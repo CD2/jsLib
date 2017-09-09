@@ -3,8 +3,9 @@ import PropTypes from 'prop-types'
 import { styled, t } from 'utils/theme'
 
 @styled`
-  ${({ background }) => {
-    return `background-color: ${background};`
+  ${({ background, theme }) => {
+    const bg = background || theme.background
+    return `background-color: ${bg};`
   }}
   > div {
     width: 100%;
@@ -14,7 +15,7 @@ import { styled, t } from 'utils/theme'
     }}
     margin: 0 auto;
     ${({ spacing, theme }) => {
-      return `padding: ${(spacing || theme.spacing.small)}px ${theme.gutterWidth / 2}px;`
+      return `padding: ${(theme.spacing[spacing] || spacing || theme.spacing.small)}px ${theme.gutterWidth / 2}px;`
     }
   }
   position: relative;

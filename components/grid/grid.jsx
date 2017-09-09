@@ -2,14 +2,20 @@ import React from 'react'
 import { styled, t } from 'utils/theme'
 
 @styled`
+  display: flex;
+  flex-wrap: wrap;
+  
   .gutter {
     display: inline-block;
-    width: ${t('gutterWidth')}px;
+    min-width: ${t('gutterWidth')}px;
     vertical-align: top;
   }
+  
   .gutter__horizontal {
-    height: ${t('gutterWidth')}px;
+    min-height: ${t('gutterWidth')}px;
+    width: 100%;
   }
+  
 `
 export default class Grid extends React.Component {
 
