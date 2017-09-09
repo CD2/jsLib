@@ -27,12 +27,14 @@ export default class List extends React.Component {
   }
 
   render() {
-    const { children, className, itemClass } = this.props
+    const { children, className, itemClass='' } = this.props
     return (
       <div className={className}>
         {React.Children.map(children, child => {
           if (!child) return
-          return React.cloneElement(child, {...child.props, className: itemClass})
+          let childClass = child.props.className || ''
+          childClass += ` ${itemClass}`
+          return React.cloneElement(child, {...child.props, className: childClass })
         })}
       </div>
     )

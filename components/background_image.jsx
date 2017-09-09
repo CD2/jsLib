@@ -11,7 +11,7 @@ import API_ROUTE from 'constants/api_host'
     const backgroundSize = contain ? 'contain' : 'cover'
     if (image) {
         return `
-          background-image: url(${API_ROUTE}${image});
+          background-image: url(${image});
           background-size: ${backgroundSize};
           background-position: 50%;
           background-repeat: no-repeat;
