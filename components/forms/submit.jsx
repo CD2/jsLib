@@ -5,7 +5,7 @@ import { styled, t } from 'utils/theme'
 @styled`
   position: relative;
   display: inline-block;
-  padding: 10px 20px 12px;
+  padding: 10px 28px 10px;
   border: none;
   outline: none;
   box-shadow: 0 2px 0 #003618;
@@ -16,6 +16,7 @@ import { styled, t } from 'utils/theme'
   vertical-align: top;
   color: white;
   background-color: ${t('primary')};
+  margin-bottom: 6px
 `
 export default class Submit extends React.Component {
 

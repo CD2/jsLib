@@ -16,15 +16,19 @@ const FIELD_TYPES = {
     font-family: ${t('font')};
     text-transform: none;
     width: 100%;
-    padding: 10px 6px 9px;
+    padding: 10px 10px 9px;
     background-color: transparent;
-    border: 2px solid;
-    font-size: 18px;
-    line-height: 1.33;
+    border: 1px solid ${t('border')};
+    height: 48px;
+    line-height: 28px;
     border-radius: 3px;
     outline: none;
     cursor: pointer;in-top: 4px;
     background: white;
+    &:focus {
+      border: 1px solid ${t('primary')};
+      outline: none;
+    }
   }
 `
 export default class Input extends React.Component {
