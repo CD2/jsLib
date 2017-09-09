@@ -1,28 +1,26 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { styled, t } from 'utils/theme'
+import { styled, p } from 'utils/theme'
+import API_ROUTE from 'constants/api_host'
+
 @styled`
-  ${({width}) => {
-    return `width: ${width || '100%'};`
-  }}
-  
-  ${({height}) => {
-    return `height: ${height || '100%'};`
-  }}
-  
+  width: ${p('width', '100%')};
+  height: ${p('height', '100%')};
   ${({ src, default_src, contain }) => {
-  const image = src || default_src 
-  const backgroundSize = contain ? 'contain' : 'cover'
-  if (image) {
-      return `
-        background-image: url(${image});
-        background-size: ${backgroundSize};
-        background-position: 50%;
-        background-repeat: no-repeat;
-      `
-    } else {
-      return `background-color: #ddd;`
-  }}
+    const image = src || default_src
+    const backgroundSize = contain ? 'contain' : 'cover'
+    if (image) {
+        return `
+          background-image: url(${API_ROUTE}${image});
+          background-size: ${backgroundSize};
+          background-position: 50%;
+          background-repeat: no-repeat;
+        `
+      } else {
+        return `background-color: #ddd;`
+    }
+  }
+
   }
 `
 export default class BackgroundImage extends React.Component {

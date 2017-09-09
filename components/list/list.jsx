@@ -2,21 +2,21 @@ import React from 'react'
 import { styled } from 'utils/theme'
 
 @styled`
-  > .list_item {
+  > .list_item:not(:last-child) {
     ${({spacing, separator, theme}) => {
       if (separator) {
         return (
           `
             padding-bottom: ${(theme.spacing[spacing] || spacing)}px;
-            border-bottom: 1px solid ${theme.border};
             margin-bottom: ${(theme.spacing[spacing] || spacing)}px;
+            border-bottom: 1px solid ${theme.border};
           `
         )
       } else {
         return `padding-bottom: ${theme.spacing[spacing] || spacing}px`
       }
     }}
-    
+
   }
 `
 export default class List extends React.Component {
