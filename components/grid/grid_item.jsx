@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { styled, t, media } from 'utils/theme'
+import { styled } from 'utils/theme'
 @styled`
   display: inline-block;
   width: ${props =>`calc(${props.weight * 100}% - ${props.gutterWidth}px)`};

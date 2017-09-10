@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { styled, p } from 'utils/theme'
-import API_ROUTE from 'constants/api_host'
 
 @styled`
   width: ${p('width', '100%')};

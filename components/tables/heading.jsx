@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import ColumnFilter from './column_filter'
 
 import chevron_up from 'images/chevron_up.svg'

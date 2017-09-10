@@ -25,7 +25,7 @@ export default class ColumnFilterSearch extends React.Component {
     })
   }
 
-  handleSubmit = (e) => {
+  handleSubmit = () => {
     this.props.onChange(this.state.value)
   }
 

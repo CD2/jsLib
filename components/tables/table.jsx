@@ -112,7 +112,7 @@ export default class Table extends React.Component {
     return (<tr>{headings}</tr>)
   }
 
-  defaultRowRenderer(row, columns, { key, url }={}) {
+  defaultRowRenderer(row, { key, url }={}) {
     const data = React.Children.map(this.props.children, child=>{
       return React.cloneElement(child, {...child.props, row })
     })
