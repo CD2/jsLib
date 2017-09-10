@@ -7,7 +7,6 @@ const FIELD_TYPES = {
   rich_text: require('./fields/rich_text_field').default,
 }
 
-
 @styled`
   margin-bottom: 10px;
   input {
@@ -35,11 +34,8 @@ export default class Input extends React.Component {
 
   static propTypes = {
     label: PropTypes.string,
+    description: PropTypes.string,
     type: PropTypes.string,
-  }
-
-  static defaultProps = {
-    type: 'text',
   }
 
   getType(type) {
@@ -47,13 +43,14 @@ export default class Input extends React.Component {
   }
 
   render() {
-    const { label, type } = this.props
+    const { label, type, description } = this.props
     const Field = this.getType(type)
     return (
       <div className={this.props.className}>
         <label>
           {label}
           <Field {...this.props} />
+          {description}
         </label>
       </div>
     )

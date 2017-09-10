@@ -3,12 +3,10 @@ import PropTypes from 'prop-types'
 import { styled, t } from 'utils/theme'
 
 @styled`
-  ${({ background, theme }) => {
-    const bg = background || theme.background
-    return `background-color: ${bg};`
-  }}
+  background-color: ${({ background, theme }) => background || theme.background};
   > div {
     width: 100%;
+    ${({innerBackground:bg}) => bg ? `background-color: ${bg};` : ''}
     ${({ width, theme, wide }) => {
       const siteWidth = wide ? theme.wideSiteWidth : theme.siteWidth
       return `max-width: ${(width || siteWidth)}px;`
@@ -25,6 +23,7 @@ export default class Wrapper extends React.Component {
   static PropTypes = {
     width: PropTypes.number,
     background: PropTypes.string,
+    innerBackground: PropTypes.string,
     spacing: PropTypes.number,
     wide: PropTypes.bool,
   }

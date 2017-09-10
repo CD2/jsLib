@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { styled } from 'utils/theme'
+import { styled, t } from 'utils/theme'
 
 @styled`
   .field {
@@ -13,12 +13,10 @@ import { styled } from 'utils/theme'
 
 export default class Form extends React.Component {
 
-  fields = {}
-
   static propTypes = {
     children: PropTypes.node,
-    onSuccess: PropTypes.func,
-    as: PropTypes.string,
+    onSubmit: PropTypes.func,
+    errors: PropTypes.arrayOf(PropTypes.string),
     preventDefault: PropTypes.bool,
   }
 
@@ -26,87 +24,18 @@ export default class Form extends React.Component {
     preventDefault: true,
   }
 
-  static childContextTypes = {
-    form: PropTypes.object
-  }
-
-  state = {
-    errors: null,
-  }
-
-  getChildContext() {
-    return {form: {register: this.registerField}}
-  }
-
-  registerField = (field) => {
-    let key
-    do {
-      key = String(Math.random())
-    } while (key in this.fields)
-    this.fields[key] = field
-    return () => this.unregisterField(key)
-  }
-
-  unregisterField(key) {
-    delete this.fields[key]
-  }
-
-  eachField(callback) {
-    Object.values(this.fields).forEach(callback)
-  }
-
-  reset() {
-    this.eachField(field => field.reset())
-  }
-
-  valid() {
-    let valid = true
-    this.eachField(field => {
-      if (!field.valid()) {
-        valid = false
-      }
-    })
-    return valid
-  }
-
-  getValues() {
-    const data = {}
-    this.eachField(field => {
-      const name = field.getName()
-      const value = field.getValue()
-      data[name] = value
-    })
-    if (this.props.as) return {[this.props.as]: data}
-    return data
-  }
-
   handleSubmit = (e) => {
-    e.preventDefault()
-    this.setState({errors: null})
-    if (true || this.valid()) {
-      const values = this.getValues()
-      window.Promise.resolve(this.props.action(values)).then(response => {
-        if (this.props.onSuccess) this.props.onSuccess(response)
-      }).catch(error => {
-        console.error(window.e = error)
-        this.setState({ errors: error.response.data })
-      })
-    }
+    const { onSubmit, preventDefault } = this.props
+    if (preventDefault) e.preventDefault()
+    if (onSubmit) onSubmit()
   }
 
   renderErrors() {
-    const { errors } = this.state
-    if (errors === null) return
-    if (typeof errors === 'string') {
-      return (
-        <ul>
-          <li className="flash error">Sorry, an unexpected error has occured.</li>)
-        </ul>
-      )
-    }
+    const { errors } = this.props
+    if (!errors) return
     return (
       <ul>
-        {Object.entries(errors).map(([field, message]) => <li className="flash error">{field} {message}</li>)}
+        {errors.map(msg => <li key={msg}>{msg}</li>)}
       </ul>
     )
   }
