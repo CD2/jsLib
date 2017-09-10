@@ -35,7 +35,7 @@ export default class TextField extends React.Component {
   }
 
   componentDidMount() {
-    this.unregister = this.context.form.register(this)
+    if (this.context.form) this.unregister = this.context.form.register(this)
   }
 
   componentWillUnmount() {
