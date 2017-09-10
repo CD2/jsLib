@@ -20,7 +20,7 @@ export default class List extends React.Component {
   }
 
   render() {
-    const { className, separator, space, itemClass='' } = this.props
+    const { className, separator, itemClass='' } = this.props
     const children = React.Children.map(this.props.children, (child, i) => {
       if (!child) return
       let childClass = child.props.className || ''
