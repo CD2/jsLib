@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 export default class TextField extends React.Component {
 
   static propTypes = {
-    name: PropTypes.string.isRequired,
+    name: PropTypes.string,
     type: PropTypes.string,
     description: PropTypes.string,
     label: PropTypes.oneOfType([
@@ -21,7 +21,6 @@ export default class TextField extends React.Component {
 
   static contextTypes = {
     form: PropTypes.object,
-    style: null,
   }
 
   constructor(props) {

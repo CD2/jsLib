@@ -17,9 +17,13 @@ export default class Form extends React.Component {
 
   static propTypes = {
     children: PropTypes.node,
-    action: PropTypes.func.isRequired,
     onSuccess: PropTypes.func,
     as: PropTypes.string,
+    preventDefault: PropTypes.bool,
+  }
+
+  static defaultProps = {
+    preventDefault: true,
   }
 
   static childContextTypes = {

@@ -31,7 +31,7 @@ export default class Grid extends React.Component {
       const gutterWidth = theme.gutterWidth * ((totalChildren - 1) / totalChildren)
       if (gridItems.length !== 0) gridItems.push(<div key={`gutter_${gridItems.length}`} className='gutter__horizontal' />)
       tobeFitted.forEach((child, i) => {
-        child = React.cloneElement(child, {...child.props, gutterWidth })
+        child = React.cloneElement(child, {key: `child_${gridItems.length}`, ...child.props, gutterWidth })
         if (i>0) gridItems.push(<div key={`gutter_${gridItems.length}`} className='gutter' />)
         gridItems.push(child)
       })

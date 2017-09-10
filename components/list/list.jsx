@@ -25,7 +25,7 @@ export default class List extends React.Component {
       if (!child) return
       let childClass = child.props.className || ''
       childClass += ` ${itemClass}`
-      child = React.cloneElement(child, {...child.props, className: childClass})
+      child = React.cloneElement(child, {key: `child_${i}`, ...child.props, className: childClass})
       if (separator && i!==0) {
         return [<ListSeparator key={i}/>, child]
       } else {
