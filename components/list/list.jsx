@@ -1,18 +1,11 @@
 import React from 'react'
+import ListSeparator from './list_separator'
 import { styled } from 'utils/theme'
 
 @styled`
   > .list_item:not(:last-child) {
     ${({spacing, separator, theme}) => {
-      if (separator) {
-        return (
-          `
-            padding-bottom: ${(theme.spacing[spacing] || spacing)}px;
-            margin-bottom: ${(theme.spacing[spacing] || spacing)}px;
-            border-bottom: 1px solid ${theme.border};
-          `
-        )
-      } else {
+      if (!separator) {
         return `padding-bottom: ${theme.spacing[spacing] || spacing}px`
       }
     }}
@@ -27,13 +20,20 @@ export default class List extends React.Component {
   }
 
   render() {
-    const { children, className, itemClass } = this.props
+    const { className, itemClass, separator, space } = this.props
+    const children = React.Children.map(this.props.children, (child, i) => {
+      if (!child) return
+      child = React.cloneElement(child, {...child.props, className: itemClass})
+      if (separator && i!==0) {
+        return [<ListSeparator key={i}/>, child]
+      } else {
+        return child
+      }
+    })
+
     return (
       <div className={className}>
-        {React.Children.map(children, child => {
-          if (!child) return
-          return React.cloneElement(child, {...child.props, className: itemClass})
-        })}
+        {children}
       </div>
     )
   }
