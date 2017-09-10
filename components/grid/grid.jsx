@@ -27,7 +27,6 @@ export default class Grid extends React.Component {
     let totalWeight = 0
 
     const fitChildren = () => {
-      console.log('fitting', tobeFitted)
       const totalChildren = tobeFitted.length
       const gutterWidth = theme.gutterWidth * ((totalChildren - 1) / totalChildren)
       if (gridItems.length !== 0) gridItems.push(<div key={`gutter_${gridItems.length}`} className='gutter__horizontal' />)
@@ -36,12 +35,10 @@ export default class Grid extends React.Component {
         if (i>0) gridItems.push(<div key={`gutter_${gridItems.length}`} className='gutter' />)
         gridItems.push(child)
       })
-      console.log('fitted', gridItems)
       tobeFitted = []
     }
 
     React.Children.map(children, (child) => {
-      console.log(child.props.weight)
       totalWeight += child.props.weight
       if (totalWeight > 1) {
         fitChildren()
@@ -53,7 +50,7 @@ export default class Grid extends React.Component {
 
     return (
       <div className={className}>
-        { gridItems }
+        {gridItems}
       </div>
     )
   }
