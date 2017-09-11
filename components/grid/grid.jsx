@@ -22,20 +22,23 @@ export default class Grid extends React.Component {
   render() {
     const { children, className, theme } = this.props
 
-    let tobeFitted = []
+    let toBeFitted = []
     const gridItems = []
     let totalWeight = 0
+    let gutterWidth
 
-    const fitChildren = () => {
-      const totalChildren = tobeFitted.length
-      const gutterWidth = theme.gutterWidth * ((totalChildren - 1) / totalChildren)
+    const fitChildren = (qqqq) => {
+
+      const totalChildren = toBeFitted.length
+
+      if (!qqqq || !gutterWidth || totalWeight===1) gutterWidth = theme.gutterWidth * ((totalChildren - 1) / totalChildren)
       if (gridItems.length !== 0) gridItems.push(<div key={`gutter_${gridItems.length}`} className='gutter__horizontal' />)
-      tobeFitted.forEach((child, i) => {
+      toBeFitted.forEach((child, i) => {
         child = React.cloneElement(child, {key: `child_${gridItems.length}`, ...child.props, gutterWidth })
         if (i>0) gridItems.push(<div key={`gutter_${gridItems.length}`} className='gutter' />)
         gridItems.push(child)
       })
-      tobeFitted = []
+      toBeFitted = []
     }
 
     React.Children.map(children, (child) => {
@@ -44,9 +47,9 @@ export default class Grid extends React.Component {
         fitChildren()
         totalWeight = child.props.weight
       }
-      tobeFitted.push(child)
+      toBeFitted.push(child)
     })
-    fitChildren()
+    fitChildren(true)
 
     return (
       <div className={className}>
