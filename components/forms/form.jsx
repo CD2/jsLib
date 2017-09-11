@@ -27,7 +27,7 @@ export default class Form extends React.Component {
   handleSubmit = (e) => {
     const { onSubmit, preventDefault } = this.props
     if (preventDefault) e.preventDefault()
-    if (onSubmit) onSubmit()
+    if (onSubmit) onSubmit(e)
   }
 
   renderErrors() {
