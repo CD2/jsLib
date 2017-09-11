@@ -1,9 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import Overlay from 'lib/components/overlay'
 
-import Overlay from 'components/app/generic/overlay'
-
-import 'lib/styles/modal.scss'
 
 export default class Modal extends React.Component {
 

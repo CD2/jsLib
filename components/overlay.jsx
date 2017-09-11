@@ -1,8 +1,25 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { styled } from 'utils/theme'
 
-import 'lib/styles/overlay.scss';
+@styled`
 
+  height: 100%;
+  left: 0;
+  opacity: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 4999;
+
+  &.visible {
+    background: $black;
+    cursor: pointer;
+    opacity: .4;
+  }
+
+
+`
 export default class overlay extends React.Component {
 
   static propTypes = {
@@ -16,14 +33,12 @@ export default class overlay extends React.Component {
     className: '',
   }
 
-  className() {
-    let className = `overlay ${this.props.className}`
-    if (this.props.visible) className += ' overlay__visible'
-    return className
-  }
 
   render() {
-    return (<div className={this.className()} onClick={this.props.onClick}/>)
+    let className = this.props.className
+    if (this.props.visible) className += ' visible'
+
+    return (<div className={className} onClick={this.props.onClick}/>)
   }
 
 }
