@@ -29,6 +29,10 @@ import { styled, t } from 'utils/theme'
         font-size: 0.9rem;
         font-weight: 600;
         padding: 6px 14px 7px;  
+        background-color: ${t('primary')};
+        &:hover {
+          color: white;
+        }
       }
       
       &.secondary {
@@ -50,21 +54,29 @@ export default class Button extends React.Component {
 
   static PropTypes = {
     text: PropTypes.string,
-    style:  PropTypes.string,
+    onClick: PropTypes.func,
+    buttonStyle:  PropTypes.string,
   }
 
   static defaultProps = {
-    style: 'common',
+    buttonStyle: 'common',
   }
 
   render() {
-    const { className, text, to, style } = this.props
-
-    return (
-      <Link to={to} className={`${className} ${style} btn`}>
-        {text}
-      </Link>
-    )
+    const { className, text, to, buttonStyle, onClick } = this.props
+    if(to) {
+      return (
+        <Link to={to} onClick={onClick} className={`${className} ${buttonStyle} btn`}>
+          {text}
+        </Link>
+      )
+    } else {
+      return (
+        <a onClick={onClick} className={`${className} ${buttonStyle} btn`}>
+          {text}
+        </a>
+      )
+    }
   }
 
 }

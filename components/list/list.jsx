@@ -20,14 +20,14 @@ export default class List extends React.Component {
   }
 
   render() {
-    const { className, separator, itemClass='' } = this.props
+    const { className, separator, spacing, itemClass='' } = this.props
     const children = React.Children.map(this.props.children, (child, i) => {
       if (!child) return
       let childClass = child.props.className || ''
       childClass += ` ${itemClass}`
       child = React.cloneElement(child, {key: `child_${i}`, ...child.props, className: childClass})
       if (separator && i!==0) {
-        return [<ListSeparator key={i}/>, child]
+        return [<ListSeparator spacing={spacing} key={i}/>, child]
       } else {
         return child
       }

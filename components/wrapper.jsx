@@ -1,14 +1,41 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { styled, t } from 'utils/theme'
+import { p } from 'utils/theme'
 
 @styled`
-  background-color: ${({ background, theme }) => background || theme.background};
-  > div {
+ .wrapper__overlay {
+    background-color: ${p('overlay', '#000')};
+    position: absolute;
     width: 100%;
-    ${({innerBackground:bg}) => bg ? `background-color: ${bg};` : ''}
+    height: 100%;
+    left: 0;
+    top: 0;
+    background-attachment: fixed;
+    opacity: 0.8;
+  }
+   
+  background-color: ${({ background, theme }) => background || theme.background};
+  
+  ${({ backgroundImage }) => {
+    if (backgroundImage) {
+      return `
+            background-image: url(${backgroundImage});
+            background-size: cover;
+            background-position: 50%;
+            background-repeat: no-repeat;
+          `
+    }
+  }}
+  
+  position: relative;
+  .wrapper__inner {
+    width: 100%;
+    position: relative;
+    z-index: 1001;
+    ${({innerBackground:bg}) => bg ? `background-color: ${bg};` : ''};
     ${({ width, theme, wide }) => {
-      const siteWidth = wide ? theme.wideSiteWidth : theme.siteWidth
+      const siteWidth = wide ? theme.wideSiteWidth : theme.siteWidth;
       return `max-width: ${(width || siteWidth)}px;`
     }}
     margin: 0 auto;
@@ -16,7 +43,6 @@ import { styled, t } from 'utils/theme'
       return `padding: ${(theme.spacing[spacing] || spacing || theme.spacing.small)}px ${theme.gutterWidth / 2}px;`
     }
   }
-  position: relative;
 `
 export default class Wrapper extends React.Component {
 
@@ -24,16 +50,19 @@ export default class Wrapper extends React.Component {
     width: PropTypes.number,
     background: PropTypes.string,
     innerBackground: PropTypes.string,
+    backgroundImage: PropTypes.string,
+    overlay: PropTypes.string,
     spacing: PropTypes.number,
     wide: PropTypes.bool,
   }
 
   render() {
-    const { className, children } = this.props
+    const { className, children, overlay } = this.props
 
     return (
       <div className={className}>
-        <div>
+        { overlay && <div className="wrapper__overlay" /> }
+        <div className="wrapper__inner">
           {children}
         </div>
       </div>
