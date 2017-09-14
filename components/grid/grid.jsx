@@ -42,6 +42,7 @@ export default class Grid extends React.Component {
     }
 
     React.Children.map(children, (child) => {
+      if (!child) return
       totalWeight += child.props.weight
       if (totalWeight > 1) {
         fitChildren()

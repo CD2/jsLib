@@ -38,7 +38,11 @@ import { styled, t } from 'utils/theme'
       &.secondary {
         color: ${t('primary')};
         border: 2px solid ${t('primary')};
-        
+      }
+      
+      &.dark {
+        color: ${t('white')};
+        border: 2px solid ${t('white')};
       }
       
       &:hover {
