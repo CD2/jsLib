@@ -35,15 +35,13 @@ import { styled, t } from 'utils/theme'
         }
       }
 
-      &.invert {
+      &.secondary {
         background-color: #fff;
         color: ${t('primary')};
         border: 2px solid ${t('primary')};
-      }
-
-      &.secondary {
-        color: ${t('primary')};
-        border: 2px solid ${t('primary')};
+        &:hover {
+          color: ${t('primary')};
+        }
       }
 
       &.dark {
