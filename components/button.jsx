@@ -64,6 +64,7 @@ export default class Button extends React.Component {
     text: PropTypes.string,
     onClick: PropTypes.func,
     buttonStyle:  PropTypes.string,
+    target:  PropTypes.string,
   }
 
   static defaultProps = {
@@ -71,16 +72,16 @@ export default class Button extends React.Component {
   }
 
   render() {
-    const { className, text, to, buttonStyle, onClick } = this.props
+    const { className, text, to, buttonStyle, onClick, target } = this.props
     if(to) {
       return (
-        <Link to={to} onClick={onClick} className={`${className} ${buttonStyle} btn`}>
+        <Link to={to} target={target} onClick={onClick} className={`${className} ${buttonStyle} btn`}>
           {text}
         </Link>
       )
     } else {
       return (
-        <a onClick={onClick} className={`${className} ${buttonStyle} btn`}>
+        <a onClick={onClick} target={target} className={`${className} ${buttonStyle} btn`}>
           {text}
         </a>
       )
