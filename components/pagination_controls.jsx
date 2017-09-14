@@ -24,6 +24,7 @@ import { styled, t } from 'utils/theme'
   }
   .current_page {
     font-weight: bold;
+    border-bottom: 2px solid;
   }
 `
 export default class PaginationControls extends React.Component {
