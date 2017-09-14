@@ -17,38 +17,44 @@ import { styled, t } from 'utils/theme'
       vertical-align: top;
       color: white;
       border-radius: 5px;
-      
+
       &.common {
         background-color: ${t('primary')};
         &:hover {
           color: white;
         }
       }
-      
+
       &.small {
         font-size: 0.9rem;
         font-weight: 600;
-        padding: 6px 14px 7px;  
+        padding: 6px 14px 7px;
         background-color: ${t('primary')};
         &:hover {
           color: white;
         }
       }
-      
+
+      &.invert {
+        background-color: #fff;
+        color: ${t('primary')};
+        border: 2px solid ${t('primary')};
+      }
+
       &.secondary {
         color: ${t('primary')};
         border: 2px solid ${t('primary')};
       }
-      
+
       &.dark {
         color: ${t('white')};
         border: 2px solid ${t('white')};
       }
-      
+
       &:hover {
         filter: brightness(1.15);
       }
-      
+
     }
     + .btn {
       margin-left: 10px;
