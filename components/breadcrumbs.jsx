@@ -5,6 +5,7 @@ import { history } from 'utils/router'
 import home from 'images/home.svg'
 import { Grid, GridItem } from 'lib/components/grid'
 import { styled, t } from 'utils/theme'
+import { small_icon } from 'utils/common_styles'
 import Wrapper from "./wrapper";
 
 @styled`
@@ -16,10 +17,7 @@ import Wrapper from "./wrapper";
     border-bottom: 0;
   }
   img {
-    max-width: 18px;
-    opacity: 0.5;
-    position: relative;
-    top: 4px;
+    ${small_icon}
   }
   a {
     color: white;
@@ -46,7 +44,7 @@ export default class Breadcrumbs extends React.Component {
 
   render() {
     return(
-      <Wrapper width="1600px" className={this.props.className} background={this.props.theme.secondary}>
+      <Wrapper width="1600" className={this.props.className} background={this.props.theme.secondary}>
         <Grid>
           <GridItem weight={5/6}>
             <span>

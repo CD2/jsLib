@@ -8,16 +8,19 @@ import { styled, t } from 'utils/theme'
   }
   .tab-heads {
     display: flex;
-    background: white;
+    border-top: 1px solid ${t('border')};
+    border-bottom: 1px solid ${t('border')};
     
     > div {
-      padding: 20px 50px;
-      background: ${t('background')};
+      padding: 10px ${t('gutterWidth')}px 10px;
+      font-size: 0.9em;
+      color: ${t('lightText')};
       cursor: pointer;
       filter: brightness(0.95);
+      
       &.selected {
-        filter: brightness(1);
-        border-top: 3px solid ${t('primary')};
+        color: black;
+        font-weight: 600;
       }
     }
   }

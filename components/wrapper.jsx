@@ -40,7 +40,7 @@ import { p } from 'utils/theme'
     }}
     margin: 0 auto;
     ${({ spacing, theme }) => {
-      return `padding: ${(theme.spacing[spacing] || spacing || theme.spacing.small)}px ${theme.gutterWidth / 2}px;`
+      return `padding: ${(theme.spacing[spacing] || spacing || theme.spacing.small)}px ${theme.gutterWidth}px;`
     }
   }
 `
