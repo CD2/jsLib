@@ -9,6 +9,9 @@ import { styled, t } from 'utils/theme'
     display: inline-block;
     min-width: ${t('gutterWidth')}px;
     vertical-align: top;
+    & + .gutter {
+      display: none;
+    }
   }
 
   .gutter__horizontal {
