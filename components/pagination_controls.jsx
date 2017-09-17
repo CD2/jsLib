@@ -1,7 +1,5 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-
-import Button from "lib/components/button";
 import { styled, t } from 'utils/theme'
 
 @styled`

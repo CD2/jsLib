@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { styled, t } from 'utils/theme'
+import { styled } from 'utils/theme'
 
 @styled`
   .field {

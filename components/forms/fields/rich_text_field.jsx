@@ -19,7 +19,6 @@ export default class RichTextBox extends React.Component {
   };
 
   handleChange = (e) => {
-    console.log(e)
     const { onRawChange, onChange } = this.props
     if (onRawChange) onRawChange(e)
     if (onChange) onChange({name: this.props.name, value: e.target.getContent() })
