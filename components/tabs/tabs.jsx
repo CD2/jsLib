@@ -35,7 +35,6 @@ export default class Tabs extends React.Component {
   }
 
   handleTabHeadClick = (key) => {
-    console.log(key)
     this.setState({selected: key})
   }
 

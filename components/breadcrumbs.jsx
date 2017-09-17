@@ -7,6 +7,7 @@ import { Grid, GridItem } from 'lib/components/grid'
 import { styled, t } from 'utils/theme'
 import { small_icon } from 'utils/common_styles'
 import Wrapper from "./wrapper";
+import Img from "./img";
 
 @styled`
   color: ${t('lightText')};
@@ -49,7 +50,7 @@ export default class Breadcrumbs extends React.Component {
           <GridItem weight={5/6}>
             <span>
               <Link className='breadcrumb__link' to='/'>
-                <img src={home} />
+                <Img src={home} />
               </Link>
             </span>
             {this.props.breadcrumbs.map(this.renderBreadcrumb)}
