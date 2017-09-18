@@ -89,7 +89,6 @@ export default class PasswordWithHelpField extends React.Component {
     }
 
     Object.values(this.helpers).forEach(tester => {
-      console.log(tester(this.state.value))
       if (!tester(this.state.value)) helper_errors = true
     })
 
