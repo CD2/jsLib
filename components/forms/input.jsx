@@ -6,11 +6,14 @@ const FIELD_TYPES = {
   text: require('./fields/text_field').default,
   rich_text: require('./fields/rich_text_field').default,
   password_with_help: require('./fields/password_with_help').default,
+  checkbox: require('./fields/checkbox').default,
 }
 
 @styled`
 margin-bottom: 10px;
-  input {
+  input[type=email],
+  input[type=text],
+  input[type=password] {
     box-sizing: border-box;
     color: ${t('text')};
     font-family: ${t('font')};

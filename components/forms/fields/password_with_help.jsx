@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { styled, t } from 'utils/theme'
 import { panel } from 'utils/common_styles'
+import { Grid, GridItem } from "lib/components/grid/index"
 @styled`
   position: relative;
   .field {
@@ -13,12 +14,7 @@ import { panel } from 'utils/common_styles'
     border: 1px solid;
     padding: 8px 12px;
     list-style: none;
-    display: inline-block;
-    position: absolute;
-    top: 0;
     margin: 0;
-    right: 0;
-    transform: translateX(calc(100% + 20px));
     ${panel};
     font-weight: 600;
     .error {
@@ -180,27 +176,31 @@ export default class PasswordWithHelpField extends React.Component {
 
   render() {
     return (
-      <div className={this.getFieldClassName()}>
-        {this.getErrorMessages()}
-        <input
-          className="field"
-          id={this.id}
-          type='password'
-          value={this.getValue()}
-          placeholder={this.props.placeholder}
-          onChange={this.handleChange}
-        />
-        <div className={this.getConfirmationFieldClassName()}>
+      <Grid className={this.getFieldClassName()}>
+        <GridItem weight={1/2}>
+          {this.getErrorMessages()}
           <input
-              className="field"
-              id={this.confirmation_id}
-              type='password'
-              value={this.getConfirmationValue()}
-              placeholder='Password Confirmation'
-              onChange={this.handleConfirmationChange}/>
-        </div>
-        {this.renderHelpers()}
-      </div>
+            className="field"
+            id={this.id}
+            type='password'
+            value={this.getValue()}
+            placeholder={this.props.placeholder}
+            onChange={this.handleChange}
+          />
+          <div className={this.getConfirmationFieldClassName()}>
+            <input
+                className="field"
+                id={this.confirmation_id}
+                type='password'
+                value={this.getConfirmationValue()}
+                placeholder='Password Confirmation'
+                onChange={this.handleConfirmationChange}/>
+          </div>
+        </GridItem>
+        <GridItem weight={1/2}>
+          {this.renderHelpers()}
+        </GridItem>
+      </Grid>
     )
   }
 

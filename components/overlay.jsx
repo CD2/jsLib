@@ -13,7 +13,7 @@ import { styled } from 'utils/theme'
   z-index: 4999;
 
   &.visible {
-    background: $black;
+    background: black;
     cursor: pointer;
     opacity: .4;
   }
