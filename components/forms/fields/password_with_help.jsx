@@ -2,7 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { styled, t } from 'utils/theme'
 import { panel } from 'utils/common_styles'
-import { Grid, GridItem } from "lib/components/grid/index"
 @styled`
   position: relative;
   text-align: right;
@@ -10,7 +9,7 @@ import { Grid, GridItem } from "lib/components/grid/index"
     margin-bottom: 10px;
   }
   .password_helpers {
-    
+
     display: inline-block;
     font-size: 0.9em;
     text-align: left;
