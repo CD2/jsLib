@@ -20,7 +20,7 @@ export default class TextField extends React.Component {
   }
 
   render() {
-    const { name, value, placeholder, initialValue, defaultValue, onFocus, type } = this.props;
+    const { name, value, placeholder, initialValue, onFocus, type } = this.props;
 
     return (
       <input
