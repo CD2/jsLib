@@ -9,7 +9,7 @@ const FIELD_TYPES = {
 }
 
 @styled`
-  margin-bottom: 10px;
+margin-bottom: 10px;
   input {
     box-sizing: border-box;
     color: ${t('text')};
@@ -24,7 +24,7 @@ const FIELD_TYPES = {
     line-height: 28px;
     border-radius: 3px;
     outline: none;
-    cursor: pointer;in-top: 4px;
+    cursor: pointer;
     background: white;
     &:focus {
       border: 1px solid ${t('primary')};
@@ -53,7 +53,7 @@ export default class Input extends React.Component {
         <div className={this.props.className}>
           <label>
             {label}
-            <Field {...this.props} />
+            <Field {...this.props} className="field"/>
             {description}
           </label>
         </div>
@@ -61,7 +61,7 @@ export default class Input extends React.Component {
     } else {
       return (
         <div className={this.props.className}>
-          <Field {...this.props} />
+          <Field {...this.props} className="field"/>
           {description}
         </div>
       )

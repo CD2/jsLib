@@ -1,6 +1,34 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-
+import { styled, t } from 'utils/theme'
+import { panel } from 'utils/common_styles'
+@styled`
+  position: relative;
+  .field {
+    margin-bottom: 10px;
+  }
+  .password_helpers {
+    font-size: 0.9em;
+    text-align: left;
+    border: 1px solid;
+    padding: 8px 12px;
+    list-style: none;
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    margin: 0;
+    right: 0;
+    transform: translateX(calc(100% + 20px));
+    ${panel};
+    font-weight: 600;
+    .error {
+      color: ${t('lightText')}
+    }
+    .complete {
+      color: ${t('primary')}
+    }
+  }
+`
 export default class PasswordWithHelpField extends React.Component {
 
   static propTypes = {
@@ -108,7 +136,7 @@ export default class PasswordWithHelpField extends React.Component {
   }
 
   getFieldClassName() {
-    let className = 'field'
+    let className = `field ${this.props.className}`
     if (this.hasErrors()) className += ' field__with-errors'
     return className
   }
@@ -145,30 +173,26 @@ export default class PasswordWithHelpField extends React.Component {
     return (
       <ul className='password_helpers'>
         {helperComponents}
+        <li>{this.getConfirmationErrorMessages()}</li>
       </ul>
     )
   }
 
   render() {
-    const { description } = this.props
     return (
       <div className={this.getFieldClassName()}>
         {this.getErrorMessages()}
-        <label>
-          Password
-          <input
-            id={this.id}
-            type='password'
-            value={this.getValue()}
-            placeholder={this.props.placeholder}
-            onChange={this.handleChange}
-          />
-        </label>
-        {description && <p className='field__description'>{description}</p>}
+        <input
+          className="field"
+          id={this.id}
+          type='password'
+          value={this.getValue()}
+          placeholder={this.props.placeholder}
+          onChange={this.handleChange}
+        />
         <div className={this.getConfirmationFieldClassName()}>
-          {this.getConfirmationErrorMessages()}
-          <label htmlFor={this.confirmation_id}>Password Confirmation</label>
           <input
+              className="field"
               id={this.confirmation_id}
               type='password'
               value={this.getConfirmationValue()}

@@ -3,9 +3,6 @@ import PropTypes from 'prop-types'
 import { styled } from 'utils/theme'
 
 @styled`
-  .field {
-    margin-bottom: 10px;
-  }
   label > input {
     margin-top: 4px;
   }
