@@ -40,6 +40,7 @@ export default class Tabs extends React.Component {
 
   renderTabHeads() {
     const headings = React.Children.map(this.props.children, child => {
+      if (!child) return null
       return React.cloneElement(child, {
         ...child.props,
         tabKey: child.key,
@@ -55,6 +56,7 @@ export default class Tabs extends React.Component {
     let tab = null
     const { selected } = this.state
     React.Children.forEach(this.props.children, child => {
+      if (!child) return null
       if (tab === null) tab=child //default to first child
       if (child.key === selected) tab=child
     })

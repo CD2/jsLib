@@ -5,6 +5,7 @@ import { styled, p } from 'utils/theme'
 @styled`
   width: ${p('width', '100%')};
   height: ${p('height', '100%')};
+  ${props => props.circular ? `border-radius: 50%;` : ``}
   ${({ src, default_src, contain }) => {
     const image = src || default_src
     const backgroundSize = contain ? 'contain' : 'cover'
@@ -30,6 +31,7 @@ export default class BackgroundImage extends React.Component {
     width: PropTypes.string,
     height: PropTypes.string,
     contain: PropTypes.bool,
+    circular: PropTypes.bool,
   }
 
   render() {
