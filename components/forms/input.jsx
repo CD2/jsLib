@@ -15,6 +15,7 @@ const FIELD_TYPES = {
     font-family: ${t('font')};
     text-transform: none;
     width: 100%;
+    font-size: 0.9em;
     padding: 10px 10px 9px;
     background-color: transparent;
     border: 1px solid ${t('border')};
