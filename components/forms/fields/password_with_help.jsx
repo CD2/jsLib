@@ -170,10 +170,18 @@ export default class PasswordWithHelpField extends React.Component {
     const helperComponents = Object.entries(this.helpers).map(([text, tester]) => {
       return this.renderHelp(text, tester)
     })
+
+    let className = ''
+    if (this.getValue() && this.getValue() === this.getConfirmationValue()) {
+      className += 'complete'
+    } else if (this.state.helper_errors) {
+      className += 'error'
+    }
+
     return (
       <ul className='password_helpers'>
         {helperComponents}
-        <li>{this.getConfirmationErrorMessages()}</li>
+        <li className={className}>Password confirmation must match</li>
       </ul>
     )
   }

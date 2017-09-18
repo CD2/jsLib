@@ -6,6 +6,7 @@ const FIELD_TYPES = {
   text: require('./fields/text_field').default,
   rich_text: require('./fields/rich_text_field').default,
   password_with_help: require('./fields/password_with_help').default,
+  checkbox: require('./fields/checkbox').default,
 }
 
 @styled`
@@ -44,6 +45,13 @@ export default class Input extends React.Component {
     return FIELD_TYPES[type] || FIELD_TYPES['text']
   }
 
+  renderErrors() {
+    const { errors } = this.props
+    if (errors) {
+      return errors.map(err => <div>{err}</div>)
+    }
+  }
+
   render() {
     const { label, type, description } = this.props
     const Field = this.getType(type)
@@ -51,6 +59,7 @@ export default class Input extends React.Component {
     if (label) {
       return (
         <div className={this.props.className}>
+          {this.renderErrors()}
           <label>
             {label}
             <Field {...this.props} className="field"/>
@@ -61,6 +70,7 @@ export default class Input extends React.Component {
     } else {
       return (
         <div className={this.props.className}>
+          {this.renderErrors()}
           <Field {...this.props} className="field"/>
           {description}
         </div>
