@@ -45,15 +45,27 @@ export default class Input extends React.Component {
   render() {
     const { label, type, description } = this.props
     const Field = this.getType(type)
-    return (
-      <div className={this.props.className}>
-        <label>
-          {label}
+
+    if (label) {
+      return (
+        <div className={this.props.className}>
+          <label>
+            {label}
+            <Field {...this.props} />
+            {description}
+          </label>
+        </div>
+      )
+    } else {
+      return (
+        <div className={this.props.className}>
           <Field {...this.props} />
           {description}
-        </label>
-      </div>
-    )
+        </div>
+      )
+    }
+
+
   }
 
 }
