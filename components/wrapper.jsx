@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { styled, t } from 'utils/theme'
+import { styled } from 'utils/theme'
 import { p } from 'utils/theme'
 
 @styled`
@@ -14,9 +14,9 @@ import { p } from 'utils/theme'
     background-attachment: fixed;
     opacity: 0.8;
   }
-   
+
   background-color: ${({ background, theme }) => background || theme.background};
-  
+
   ${({ backgroundImage }) => {
     if (backgroundImage) {
       return `
@@ -27,7 +27,7 @@ import { p } from 'utils/theme'
           `
     }
   }}
-  
+
   position: relative;
   .wrapper__inner {
     width: 100%;
