@@ -56,11 +56,11 @@ export default class PaginationControls extends React.Component {
     const str = '‹ Left'
     if (this.firstPage()) {
       return (
-        <div className={`${className} disabled`}  buttonStyle="small" >{str}</div>
+        <div className={`${className} disabled`}>{str}</div>
       )
     }
     return (
-      <div className={className} onClick={() => this.changePage(this.props.page - 1)}   buttonStyle="small">{str}</div>
+      <div className={className} onClick={() => this.changePage(this.props.page - 1)}>{str}</div>
     )
   }
 
@@ -69,11 +69,11 @@ export default class PaginationControls extends React.Component {
     const str = 'Right ›'
     if (this.lastPage()) {
       return (
-        <div className={`${className} disabled`}  buttonStyle="small" >{str}</div>
+        <div className={`${className} disabled`}>{str}</div>
       )
     }
     return (
-      <div className={className} onClick={() => this.changePage(this.props.page + 1)}  buttonStyle="small" >{str}</div>
+      <div className={className} onClick={() => this.changePage(this.props.page + 1)}>{str}</div>
     )
   }
 
@@ -81,9 +81,9 @@ export default class PaginationControls extends React.Component {
     const page_numbers = []
     for(let i=1; i<=this.totalPages(); i++) {
       if (i === this.props.page) {
-        page_numbers.push(<div className={'pagination__button current_page'} buttonStyle="small invert" >{i}</div>)
+        page_numbers.push(<div className={'pagination__button current_page'}>{i}</div>)
       } else {
-        page_numbers.push(<div className={'pagination__button'} key={i} buttonStyle="small" onClick={() => this.changePage(i)} >{i}</div>)
+        page_numbers.push(<div className={'pagination__button'} key={i} onClick={() => this.changePage(i)} >{i}</div>)
       }
     }
     return page_numbers

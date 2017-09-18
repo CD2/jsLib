@@ -10,14 +10,14 @@ import { styled, t } from 'utils/theme'
     display: flex;
     border-top: 1px solid ${t('border')};
     border-bottom: 1px solid ${t('border')};
-    
+
     > div {
       padding: 10px ${t('gutterWidth')}px 10px;
       font-size: 0.9em;
       color: ${t('lightText')};
       cursor: pointer;
       filter: brightness(0.95);
-      
+
       &.selected {
         color: black;
         font-weight: 600;
@@ -43,7 +43,7 @@ export default class Tabs extends React.Component {
       if (!child) return null
       return React.cloneElement(child, {
         ...child.props,
-        tabKey: child.key,
+        tabKey: child.tabName,
         renderHead: true,
         onTabHeadClick: this.handleTabHeadClick,
         className: 'tab-head'
@@ -58,7 +58,7 @@ export default class Tabs extends React.Component {
     React.Children.forEach(this.props.children, child => {
       if (!child) return null
       if (tab === null) tab=child //default to first child
-      if (child.key === selected) tab=child
+      if (child.tabName === selected) tab=child
     })
     return <div className="tab-content">{tab}</div>
   }

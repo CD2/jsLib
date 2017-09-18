@@ -6,6 +6,12 @@ export default class TextField extends React.Component {
   static propTypes = {
     onChange: PropTypes.func,
     onRawChange: PropTypes.func,
+    onFocus: PropTypes.func,
+    name: PropTypes.string,
+    placeholder: PropTypes.string,
+    initialValue: PropTypes.string,
+    defaultValue: PropTypes.string,
+    type: PropTypes.string,
   }
 
   handleChange = (e) => {
@@ -15,8 +21,17 @@ export default class TextField extends React.Component {
   }
 
   render() {
+    const { name, value, placeholder, initialValue, defaultValue, onFocus, type } = this.props;
+
     return (
-      <input {...this.props} onChange={this.handleChange}/>
+      <input
+        type={type}
+        name={name}
+        defaultValue={value || initialValue || defaultValue}
+        placeholder={placeholder}
+        onChange={this.handleChange}
+        onFocus={onFocus}
+      />
     )
   }
 }
