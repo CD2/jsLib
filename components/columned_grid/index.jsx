@@ -9,7 +9,7 @@ import { styled, t } from 'utils/theme'
 
   .gutter {
     display: inline-block;
-    min-width: ${t('gutterWidth')}px;
+    min-width: ${props => props.gutterWidth || props.theme.gutterWidth}px;
     vertical-align: top;
     & + .gutter {
       display: none;
@@ -17,7 +17,7 @@ import { styled, t } from 'utils/theme'
   }
 
   .gutter__horizontal {
-    min-height: ${t('gutterWidth')}px;
+    min-height: ${t('gutterHeight')}px;
     width: 100%;
   }
 `
@@ -32,7 +32,8 @@ class ColumnedGrid extends React.Component {
     const gutter = <div className='gutter' />
     const gutterHorizontal = <div className='gutter__horizontal' />
 
-    const { gutterWidth } = this.props.theme
+    const gutterWidth = this.props.gutterWidth || this.props.theme.gutterWidth
+
     const getWidth = (span=1) => {
       const colspans = ((span/columns)*100) + '%'
       const gutterOffsets = span * (((columns-1)/columns)*gutterWidth) + 'px'

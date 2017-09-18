@@ -39,8 +39,8 @@ import { p } from 'utils/theme'
       return `max-width: ${(width || siteWidth)}px;`
     }}
     margin: 0 auto;
-    ${({ spacing, theme }) => {
-      return `padding: ${(theme.spacing[spacing] || spacing || theme.spacing.small)}px ${theme.gutterWidth}px;`
+    ${({ spacing, theme, gutter }) => {
+      return `padding: ${(theme.spacing[spacing] || spacing || theme.spacing.small)}px ${gutter || theme.gutterWidth}px;`
     }
   }
 `
@@ -53,6 +53,7 @@ export default class Wrapper extends React.Component {
     backgroundImage: PropTypes.string,
     overlay: PropTypes.string,
     spacing: PropTypes.number,
+    gutter: PropTypes.number,
     wide: PropTypes.bool,
   }
 
