@@ -10,7 +10,6 @@ export default class TextField extends React.Component {
     name: PropTypes.string,
     placeholder: PropTypes.string,
     initialValue: PropTypes.string,
-    defaultValue: PropTypes.string,
     type: PropTypes.string,
   }
 
@@ -27,7 +26,8 @@ export default class TextField extends React.Component {
       <input
         type={type}
         name={name}
-        defaultValue={value || initialValue || defaultValue}
+        defaultValue={initialValue}
+        value={value || ''}
         placeholder={placeholder}
         onChange={this.handleChange}
         onFocus={onFocus}
