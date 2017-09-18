@@ -16,6 +16,7 @@ const FIELD_TYPES = {
     font-family: ${t('font')};
     text-transform: none;
     width: 100%;
+    font-size: 0.9em;
     padding: 10px 10px 9px;
     background-color: transparent;
     border: 1px solid ${t('border')};
@@ -46,15 +47,27 @@ export default class Input extends React.Component {
   render() {
     const { label, type, description } = this.props
     const Field = this.getType(type)
-    return (
-      <div className={this.props.className}>
-        <label>
-          {label}
+
+    if (label) {
+      return (
+        <div className={this.props.className}>
+          <label>
+            {label}
+            <Field {...this.props} />
+            {description}
+          </label>
+        </div>
+      )
+    } else {
+      return (
+        <div className={this.props.className}>
           <Field {...this.props} />
           {description}
-        </label>
-      </div>
-    )
+        </div>
+      )
+    }
+
+
   }
 
 }
