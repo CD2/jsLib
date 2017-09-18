@@ -34,6 +34,13 @@ margin-bottom: 10px;
       outline: none;
     }
   }
+  .validation-error {
+    color: ${t('error')};
+    font-size: 0.8em;
+    display: block;
+    text-align: right;
+    font-weight: 600;
+  }
 `
 export default class Input extends React.Component {
 
@@ -47,6 +54,13 @@ export default class Input extends React.Component {
     return FIELD_TYPES[type] || FIELD_TYPES['text']
   }
 
+  renderErrors() {
+    const { errors } = this.props
+    if (errors) {
+      return errors.map(err => <span className="validation-error">{err}</span>)
+    }
+  }
+
   render() {
     const { label, type, description } = this.props
     const Field = this.getType(type)
@@ -54,6 +68,7 @@ export default class Input extends React.Component {
     if (label) {
       return (
         <div className={this.props.className}>
+          {this.renderErrors()}
           <label>
             {label}
             <Field {...this.props} className="field"/>
@@ -64,6 +79,7 @@ export default class Input extends React.Component {
     } else {
       return (
         <div className={this.props.className}>
+          {this.renderErrors()}
           <Field {...this.props} className="field"/>
           {description}
         </div>

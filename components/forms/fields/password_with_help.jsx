@@ -5,10 +5,13 @@ import { panel } from 'utils/common_styles'
 import { Grid, GridItem } from "lib/components/grid/index"
 @styled`
   position: relative;
+  text-align: right;
   .field {
     margin-bottom: 10px;
   }
   .password_helpers {
+    
+    display: inline-block;
     font-size: 0.9em;
     text-align: left;
     border: 1px solid;
@@ -166,18 +169,25 @@ export default class PasswordWithHelpField extends React.Component {
     const helperComponents = Object.entries(this.helpers).map(([text, tester]) => {
       return this.renderHelp(text, tester)
     })
+
+    let className = ''
+    if (this.getValue() && this.getValue() === this.getConfirmationValue()) {
+      className += 'complete'
+    } else if (this.state.helper_errors) {
+      className += 'error'
+    }
+
     return (
       <ul className='password_helpers'>
         {helperComponents}
-        <li>{this.getConfirmationErrorMessages()}</li>
+        <li className={className}>Password confirmation must match</li>
       </ul>
     )
   }
 
   render() {
     return (
-      <Grid className={this.getFieldClassName()}>
-        <GridItem weight={1/2}>
+      <div className={this.getFieldClassName()}>
           {this.getErrorMessages()}
           <input
             className="field"
@@ -196,11 +206,8 @@ export default class PasswordWithHelpField extends React.Component {
                 placeholder='Password Confirmation'
                 onChange={this.handleConfirmationChange}/>
           </div>
-        </GridItem>
-        <GridItem weight={1/2}>
           {this.renderHelpers()}
-        </GridItem>
-      </Grid>
+      </div>
     )
   }
 

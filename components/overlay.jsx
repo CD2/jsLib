@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { styled } from 'utils/theme'
+import { styled, t } from 'utils/theme'
 
 @styled`
 
@@ -13,7 +13,7 @@ import { styled } from 'utils/theme'
   z-index: 4999;
 
   &.visible {
-    background: black;
+    background: ${t('darkBackground')};
     cursor: pointer;
     opacity: .4;
   }
