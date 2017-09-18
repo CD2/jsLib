@@ -13,6 +13,7 @@ const FIELD_TYPES = {
 margin-bottom: 10px;
   input[type=email],
   input[type=text],
+  input[type=search],
   input[type=password] {
     box-sizing: border-box;
     color: ${t('text')};

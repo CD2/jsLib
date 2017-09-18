@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { styled } from 'utils/theme'
 import { p } from 'utils/theme'
-
+import { observer } from 'mobx-react'
 @styled`
  .wrapper__overlay {
     background-color: ${p('overlay', '#000')};
@@ -34,16 +34,13 @@ import { p } from 'utils/theme'
     position: relative;
     z-index: 1001;
     ${({innerBackground:bg}) => bg ? `background-color: ${bg};` : ''};
-    ${({ width, theme, wide }) => {
-      const siteWidth = wide ? theme.wideSiteWidth : theme.siteWidth;
-      return `max-width: ${(width || siteWidth)}px;`
-    }}
     margin: 0 auto;
     ${({ spacing, theme, gutter }) => {
       return `padding: ${(theme.spacing[spacing] || spacing || theme.spacing.small)}px ${gutter || theme.gutterWidth}px;`
     }
   }
 `
+@observer
 export default class Wrapper extends React.Component {
 
   static PropTypes = {
@@ -59,11 +56,11 @@ export default class Wrapper extends React.Component {
 
   render() {
     const { className, children, overlay } = this.props
-
+    const width = this.props.width || this.props.theme.siteWidth
     return (
       <div className={className}>
         { overlay && <div className="wrapper__overlay" /> }
-        <div className="wrapper__inner">
+        <div className="wrapper__inner" style={{maxWidth: `${width}px`}}>
           {children}
         </div>
       </div>
