@@ -29,7 +29,7 @@ import { p } from 'utils/theme'
   }}
 
   position: relative;
-  .wrapper__inner {
+  > .wrapper__inner {
     width: 100%;
     position: relative;
     z-index: 1001;
