@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { styled, t } from 'utils/theme'
+import { styled } from 'utils/theme'
 
 @styled`
   display: block;
@@ -33,4 +33,3 @@ export default class Checkbox extends React.Component {
     )
   }
 }
-
