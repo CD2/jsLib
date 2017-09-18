@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import TinyMCE from 'react-tinymce';
 
-import tinymce from 'tinymce';
+import 'tinymce';
 import 'tinymce/themes/modern';
 import 'tinymce/plugins/lists';
 import 'tinymce/plugins/link';
