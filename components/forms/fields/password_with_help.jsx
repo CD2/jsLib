@@ -189,7 +189,6 @@ export default class PasswordWithHelpField extends React.Component {
           {this.getErrorMessages()}
           <input
             className="field"
-            id={this.id}
             type='password'
             value={this.getValue()}
             placeholder={this.props.placeholder}
@@ -198,7 +197,6 @@ export default class PasswordWithHelpField extends React.Component {
           <div className={this.getConfirmationFieldClassName()}>
             <input
                 className="field"
-                id={this.confirmation_id}
                 type='password'
                 value={this.getConfirmationValue()}
                 placeholder='Password Confirmation'
