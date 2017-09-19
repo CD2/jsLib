@@ -44,7 +44,7 @@ export default class Breadcrumbs extends React.Component {
   }
 
   render() {
-    if (BreadcrumbStore.breadcrumbs.length === 0) return null
+    if (BreadcrumbStore.breadcrumbs.filter(crumb=>crumb).length === 0) return null
     return(
       <Wrapper width="1600" className={this.props.className} background={this.props.theme.secondary}>
         <Grid>
