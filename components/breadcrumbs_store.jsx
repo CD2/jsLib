@@ -54,7 +54,7 @@ export default class Breadcrumbs extends React.Component {
                 <Img src={home} />
               </Link>
             </span>
-            {BreadcrumbStore.breadcrumbs.map(this.renderBreadcrumb)}
+            {BreadcrumbStore.breadcrumbs.filter(crumb=>crumb).map(this.renderBreadcrumb)}
           </GridItem>
           <GridItem align="right" weight={1/6}>
             <a onClick={ history.goBack } >Back</a>
