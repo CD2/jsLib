@@ -11,8 +11,8 @@ import { styled, p } from 'utils/theme'
     const backgroundSize = contain ? 'contain' : 'cover'
     if (image) {
         return `
-          background-image: url(${image});
           background-size: ${backgroundSize};
+          background-image: url(${image});
           background-position: 50%;
           background-repeat: no-repeat;
         `
