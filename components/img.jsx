@@ -2,7 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 export default class Img extends React.Component {
-
   static propTypes = {
     alt: PropTypes.string
   }
@@ -16,5 +15,4 @@ export default class Img extends React.Component {
       <img alt={this.props.alt} {...this.props} />
     )
   }
-
 }
