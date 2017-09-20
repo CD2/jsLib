@@ -2,11 +2,13 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { styled, p } from 'utils/theme'
 import decorate from 'utils/decorate'
+import { apiRoute } from 'utils/api_http';
 
 export class BackgroundImage extends React.Component {
 
   static PropTypes = {
     src: PropTypes.string,
+    url: PropTypes.string,
     default_src: PropTypes.string,
     width: PropTypes.string,
     height: PropTypes.string,
@@ -30,8 +32,8 @@ export default decorate(
     width: ${p('width', '100%')};
     height: ${p('height', '100%')};
     ${props => props.circular ? `border-radius: 50%;` : ``}
-    ${({ src, default_src, contain }) => {
-      const image = src || default_src
+    ${({ src, default_src, contain, url }) => {
+      const image = url ? apiRoute + url : src || default_src
       const backgroundSize = contain ? 'contain' : 'cover'
       if (image) {
           return `
