@@ -6,6 +6,7 @@ const FIELD_TYPES = {
   text: require('./fields/text_field').default,
   rich_text: require('./fields/rich_text_field').default,
   password_with_help: require('./fields/password_with_help').default,
+  select: require('./fields/select').default,
   checkbox: require('./fields/checkbox').default,
 }
 

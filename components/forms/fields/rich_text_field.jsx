@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import TinyMCE from 'react-tinymce';
-
+import TinyMCE from 'utils/tinymce';
+console.log(TinyMCE)
 import 'tinymce';
 import 'tinymce/themes/modern';
 import 'tinymce/plugins/lists';
@@ -26,8 +26,8 @@ export default class RichTextBox extends React.Component {
 
   render() {
     return(
-      <TinyMCE
-        className={this.props.classNAme}
+      <div>{this.props.value}<TinyMCE
+        className={this.props.className}
         content={this.props.value}
         config={{
           skin_url: '/tinymce/lightgray',
@@ -39,7 +39,7 @@ export default class RichTextBox extends React.Component {
           toolbar: 'bold italic removeformat | bullist numlist | table | link',
         }}
         onChange={this.handleChange}
-      />
+      /></div>
     );
   }
 }
