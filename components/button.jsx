@@ -3,65 +3,11 @@ import PropTypes from 'prop-types'
 import invariant from 'invariant'
 import { Link } from 'react-router-dom'
 import { styled, t } from 'utils/theme'
+import decorate from 'utils/decorate'
 
-@styled`
-  &.btn {
-    position: relative;
-    display: inline-block;
-    padding: 10px 20px 12px;
-    border: none;
-    outline: none;
-    font-size: 1rem;
-    line-height: 1.25;
-    text-decoration: none;
-    cursor: pointer;
-    vertical-align: top;
-    color: white;
-    border-radius: 5px;
+export class Button extends React.Component {
 
-    &.common {
-      background-color: ${t('primary')};
-      &:hover {
-        color: white;
-      }
-    }
-
-    &.small {
-      font-size: 0.9rem;
-      font-weight: 600;
-      padding: 6px 14px 7px;
-      background-color: ${t('primary')};
-      &:hover {
-        color: white;
-      }
-    }
-
-    &.secondary {
-      background-color: #fff;
-      color: ${t('primary')};
-      border: 2px solid ${t('primary')};
-      &:hover {
-        color: ${t('primary')};
-      }
-    }
-
-    &.dark {
-      color: ${t('white')};
-      border: 2px solid ${t('white')};
-    }
-
-    &:hover {
-      filter: brightness(1.15);
-    }
-
-  }
-  + .btn {
-    margin-left: 10px;
-  }
-`
-export default class Button extends React.Component {
-
-  static PropTypes = {
+  static propTypes = {
     className: PropTypes.string,
     to: PropTypes.string,
     external: PropTypes.bool,
@@ -101,3 +47,61 @@ export default class Button extends React.Component {
   }
 
 }
+export default decorate(
+  styled`
+    &.btn {
+      position: relative;
+      display: inline-block;
+      padding: 10px 20px 12px;
+      border: none;
+      outline: none;
+      font-size: 1rem;
+      line-height: 1.25;
+      text-decoration: none;
+      cursor: pointer;
+      vertical-align: top;
+      color: white;
+      border-radius: 5px;
+
+      &.common {
+        background-color: ${t('primary')};
+        &:hover {
+          color: white;
+        }
+      }
+
+      &.small {
+        font-size: 0.9rem;
+        font-weight: 600;
+        padding: 6px 14px 7px;
+        background-color: ${t('primary')};
+        &:hover {
+          color: white;
+        }
+      }
+
+      &.secondary {
+        background-color: #fff;
+        color: ${t('primary')};
+        border: 2px solid ${t('primary')};
+        &:hover {
+          color: ${t('primary')};
+        }
+      }
+
+      &.dark {
+        color: ${t('white')};
+        border: 2px solid ${t('white')};
+      }
+
+      &:hover {
+        filter: brightness(1.15);
+      }
+
+    }
+    + .btn {
+      margin-left: 10px;
+    }
+  `,
+  Button
+)

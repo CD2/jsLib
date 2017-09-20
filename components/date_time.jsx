@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import moment from 'moment'
 
-export default class DateTime extends React.Component {
+export class DateTime extends React.Component {
 
   static propTypes = {
     date:PropTypes.any,
@@ -28,7 +28,7 @@ export default class DateTime extends React.Component {
   }
 
 }
-
+export default DateTime
 // YEAR, MONTH, DAY
 // YYYY        2014            4 or 2 digit year
 // YY          14              2 digit year

@@ -8,23 +8,9 @@ import { styled, t } from 'utils/theme'
 import { small_icon } from 'utils/common_styles'
 import Wrapper from "./wrapper";
 import Img from "./img";
+import decorate from 'utils/decorate'
 
-@styled`
-  color: ${t('lightText')};
-  box-shadow: ${t('shadow1')};
-  color: white;
-  font-weight: 600;
-  .breadcrumb__link {
-    border-bottom: 0;
-  }
-  img {
-    ${small_icon}
-  }
-  a {
-    color: white;
-  }
-`
-export default class Breadcrumbs extends React.Component {
+export class Breadcrumbs extends React.Component {
 
   static propTypes = {
     breadcrumbs: PropTypes.arrayOf(PropTypes.object),
@@ -63,3 +49,21 @@ export default class Breadcrumbs extends React.Component {
     )
   }
 }
+export default decorate(
+  styled`
+    color: ${t('lightText')};
+    box-shadow: ${t('shadow1')};
+    color: white;
+    font-weight: 600;
+    .breadcrumb__link {
+      border-bottom: 0;
+    }
+    img {
+      ${small_icon}
+    }
+    a {
+      color: white;
+    }
+  `,
+  Breadcrumbs
+)
