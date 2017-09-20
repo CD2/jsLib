@@ -1,12 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import TinyMCE from 'utils/tinymce';
-console.log(TinyMCE)
-import 'tinymce';
-import 'tinymce/themes/modern';
-import 'tinymce/plugins/lists';
-import 'tinymce/plugins/link';
-import 'tinymce/plugins/table';
+import RichTextInput from './rich_text_box'
+
+import 'tinymce'
+import 'tinymce/themes/modern'
+import 'tinymce/plugins/lists'
+import 'tinymce/plugins/link'
+import 'tinymce/plugins/table'
 
 export default class RichTextBox extends React.Component {
 
@@ -16,30 +16,21 @@ export default class RichTextBox extends React.Component {
     onChange: PropTypes.func,
     onRawChange: PropTypes.func,
     value: PropTypes.string,
-  };
+  }
 
-  handleChange = (e) => {
+  handleChange = (value) => {
     const { onRawChange, onChange } = this.props
-    if (onRawChange) onRawChange(e)
-    if (onChange) onChange({name: this.props.name, value: e.target.getContent() })
+    if (onRawChange) onRawChange(value)
+    if (onChange) onChange({name: this.props.name, value })
   }
 
   render() {
     return(
-      <div>{this.props.value}<TinyMCE
+      <RichTextInput
         className={this.props.className}
-        content={this.props.value}
-        config={{
-          skin_url: '/tinymce/lightgray',
-          branding: false,
-          menubar: false,
-          elementpath: false,
-          browser_spellcheck: true,
-          plugins: 'lists link table',
-          toolbar: 'bold italic removeformat | bullist numlist | table | link',
-        }}
+        value={this.props.value}
         onChange={this.handleChange}
-      /></div>
-    );
+      />
+    )
   }
 }
