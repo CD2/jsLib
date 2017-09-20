@@ -6,12 +6,19 @@ import { styled } from 'utils/theme'
 
 import { observable, computed, action } from 'mobx'
 import { observer } from 'mobx-react'
-
+import { tag, panel } from 'utils/common_styles'
 @styled`
   .wrapper {
     z-index: 5000;
     position: relative;
     background: white;
+    ${panel};
+    padding: 6px;
+    cursor: pointer;
+  }
+  span {
+    ${tag}
+    margin-top: 2px;
   }
 `
 @observer
@@ -175,7 +182,6 @@ export default class TagField extends React.Component {
       <div className={this.props.className}>
         {this.focussed && <Overlay onClick={this.blur} visible/>}
         <div onClick={this.handlefocus} className='wrapper'>
-          {this.current_index} {JSON.stringify(this.tags)}
           {this.renderPopularSuggestions()}
           <div>
             {this.renderValue()}
