@@ -10,24 +10,9 @@ import Img from "./img";
 
 import BreadcrumbStore from 'stores/breadcrumbs'
 import { observer } from 'mobx-react'
+import decorate from 'utils/decorate'
 
-@styled`
-  color: ${t('lightText')};
-  box-shadow: ${t('shadow1')};
-  color: white;
-  font-weight: 600;
-  .breadcrumb__link {
-    border-bottom: 0;
-  }
-  img {
-    ${small_icon}
-  }
-  a {
-    color: white;
-  }
-`
-@observer
-export default class Breadcrumbs extends React.Component {
+export class Breadcrumbs extends React.Component {
 
   static defaultProps = {
     breadcrumbs: [],
@@ -63,3 +48,22 @@ export default class Breadcrumbs extends React.Component {
     )
   }
 }
+export default decorate(
+  styled`
+    color: ${t('lightText')};
+    box-shadow: ${t('shadow1')};
+    color: white;
+    font-weight: 600;
+    .breadcrumb__link {
+      border-bottom: 0;
+    }
+    img {
+      ${small_icon}
+    }
+    a {
+      color: white;
+    }
+  `,
+  observer,
+  Breadcrumbs
+)

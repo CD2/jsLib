@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Component <PaginationControls /> functions first page Component <PaginationControls /> renders correctly 1`] = `"<div><div class=\\"pagination__control\\">‹ Left</div><div class=\\"pagination__button\\">1</div><div class=\\"pagination__button current_page\\">2</div><div class=\\"pagination__button\\">3</div><div class=\\"pagination__button\\">4</div><div class=\\"pagination__button\\">5</div><div class=\\"pagination__control\\">Right ›</div></div>"`;
+
+exports[`Component <PaginationControls /> functions lastPage Component <PaginationControls /> renders correctly 1`] = `"<div><div class=\\"pagination__control\\">‹ Left</div><div class=\\"pagination__button\\">1</div><div class=\\"pagination__button\\">2</div><div class=\\"pagination__button\\">3</div><div class=\\"pagination__button\\">4</div><div class=\\"pagination__button current_page\\">5</div><div class=\\"pagination__control disabled\\">Right ›</div></div>"`;
+
+exports[`Component <PaginationControls /> functions lastPage Component <PaginationControls /> renders correctly 2`] = `"<div><div class=\\"pagination__control\\">‹ Left</div><div class=\\"pagination__button\\">1</div><div class=\\"pagination__button current_page\\">2</div><div class=\\"pagination__button\\">3</div><div class=\\"pagination__button\\">4</div><div class=\\"pagination__button\\">5</div><div class=\\"pagination__control\\">Right ›</div></div>"`;
+
+exports[`Component <PaginationControls /> render Left Component <PaginationControls /> renders correctly 1`] = `"<div><div class=\\"pagination__control\\">‹ Left</div><div class=\\"pagination__button\\">1</div><div class=\\"pagination__button current_page\\">2</div><div class=\\"pagination__button\\">3</div><div class=\\"pagination__button\\">4</div><div class=\\"pagination__button\\">5</div><div class=\\"pagination__control\\">Right ›</div></div>"`;
+
+exports[`Component <PaginationControls /> renders correctly 1`] = `"<div><div class=\\"pagination__control disabled\\">‹ Left</div><div class=\\"pagination__button current_page\\">1</div><div class=\\"pagination__button\\">2</div><div class=\\"pagination__button\\">3</div><div class=\\"pagination__button\\">4</div><div class=\\"pagination__button\\">5</div><div class=\\"pagination__control\\">Right ›</div></div>"`;
