@@ -8,6 +8,7 @@ const FIELD_TYPES = {
   password_with_help: require('./fields/password_with_help').default,
   select: require('./fields/select').default,
   checkbox: require('./fields/checkbox').default,
+  tags: require('./fields/tags').default,
 }
 
 @styled`

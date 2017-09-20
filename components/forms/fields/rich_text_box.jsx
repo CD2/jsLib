@@ -54,10 +54,10 @@ export default class RichTextBox extends React.Component {
         editor.on('keyup change', () => {
           this.handleChange(editor.getContent())
         });
+        if (this.props.value) editor.setContent(this.props.value);
       }
     });
     this.value = this.props.value
-    this.editor.setContent(this.props.value);
   }
 
   componentWillUnmount() {

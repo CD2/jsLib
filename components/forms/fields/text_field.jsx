@@ -24,7 +24,7 @@ export default class TextField extends React.Component {
 
     return (
       <input
-        type={type}
+        type={type || 'text'}
         name={name}
         defaultValue={initialValue}
         value={value || ''}
