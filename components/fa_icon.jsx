@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import {styled} from "utils/theme/index"
 @styled`
   ${({ color, theme, size }) => {
-    const col = color || theme.darkBackground 
+    const col = color || theme.darkBackground
     const sze = size || 1
     return (
       `
@@ -27,17 +27,23 @@ import {styled} from "utils/theme/index"
 export default class FaIcon extends React.Component {
 
   static PropTypes = {
-    icon: PropTypes.string,
+    icon: PropTypes.string.isRequired,
     hoverColor: PropTypes.string,
     color: PropTypes.string,
     size: PropTypes.number,
+    onClick: PropTypes.func,
+  }
+
+  get className() {
+    let { className, icon } = this.props
+    className += ` fa fa-${icon}`
+    return className
   }
 
   render() {
-    const { icon, className } = this.props
-
+    const { onClick } = this.props
     return (
-      <i className={`fa fa-${icon} ${className}`} />
+      <i className={this.className} onClick={onClick}/>
     )
   }
 

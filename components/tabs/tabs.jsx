@@ -43,7 +43,7 @@ export default class Tabs extends React.Component {
       if (!child) return null
       return React.cloneElement(child, {
         ...child.props,
-        tabKey: child.tabName,
+        tabKey: child.key,
         renderHead: true,
         onTabHeadClick: this.handleTabHeadClick,
         className: 'tab-head'
@@ -58,7 +58,7 @@ export default class Tabs extends React.Component {
     React.Children.forEach(this.props.children, child => {
       if (!child) return null
       if (tab === null) tab=child //default to first child
-      if (child.tabName === selected) tab=child
+      if (child.key === selected) tab=child
     })
     return <div className="tab-content">{tab}</div>
   }

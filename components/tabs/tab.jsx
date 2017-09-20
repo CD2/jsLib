@@ -4,7 +4,6 @@ import PropTypes from 'prop-types'
 export default class Tab extends React.Component {
 
   static propTypes = {
-    tabName: PropTypes.string.isRequired,
     heading: PropTypes.string.isRequired,
     children: PropTypes.node,
 
