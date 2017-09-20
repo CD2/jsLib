@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Component <Wrapper /> renders correctly 1`] = `"<div><div class=\\"wrapper__overlay\\"></div><div class=\\"wrapper__inner\\" style=\\"max-width: 10px;\\"></div></div>"`;

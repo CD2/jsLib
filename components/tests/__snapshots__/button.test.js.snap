@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Component <Button /> render Component <Button /> renders correctly 1`] = `"<a class=\\"button_class common btn\\" href=\\"/somehref\\"></a>"`;
+
+exports[`Component <Button /> render Component <Button /> renders correctly 2`] = `"<div class=\\"button_class common btn\\"></div>"`;
+
+exports[`Component <Button /> renders correctly 1`] = `"<div class=\\"undefined common btn\\"></div>"`;

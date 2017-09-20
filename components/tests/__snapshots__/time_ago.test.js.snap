@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Component <TimeAgo /> Component <TimeAgo /> renders correctly 1`] = `"<span>a minute ago</span>"`;
+
+exports[`Component <TimeAgo /> Component <TimeAgo /> renders correctly 2`] = `"<span>2 hours ago</span>"`;
+
+exports[`Component <TimeAgo /> expecting hours Component <TimeAgo /> renders correctly 1`] = `"<span>2 hours ago</span>"`;
+
+exports[`Component <TimeAgo /> expecting minutes Component <TimeAgo /> renders correctly 1`] = `"<span>a minute ago</span>"`;
+
+exports[`Component <TimeAgo /> renders correctly 1`] = `"<span>a few seconds ago</span>"`;

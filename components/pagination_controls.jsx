@@ -1,31 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { styled, t } from 'utils/theme'
+import decorate from 'utils/decorate'
 
-@styled`
-  text-align: center;
-  padding: ${t('gutterWidth')}px 0;
-
-  .pagination__control {
-    display: inline-block;
-    color: ${t('primary')};
-    font-weight: bold;
-    transition: color ${t('globalTransitionSpeed')};
-    margin: 0 9px;
-    &:hover {
-      color: ${t('primaryLight')};
-    }
-  }
-  .pagination__button {
-    display: inline-block;
-    margin: 0 6px;
-  }
-  .current_page {
-    font-weight: bold;
-    border-bottom: 2px solid ${t('primary')};
-  }
-`
-export default class PaginationControls extends React.Component {
+export class PaginationControls extends React.Component {
 
   static propTypes = {
     page: PropTypes.number.isRequired,
@@ -100,3 +78,29 @@ export default class PaginationControls extends React.Component {
   }
 
 }
+export default decorate(
+  styled`
+    text-align: center;
+    padding: ${t('gutterWidth')}px 0;
+
+    .pagination__control {
+      display: inline-block;
+      color: ${t('primary')};
+      font-weight: bold;
+      transition: color ${t('globalTransitionSpeed')};
+      margin: 0 9px;
+      &:hover {
+        color: ${t('primaryLight')};
+      }
+    }
+    .pagination__button {
+      display: inline-block;
+      margin: 0 6px;
+    }
+    .current_page {
+      font-weight: bold;
+      border-bottom: 2px solid ${t('primary')};
+    }
+  `,
+  PaginationControls
+)
