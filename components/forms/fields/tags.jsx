@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import Overlay from 'lib/components/overlay'
 import { styled } from 'utils/theme'
 
-import { observable, computed, action } from 'mobx'
+import { observable, computed, action, reaction } from 'mobx'
 import { observer } from 'mobx-react'
 
 @styled`
@@ -31,6 +31,7 @@ export default class TagField extends React.Component {
     placeholder: PropTypes.string,
   }
 
+
   @observable focussed = false
   @observable suggestions = ['hello', 'SUGGESTION']
   @observable tags = []
@@ -39,7 +40,16 @@ export default class TagField extends React.Component {
   @computed get current_value() { return this.tags[this.current_index] }
   set current_value(value) { this.tags[this.current_index] = value }
 
-  @computed get popular_suggestions() { return this.props.popularSuggestions.filter(sug => this.tags.indexOf(sug) === -1)}
+  @computed get popular_suggestions() { return this.props.popularSuggestions.filter(sug => this.tags.indexOf(sug) === -1) }
+
+  // componentDidMount() {
+  //   this.cleanup = reaction(()=>this.tags, () => {
+  //     console.log('running', this.current_value)
+  //     this.fetchSuggestions(this.current_value)
+  //   })
+  // }
+
+
 
   // replaces current editing with suggestion
   @action use_suggestion(suggestion) {
@@ -50,32 +60,43 @@ export default class TagField extends React.Component {
     }
   }
 
+  @observable fetchingSuggestions = false
 
-  fetchSuggestions(value) {
+  @action fetchSuggestions() {
+    if (this.fetchingSuggestions) return
     const { suggestions } = this.props
-    if (suggestions && value) {
+    const search_value = this.current_value
+    if (suggestions && this.current_value) {
+      this.fetchingSuggestions = true
       if (typeof suggestions === 'function') {
-        window.Promise.resolve(suggestions(value)).then(array => {
-          this.setState({suggestions: array})
-        })
+        window.Promise.resolve(suggestions(search_value)).then(
+          action('fetchSuggestionsFulfilled', array => {
+            this.fetchingSuggestions = false
+            this.suggestions.replace(array)
+          })
+        )
       } else {
-        const array = suggestions.filter(suggestion => suggestion.indexOf(value) > -1)
-        this.setState({suggestions: array})
+        this.fetchingSuggestions = false
+        this.suggestions.replace(suggestions.filter(sug => sug.indexOf(search_value)!==-1))
       }
     }
-    this.setState({suggestions: []})
   }
 
   @action blur = () => {
     this.focussed = false
+    this.tags = this.tags.filter(tag=>tag)
     this.current_index = -1
   }
   @action handlefocus = () => {
     this.focussed = true
-    if (this.current_index === -1) this.current_index = this.tags.length
+    if (this.current_index === -1) {
+      this.current_index = this.tags.length
+      this.tags.push('')
+    }
   }
 
   @action handleTagClick = (tag) => {
+    this.tags = this.tags.filter(tag=>tag)
     this.current_index = this.tags.indexOf(tag)
   }
 
@@ -92,6 +113,7 @@ export default class TagField extends React.Component {
       case ',':
         e.preventDefault()
         if (this.current_index < this.tags.length - 1) { //just move to next one
+          this.tags = this.tags.filter(tag=>tag)
           this.current_index++
         } else if (this.current_index === this.tags.length - 1 && this.current_value !== ''){
           this.current_index = this.tags.length
@@ -103,7 +125,8 @@ export default class TagField extends React.Component {
   }
 
   @action handleCurrentTagChange = (e) => {
-    this.tags[this.current_index] = e.target.value
+    this.current_value = e.target.value
+    this.fetchSuggestions()
   }
 
   componentDidUpdate() {
@@ -142,14 +165,14 @@ export default class TagField extends React.Component {
     return result
   }
 
-  renderPopularSuggestions() {
-    return this.popular_suggestions.map(suggestion => {
+  @computed get renderPopularSuggestions() {
+    return this.popular_suggestions.filter(sug => this.tags.indexOf(sug) === -1).map(suggestion => {
       return <span key={suggestion} onClick={this.use_suggestion.bind(this, suggestion)}>{suggestion}</span>
     })
   }
-  //
+
   @computed get renderSuggestions() {
-    console.log('RENDER SUGGESTIONS')
+    console.log('SUG: ', this.suggestions)
     if (!this.focussed) return
     if (this.suggestions.length === 0) return
 
@@ -170,13 +193,12 @@ export default class TagField extends React.Component {
   }
 
   render() {
-    console.log('RE RENDER')
     return (
       <div className={this.props.className}>
         {this.focussed && <Overlay onClick={this.blur} visible/>}
         <div onClick={this.handlefocus} className='wrapper'>
           {this.current_index} {JSON.stringify(this.tags)}
-          {this.renderPopularSuggestions()}
+          {this.renderPopularSuggestions}
           <div>
             {this.renderValue()}
           </div>

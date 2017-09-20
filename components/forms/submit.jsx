@@ -23,14 +23,6 @@ import load from 'images/load.gif'
       background-color: ${t('primaryLight')};
     }
     ${({ submitting }) => {
-  console.log(submitting)
-  console.log(submitting)
-  console.log(submitting)
-  console.log(submitting)
-  console.log(submitting)
-  console.log(submitting)
-  console.log(submitting)
-  console.log(submitting)
       if(submitting){
     return(`
         background: url(${load});
