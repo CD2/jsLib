@@ -56,8 +56,6 @@ export default class RichTextBox extends React.Component {
         });
       }
     });
-    this.value = this.props.value
-    this.editor.setContent(this.props.value);
   }
 
   componentWillUnmount() {
@@ -84,6 +82,11 @@ export default class RichTextBox extends React.Component {
   }
 
   render() {
+    if(this.editor) {
+      this.value = this.props.value
+      this.editor.setContent(this.props.value);
+    }
+
     return(
       <div className={this.props.className}>
         <textarea
