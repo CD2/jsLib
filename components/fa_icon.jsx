@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import {styled} from "utils/theme/index"
 import decorate from 'utils/decorate'
 
-export default class FaIcon extends React.Component {
+export class FaIcon extends React.Component {
 
   static PropTypes = {
     icon: PropTypes.string.isRequired,
