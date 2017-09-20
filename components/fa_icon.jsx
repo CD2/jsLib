@@ -5,7 +5,7 @@ import decorate from 'utils/decorate'
 
 export class FaIcon extends React.Component {
 
-  static PropTypes = {
+  static propTypes = {
     icon: PropTypes.string.isRequired,
     hoverColor: PropTypes.string,
     color: PropTypes.string,
