@@ -33,14 +33,19 @@ export default class TagField extends React.Component {
 
 
   @observable focussed = false
-  @observable suggestions = ['hello', 'SUGGESTION']
   @observable tags = []
   @observable current_index = -1
+
+  @observable suggestions = ['hello', 'SUGGESTION']
+  @observable suggestion_query = ''
 
   @computed get current_value() { return this.tags[this.current_index] }
   set current_value(value) { this.tags[this.current_index] = value }
 
   @computed get popular_suggestions() { return this.props.popularSuggestions.filter(sug => this.tags.indexOf(sug) === -1) }
+
+
+  @computed get suggestions_up_to_date() { return this.current_value === this.suggestion_query }
 
   // componentDidMount() {
   //   this.cleanup = reaction(()=>this.tags, () => {
@@ -63,21 +68,23 @@ export default class TagField extends React.Component {
   @observable fetchingSuggestions = false
 
   @action fetchSuggestions() {
-    if (this.fetchingSuggestions) return
+    if (this.fetchingSuggestions || this.suggestions_up_to_date) return
     const { suggestions } = this.props
-    const search_value = this.current_value
+    const query = this.current_value
     if (suggestions && this.current_value) {
       this.fetchingSuggestions = true
       if (typeof suggestions === 'function') {
-        window.Promise.resolve(suggestions(search_value)).then(
+        window.Promise.resolve(suggestions(query)).then(
           action('fetchSuggestionsFulfilled', array => {
             this.fetchingSuggestions = false
+            this.suggestion_query = query
             this.suggestions.replace(array)
           })
         )
       } else {
         this.fetchingSuggestions = false
-        this.suggestions.replace(suggestions.filter(sug => sug.indexOf(search_value)!==-1))
+        this.suggestions.replace(suggestions.filter(sug => sug.indexOf(query)!==-1))
+        this.suggestion_query = query
       }
     }
   }
@@ -176,6 +183,10 @@ export default class TagField extends React.Component {
     if (!this.focussed) return
     if (this.suggestions.length === 0) return
 
+    if (this.suggestions_up_to_date) {
+      return 'LOADING'
+    }
+
     const suggestionsComponent = this.suggestions.map(suggestion => {
       return (
         <span
@@ -209,3 +220,40 @@ export default class TagField extends React.Component {
   }
 
 }
+
+
+import { autorun, extendObservable } from 'mobx'
+
+class Record {
+
+  @observable first_name = 'Henry'
+  @observable last_name = 'Morgan'
+
+  setAttribute(name, value) {
+    extendObservable(this, {[name]: value})
+  }
+
+}
+
+class Article extends Record {
+
+  first_name = 'asdasd'
+
+  @computed get fullname() {
+    console.log('creating full name')
+    return `${this.first_name} ${this.last_name}`
+  }
+}
+
+const r = new Article()
+
+autorun(() => console.log('name changed: ', r.fullname))
+r.setAttribute('age', 10)
+
+
+r.first_name = 'Bob'
+r.last_name = 'Smith'
+
+autorun(() => console.log('age changed: ', r.age))
+
+r.age = 30
