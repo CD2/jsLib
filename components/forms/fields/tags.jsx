@@ -6,12 +6,19 @@ import { styled } from 'utils/theme'
 
 import { observable, computed, action, reaction } from 'mobx'
 import { observer } from 'mobx-react'
-
+import { tag, panel } from 'utils/common_styles'
 @styled`
   .wrapper {
     z-index: 5000;
     position: relative;
     background: white;
+    ${panel};
+    padding: 6px;
+    cursor: pointer;
+  }
+  span {
+    ${tag}
+    margin-top: 2px;
   }
 `
 @observer
@@ -41,19 +48,11 @@ export default class TagField extends React.Component {
 
   @computed get current_value() { return this.tags[this.current_index] }
   set current_value(value) { this.tags[this.current_index] = value }
-
+  @computed get tag_execept_current() { return this.tags.filter((_, i)=>i!==this.current_index) }
+  @computed get filtered_suggestions() { return this.suggestions.filter(sug => this.tag_execept_current.indexOf(sug) === -1) }
   @computed get popular_suggestions() { return this.props.popularSuggestions.filter(sug => this.tags.indexOf(sug) === -1) }
 
-
   @computed get suggestions_up_to_date() { return this.current_value === this.suggestion_query }
-
-  // componentDidMount() {
-  //   this.cleanup = reaction(()=>this.tags, () => {
-  //     console.log('running', this.current_value)
-  //     this.fetchSuggestions(this.current_value)
-  //   })
-  // }
-
 
 
   // replaces current editing with suggestion
@@ -61,7 +60,11 @@ export default class TagField extends React.Component {
     if (this.current_index === -1) this.tags.push(suggestion)
     else {
       this.current_value = suggestion
+      this.suggestions.clear()
       this.current_index++
+      if (this.current_index >= this.tags.length) {
+        this.tags.push('')
+      }
     }
   }
 
@@ -83,7 +86,7 @@ export default class TagField extends React.Component {
         )
       } else {
         this.fetchingSuggestions = false
-        this.suggestions.replace(suggestions.filter(sug => sug.indexOf(query)!==-1))
+        this.suggestions.replace(suggestions.filter(sug => sug.indexOf(query) !== -1))
         this.suggestion_query = query
       }
     }
@@ -119,12 +122,14 @@ export default class TagField extends React.Component {
       case 'Enter':
       case ',':
         e.preventDefault()
-        if (this.current_index < this.tags.length - 1) { //just move to next one
-          this.tags = this.tags.filter(tag=>tag)
-          this.current_index++
-        } else if (this.current_index === this.tags.length - 1 && this.current_value !== ''){
-          this.current_index = this.tags.length
-          this.tags.push('')
+        if (this.tag_execept_current.indexOf(this.current_value) !== -1) this.current_value = ''
+        else {
+          if (this.current_index < this.tags.length - 1) { //just move to next one
+            this.tags = this.tags.filter(tag=>tag)
+          } else if (this.current_index === this.tags.length - 1 && this.current_value !== ''){
+            this.current_index = this.tags.length
+            this.tags.push('')
+          }
         }
         break
       default:{}
@@ -179,19 +184,17 @@ export default class TagField extends React.Component {
   }
 
   @computed get renderSuggestions() {
-    console.log('SUG: ', this.suggestions)
     if (!this.focussed) return
-    if (this.suggestions.length === 0) return
 
-    if (this.suggestions_up_to_date) {
-      return 'LOADING'
-    }
+    // if (!this.suggestions_up_to_date) {
+    //   return 'LOADING'
+    // }
 
-    const suggestionsComponent = this.suggestions.map(suggestion => {
+    const suggestionsComponent = this.filtered_suggestions.map(suggestion => {
       return (
         <span
             className='tag-input__suggestion tag-input__tag'
-            onClick={() => this.handleAddSuggestion(suggestion)}
+            onClick={this.use_suggestion.bind(this, suggestion)}
           >{suggestion}
         </span>
       )
@@ -208,7 +211,6 @@ export default class TagField extends React.Component {
       <div className={this.props.className}>
         {this.focussed && <Overlay onClick={this.blur} visible/>}
         <div onClick={this.handlefocus} className='wrapper'>
-          {this.current_index} {JSON.stringify(this.tags)}
           {this.renderPopularSuggestions}
           <div>
             {this.renderValue()}
@@ -220,40 +222,3 @@ export default class TagField extends React.Component {
   }
 
 }
-
-
-import { autorun, extendObservable } from 'mobx'
-
-class Record {
-
-  @observable first_name = 'Henry'
-  @observable last_name = 'Morgan'
-
-  setAttribute(name, value) {
-    extendObservable(this, {[name]: value})
-  }
-
-}
-
-class Article extends Record {
-
-  first_name = 'asdasd'
-
-  @computed get fullname() {
-    console.log('creating full name')
-    return `${this.first_name} ${this.last_name}`
-  }
-}
-
-const r = new Article()
-
-autorun(() => console.log('name changed: ', r.fullname))
-r.setAttribute('age', 10)
-
-
-r.first_name = 'Bob'
-r.last_name = 'Smith'
-
-autorun(() => console.log('age changed: ', r.age))
-
-r.age = 30

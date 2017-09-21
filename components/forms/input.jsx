@@ -44,6 +44,17 @@ margin-bottom: 10px;
     text-align: right;
     font-weight: 600;
   }
+  .description {
+    margin: 0;
+    font-size: 0.9em;
+    font-weight: 600;
+    color: ${t('lightText')};
+  }
+  label {
+    color: black;
+    font-weight: 600;
+  }
+  
 `
 export default class Input extends React.Component {
 
@@ -75,7 +86,7 @@ export default class Input extends React.Component {
           <label>
             {label}
             <Field {...this.props} className="field"/>
-            {description}
+            <p className="description">{description}</p>
           </label>
         </div>
       )
@@ -84,7 +95,7 @@ export default class Input extends React.Component {
         <div className={this.props.className}>
           {this.renderErrors()}
           <Field {...this.props} className="field"/>
-          {description}
+          <p className="description">{description}</p>
         </div>
       )
     }
