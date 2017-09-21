@@ -38,6 +38,7 @@ export default class RichTextBox extends React.Component {
   }
 
   componentDidMount() {
+    console.log('MOUNTAIN', this)
     tinymce.init({
       target: this.target,
       skin_url: '/tinymce/lightgray',
@@ -54,7 +55,7 @@ export default class RichTextBox extends React.Component {
         editor.on('keyup change', () => {
           this.handleChange(editor.getContent())
         });
-        if (this.props.value) editor.setContent(this.props.value);
+        // if (this.props.value) editor.setContent('asd' + this.props.value);
       }
     });
     this.value = this.props.value

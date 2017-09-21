@@ -3,7 +3,8 @@ import PropTypes from 'prop-types'
 import { styled, t } from 'utils/theme'
 
 const FIELD_TYPES = {
-  text: require('./fields/text_field').default,
+  text: require('./fields/text').default,
+  textarea: require('./fields/textarea').default,
   rich_text: require('./fields/rich_text_field').default,
   password_with_help: require('./fields/password_with_help').default,
   select: require('./fields/select').default,
@@ -54,13 +55,14 @@ margin-bottom: 10px;
     color: black;
     font-weight: 600;
   }
-  
+
 `
 export default class Input extends React.Component {
 
   static propTypes = {
     label: PropTypes.string,
     description: PropTypes.string,
+    errors: PropTypes.arrayOf(PropTypes.string),
     type: PropTypes.string,
   }
 
