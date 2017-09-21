@@ -97,6 +97,24 @@ export default decorate(
       &:hover {
         filter: brightness(1.15);
       }
+      
+      &.minor {
+        background-color: ${t('background')};
+        color: ${t('lightText')};
+        font-size: 0.9rem;
+        padding: 6px 14px 7px;
+        &:hover {
+          background-color: #cecece;
+        }
+      }
+      
+      &.cancel {
+        background-color: ${t('background')};
+        color: ${t('lightText')};
+        &:hover {
+          background-color: #cecece;
+        }
+      }
 
     }
     + .btn {
