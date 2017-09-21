@@ -41,6 +41,7 @@ export default class TagField extends React.Component {
 
   @observable focussed = false
   @observable tags = []
+  @computed get tag_cache() { return JSON.stringify(this.tags) }
   @observable current_index = -1
 
   @observable suggestions = ['hello', 'SUGGESTION']
@@ -50,10 +51,17 @@ export default class TagField extends React.Component {
   set current_value(value) { this.tags[this.current_index] = value }
   @computed get tag_execept_current() { return this.tags.filter((_, i)=>i!==this.current_index) }
   @computed get filtered_suggestions() { return this.suggestions.filter(sug => this.tag_execept_current.indexOf(sug) === -1) }
-  @computed get popular_suggestions() { return this.props.popularSuggestions.filter(sug => this.tags.indexOf(sug) === -1) }
+  @computed get popular_suggestions() { return this.props.popularSuggestions.filter(sug => this.tag_execept_current.indexOf(sug) === -1) }
 
   @computed get suggestions_up_to_date() { return this.current_value === this.suggestion_query }
 
+
+  componentDidMount() {
+    reaction(
+      () => this.tag_cache,
+      () => this.props.onChange({name: this.props.name, value: this.tags.toJS()})
+    )
+  }
 
   // replaces current editing with suggestion
   @action use_suggestion(suggestion) {
@@ -94,7 +102,7 @@ export default class TagField extends React.Component {
 
   @action blur = () => {
     this.focussed = false
-    this.tags = this.tags.filter(tag=>tag)
+    this.tags.replace(this.tags.filter(tag=>tag))
     this.current_index = -1
   }
   @action handlefocus = () => {
@@ -106,7 +114,7 @@ export default class TagField extends React.Component {
   }
 
   @action handleTagClick = (tag) => {
-    this.tags = this.tags.filter(tag=>tag)
+    this.tags.replace(this.tags.filter(tag=>tag))
     this.current_index = this.tags.indexOf(tag)
   }
 
@@ -116,6 +124,7 @@ export default class TagField extends React.Component {
         if (this.current_index !== 0 && this.current_value === '') {
           e.preventDefault()
           this.current_index--
+          this.tags.replace(this.tags.filter(tag=>tag))
         }
         break;
       case 'Tab':
@@ -125,7 +134,7 @@ export default class TagField extends React.Component {
         if (this.tag_execept_current.indexOf(this.current_value) !== -1) this.current_value = ''
         else {
           if (this.current_index < this.tags.length - 1) { //just move to next one
-            this.tags = this.tags.filter(tag=>tag)
+            this.tags.replace(this.tags.filter(tag=>tag))
           } else if (this.current_index === this.tags.length - 1 && this.current_value !== ''){
             this.current_index = this.tags.length
             this.tags.push('')
@@ -178,7 +187,7 @@ export default class TagField extends React.Component {
   }
 
   @computed get renderPopularSuggestions() {
-    return this.popular_suggestions.filter(sug => this.tags.indexOf(sug) === -1).map(suggestion => {
+    return this.popular_suggestions.map(suggestion => {
       return <span key={suggestion} onClick={this.use_suggestion.bind(this, suggestion)}>{suggestion}</span>
     })
   }
