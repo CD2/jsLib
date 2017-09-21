@@ -43,7 +43,6 @@ export default decorate(
       padding: ${t('gutterWidth')}px;
       width: 90%;
       max-width: 600px;
-      height: 90%;
       max-height: 600px;
       overflow: auto;
       position: absolute;

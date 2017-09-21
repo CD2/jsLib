@@ -11,12 +11,21 @@ import { styled } from 'utils/theme'
     }}
 
   }
+  > .list_item {
+    ${({endSpace, spacing, separator, theme}) => {
+      console.log(endSpace)
+      if (endSpace) {
+        return `padding-bottom: ${theme.spacing[spacing] || spacing}px`
+      }
+    }}
+  }
 `
 export default class List extends React.Component {
 
   static defaultProps = {
     spacing: 'medium',
     separator: false,
+    endSpace: false,
   }
 
   render() {
