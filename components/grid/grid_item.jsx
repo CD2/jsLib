@@ -13,7 +13,7 @@ import { styled } from 'utils/theme'
 `
 export default class GridItem extends React.Component {
 
-  static PropTypes = {
+  static propTypes = {
     align: PropTypes.string,
   }
 
