@@ -56,3 +56,5 @@ validators take the form of `{validator_type: options, ...}`
   - options: { accepts:[true, 'true', 1, '1'] }
 - format
   - options: { with:(required regex to match value to) }
+
+its really simple to write new validators, just look at one of the files and it is obvious (remember to add new validators to the array at the top of the *form_validations.js* so they can get picked up by the method.
