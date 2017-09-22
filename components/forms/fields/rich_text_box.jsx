@@ -24,6 +24,8 @@ export default class RichTextBox extends React.Component {
 
     onChange: PropTypes.func,
     value: PropTypes.string,
+
+    full_editor: PropTypes.bool,
   };
 
   @observable value = ''
@@ -38,7 +40,12 @@ export default class RichTextBox extends React.Component {
   }
 
   componentDidMount() {
-    console.log('MOUNTAIN', this)
+    let toolbar = 'bold italic removeformat | bullist numlist | table | link'
+    let height = '150'
+    if (this.props.full_editor) {
+      toolbar = 'formatselect | bold italic strikethrough forecolor backcolor | link | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat'
+      height = '400'
+    }
     tinymce.init({
       target: this.target,
       skin_url: '/tinymce/lightgray',
@@ -46,10 +53,12 @@ export default class RichTextBox extends React.Component {
       menubar: false,
       elementpath: false,
       browser_spellcheck: true,
+
       plugins: [
         'lists link table'
       ],
-      toolbar: 'bold italic removeformat | bullist numlist | table | link',
+      toolbar,
+      height,
       setup: editor => {
         this.editor = editor;
         editor.on('keyup change', () => {
