@@ -42,7 +42,7 @@ export default class TagField extends React.Component {
   @computed get tag_cache() { return JSON.stringify(this.tags) }
   @observable current_index = -1
 
-  @observable suggestions = ['hello', 'SUGGESTION']
+  @observable suggestions = []
   @observable suggestion_query = ''
 
   @computed get current_value() { return this.tags[this.current_index] }

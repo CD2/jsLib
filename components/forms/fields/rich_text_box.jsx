@@ -95,7 +95,6 @@ export default class RichTextBox extends React.Component {
           id={this.props.id}
           ref={(elem) => this.target = elem}
         />
-        {this.value}
       </div>
     );
   }
