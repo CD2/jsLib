@@ -13,6 +13,7 @@ const FIELD_TYPES = {
   date: require('./fields/date').default,
   tags: require('./fields/tags').default,
   radiogroup: require('./fields/radiogroup').default,
+  image: require('./fields/image').default,
 }
 
 @styled`
@@ -44,14 +45,14 @@ margin-bottom: 10px;
       outline: none;
     }
   }
-  
+
   select{
     background-image: url(${dropdown});
     background-size: 10px;
     background-position: 98% 50%;
     background-repeat: no-repeat;
   }
-  
+
   textarea {
     height: 100px;
   }

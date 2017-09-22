@@ -19,7 +19,7 @@ export default class SelectField extends React.Component {
     const { choices } = this.props
     return (
       <select {...this.props} onChange={this.handleChange}>
-        {choices.map(choice => <option>{choice}</option>)}
+        {choices.map(choice => <option value={choice.value}>{choice.text}</option>)}
       </select>
     )
   }

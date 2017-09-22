@@ -13,9 +13,9 @@ import { styled, p } from 'utils/theme'
 export default class GridItem extends React.Component {
 
   render() {
-    const { className, children } = this.props
+    const { className, children, onClick } = this.props
     return (
-      <div className={className}>
+      <div className={className} onClick={onClick}>
         {children}
       </div>
     )

@@ -29,19 +29,12 @@ export default class RichTextBox extends React.Component {
   };
 
   @observable value = ''
-
-  constructor() {
-    super()
-    this.className = `tiny_mouse_${Math.round(Math.random()*1000)}`
-
-    this.state = {
-      value: '',
-    }
-  }
+  @observable setup = false
 
   componentDidMount() {
     let toolbar = 'bold italic removeformat | bullist numlist | table | link'
     let height = '150'
+    console.log('MOUNT')
     if (this.props.full_editor) {
       toolbar = 'formatselect | bold italic strikethrough forecolor backcolor | link | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat'
       height = '400'
@@ -59,23 +52,25 @@ export default class RichTextBox extends React.Component {
       ],
       toolbar,
       height,
-      setup: editor => {
+      init_instance_callback: editor => {
         this.editor = editor;
-        editor.on('keyup change', () => {
-          this.handleChange(editor.getContent())
-        });
-        // if (this.props.value) editor.setContent('asd' + this.props.value);
-      }
+        editor.on('keyup change', () => this.handleChange(editor.getContent()))
+        if (this.props.value) {
+          this.value = this.props.value
+          editor.setContent(this.props.value);
+        }
+      },
     });
-    this.value = this.props.value
   }
 
   componentWillUnmount() {
     tinymce.remove(this.editor);
+    this.editor = undefined;
+
   }
 
   componentWillReceiveProps(props) {
-    if (props.value !== this.value) {
+    if (this.editor && props.value !== this.value) {
       this.value = props.value
       var bookmark = this.editor.selection.getBookmark(2, true);
       this.editor.setContent(props.value);
@@ -100,6 +95,7 @@ export default class RichTextBox extends React.Component {
           id={this.props.id}
           ref={(elem) => this.target = elem}
         />
+        {this.value}
       </div>
     );
   }
