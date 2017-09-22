@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import dropdown from 'images/dropdown.svg'
 import { styled, t } from 'utils/theme'
 
 const FIELD_TYPES = {
@@ -17,7 +18,9 @@ margin-bottom: 10px;
   input[type=email],
   input[type=text],
   input[type=search],
-  input[type=password] {
+  input[type=password],
+  textarea,
+  select{
     box-sizing: border-box;
     color: ${t('text')};
     font-family: ${t('font')};
@@ -33,10 +36,22 @@ margin-bottom: 10px;
     outline: none;
     cursor: pointer;
     background: white;
+    -webkit-appearance: none;
     &:focus {
       border: 1px solid ${t('primary')};
       outline: none;
     }
+  }
+  
+  select{
+    background-image: url(${dropdown});
+    background-size: 10px;
+    background-position: 98% 50%;
+    background-repeat: no-repeat;
+  }
+  
+  textarea {
+    height: 100px;
   }
   .validation-error {
     color: ${t('error')};

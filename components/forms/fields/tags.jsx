@@ -1,24 +1,22 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import Overlay from 'lib/components/overlay'
 import { styled } from 'utils/theme'
 
 import { observable, computed, action, reaction } from 'mobx'
 import { observer } from 'mobx-react'
 import { tag, panel } from 'utils/common_styles'
 @styled`
-  .wrapper {
-    z-index: 5000;
-    position: relative;
-    background: white;
+  .tag-input {
     ${panel};
     padding: 6px;
     cursor: pointer;
+    min-height: 44px;
   }
   span {
     ${tag}
     margin-top: 2px;
+
   }
 `
 @observer
@@ -188,16 +186,12 @@ export default class TagField extends React.Component {
 
   @computed get renderPopularSuggestions() {
     return this.popular_suggestions.map(suggestion => {
-      return <span key={suggestion} onClick={this.use_suggestion.bind(this, suggestion)}>{suggestion}</span>
+      return <span className="suggestion-tag" key={suggestion} onClick={this.use_suggestion.bind(this, suggestion)}>+ {suggestion}</span>
     })
   }
 
   @computed get renderSuggestions() {
     if (!this.focussed) return
-
-    // if (!this.suggestions_up_to_date) {
-    //   return 'LOADING'
-    // }
 
     const suggestionsComponent = this.filtered_suggestions.map(suggestion => {
       return (
@@ -218,10 +212,9 @@ export default class TagField extends React.Component {
   render() {
     return (
       <div className={this.props.className}>
-        {this.focussed && <Overlay onClick={this.blur} visible/>}
         <div onClick={this.handlefocus} className='wrapper'>
           {this.renderPopularSuggestions}
-          <div>
+          <div className="tag-input">
             {this.renderValue()}
           </div>
           {this.renderSuggestions}
