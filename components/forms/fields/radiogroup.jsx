@@ -1,6 +1,17 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { styled } from 'utils/theme'
 
+@styled`
+  display: block;
+  text-align: left;
+  font-size: 0.9em;
+  line-height: 2;
+  input {
+    display: inline-block;
+    margin-right: 6px;
+  }
+`
 export default class SelectField extends React.Component {
 
   static propTypes = {
@@ -19,10 +30,9 @@ export default class SelectField extends React.Component {
   render() {
     const { choices } = this.props
     return (
-      <radiogroup {...this.props} onChange={undefined}>
+      <radiogroup {...this.props} onChange={undefined} className={this.props.className}>
         {choices.map(choice => (
           <label>
-            {choice.text}
             <input
               key={`${choice.text}_${choice.value}`}
               name={this.props.name}
@@ -31,6 +41,7 @@ export default class SelectField extends React.Component {
               onChange={this.handleChange}
               checked={this.props.value === choice.value}
             />
+            <span>{choice.text}</span>
           </label>
         ))}
       </radiogroup>
