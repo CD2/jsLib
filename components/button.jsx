@@ -115,6 +115,18 @@ export default decorate(
           background-color: #cecece;
         }
       }
+      
+      &.pagination {
+        background-color: ${t('primary')};
+        font-size: 0.9em;
+        font-weight: 600;
+        padding: 6px 14px 7px;
+        margin: 3px 1px;
+        border-radius: 2px;
+        &:hover {
+          color: white;
+        }
+      }
 
     }
     + .btn {
