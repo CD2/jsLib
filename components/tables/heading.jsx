@@ -4,7 +4,7 @@ import ColumnFilter from './column_filter'
 import chevron_up from 'images/chevron_up.svg'
 import chevron_down from 'images/chevron_down.svg'
 
-import Img from "lib/components/img";
+import Img from "lib/components/img"
 
 export default class TableHeading extends React.Component {
 
@@ -17,15 +17,15 @@ export default class TableHeading extends React.Component {
   }
 
   getSort() {
-    const { sort, sort:{ current, onChange }={} } = this.props
+    const { sort, sort:{ current, onChange }={}} = this.props
     let callback, sort_icon
     if (sort) {
-      callback = () => onChange('asc')
-      if (current === 'asc') {
+      callback = () => onChange(`asc`)
+      if (current === `asc`) {
         sort_icon = <Img src={chevron_up} />
-        callback = () => onChange('desc')
+        callback = () => onChange(`desc`)
       }
-      if (current === 'desc') {
+      if (current === `desc`) {
         sort_icon = <Img src={chevron_down} />
         callback = () => onChange(null)
       }
@@ -46,7 +46,7 @@ export default class TableHeading extends React.Component {
 
   handleFilterIconClick = (e) => {
     e.stopPropagation()
-    this.setState({filter_open: !this.state.filter_open})
+    this.setState({ filter_open: !this.state.filter_open })
   }
 
   render() {

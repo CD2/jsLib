@@ -13,15 +13,15 @@ export class Overlay extends React.Component {
 
   static defaultProps = {
     visible: false,
-    className: '',
+    className: ``,
   }
 
 
   render() {
     let className = this.props.className
-    if (this.props.visible) className += ' visible'
+    if (this.props.visible) className += ` visible`
 
-    return (<div className={className} onClick={this.props.onClick}/>)
+    return (<div className={className} onClick={this.props.onClick} />)
   }
 
 }
@@ -37,7 +37,7 @@ export default decorate(
     z-index: 4999;
 
     &.visible {
-      background: ${t('darkBackground')};
+      background: ${t(`darkBackground`)};
       cursor: pointer;
       opacity: .4;
     }

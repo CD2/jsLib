@@ -21,13 +21,13 @@ export default class Checkbox extends React.Component {
   handleChange = (e) => {
     const { onRawChange, onChange } = this.props
     if (onRawChange) onRawChange(e)
-    if (onChange) onChange({name: e.target.name, value: e.target.checked})
+    if (onChange) onChange({ name: e.target.name, value: e.target.checked })
   }
 
   render() {
     return (
       <label className={this.props.className}>
-        <input {...this.props} className='input' onChange={this.handleChange}/>
+        <input {...this.props} className="input" onChange={this.handleChange} />
         <span>{this.props.labelText}</span>
       </label>
     )

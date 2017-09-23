@@ -3,16 +3,16 @@ import { styled, t } from 'utils/theme'
 
 @styled`
   .tab-content {
-    padding: ${t('gutterWidth', w=>w/2)}px;
+    padding: ${t(`gutterWidth`, w=>w/2)}px;
   }
   .tab-heads {
     display: flex;
-    border-bottom: 1px solid ${t('border')};
+    border-bottom: 1px solid ${t(`border`)};
 
     > div {
-      padding: 10px ${t('gutterWidth', w=>w/2)}px 10px;
+      padding: 10px ${t(`gutterWidth`, w=>w/2)}px 10px;
       font-size: 0.9em;
-      color: ${t('lightText')};
+      color: ${t(`lightText`)};
       cursor: pointer;
       filter: brightness(0.95);
 
@@ -33,7 +33,7 @@ export default class Tabs extends React.Component {
   }
 
   handleTabHeadClick = (key) => {
-    this.setState({selected: key})
+    this.setState({ selected: key })
   }
 
   renderTabHeads() {
@@ -44,7 +44,7 @@ export default class Tabs extends React.Component {
         tabKey: child.key,
         renderHead: true,
         onTabHeadClick: this.handleTabHeadClick,
-        className: 'tab-head'
+        className: `tab-head`
       })
     })
     return (<div className="tab-heads">{headings}</div>)

@@ -5,7 +5,7 @@ import { styled } from 'utils/theme'
   display: inline-block;
   width: ${props =>`calc(${props.weight * 100}% - ${props.gutterWidth}px)`};
   vertical-align: top;
-  ${({align = 'left'}) => `text-align: ${align}`}
+  ${({ align = `left` }) => `text-align: ${align}`}
   }
   > p:first-child {
     margin-top: 0;

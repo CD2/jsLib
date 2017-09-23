@@ -7,7 +7,7 @@ export class Img extends React.Component {
   }
 
   static defaultProps = {
-    alt: '',
+    alt: ``,
   }
 
   render() {

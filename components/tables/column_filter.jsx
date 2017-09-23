@@ -3,12 +3,12 @@ import PropTypes from 'prop-types'
 import { styled, t } from 'utils/theme'
 
 const types = {
-  search: require('./filter_types/search').default,
-  select: require('./filter_types/select').default,
+  search: require(`./filter_types/search`).default,
+  select: require(`./filter_types/select`).default,
 }
 
 @styled`
-  background: ${t('secondary')};
+  background: ${t(`secondary`)};
   padding: 0 18px;
   left: 0;
   width: 100%;
@@ -17,11 +17,11 @@ const types = {
 export default class ColumnFilter extends React.Component {
 
   static propTypes = {
-    type: PropTypes.oneOf(['search'])
+    type: PropTypes.oneOf([`search`])
   }
 
   state = {
-    value: '',
+    value: ``,
     selected: [],
   }
 

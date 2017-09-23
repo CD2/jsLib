@@ -2,8 +2,8 @@ import React from 'react'
 import { styled, t } from 'utils/theme'
 
 @styled`
-  border-bottom: 1px solid ${t('border')};
-  ${({spacing, theme}) => `
+  border-bottom: 1px solid ${t(`border`)};
+  ${({ spacing, theme }) => `
       padding-bottom: ${(theme.spacing[spacing] || spacing)}px;
       margin-bottom: ${(theme.spacing[spacing] || spacing)}px;
     `

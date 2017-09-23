@@ -10,12 +10,12 @@ export class DateTime extends React.Component {
   }
 
   static defaultProps = {
-    format: 'short_date',
+    format: `short_date`,
   }
 
   predefinedFormats = {
-    'short_date': 'DD MMM YYYY',
-    'long_date': 'Do M YY',
+    'short_date': `DD MMM YYYY`,
+    'long_date': `Do M YY`,
   }
 
   render() {

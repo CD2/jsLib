@@ -12,7 +12,7 @@ export default class SelectField extends React.Component {
   handleChange = (e) => {
     const { onRawChange, onChange } = this.props
     if (onRawChange) onRawChange(e)
-    if (onChange) onChange({name: e.target.name, value: e.target.value})
+    if (onChange) onChange({ name: e.target.name, value: e.target.value })
   }
 
   render() {

@@ -1,11 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import tinymce from 'tinymce';
-import 'tinymce/themes/modern';
-import 'tinymce/plugins/lists';
-import 'tinymce/plugins/link';
-import 'tinymce/plugins/table';
+import tinymce from 'tinymce'
+import 'tinymce/themes/modern'
+import 'tinymce/plugins/lists'
+import 'tinymce/plugins/link'
+import 'tinymce/plugins/table'
 import { styled } from 'utils/theme'
 import { panel } from 'utils/common_styles'
 
@@ -28,53 +28,53 @@ export default class RichTextBox extends React.Component {
     full_editor: PropTypes.bool,
   };
 
-  @observable value = ''
+  @observable value = ``
   @observable setup = false
 
   componentDidMount() {
-    let toolbar = 'bold italic removeformat | bullist numlist | table | link'
-    let height = '150'
-    console.log('MOUNT')
+    let toolbar = `bold italic removeformat | bullist numlist | table | link`
+    let height = `150`
+    console.log(`MOUNT`)
     if (this.props.full_editor) {
-      toolbar = 'formatselect | bold italic strikethrough forecolor backcolor | link | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat'
-      height = '400'
+      toolbar = `formatselect | bold italic strikethrough forecolor backcolor | link | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat`
+      height = `400`
     }
     tinymce.init({
       target: this.target,
-      skin_url: '/tinymce/lightgray',
+      skin_url: `/tinymce/lightgray`,
       branding: false,
       menubar: false,
       elementpath: false,
       browser_spellcheck: true,
 
       plugins: [
-        'lists link table'
+        `lists link table`
       ],
       toolbar,
       height,
       init_instance_callback: editor => {
-        this.editor = editor;
-        editor.on('keyup change', () => this.handleChange(editor.getContent()))
+        this.editor = editor
+        editor.on(`keyup change`, () => this.handleChange(editor.getContent()))
         if (this.props.value) {
           this.value = this.props.value
-          editor.setContent(this.props.value);
+          editor.setContent(this.props.value)
         }
       },
-    });
+    })
   }
 
   componentWillUnmount() {
-    tinymce.remove(this.editor);
-    this.editor = undefined;
+    tinymce.remove(this.editor)
+    this.editor = undefined
 
   }
 
   componentWillReceiveProps(props) {
     if (this.editor && props.value !== this.value) {
       this.value = props.value
-      var bookmark = this.editor.selection.getBookmark(2, true);
-      this.editor.setContent(props.value);
-      this.editor.selection.moveToBookmark(bookmark);
+      var bookmark = this.editor.selection.getBookmark(2, true)
+      this.editor.setContent(props.value)
+      this.editor.selection.moveToBookmark(bookmark)
     }
   }
 
@@ -96,6 +96,6 @@ export default class RichTextBox extends React.Component {
           ref={(elem) => this.target = elem}
         />
       </div>
-    );
+    )
   }
 }

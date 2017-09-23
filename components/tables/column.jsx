@@ -15,13 +15,13 @@ import { styled, t } from 'utils/theme'
     text-overflow: ellipsis;
     text-align: left;
     max-width: 400px;
-    color: ${t('text')};
+    color: ${t(`text`)};
     &.sticky {
       position: absolute;
-      left: ${t('gutterWidth', w=>w/2)}px;
-      width: ${t('stickyTableWidth')}px;
-      background: ${t('background')};
-      border-left: 1px solid ${t('border')};
+      left: ${t(`gutterWidth`, w=>w/2)}px;
+      width: ${t(`stickyTableWidth`)}px;
+      background: ${t(`background`)};
+      border-left: 1px solid ${t(`border`)};
       box-shadow: 3px 0 5px rgba(0,0,0,0.15);
     }
   }
@@ -36,11 +36,11 @@ export default class Column extends React.Component {
       PropTypes.func,
     ]),
     sort: PropTypes.shape({
-      current: PropTypes.oneOf(['asc', 'desc']),
+      current: PropTypes.oneOf([`asc`, `desc`]),
       onChange: PropTypes.func,
     }),
     filterable: PropTypes.shape({
-      type: PropTypes.oneOf(['search', 'choice'])
+      type: PropTypes.oneOf([`search`, `choice`])
     }),
 
     //internal props
@@ -56,20 +56,20 @@ export default class Column extends React.Component {
 
   getValue() {
     const { row, value } = this.props
-    if (typeof value === 'string') return row[value]
+    if (typeof value === `string`) return row[value]
     return value(row)
   }
 
   getClassName(){
     let className = this.props.className
     className += ` ${this.props.value}`
-    if (this.props.sticky) className += ' sticky'
+    if (this.props.sticky) className += ` sticky`
     return className
   }
 
   handleFilterIconClick = (e) => {
     e.stopPropagation()
-    this.setState({filter_open: !this.state.filter_open})
+    this.setState({ filter_open: !this.state.filter_open })
   }
 
   renderHeading() {
@@ -77,8 +77,8 @@ export default class Column extends React.Component {
   }
 
   render() {
-    return (this.props.renderHeading)
-      ? <TableHeading {...this.props} className={this.getClassName()}/>
+    return this.props.renderHeading
+      ? <TableHeading {...this.props} className={this.getClassName()} />
       : (
         <td className={this.getClassName()}>
           {this.getValue()}

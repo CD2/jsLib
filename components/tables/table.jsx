@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import Wrapper from "components/app/parts/wrapper";
+import Wrapper from "components/app/parts/wrapper"
 import Pagination from './pagination'
 import { styled, t } from 'utils/theme'
 import { redirect } from 'utils/router'
@@ -14,19 +14,19 @@ import { redirect } from 'utils/router'
     background-color: #ffffff;
     background-size: 301px 100%,12px 100%,301px 100%,12px 100%;
     background-attachment: local,local,scroll,scroll;
-    border-bottom: 1px solid ${t('border')};
-    border-right: 3px solid ${t('border')};
+    border-bottom: 1px solid ${t(`border`)};
+    border-right: 3px solid ${t(`border`)};
   }
   table {
-    margin-left: ${t('stickyTableWidth')}px;
+    margin-left: ${t(`stickyTableWidth`)}px;
     border-spacing: 0;
-    min-width: calc(100% - ${t('stickyTableWidth')}px);
+    min-width: calc(100% - ${t(`stickyTableWidth`)}px);
     font-size: 14px;
   }
   thead {
     th, th.sticky {
-      background: ${t('primary')};
-      color: ${t('background')};
+      background: ${t(`primary`)};
+      color: ${t(`background`)};
       font-weight: 400;
       img {
         display: inline-block;
@@ -88,8 +88,8 @@ export default class Table extends React.Component {
 
   getPaginationOptions() {
     const { pagination } = this.props
-    if (typeof pagination === 'boolean') return this.state.pagination
-    return {...this.state.pagination, ...pagination}
+    if (typeof pagination === `boolean`) return this.state.pagination
+    return { ...this.state.pagination, ...pagination }
   }
 
   getPaginatedRows() {
@@ -100,27 +100,27 @@ export default class Table extends React.Component {
   }
 
   handlePageChange = (page) => {
-    this.setState({pagination: {...this.state.pagination, page }})
+    this.setState({ pagination: { ...this.state.pagination, page }})
     const { onPageChange=()=>{} } = this.getPaginationOptions()
     onPageChange(page)
   }
 
   renderHeadings() {
     const headings = React.Children.map(this.props.children, child=>{
-      return React.cloneElement(child, {...child.props, renderHeading: true })
+      return React.cloneElement(child, { ...child.props, renderHeading: true })
     })
     return (<tr>{headings}</tr>)
   }
 
   defaultRowRenderer(row, { key, url }={}) {
     const data = React.Children.map(this.props.children, child=>{
-      return React.cloneElement(child, {...child.props, row })
+      return React.cloneElement(child, { ...child.props, row })
     })
     if (url) {
       return (<tr key={key} onClick={redirect(url)}>{data}</tr>)
-    } else {
-      return (<tr key={key} onClick={redirect(url)}>{data}</tr>)
-    }
+    } 
+    return (<tr key={key} onClick={redirect(url)}>{data}</tr>)
+    
   }
 
   renderRows() {
@@ -151,16 +151,16 @@ export default class Table extends React.Component {
         {this.renderPagination()}
         <div className="table-wrapper">
           <table>
-              <thead>
-                {this.renderHeadings()}
-              </thead>
-              <tbody>
-                {this.renderRows()}
-              </tbody>
-            </table>
-          </div>
-          {this.renderPagination()}
-        </Wrapper>
+            <thead>
+              {this.renderHeadings()}
+            </thead>
+            <tbody>
+              {this.renderRows()}
+            </tbody>
+          </table>
+        </div>
+        {this.renderPagination()}
+      </Wrapper>
     )
   }
 

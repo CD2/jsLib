@@ -18,23 +18,23 @@ export class Button extends React.Component {
   }
 
   static defaultProps = {
-    buttonStyle: 'common',
+    buttonStyle: `common`,
     external: false,
   }
 
   render() {
     let { className, to, external, buttonStyle, onClick, children, target } = this.props
 
-    invariant(!(external && !to), 'prop `to` is required if `external` is present')
+    invariant(!(external && !to), `prop \`to\` is required if \`external\` is present`)
 
-    let Comp = 'div'
+    let Comp = `div`
     className = `${className} ${buttonStyle} btn`
 
     let props = { className, to, onClick, children, target }
 
     if (to) {
       if (external) {
-        Comp = 'a'
+        Comp = `a`
         props.href = props.to
         delete props.to
       } else {
@@ -64,7 +64,7 @@ export default decorate(
       border-radius: 5px;
 
       &.common {
-        background-color: ${t('primary')};
+        background-color: ${t(`primary`)};
         &:hover {
           color: white;
         }
@@ -74,7 +74,7 @@ export default decorate(
         font-size: 0.9rem;
         font-weight: 600;
         padding: 6px 14px 7px;
-        background-color: ${t('primary')};
+        background-color: ${t(`primary`)};
         &:hover {
           color: white;
         }
@@ -82,16 +82,16 @@ export default decorate(
 
       &.secondary {
         background-color: #fff;
-        color: ${t('primary')};
-        border: 2px solid ${t('primary')};
+        color: ${t(`primary`)};
+        border: 2px solid ${t(`primary`)};
         &:hover {
-          color: ${t('primary')};
+          color: ${t(`primary`)};
         }
       }
 
       &.dark {
-        color: ${t('white')};
-        border: 2px solid ${t('white')};
+        color: ${t(`white`)};
+        border: 2px solid ${t(`white`)};
       }
 
       &:hover {
@@ -99,8 +99,8 @@ export default decorate(
       }
       
       &.minor {
-        background-color: ${t('background')};
-        color: ${t('lightText')};
+        background-color: ${t(`background`)};
+        color: ${t(`lightText`)};
         font-size: 0.9rem;
         padding: 6px 14px 7px;
         &:hover {
@@ -109,15 +109,15 @@ export default decorate(
       }
       
       &.cancel {
-        background-color: ${t('background')};
-        color: ${t('lightText')};
+        background-color: ${t(`background`)};
+        color: ${t(`lightText`)};
         &:hover {
           background-color: #cecece;
         }
       }
       
       &.pagination {
-        background-color: ${t('primary')};
+        background-color: ${t(`primary`)};
         font-size: 0.9em;
         font-weight: 600;
         padding: 6px 14px 7px;

@@ -17,18 +17,18 @@ export default class DateField extends React.Component {
   handleChange = (e) => {
     const { onRawChange, onChange } = this.props
     if (onRawChange) onRawChange(e)
-    if (onChange) onChange({name: e.target.name, value: e.target.value})
+    if (onChange) onChange({ name: e.target.name, value: e.target.value })
   }
 
   render() {
-    const { name, value, placeholder, initialValue, onFocus, type, onKeyPress } = this.props;
+    const { name, value, placeholder, initialValue, onFocus, type, onKeyPress } = this.props
 
     return (
       <input
-        type={type || 'text'}
+        type={type || `text`}
         name={name}
         defaultValue={initialValue}
-        value={value || ''}
+        value={value || ``}
         placeholder={placeholder}
         onChange={this.handleChange}
         onFocus={onFocus}

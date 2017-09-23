@@ -20,10 +20,10 @@ export class Modal extends React.Component {
   render() {
     return (
       <div className={this.props.className}>
-        <div className='modal'>
+        <div className="modal">
           {this.props.children}
         </div>
-        <Overlay visible onClick={this.handleClose}/>
+        <Overlay visible onClick={this.handleClose} />
       </div>
     )
   }
@@ -40,7 +40,7 @@ export default decorate(
     .modal {
       ${active_card};
       z-index: 100000;
-      padding: ${t('gutterWidth')}px;
+      padding: ${t(`gutterWidth`)}px;
       width: 90%;
       max-width: 600px;
       max-height: 600px;

@@ -24,7 +24,7 @@ export default class SelectField extends React.Component {
     const { onRawChange, onChange } = this.props
     if (onRawChange) onRawChange(e)
     console.log(e.target.value)
-    if (onChange) onChange({name: e.target.name, value: e.target.value})
+    if (onChange) onChange({ name: e.target.name, value: e.target.value })
   }
 
   render() {
@@ -36,7 +36,7 @@ export default class SelectField extends React.Component {
             <input
               key={`${choice.text}_${choice.value}`}
               name={this.props.name}
-              type='radio'
+              type="radio"
               value={choice.value}
               onChange={this.handleChange}
               checked={this.props.value === choice.value}
