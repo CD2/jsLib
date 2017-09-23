@@ -45,9 +45,6 @@ import { redirect } from 'utils/router'
 export default class Table extends React.Component {
 
   static propTypes = {
-    rows: PropTypes.array,
-    row_key: PropTypes.string,
-    renderRow: PropTypes.func,
     pagination: PropTypes.oneOfType([
       PropTypes.bool,
       PropTypes.shape({
@@ -56,7 +53,11 @@ export default class Table extends React.Component {
         onPageChange: PropTypes.func,
         component: PropTypes.node,
       })
-    ])
+    ]),
+    renderRow: PropTypes.func,
+    row_key: PropTypes.string,
+    row_url: PropTypes.string,
+    rows: PropTypes.array,
   }
 
   state = {

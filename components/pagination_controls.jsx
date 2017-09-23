@@ -6,10 +6,10 @@ import decorate from 'utils/decorate'
 export class PaginationControls extends React.Component {
 
   static propTypes = {
+    onPageChange: PropTypes.func.isRequired,
     page: PropTypes.number.isRequired,
     per_page: PropTypes.number.isRequired,
     total_records: PropTypes.number.isRequired,
-    onPageChange: PropTypes.func.isRequired,
   }
 
   changePage(page_number) {

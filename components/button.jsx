@@ -8,13 +8,13 @@ import decorate from 'utils/decorate'
 export class Button extends React.Component {
 
   static propTypes = {
-    className: PropTypes.string,
-    to: PropTypes.string,
-    external: PropTypes.bool,
     buttonStyle:  PropTypes.string,
-    onClick: PropTypes.func,
     children: PropTypes.node,
+    className: PropTypes.string,
+    external: PropTypes.bool,
+    onClick: PropTypes.func,
     target: PropTypes.string,
+    to: PropTypes.string,
   }
 
   static defaultProps = {
