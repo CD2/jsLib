@@ -21,11 +21,12 @@ export default class TextField extends React.Component {
   }
 
   render() {
-    const { name, value, placeholder, initialValue, onFocus, type, onKeyPress } = this.props;
+    const { name, value, autoFocus, placeholder, initialValue, onFocus, type, onKeyPress } = this.props;
 
     return (
       <input
         type={type || 'text'}
+        autoFocus={autoFocus}
         name={name}
         defaultValue={initialValue}
         value={value || ''}
