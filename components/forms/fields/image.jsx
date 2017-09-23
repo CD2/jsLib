@@ -20,8 +20,6 @@ export default class ImageField extends React.Component {
   handleChange = (e) => {
     const { onRawChange, onChange } = this.props
     if (onRawChange) onRawChange(e)
-    e.persist()
-    console.log(e)
     if (onChange) onChange({
       name: e.target.name,
       value: e.target.files[0],

@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-export default class TextField extends React.Component {
+export default class DateField extends React.Component {
 
   static propTypes = {
     onChange: PropTypes.func,
