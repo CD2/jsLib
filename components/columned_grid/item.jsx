@@ -2,10 +2,10 @@ import React from 'react'
 import { styled, p } from 'utils/theme'
 
 @styled`
-  width: ${p('width', '100%')};
+  width: ${p(`width`, `100%`)};
   display: inline-block;
   vertical-align: top;
-  text-align: ${p('align', 'left')};
+  text-align: ${p(`align`, `left`)};
   > p:first-child {
     margin-top: 0;
   }

@@ -17,7 +17,7 @@ export default class Pagination extends React.Component {
 
   changePage(page_number) {
     if (0 < page_number && page_number <= this.totalPages())
-    this.props.onPageChange(page_number)
+    {this.props.onPageChange(page_number)}
   }
 
   totalPages() {
@@ -34,16 +34,16 @@ export default class Pagination extends React.Component {
   }
 
   renderLeft() {
-    let className = 'pagination__button'
-    if (this.firstPage()) className = ' pagination__button--disabled'
+    let className = `pagination__button`
+    if (this.firstPage()) className = ` pagination__button--disabled`
     return (
       <div className={className} onClick={() => this.changePage(this.props.page - 1)}>Left</div>
     )
   }
 
   renderRight() {
-    let className = 'pagination__button'
-    if (this.lastPage()) className = ' pagination__button--disabled'
+    let className = `pagination__button`
+    if (this.lastPage()) className = ` pagination__button--disabled`
     return (
       <div className={className} onClick={() => this.changePage(this.props.page + 1)}>Right</div>
     )
@@ -71,7 +71,7 @@ export default class Pagination extends React.Component {
 
   render() {
     return (
-      <div className='pagination'>
+      <div className="pagination">
         {this.props.page}
         {this.renderLeft()}
         {this.renderPageNumbers()}
@@ -81,7 +81,6 @@ export default class Pagination extends React.Component {
   }
 
 }
-
 
 
 // 1  2  3  4  5  6  7  - 70  on < 5

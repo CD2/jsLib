@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import {styled} from "utils/theme/index"
+import { styled } from "utils/theme/index"
 import decorate from 'utils/decorate'
 
 export class FaIcon extends React.Component {
@@ -22,33 +22,33 @@ export class FaIcon extends React.Component {
   render() {
     const { onClick } = this.props
     return (
-      <i className={this.className} onClick={onClick}/>
+      <i className={this.className} onClick={onClick} />
     )
   }
 }
 export default decorate(
   styled`
     ${({ color, theme, size }) => {
-      const col = color || theme.darkBackground
-      const sze = size || 1
-      return (
-        `
+    const col = color || theme.darkBackground
+    const sze = size || 1
+    return (
+      `
         color: ${col};
         font-size: ${sze}em;
         `
-      )
-    }}
+    )
+  }}
     ${({ hoverColor }) => {
-      if(hoverColor) {
-        return (
-          `
+    if(hoverColor) {
+      return (
+        `
           &:hover{
             color: ${hoverColor};
           }
           `
-        )
-      }
-    }}
+      )
+    }
+  }}
   `,
   FaIcon
 )

@@ -23,7 +23,7 @@ export default class RichTextBox extends React.Component {
   handleChange = (value) => {
     const { onRawChange, onChange } = this.props
     if (onRawChange) onRawChange(value)
-    if (onChange) onChange({name: this.props.name, value })
+    if (onChange) onChange({ name: this.props.name, value })
   }
 
   render() {

@@ -7,11 +7,11 @@ export default class ColumnFilterSearch extends React.Component {
   }
 
   state = {
-    value: '',
+    value: ``,
   }
 
   handleChange = (e) => {
-    this.setState({value: e.target.value})
+    this.setState({ value: e.target.value })
   }
 
   handleSubmit = (e) => {
@@ -19,13 +19,13 @@ export default class ColumnFilterSearch extends React.Component {
   }
 
   handleKeyPress = (e) => {
-    if (e.key === 'Enter') this.handleSubmit()
+    if (e.key === `Enter`) this.handleSubmit()
   }
 
   render() {
     return (
       <div>
-        <input onChange={this.handleChange} value={this.state.value} onKeyPress={this.handleKeyPress}/>
+        <input onChange={this.handleChange} value={this.state.value} onKeyPress={this.handleKeyPress} />
         <button onClick={this.handleSubmit}>Apply</button>
       </div>
     )

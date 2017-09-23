@@ -25,7 +25,7 @@ export default class Tab extends React.Component {
 
   renderHead() {
     const { heading, selected, name } = this.props
-    const className = selected === name ? 'selected' : ''
+    const className = selected === name ? `selected` : ``
     return <div onClick={this.handleTabHeadClick} className={className}>{heading}</div>
   }
 

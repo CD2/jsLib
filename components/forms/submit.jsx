@@ -16,15 +16,15 @@ import load from 'images/load.gif'
     vertical-align: top;
     color: white;
     border-radius: 5px;
-    background-color: ${t('primary')};
+    background-color: ${t(`primary`)};
     transition: 0.3s;
     margin-bottom: 10px;
     &:hover {
-      background-color: ${t('primaryLight')};
+      background-color: ${t(`primaryLight`)};
     }
     ${({ submitting }) => {
-      if(submitting){
-    return(`
+  if(submitting){
+    return`
         background: url(${load});
         opacity: 0.7;
         background-size: 100%;
@@ -34,8 +34,8 @@ import load from 'images/load.gif'
         &:hover{
           background-color: #2c2d2d;
         }
-      `)}
-    }}
+    `}
+}}
 
 `
 
@@ -52,11 +52,11 @@ export default class Submit extends React.Component {
   }
 
   render() {
-    const { className='', value, submitting } = this.props
+    const { className=``, value, submitting } = this.props
     let val = value
-    if (submitting) val = ''
+    if (submitting) val = ``
     return (
-      <input className={`btn ${className}`} type='submit' value={val} />
+      <input className={`btn ${className}`} type="submit" value={val} />
     )
   }
 

@@ -7,7 +7,7 @@ import { observer } from 'mobx-react'
 @observer
 export default class ImageField extends React.Component {
 
-  @observable preview_src = ''
+  @observable preview_src = ``
 
   static propTypes = {
     name: PropTypes.string,
@@ -20,21 +20,21 @@ export default class ImageField extends React.Component {
   handleChange = (e) => {
     const { onRawChange, onChange } = this.props
     if (onRawChange) onRawChange(e)
-    if (onChange) onChange({
+    if (onChange) {onChange({
       name: e.target.name,
       value: e.target.files[0],
       filename: e.target.files[0].name,
-      size: e.target.files["0"].size,
-      type: e.target.files["0"].type,
-    })
+      size: e.target.files[`0`].size,
+      type: e.target.files[`0`].type,
+    })}
   }
 
   componentWillReceiveProps(props) {
     if (!props.value) return
     if (props.value instanceof File) {
-      var reader = new FileReader();
+      var reader = new FileReader()
       reader.onload = action((e) => this.preview_src = e.target.result)
-      reader.readAsDataURL(props.value);
+      reader.readAsDataURL(props.value)
     } else {
       this.preview_src = props.value
     }
@@ -53,19 +53,19 @@ export default class ImageField extends React.Component {
   }
 
   render() {
-    const { name, multiple, onFocus } = this.props;
+    const { name, multiple, onFocus } = this.props
 
     return (
-    <div>
-      {this.renderPreview()}
-      <input
-        type='file'
-        name={name}
-        multiple={multiple}
-        onChange={this.handleChange}
-        onFocus={onFocus}
-      />
-    </div>
+      <div>
+        {this.renderPreview()}
+        <input
+          type="file"
+          name={name}
+          multiple={multiple}
+          onChange={this.handleChange}
+          onFocus={onFocus}
+        />
+      </div>
     )
   }
 }

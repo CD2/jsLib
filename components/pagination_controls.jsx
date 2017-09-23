@@ -30,8 +30,8 @@ export class PaginationControls extends React.Component {
   }
 
   renderLeft() {
-    const  className = 'pagination__control'
-    const str = '‹ Left'
+    const  className = `pagination__control`
+    const str = `‹ Left`
     if (this.firstPage()) {
       return (
         <div className={`${className} disabled`}>{str}</div>
@@ -43,8 +43,8 @@ export class PaginationControls extends React.Component {
   }
 
   renderRight() {
-    const  className = 'pagination__control'
-    const str = 'Right ›'
+    const  className = `pagination__control`
+    const str = `Right ›`
     if (this.lastPage()) {
       return (
         <div className={`${className} disabled`}>{str}</div>
@@ -59,9 +59,9 @@ export class PaginationControls extends React.Component {
     const page_numbers = []
     for(let i=1; i<=this.totalPages(); i++) {
       if (i === this.props.page) {
-        page_numbers.push(<div className={'pagination__button current_page'}>{i}</div>)
+        page_numbers.push(<div className={`pagination__button current_page`}>{i}</div>)
       } else {
-        page_numbers.push(<div className={'pagination__button'} key={i} onClick={() => this.changePage(i)} >{i}</div>)
+        page_numbers.push(<div className={`pagination__button`} key={i} onClick={() => this.changePage(i)} >{i}</div>)
       }
     }
     return page_numbers
@@ -81,16 +81,16 @@ export class PaginationControls extends React.Component {
 export default decorate(
   styled`
     text-align: center;
-    padding: ${t('gutterWidth')}px 0;
+    padding: ${t(`gutterWidth`)}px 0;
 
     .pagination__control {
       display: inline-block;
-      color: ${t('primary')};
+      color: ${t(`primary`)};
       font-weight: bold;
-      transition: color ${t('globalTransitionSpeed')};
+      transition: color ${t(`globalTransitionSpeed`)};
       margin: 0 9px;
       &:hover {
-        color: ${t('primaryLight')};
+        color: ${t(`primaryLight`)};
       }
     }
     .pagination__button {
@@ -99,7 +99,7 @@ export default decorate(
     }
     .current_page {
       font-weight: bold;
-      border-bottom: 2px solid ${t('primary')};
+      border-bottom: 2px solid ${t(`primary`)};
     }
   `,
   PaginationControls

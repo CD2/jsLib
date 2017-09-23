@@ -19,41 +19,41 @@ export class TimeAgo extends React.Component {
 
     this.state = {
       time: new Date(props.time).getTime(),
-      displayTime: '',
+      displayTime: ``,
     }
   }
 
   componentDidMount() {
-    this.timeout();
+    this.timeout()
   }
 
   componentWillUnmount() {
-    clearTimeout(this.timer);
+    clearTimeout(this.timer)
   }
 
   getInterval() {
-    const diff = Date.now() - this.state.time;
+    const diff = Date.now() - this.state.time
 
     if(diff < MINUTE) {
-      return SECOND*5;
+      return SECOND*5
     } else if(diff < HOUR) {
-      return SECOND*15;
+      return SECOND*15
     } else if(diff < DAY) {
-      return MINUTE*15;
-    } else {
-      return null;
-    }
+      return MINUTE*15
+    } 
+    return null
+    
   }
 
   timeout = (firstLoad=false) => {
-    let interval = this.getInterval();
+    let interval = this.getInterval()
     const displayTime = moment(new Date(this.props.time)).fromNow()
 
     if(!firstLoad && this.state.displayTime !== displayTime) {
-      this.setState({displayTime});
+      this.setState({ displayTime })
     }
     if(interval) {
-      this.timer = setTimeout(this.timeout, interval);
+      this.timer = setTimeout(this.timeout, interval)
     }
   }
 

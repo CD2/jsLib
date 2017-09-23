@@ -18,7 +18,7 @@ export default class ColumnFilterSearch extends React.Component {
   handleChange = (e) => {
     const { name, checked } = e.target
     this.setState(prevState => {
-      let values = (checked)
+      let values = checked
         ? [...prevState.values, name]
         : prevState.values.filter(v=> v !== name)
       return { values }
@@ -37,10 +37,11 @@ export default class ColumnFilterSearch extends React.Component {
     return (
       <label>
         <input
-          type='checkbox'
+          type="checkbox"
           name={option.value}
           checked={this.isChecked(option.value)}
-          onChange={this.handleChange}/>
+          onChange={this.handleChange}
+        />
         {option.label}
       </label>
     )

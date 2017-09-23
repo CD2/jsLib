@@ -4,7 +4,7 @@ export default class FormatValidator extends BaseValidator {
 
   defaultOptions() {
     return {
-      with: { test: () => {throw new Error('must specify with option in format validator ')}}
+      with: { test: () => {throw new Error(`must specify with option in format validator `)} }
     }
   }
 

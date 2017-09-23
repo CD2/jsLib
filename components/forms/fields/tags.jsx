@@ -43,7 +43,7 @@ export default class TagField extends React.Component {
   @observable current_index = -1
 
   @observable suggestions = []
-  @observable suggestion_query = ''
+  @observable suggestion_query = ``
 
   @computed get current_value() { return this.tags[this.current_index] }
   set current_value(value) { this.tags[this.current_index] = value }
@@ -57,7 +57,7 @@ export default class TagField extends React.Component {
   componentDidMount() {
     reaction(
       () => this.tag_cache,
-      () => this.props.onChange({name: this.props.name, value: this.tags.toJS()})
+      () => this.props.onChange({ name: this.props.name, value: this.tags.toJS() })
     )
   }
 
@@ -69,7 +69,7 @@ export default class TagField extends React.Component {
       this.suggestions.clear()
       this.current_index++
       if (this.current_index >= this.tags.length) {
-        this.tags.push('')
+        this.tags.push(``)
       }
     }
   }
@@ -82,9 +82,9 @@ export default class TagField extends React.Component {
     const query = this.current_value
     if (suggestions && this.current_value) {
       this.fetchingSuggestions = true
-      if (typeof suggestions === 'function') {
+      if (typeof suggestions === `function`) {
         window.Promise.resolve(suggestions(query)).then(
-          action('fetchSuggestionsFulfilled', array => {
+          action(`fetchSuggestionsFulfilled`, array => {
             this.fetchingSuggestions = false
             this.suggestion_query = query
             this.suggestions.replace(array)
@@ -107,7 +107,7 @@ export default class TagField extends React.Component {
     this.focussed = true
     if (this.current_index === -1) {
       this.current_index = this.tags.length
-      this.tags.push('')
+      this.tags.push(``)
     }
   }
 
@@ -118,28 +118,28 @@ export default class TagField extends React.Component {
 
   @action handleInputKeyDown = (e) => {
     switch (e.key) {
-      case 'Backspace':
-        if (this.current_index !== 0 && this.current_value === '') {
-          e.preventDefault()
-          this.current_index--
-          this.tags.replace(this.tags.filter(tag=>tag))
-        }
-        break;
-      case 'Tab':
-      case 'Enter':
-      case ',':
+    case `Backspace`:
+      if (this.current_index !== 0 && this.current_value === ``) {
         e.preventDefault()
-        if (this.tag_execept_current.indexOf(this.current_value) !== -1) this.current_value = ''
-        else {
-          if (this.current_index < this.tags.length - 1) { //just move to next one
-            this.tags.replace(this.tags.filter(tag=>tag))
-          } else if (this.current_index === this.tags.length - 1 && this.current_value !== ''){
-            this.current_index = this.tags.length
-            this.tags.push('')
-          }
+        this.current_index--
+        this.tags.replace(this.tags.filter(tag=>tag))
+      }
+      break
+    case `Tab`:
+    case `Enter`:
+    case `,`:
+      e.preventDefault()
+      if (this.tag_execept_current.indexOf(this.current_value) !== -1) this.current_value = ``
+      else {
+        if (this.current_index < this.tags.length - 1) { //just move to next one
+          this.tags.replace(this.tags.filter(tag=>tag))
+        } else if (this.current_index === this.tags.length - 1 && this.current_value !== ``){
+          this.current_index = this.tags.length
+          this.tags.push(``)
         }
-        break
-      default:{}
+      }
+      break
+    default:{}
     }
   }
 
@@ -160,21 +160,21 @@ export default class TagField extends React.Component {
     )
   }
 
-  renderInput(tag='') {
+  renderInput(tag=``) {
     return (
       <input
-          key='input'
-          value={tag}
-          ref={elem => this.input = elem}
-          onKeyDown={this.handleInputKeyDown}
-          onChange={this.handleCurrentTagChange}
-        />
+        key="input"
+        value={tag}
+        ref={elem => this.input = elem}
+        onKeyDown={this.handleInputKeyDown}
+        onChange={this.handleCurrentTagChange}
+      />
     )
   }
 
   renderValue() {
     const result = this.tags.map((tag, i) => {
-      return (i === this.current_index) ?
+      return i === this.current_index ?
         this.renderInput(tag) :
         this.renderTag(tag, i)
     })
@@ -196,14 +196,14 @@ export default class TagField extends React.Component {
     const suggestionsComponent = this.filtered_suggestions.map(suggestion => {
       return (
         <span
-            className='tag-input__suggestion tag-input__tag'
-            onClick={this.use_suggestion.bind(this, suggestion)}
-          >{suggestion}
+          className="tag-input__suggestion tag-input__tag"
+          onClick={this.use_suggestion.bind(this, suggestion)}
+        >{suggestion}
         </span>
       )
     })
     return (
-      <div className='tag-input__suggestion-container'>
+      <div className="tag-input__suggestion-container">
         {suggestionsComponent}
       </div>
     )
@@ -212,7 +212,7 @@ export default class TagField extends React.Component {
   render() {
     return (
       <div className={this.props.className}>
-        <div onClick={this.handlefocus} className='wrapper'>
+        <div onClick={this.handlefocus} className="wrapper">
           {this.renderPopularSuggestions}
           <div className="tag-input">
             {this.renderValue()}

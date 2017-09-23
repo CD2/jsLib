@@ -17,7 +17,7 @@ export default class TextField extends React.Component {
   handleChange = (e) => {
     const { onRawChange, onChange } = this.props
     if (onRawChange) onRawChange(e)
-    if (onChange) onChange({name: e.target.name, value: e.target.value})
+    if (onChange) onChange({ name: e.target.name, value: e.target.value })
   }
 
   render() {
@@ -29,7 +29,7 @@ export default class TextField extends React.Component {
         autoFocus={autoFocus}
         name={name}
         defaultValue={initialValue}
-        value={value || ''}
+        value={value || ``}
         placeholder={placeholder}
         onChange={this.handleChange}
         onFocus={onFocus}
