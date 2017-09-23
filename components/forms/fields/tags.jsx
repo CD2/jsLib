@@ -2,11 +2,16 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import { styled } from 'utils/theme'
+import Overlay from 'lib/components/overlay'
 
 import { observable, computed, action, reaction } from 'mobx'
 import { observer } from 'mobx-react'
 import { tag, panel } from 'utils/common_styles'
 @styled`
+  .wrapper {
+    z-index: 5000;
+    position: relative;
+  }
   .tag-input {
     ${panel};
     padding: 6px;
@@ -39,7 +44,6 @@ export default class TagField extends React.Component {
 
   @observable focussed = false
   @observable tags = []
-  @computed get tag_cache() { return JSON.stringify(this.tags) }
   @observable current_index = -1
 
   @observable suggestions = []
@@ -47,16 +51,16 @@ export default class TagField extends React.Component {
 
   @computed get current_value() { return this.tags[this.current_index] }
   set current_value(value) { this.tags[this.current_index] = value }
-  @computed get tag_execept_current() { return this.tags.filter((_, i)=>i!==this.current_index) }
-  @computed get filtered_suggestions() { return this.suggestions.filter(sug => this.tag_execept_current.indexOf(sug) === -1) }
-  @computed get popular_suggestions() { return this.props.popularSuggestions.filter(sug => this.tag_execept_current.indexOf(sug) === -1) }
+  @computed get tag_except_current() { return this.tags.filter((_, i)=>i!==this.current_index) }
+  @computed get filtered_suggestions() { return this.suggestions.filter(sug => this.tag_except_current.indexOf(sug) === -1) }
+  @computed get popular_suggestions() { return this.props.popularSuggestions.filter(sug => this.tag_except_current.indexOf(sug) === -1) }
 
   @computed get suggestions_up_to_date() { return this.current_value === this.suggestion_query }
 
 
   componentDidMount() {
     reaction(
-      () => this.tag_cache,
+      () => this.tags.map(tag=>tag),
       () => this.props.onChange({ name: this.props.name, value: this.tags.toJS() })
     )
   }
@@ -129,10 +133,11 @@ export default class TagField extends React.Component {
     case `Enter`:
     case `,`:
       e.preventDefault()
-      if (this.tag_execept_current.indexOf(this.current_value) !== -1) this.current_value = ``
+      if (this.tag_except_current.indexOf(this.current_value) !== -1) this.current_value = ``
       else {
         if (this.current_index < this.tags.length - 1) { //just move to next one
           this.tags.replace(this.tags.filter(tag=>tag))
+          this.current_index = this.tags.indexOf(this.current_value) + 1
         } else if (this.current_index === this.tags.length - 1 && this.current_value !== ``){
           this.current_index = this.tags.length
           this.tags.push(``)
@@ -148,8 +153,16 @@ export default class TagField extends React.Component {
     this.fetchSuggestions()
   }
 
+  componentWillMount() {
+    if (this.props.value) this.tags.replace(this.props.value)
+  }
+
   componentDidUpdate() {
     if (this.input) this.input.focus()
+  }
+
+  componentWillRecieveProps(props) {
+    if (props.value) this.tags.replace(props.value)
   }
 
   //////RENDERING
@@ -212,6 +225,7 @@ export default class TagField extends React.Component {
   render() {
     return (
       <div className={this.props.className}>
+        {this.focussed && <Overlay onClick={this.blur} clickThrough/>}
         <div onClick={this.handlefocus} className="wrapper">
           {this.renderPopularSuggestions}
           <div className="tag-input">

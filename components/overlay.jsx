@@ -8,20 +8,31 @@ export class Overlay extends React.Component {
   static propTypes = {
     onClick: PropTypes.func.isRequired,
     visible: PropTypes.bool.isRequired,
+    clickThrough: PropTypes.bool.isRequired,
     className: PropTypes.string,
   }
 
   static defaultProps = {
     visible: false,
+    clickThrough: false,
     className: ``,
   }
 
+  handleClick = (e) => {
+    const { clickThrough, onClick } = this.props
+    if (onClick) onClick()
+    if (clickThrough) {
+      e.target.style.pointerEvents = `none`
+      document.elementFromPoint(e.pageX, e.pageY).click()
+      e.target.style.pointerEvents = ``
+    }
+  }
 
   render() {
     let className = this.props.className
     if (this.props.visible) className += ` visible`
 
-    return (<div className={className} onClick={this.props.onClick} />)
+    return (<div className={className} onClick={this.handleClick} />)
   }
 
 }
