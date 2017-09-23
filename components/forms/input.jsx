@@ -23,7 +23,7 @@ margin-bottom: 10px;
   input[type=search],
   input[type=password],
   textarea,
-  select{
+  .select{
     box-sizing: border-box;
     color: ${t(`text`)};
     font-family: ${t(`font`)};
@@ -46,7 +46,7 @@ margin-bottom: 10px;
     }
   }
 
-  select{
+  .select{
     background-image: url(${dropdown});
     background-size: 10px;
     background-position: 98% 50%;
