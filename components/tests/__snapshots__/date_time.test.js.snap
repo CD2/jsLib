@@ -1,3 +1,3 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Component <DateTime /> renders correctly 1`] = `"<span>21 Sep 2017</span>"`;
+exports[`Component <DateTime /> renders correctly 1`] = `"<span>22 Sep 2017</span>"`;

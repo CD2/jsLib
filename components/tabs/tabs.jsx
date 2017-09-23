@@ -2,17 +2,15 @@ import React from 'react'
 import { styled, t } from 'utils/theme'
 
 @styled`
-  background-color: ${t('background')};
   .tab-content {
     padding: ${t('gutterWidth', w=>w/2)}px;
   }
   .tab-heads {
     display: flex;
-    border-top: 1px solid ${t('border')};
     border-bottom: 1px solid ${t('border')};
 
     > div {
-      padding: 10px ${t('gutterWidth')}px 10px;
+      padding: 10px ${t('gutterWidth', w=>w/2)}px 10px;
       font-size: 0.9em;
       color: ${t('lightText')};
       cursor: pointer;
