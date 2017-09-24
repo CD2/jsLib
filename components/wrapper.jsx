@@ -63,7 +63,7 @@ export default decorate(
       width: 100%;
       position: relative;
       z-index: 1001;
-      ${({ innerBackground:bg }) => bg ? `background-color: ${bg};` : ``};
+      ${({ innerBackground: bg }) => bg ? `background-color: ${bg};` : ``};
       margin: 0 auto;
       ${({ spacing, theme, gutter }) => {
     return `padding: ${(theme.spacing[spacing] || spacing || theme.spacing.small)}px ${gutter || theme.gutterWidth}px;`

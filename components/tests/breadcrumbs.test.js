@@ -2,7 +2,7 @@ import t from 'utils/test_helper'
 
 import { Breadcrumbs } from '../breadcrumbs'
 
-t.describe_component(Breadcrumbs, { theme:{ secondary:`tst` }, breadcrumbs:[{ name:`test1`, href:`/href1` }] }, (c) => {
+t.describe_component(Breadcrumbs, { theme: { secondary: `tst` }, breadcrumbs: [{ name: `test1`, href: `/href1` }] }, (c) => {
   c.accepts_prop(`breadcrumbs`)
 
   c.has_css(`Wrapper`).with_attr(`background`).has_css(`Grid`, (c) => {

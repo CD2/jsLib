@@ -17,7 +17,7 @@ export default class TableHeading extends React.Component {
   }
 
   getSort() {
-    const { sort, sort:{ current, onChange }={}} = this.props
+    const { sort, sort: { current, onChange }={}} = this.props
     let callback, sort_icon
     if (sort) {
       callback = () => onChange(`asc`)

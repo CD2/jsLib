@@ -2,7 +2,7 @@ import t from 'utils/test_helper'
 
 import { Overlay } from '../overlay'
 
-t.describe_component(Overlay, { onClick:() => {}, visible:true, className:`test` }, (c) => {
+t.describe_component(Overlay, { onClick: () => {}, visible: true, className: `test` }, (c) => {
   describe(`proptypes`, () => {
     c.accepts_prop(`onClick`)
     c.accepts_prop(`visible`)

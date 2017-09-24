@@ -2,7 +2,7 @@ import t from 'utils/test_helper'
 
 import { Wrapper } from '../wrapper'
 
-t.describe_component(Wrapper, { theme:{ siteWidth:10 }, width:10, overlay:`tst` }, (c) => {
+t.describe_component(Wrapper, { theme: { siteWidth: 10 }, width: 10, overlay: `tst` }, (c) => {
   describe(`proptypes`, () => {
     c.accepts_prop(`width`)
     c.accepts_prop(`background`)

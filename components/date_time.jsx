@@ -5,8 +5,8 @@ import moment from 'moment'
 export class DateTime extends React.Component {
 
   static propTypes = {
-    date:PropTypes.any,
-    format:PropTypes.string,
+    date: PropTypes.any,
+    format: PropTypes.string,
   }
 
   static defaultProps = {
@@ -14,8 +14,8 @@ export class DateTime extends React.Component {
   }
 
   predefinedFormats = {
-    'short_date': `DD MMM YYYY`,
-    'long_date': `Do M YY`,
+    short_date: `DD MMM YYYY`,
+    long_date: `Do M YY`,
   }
 
   render() {
