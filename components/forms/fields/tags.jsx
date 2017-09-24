@@ -224,7 +224,7 @@ export default class TagField extends React.Component {
   render() {
     return (
       <div className={this.props.className}>
-        {this.focussed && <Overlay onClick={this.blur} clickThrough/>}
+        {this.focussed && <Overlay onClick={this.blur} clickThrough />}
         <div onClick={this.handlefocus} className="wrapper">
           {this.renderPopularSuggestions}
           <div className="tag-input">

@@ -11,7 +11,7 @@ export default class LinkOrDiv extends React.Component {
 
   render() {
     if (this.props.noLink) {
-      const props = {...this.props}
+      const props = { ...this.props }
       delete props.href
       delete props.to
       delete props.noLink
