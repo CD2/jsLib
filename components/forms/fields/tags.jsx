@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 
 import { styled } from 'utils/theme'
 import Overlay from 'lib/components/overlay'
+import FaIcon from 'lib/components/fa_icon'
 
 import { observable, computed, action, reaction } from 'mobx'
 import { observer } from 'mobx-react'
@@ -101,12 +102,12 @@ export default class TagField extends React.Component {
     }
   }
 
-  @action blur = () => {
+  @action handleBlur = () => {
     this.focussed = false
     this.tags.replace(this.tags.filter(tag=>tag))
     this.current_index = -1
   }
-  @action handlefocus = () => {
+  @action handleFocus = () => {
     this.focussed = true
     if (this.current_index === -1) {
       this.current_index = this.tags.length
@@ -143,8 +144,15 @@ export default class TagField extends React.Component {
         }
       }
       break
-    default:{}
+    default:
     }
+  }
+
+  @action handleRemoveTag = (tag, e) => {
+    e.stopPropagation()
+    const cv = this.current_value
+    this.tags.replace(this.tags.filter(t => t!==tag))
+    this.current_index = this.tags.indexOf(cv)
   }
 
   @action handleCurrentTagChange = (e) => {
@@ -168,16 +176,19 @@ export default class TagField extends React.Component {
 
   renderTag(tag) {
     return (
-      <span key={tag} onClick={this.handleTagClick.bind(this, tag)}>{tag}</span>
+      <span key={tag} onClick={this.handleTagClick.bind(this, tag)}>
+        {tag}
+        <FaIcon icon="cross" onClick={this.handleRemoveTag.bind(this, tag)} />
+      </span>
     )
   }
 
   renderInput(tag=``) {
     return (
       <input
+        ref={elem => this.input = elem}
         key="input"
         value={tag}
-        ref={elem => this.input = elem}
         onKeyDown={this.handleInputKeyDown}
         onChange={this.handleCurrentTagChange}
       />
@@ -198,7 +209,15 @@ export default class TagField extends React.Component {
 
   @computed get renderPopularSuggestions() {
     return this.popular_suggestions.map(suggestion => {
-      return <span className="suggestion-tag" key={suggestion} onClick={this.use_suggestion.bind(this, suggestion)}>+ {suggestion}</span>
+      return (
+        <span
+          key={suggestion}
+          className="suggestion-tag"
+          onClick={this.use_suggestion.bind(this, suggestion)}
+        >
+          + {suggestion}
+        </span>
+      )
     })
   }
 
@@ -208,9 +227,11 @@ export default class TagField extends React.Component {
     const suggestionsComponent = this.filtered_suggestions.map(suggestion => {
       return (
         <span
+          key={suggestion}
           className="tag-input__suggestion tag-input__tag"
           onClick={this.use_suggestion.bind(this, suggestion)}
-        >{suggestion}
+        >
+          {suggestion}
         </span>
       )
     })
@@ -224,8 +245,8 @@ export default class TagField extends React.Component {
   render() {
     return (
       <div className={this.props.className}>
-        {this.focussed && <Overlay onClick={this.blur} clickThrough />}
-        <div onClick={this.handlefocus} className="wrapper">
+        {this.focussed && <Overlay onClick={this.handleBlur} clickThrough />}
+        <div onClick={this.handleFocus} className="wrapper">
           {this.renderPopularSuggestions}
           <div className="tag-input">
             {this.renderValue()}
