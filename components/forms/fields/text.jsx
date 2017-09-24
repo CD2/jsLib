@@ -4,13 +4,13 @@ import PropTypes from 'prop-types'
 export default class TextField extends React.Component {
 
   static propTypes = {
-    onChange: PropTypes.func,
-    onRawChange: PropTypes.func,
-    onKeyPress: PropTypes.func,
-    onFocus: PropTypes.func,
-    name: PropTypes.string,
-    placeholder: PropTypes.string,
     initialValue: PropTypes.string,
+    name: PropTypes.string,
+    onChange: PropTypes.func,
+    onFocus: PropTypes.func,
+    onKeyPress: PropTypes.func,
+    onRawChange: PropTypes.func,
+    placeholder: PropTypes.string,
     type: PropTypes.string,
   }
 

@@ -28,17 +28,16 @@ import { tag, panel } from 'utils/common_styles'
 export default class TagField extends React.Component {
 
   static propTypes = {
+    name: PropTypes.string,
+    onChange: PropTypes.func,
+    onFocus: PropTypes.func,
+    onRawChange: PropTypes.func,
+    placeholder: PropTypes.string,
+    popularSuggestions: PropTypes.arrayOf(PropTypes.string),
     suggestions: PropTypes.oneOfType([
       PropTypes.func,
       PropTypes.arrayOf(PropTypes.string),
     ]),
-    popularSuggestions: PropTypes.arrayOf(PropTypes.string),
-
-    name: PropTypes.string,
-    onChange: PropTypes.func,
-    onRawChange: PropTypes.func,
-    onFocus: PropTypes.func,
-    placeholder: PropTypes.string,
   }
 
 

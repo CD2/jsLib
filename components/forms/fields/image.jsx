@@ -10,11 +10,11 @@ export default class ImageField extends React.Component {
   @observable preview_src = ``
 
   static propTypes = {
+    multiple: PropTypes.bool,
     name: PropTypes.string,
     onChange: PropTypes.func,
-    onRawChange: PropTypes.func,
     onFocus: PropTypes.func,
-    multiple: PropTypes.bool,
+    onRawChange: PropTypes.func,
   }
 
   handleChange = (e) => {
@@ -41,7 +41,6 @@ export default class ImageField extends React.Component {
   }
 
   renderPreview() {
-    console.log(typeof this.props.value, this.props.value)
     const { value } = this.props
     if (value instanceof File) {
     }

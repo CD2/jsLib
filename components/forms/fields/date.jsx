@@ -40,7 +40,6 @@ export default class Example extends React.Component {
   };
   handleChange = (day) => {
     const { onChange, name } = this.props
-    console.log(day)
     if (onChange) onChange({ name, value: day })
   }
   render() {

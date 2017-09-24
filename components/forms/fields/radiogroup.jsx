@@ -15,15 +15,14 @@ import { styled } from 'utils/theme'
 export default class SelectField extends React.Component {
 
   static propTypes = {
+    choices: PropTypes.arrayOf(PropTypes.string),
     onChange: PropTypes.func,
     onRawChange: PropTypes.func,
-    choices: PropTypes.arrayOf(PropTypes.string)
   }
 
   handleChange = (e) => {
     const { onRawChange, onChange } = this.props
     if (onRawChange) onRawChange(e)
-    console.log(e.target.value)
     if (onChange) onChange({ name: e.target.name, value: e.target.value })
   }
 

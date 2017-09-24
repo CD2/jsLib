@@ -12,12 +12,10 @@ export default class RichTextBox extends React.Component {
 
   static propTypes = {
     className: PropTypes.string,
-
+    full_editor: PropTypes.bool,
     onChange: PropTypes.func,
     onRawChange: PropTypes.func,
     value: PropTypes.string,
-
-    full_editor: PropTypes.bool,
   }
 
   handleChange = (value) => {

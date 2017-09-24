@@ -19,13 +19,11 @@ import { observable } from 'mobx'
 export default class RichTextBox extends React.Component {
 
   static propTypes = {
-    id: PropTypes.string,
     className: PropTypes.string,
-
+    full_editor: PropTypes.bool,
+    id: PropTypes.string,
     onChange: PropTypes.func,
     value: PropTypes.string,
-
-    full_editor: PropTypes.bool,
   };
 
   @observable value = ``
@@ -34,7 +32,6 @@ export default class RichTextBox extends React.Component {
   componentDidMount() {
     let toolbar = `bold italic removeformat | bullist numlist | table | link`
     let height = `150`
-    console.log(`MOUNT`)
     if (this.props.full_editor) {
       toolbar = `formatselect | bold italic strikethrough forecolor backcolor | link | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat`
       height = `400`

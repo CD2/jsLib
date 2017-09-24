@@ -4,9 +4,9 @@ import PropTypes from 'prop-types'
 export default class SelectField extends React.Component {
 
   static propTypes = {
+    choices: PropTypes.arrayOf(PropTypes.string),
     onChange: PropTypes.func,
     onRawChange: PropTypes.func,
-    choices: PropTypes.arrayOf(PropTypes.string)
   }
 
   handleChange = (e) => {

@@ -30,15 +30,15 @@ import { panel } from 'utils/common_styles'
 export default class PasswordWithHelpField extends React.Component {
 
   static propTypes = {
-    name: PropTypes.string.isRequired,
-    type: PropTypes.string,
+    description: PropTypes.string,
+    initialValue: PropTypes.string,
     label: PropTypes.oneOfType([
       PropTypes.node,
       PropTypes.bool,
     ]),
-    description: PropTypes.string,
-    initialValue: PropTypes.string,
+    name: PropTypes.string.isRequired,
     placeholder: PropTypes.string,
+    type: PropTypes.string,
   }
 
   constructor(props) {
