@@ -7,13 +7,13 @@ import { apiRoute } from 'utils/api_http'
 export class BackgroundImage extends React.Component {
 
   static propTypes = {
+    circular: PropTypes.bool,
+    contain: PropTypes.bool,
+    default_src: PropTypes.string,
+    height: PropTypes.string,
     src: PropTypes.string,
     url: PropTypes.string,
-    default_src: PropTypes.string,
     width: PropTypes.string,
-    height: PropTypes.string,
-    contain: PropTypes.bool,
-    circular: PropTypes.bool,
   }
 
   render() {
@@ -42,9 +42,9 @@ export default decorate(
             background-position: 50%;
             background-repeat: no-repeat;
       `
-    } 
+    }
     return `background-color: #ddd;`
-    
+
   }
 
 }
