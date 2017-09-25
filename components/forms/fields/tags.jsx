@@ -53,6 +53,7 @@ export default class TagField extends React.Component {
   set current_value(value) { this.tags[this.current_index] = value }
   @computed get tag_except_current() { return this.tags.filter((_, i)=>i!==this.current_index) }
   @computed get filtered_suggestions() { return this.suggestions.filter(sug => this.tag_except_current.indexOf(sug) === -1) }
+  @computed get any_popular_suggestions() { return !!this.props.popularSuggestions }
   @computed get popular_suggestions() { return this.props.popularSuggestions.filter(sug => this.tag_except_current.indexOf(sug) === -1) }
 
   @computed get suggestions_up_to_date() { return this.current_value === this.suggestion_query }
@@ -168,8 +169,10 @@ export default class TagField extends React.Component {
     if (this.input) this.input.focus()
   }
 
-  componentWillRecieveProps(props) {
-    if (props.value) this.tags.replace(props.value)
+  componentWillReceiveProps(props) {
+    if (JSON.stringify(props.value) !== JSON.stringify(this.tags)) {
+      if (props.value) this.tags.replace(props.value)
+    }
   }
 
   //////RENDERING
@@ -208,6 +211,7 @@ export default class TagField extends React.Component {
   }
 
   @computed get renderPopularSuggestions() {
+    if (!this.any_popular_suggestions) return
     return this.popular_suggestions.map(suggestion => {
       return (
         <span
