@@ -62,6 +62,7 @@ export default decorate(
       vertical-align: top;
       color: white;
       border-radius: 5px;
+      text-align: center;
 
       &.common {
         background-color: ${t(`primary`)};
