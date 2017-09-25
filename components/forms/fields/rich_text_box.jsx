@@ -6,6 +6,7 @@ import 'tinymce/themes/modern'
 import 'tinymce/plugins/lists'
 import 'tinymce/plugins/link'
 import 'tinymce/plugins/table'
+import 'tinymce/plugins/anchor'
 import { styled } from 'utils/theme'
 import { panel } from 'utils/common_styles'
 
@@ -33,7 +34,7 @@ export default class RichTextBox extends React.Component {
     let toolbar = `bold italic removeformat | bullist numlist | table | link`
     let height = `150`
     if (this.props.full_editor) {
-      toolbar = `formatselect | bold italic strikethrough forecolor backcolor | link | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat`
+      toolbar = `formatselect | bold italic strikethrough forecolor backcolor | link anchor | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat`
       height = `400`
     }
     tinymce.init({
@@ -45,7 +46,7 @@ export default class RichTextBox extends React.Component {
       browser_spellcheck: true,
 
       plugins: [
-        `lists link table`
+        `lists link table anchor`
       ],
       toolbar,
       height,
