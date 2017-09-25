@@ -8,14 +8,15 @@ import decorate from 'utils/decorate'
 export class Wrapper extends React.Component {
 
   static propTypes = {
-    width: PropTypes.number,
     background: PropTypes.string,
-    innerBackground: PropTypes.string,
     backgroundImage: PropTypes.string,
+    children: PropTypes.node,
+    gutter: PropTypes.number,
+    innerBackground: PropTypes.string,
     overlay: PropTypes.string,
     spacing: PropTypes.number,
-    gutter: PropTypes.number,
     wide: PropTypes.bool,
+    width: PropTypes.number,
   }
 
   render() {
