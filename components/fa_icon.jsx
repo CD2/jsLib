@@ -5,6 +5,8 @@ import decorate from 'utils/decorate'
 
 export class FaIcon extends React.Component {
 
+  static prefix= `fa`
+
   static propTypes = {
     icon: PropTypes.string.isRequired,
     hoverColor: PropTypes.string,
@@ -13,9 +15,13 @@ export class FaIcon extends React.Component {
     onClick: PropTypes.func,
   }
 
+  get prefix() {
+    return this.constructor.prefix
+  }
+
   get className() {
     let { className, icon } = this.props
-    className += ` fa fa-${icon}`
+    className += ` ${this.prefix} ${this.prefix}-${icon}`
     return className
   }
 
