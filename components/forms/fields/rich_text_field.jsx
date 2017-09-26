@@ -28,7 +28,7 @@ export default class RichTextBox extends React.Component {
     return(
       <RichTextInput
         className={this.props.className}
-        value={this.props.value}
+        value={this.props.value || ``}
         onChange={this.handleChange}
         full_editor={this.props.full_editor}
       />
