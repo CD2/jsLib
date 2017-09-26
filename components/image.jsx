@@ -2,6 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { buildUrl } from 'utils/api_http'
 import invariant from 'invariant'
+import { styled, t } from 'utils/theme'
+import decorate from 'utils/decorate'
 
 export class Image extends React.Component {
 
@@ -41,6 +43,7 @@ export class Image extends React.Component {
           style={{ backgroundImage: `url(${this.url})` }}
           onClick={this.props.onClick}
           children={children}
+          className={`bg-image ${this.props.className}`}
         />
       )
     }
@@ -48,9 +51,19 @@ export class Image extends React.Component {
     invariant(!children, `images cant accept children unless marked as a background image`)
 
     return (
-      <img alt={alt} onClick={this.props.onClick} src={this.url} />
+      <img alt={alt} onClick={this.props.onClick} src={this.url} className={`image ${this.props.className}`} />
     )
   }
 }
+export default decorate(
+  styled`
+    &.bg-image {
+      background-size: cover;
+      background-position: 50%;
+      background-repeat: no-repeat;
+    }
+  `,
+  Image
+)
 
-export default Image
+
