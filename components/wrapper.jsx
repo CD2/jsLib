@@ -14,7 +14,7 @@ export class Wrapper extends React.Component {
     gutter: PropTypes.number,
     innerBackground: PropTypes.string,
     overlay: PropTypes.string,
-    spacing: PropTypes.number,
+    spacing: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     wide: PropTypes.bool,
     width: PropTypes.number,
   }
