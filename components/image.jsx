@@ -10,6 +10,7 @@ export class Image extends React.Component {
     background: PropTypes.bool,
     children: PropTypes.node,
     crop: PropTypes.bool,
+    defaultSrc: PropTypes.string,
     height: PropTypes.number,
     onClick: PropTypes.func,
     uid: PropTypes.string,
@@ -31,14 +32,17 @@ export class Image extends React.Component {
   }
 
   render() {
-    const { alt, background, children } = this.props
+    const { alt, background, children, defaultSrc, uid } = this.props
 
     invariant(!(background && alt), `background images don't accept alt tags`)
+
+    let url = this.url
+    if (!uid) { url = defaultSrc }
 
     if (background) {
       return (
         <div
-          style={{ backgroundImage: `url(${this.url})` }}
+          style={{ backgroundImage: `url(${url})` }}
           onClick={this.props.onClick}
           children={children}
         />
@@ -48,7 +52,7 @@ export class Image extends React.Component {
     invariant(!children, `images cant accept children unless marked as a background image`)
 
     return (
-      <img alt={alt} onClick={this.props.onClick} src={this.url} />
+      <img alt={alt} onClick={this.props.onClick} src={url} />
     )
   }
 }
