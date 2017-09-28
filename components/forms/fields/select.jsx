@@ -29,7 +29,7 @@ export default class SelectField extends React.Component {
     choices.forEach(choice => {
       let text
       let value
-      if (typeof choice === 'string') {
+      if (typeof choice === `string`) {
         text = choice
         value = choice
       } else {

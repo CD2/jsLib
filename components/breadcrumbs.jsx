@@ -35,7 +35,7 @@ export class Breadcrumbs extends React.Component {
           <GridItem weight={5/6}>
             <span>
               <Link className="breadcrumb__link" to="/">
-                <FaIcon icon="home"/>
+                <FaIcon icon="home" />
               </Link>
             </span>
             {this.props.breadcrumbs.map(this.renderBreadcrumb)}

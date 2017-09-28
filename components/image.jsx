@@ -55,7 +55,10 @@ export class Image extends React.Component {
     invariant(!children, `images cant accept children unless marked as a background image`)
 
     return (
-      <img alt={alt} onClick={this.props.onClick} src={url} className={`image ${this.props.className}`} />
+      <img
+        alt={alt} onClick={this.props.onClick} src={url}
+        className={`image ${this.props.className}`}
+      />
     )
   }
 }
@@ -65,7 +68,7 @@ export default decorate(
       background-size: cover;
       background-position: 50%;
       background-repeat: no-repeat;
-      height: ${p('height')}px;
+      height: ${p(`height`)}px;
     }
   `,
   Image
