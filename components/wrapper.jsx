@@ -17,7 +17,7 @@ export class Wrapper extends React.Component {
     overlay: PropTypes.string,
     spacing: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     theme: PropTypes.shape({
-      siteWidth: PropTypes.number
+      siteWidth: PropTypes.any
     }),
     wide: PropTypes.bool,
     width: PropTypes.number,

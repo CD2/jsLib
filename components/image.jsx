@@ -68,7 +68,11 @@ export default decorate(
       background-size: cover;
       background-position: 50%;
       background-repeat: no-repeat;
-      height: ${p(`height`)}px;
+      ${({ height }) => {
+        if(height) {
+          return `height: ${height}px;`
+        }
+      }}
     }
   `,
   Image
