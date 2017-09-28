@@ -1,13 +1,10 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { history } from 'utils/router'
-// import home from 'images/home.svg'
 import { Grid, GridItem } from 'lib/components/grid'
 import { styled, t } from 'utils/theme'
 import { small_icon } from 'utils/common_styles'
 import Wrapper from "./wrapper"
-import Img from "./img"
-
 import BreadcrumbStore from 'stores/breadcrumbs'
 import { observer } from 'mobx-react'
 import decorate from 'utils/decorate'

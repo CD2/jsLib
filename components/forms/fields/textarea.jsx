@@ -12,6 +12,7 @@ export default class TextArea extends React.Component {
     onRawChange: PropTypes.func,
     placeholder: PropTypes.string,
     type: PropTypes.string,
+    value: PropTypes.string,
   }
 
   handleChange = (e) => {

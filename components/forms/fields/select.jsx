@@ -6,7 +6,7 @@ export default class SelectField extends React.Component {
 
   static propTypes = {
     choices: PropTypes.arrayOf(PropTypes.string),
-    includeBlank: PropTypes.oneOfType(PropTypes.bool, PropTypes.string),
+    includeBlank: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
     onChange: PropTypes.func,
     onRawChange: PropTypes.func,
   }

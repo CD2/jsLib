@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 export default class TextField extends React.Component {
 
   static propTypes = {
+    autoFocus: PropTypes.bool,
     initialValue: PropTypes.string,
     name: PropTypes.string,
     onChange: PropTypes.func,
@@ -12,6 +13,7 @@ export default class TextField extends React.Component {
     onRawChange: PropTypes.func,
     placeholder: PropTypes.string,
     type: PropTypes.string,
+    value: PropTypes.string,
   }
 
   handleChange = (e) => {
@@ -21,7 +23,14 @@ export default class TextField extends React.Component {
   }
 
   render() {
-    const { name, value, autoFocus, placeholder, initialValue, onFocus, type, onKeyPress } = this.props
+    const { name,
+      value,
+      autoFocus,
+      placeholder,
+      initialValue,
+      onFocus,
+      type,
+      onKeyPress } = this.props
 
     return (
       <input

@@ -2,12 +2,10 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import { history } from 'utils/router'
-// import home from 'images/home.svg'
 import { Grid, GridItem } from 'lib/components/grid'
 import { styled, t } from 'utils/theme'
 import { small_icon } from 'utils/common_styles'
 import Wrapper from "./wrapper"
-import Img from "./img"
 import decorate from 'utils/decorate'
 import FaIcon from 'lib/components/fa_icon'
 

@@ -1,6 +1,5 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import dropdown from 'images/dropdown.svg'
 import { styled, t } from 'utils/theme'
 
 const FIELD_TYPES = {
@@ -47,7 +46,6 @@ margin-bottom: 10px;
   }
 
   .select{
-    background-image: url(${dropdown});
     background-size: 10px;
     background-position: 98% 50%;
     background-repeat: no-repeat;
