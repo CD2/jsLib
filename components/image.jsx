@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { buildUrl } from 'utils/api_http'
 import invariant from 'invariant'
-import { styled, t } from 'utils/theme'
+import { styled, p } from 'utils/theme'
 import decorate from 'utils/decorate'
 
 export class Image extends React.Component {
@@ -65,6 +65,7 @@ export default decorate(
       background-size: cover;
       background-position: 50%;
       background-repeat: no-repeat;
+      height: ${p('height')}px;
     }
   `,
   Image
