@@ -6,12 +6,12 @@ import { validateForm } from 'lib/components/forms'
 
 export default class Model {
 
-  @observable values = observable.map()
-  @observable changes = observable.map()
-  @observable errors = observable.map()
+  @observable values = observable.shallowMap()
+  @observable changes = observable.shallowMap()
+  @observable errors = observable.shallowMap()
 
   @computed get completeValues() {
-    const full = observable.map(toJS(this.values))
+    const full = observable.shallowMap(toJS(this.values))
     full.merge(this.changes)
     return full
   }
