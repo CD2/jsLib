@@ -4,18 +4,21 @@ import { styled } from 'utils/theme'
 import { p } from 'utils/theme'
 import { observer } from 'mobx-react'
 import decorate from 'utils/decorate'
+import Image from "./image";
 
 export class Wrapper extends React.Component {
 
   static propTypes = {
     background: PropTypes.string,
     backgroundImage: PropTypes.string,
+    backgroundImageUid: PropTypes.string,
     children: PropTypes.node,
     className: PropTypes.string,
     gutter: PropTypes.number,
     innerBackground: PropTypes.string,
     overlay: PropTypes.string,
     spacing: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    backgroundSize: PropTypes.string,
     theme: PropTypes.shape({
       siteWidth: PropTypes.any
     }),
@@ -25,16 +28,27 @@ export class Wrapper extends React.Component {
   }
 
   render() {
-    const { className, children, overlay } = this.props
+    const { className, children, overlay, backgroundImage, backgroundImageUid, backgroundSize } = this.props
     const width = this.props.width || this.props.theme.siteWidth
-    return (
-      <div className={className}>
-        { overlay && <div className="wrapper__overlay" /> }
-        <div className="wrapper__inner" style={{ maxWidth: `${width}px` }}>
-          {children}
+    if(backgroundImage || backgroundImageUid) {
+      return(
+        <Image className={className} background defaultSrc={backgroundImage} uid={backgroundImageUid} size={backgroundSize} crop>
+          {overlay && <div className="wrapper__overlay"/>}
+          <div className="wrapper__inner" style={{ maxWidth: `${width}px` }}>
+            {children}
+          </div>
+        </Image>
+      )
+    } else {
+      return (
+        <div className={className}>
+          {overlay && <div className="wrapper__overlay"/>}
+          <div className="wrapper__inner" style={{ maxWidth: `${width}px` }}>
+            {children}
+          </div>
         </div>
-      </div>
-    )
+      )
+    }
   }
 
 }
@@ -52,16 +66,6 @@ export default decorate(
     }
 
     background-color: ${({ background, theme }) => background || theme.background};
-
-    ${({ backgroundImage }) => {
-    if (backgroundImage) {
-      return `
-              background-image: url(${backgroundImage});
-              background-size: cover;
-              background-position: 50%;
-              background-repeat: no-repeat;
-      `
-    }
   }}
 
     position: relative;

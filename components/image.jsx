@@ -17,6 +17,7 @@ export class Image extends React.Component {
     onClick: PropTypes.func,
     uid: PropTypes.string,
     width: PropTypes.number,
+    size: PropTypes.string,
   }
 
   static defaultProps = {
@@ -26,9 +27,9 @@ export class Image extends React.Component {
   }
 
   get url() {
-    const { uid, width, height, crop } = this.props
-    const params = { uid }
-    if (height) params.size = `${width || height*1.5}x${height}`
+    const { uid, width, height, crop, size } = this.props
+    const params = { uid, size }
+    if (height && !size) params.size = `${width || height*1.5}x${height}`
     if (crop) params.crop = true
     return buildUrl([`image`], params)
   }
@@ -47,7 +48,7 @@ export class Image extends React.Component {
           style={{ backgroundImage: `url(${url})` }}
           onClick={this.props.onClick}
           children={children}
-          className={`bg-image ${this.props.className}`}
+          className={this.props.className}
         />
       )
     }
@@ -64,16 +65,14 @@ export class Image extends React.Component {
 }
 export default decorate(
   styled`
-    &.bg-image {
-      background-size: cover;
-      background-position: 50%;
-      background-repeat: no-repeat;
-      ${({ height }) => {
-        if(height) {
-          return `height: ${height}px;`
-        }
-      }}
-    }
+    background-size: cover;
+    background-position: 50%;
+    background-repeat: no-repeat;
+    ${({ height }) => {
+      if(height) {
+        return `height: ${height}px;`
+      }
+    }}
   `,
   Image
 )

@@ -17,7 +17,9 @@ export default class LinkOrDiv extends React.Component {
       delete props.noLink
       return (<div {...props} />)
     }
-    return (<Link {...this.props} />)
+    const props = { ...this.props }
+    delete props.noLink
+    return (<Link {...props} />)
   }
 
 }
