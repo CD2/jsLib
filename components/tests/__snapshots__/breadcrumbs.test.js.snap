@@ -1,6 +1,3 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Component <Breadcrumbs /> renders correctly 1`] = `
-"<div class=\\"sc-htpNat fOvDWz\\"><div class=\\"wrapper__inner\\" style=\\"max-width: 1600px;\\"><div class=\\"sc-bdVaJa hHufzj\\"><div class=\\"sc-bwzfXH fnMaUN\\"><span><a class=\\"breadcrumb__link\\" href=\\"/\\"><img alt=\\"\\" src=\\"svg>
-\\"></a></span><span><span> &gt; </span><a class=\\"breadcrumb__link\\" href=\\"/href1\\">test1</a></span></div><div class=\\"gutter\\"></div><div class=\\"sc-bwzfXH kYHtvX\\"><a>Back</a></div></div></div></div>"
-`;
+exports[`Component <Breadcrumbs /> renders correctly 1`] = `"<div class=\\"sc-htpNat fOvDWz\\"><div class=\\"wrapper__inner\\" style=\\"max-width: 1600px;\\"><div class=\\"sc-bdVaJa hHufzj\\"><div class=\\"sc-bwzfXH fnMaUN\\"><span><a class=\\"breadcrumb__link\\" href=\\"/\\"><i class=\\"sc-bxivhb GoXOR fa fa-home\\"></i></a></span><span><span> &gt; </span><a class=\\"breadcrumb__link\\" href=\\"/href1\\">test1</a></span></div><div class=\\"gutter\\"></div><div class=\\"sc-bwzfXH kYHtvX\\"><a>Back</a></div></div></div></div>"`;
