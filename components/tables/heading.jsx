@@ -1,8 +1,6 @@
 import React from 'react'
 import ColumnFilter from './column_filter'
-
-import chevron_up from 'images/chevron_up.svg'
-import chevron_down from 'images/chevron_down.svg'
+import FaIcon from 'lib/components/fa_icon'
 
 import Img from "lib/components/img"
 
@@ -22,11 +20,10 @@ export default class TableHeading extends React.Component {
     if (sort) {
       callback = () => onChange(`asc`)
       if (current === `asc`) {
-        sort_icon = <Img src={chevron_up} />
+        sort_icon = <FaIcon icon="chevron-up" />
         callback = () => onChange(`desc`)
-      }
-      if (current === `desc`) {
-        sort_icon = <Img src={chevron_down} />
+      } else  if (current === `desc`) {
+        sort_icon = <FaIcon icon="chevron-down" />
         callback = () => onChange(null)
       }
     }
