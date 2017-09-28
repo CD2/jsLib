@@ -11,12 +11,17 @@ export class Wrapper extends React.Component {
     background: PropTypes.string,
     backgroundImage: PropTypes.string,
     children: PropTypes.node,
+    className: PropTypes.string,
     gutter: PropTypes.number,
     innerBackground: PropTypes.string,
     overlay: PropTypes.string,
     spacing: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    theme: PropTypes.shape({
+      siteWidth: PropTypes.number
+    }),
     wide: PropTypes.bool,
     width: PropTypes.number,
+
   }
 
   render() {
