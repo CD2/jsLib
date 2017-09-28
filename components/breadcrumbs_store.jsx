@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { history } from 'utils/router'
-import home from 'images/home.svg'
+// import home from 'images/home.svg'
 import { Grid, GridItem } from 'lib/components/grid'
 import { styled, t } from 'utils/theme'
 import { small_icon } from 'utils/common_styles'
@@ -11,6 +11,7 @@ import Img from "./img"
 import BreadcrumbStore from 'stores/breadcrumbs'
 import { observer } from 'mobx-react'
 import decorate from 'utils/decorate'
+import FaIcon from 'lib/components/fa_icon'
 
 export class Breadcrumbs extends React.Component {
 
@@ -35,7 +36,7 @@ export class Breadcrumbs extends React.Component {
           <GridItem weight={5/6}>
             <span>
               <Link className="breadcrumb__link" to="/">
-                <Img src={home} />
+                <FaIcon icon="home"/>
               </Link>
             </span>
             {BreadcrumbStore.breadcrumbs.filter(crumb=>crumb).map(this.renderBreadcrumb)}
