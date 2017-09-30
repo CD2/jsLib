@@ -1,3 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Component <Modal /> renders correctly 1`] = `"<div><div class=\\"modal\\"></div><div class=\\"sc-bwzfXH hRQPAJ visible\\"></div></div>"`;
+exports[`Component <Modal /> renders correctly 1`] = `
+<div>
+  <div
+    className="modal"
+  />
+  <withTheme(StyledComponent)
+    onClick={[Function]}
+    visible={true}
+  />
+</div>
+`;

@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Component <TimeAgo /> expecting hours Component <TimeAgo /> renders correctly 1`] = `"<span></span>"`;
+exports[`Component <TimeAgo /> expecting hours Component <TimeAgo /> renders correctly 1`] = `<span />`;
 
-exports[`Component <TimeAgo /> expecting minutes Component <TimeAgo /> renders correctly 1`] = `"<span></span>"`;
+exports[`Component <TimeAgo /> expecting minutes Component <TimeAgo /> renders correctly 1`] = `<span />`;
 
-exports[`Component <TimeAgo /> renders correctly 1`] = `"<span></span>"`;
+exports[`Component <TimeAgo /> renders correctly 1`] = `<span />`;
