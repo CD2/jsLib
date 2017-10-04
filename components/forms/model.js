@@ -48,6 +48,11 @@ export default class Model {
     this.onSave(toJS(this.changes))
   }
 
+  create() {
+    if (!this.valid()) return
+    this.onCreate(toJS(this.changes))
+  }
+
   reset(newValues) {
     this.changes.clear()
     if (newValues) this.values.replace(newValues)
