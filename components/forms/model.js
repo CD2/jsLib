@@ -27,6 +27,10 @@ export default class Model {
     return this.changes.has(key) ? this.changes.get(key) : this.values.get(key)
   }
 
+  getAll() {
+    return toJS(this.changes)
+  }
+
   getError(key) {
     return this.errors.get(key)
   }
