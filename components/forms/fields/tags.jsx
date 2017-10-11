@@ -29,6 +29,7 @@ import { tag, panel } from 'utils/common_styles'
 export default class TagField extends React.Component {
 
   static propTypes = {
+    disabled: PropTypes.bool,
     name: PropTypes.string,
     onChange: PropTypes.func,
     onFocus: PropTypes.func,
@@ -189,6 +190,7 @@ export default class TagField extends React.Component {
   renderInput(tag=``) {
     return (
       <input
+        disabled={this.props.disabled}
         ref={elem => this.input = elem}
         key="input"
         value={tag}

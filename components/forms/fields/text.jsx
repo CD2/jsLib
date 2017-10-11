@@ -5,6 +5,7 @@ export default class TextField extends React.Component {
 
   static propTypes = {
     autoFocus: PropTypes.bool,
+    disabled: PropTypes.bool,
     initialValue: PropTypes.string,
     name: PropTypes.string,
     onChange: PropTypes.func,
@@ -23,14 +24,17 @@ export default class TextField extends React.Component {
   }
 
   render() {
-    const { name,
+    const {
+      name,
       value,
       autoFocus,
       placeholder,
       initialValue,
       onFocus,
       type,
-      onKeyPress } = this.props
+      onKeyPress,
+      disabled,
+    } = this.props
 
     return (
       <input
@@ -43,6 +47,7 @@ export default class TextField extends React.Component {
         onChange={this.handleChange}
         onFocus={onFocus}
         onKeyPress={onKeyPress}
+        disabled={disabled}
       />
     )
   }

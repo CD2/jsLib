@@ -21,10 +21,20 @@ function YearMonthForm({ date, localeUtils, onChange }) {
 
   return (
     <form className="DayPicker-Caption">
-      <select name="month" onChange={handleChange} value={date.getMonth()}>
+      <select
+        name="month"
+        value={date.getMonth()}
+        disabled={this.props.disabled}
+        onChange={handleChange}
+      >
         {months.map((month, i) => <option key={i} value={i}>{month}</option>)}
       </select>
-      <select name="year" onChange={handleChange} value={date.getFullYear()}>
+      <select
+        name="year"
+        value={date.getFullYear()}
+        disabled={this.props.disabled}
+        onChange={handleChange}
+      >
         {years.map((year, i) => <option key={i} value={year}>{year}</option>)}
       </select>
     </form>
@@ -58,6 +68,7 @@ export default class Example extends React.Component {
           captionElement={
             <YearMonthForm onChange={this.handleYearMonthChange} />
           }
+          disabled={this.props.disabled}
         />
       </div>
     )

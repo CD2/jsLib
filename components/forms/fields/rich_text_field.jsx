@@ -12,6 +12,7 @@ export default class RichTextBox extends React.Component {
 
   static propTypes = {
     className: PropTypes.string,
+    disabled: PropTypes.bool,
     full_editor: PropTypes.bool,
     onChange: PropTypes.func,
     onRawChange: PropTypes.func,
@@ -29,8 +30,9 @@ export default class RichTextBox extends React.Component {
       <RichTextInput
         className={this.props.className}
         value={this.props.value || ``}
-        onChange={this.handleChange}
+        disabled={this.props.disabled}
         full_editor={this.props.full_editor}
+        onChange={this.handleChange}
       />
     )
   }

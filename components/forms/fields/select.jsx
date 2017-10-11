@@ -43,7 +43,11 @@ export default class SelectField extends React.Component {
 
   render() {
     return (
-      <select {...this.props} onChange={this.handleChange} className="select">
+      <select
+        {...this.props}
+        className="select"
+        onChange={this.handleChange}
+      >
         {this.renderChoices()}
       </select>
     )

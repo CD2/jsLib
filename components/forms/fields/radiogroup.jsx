@@ -27,18 +27,18 @@ export default class SelectField extends React.Component {
   }
 
   render() {
-    const { choices } = this.props
+    const { choices, disabled } = this.props
     return (
       <radiogroup {...this.props} onChange={undefined} className={this.props.className}>
         {choices.map(choice => (
-          <label>
+          <label key={`${choice.text}_${choice.value}`}>
             <input
-              key={`${choice.text}_${choice.value}`}
               name={this.props.name}
               type="radio"
               value={choice.value}
-              onChange={this.handleChange}
               checked={this.props.value === choice.value}
+              disabled={disabled}
+              onChange={this.handleChange}
             />
             <span>{choice.text}</span>
           </label>

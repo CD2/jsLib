@@ -21,6 +21,7 @@ export default class RichTextBox extends React.Component {
 
   static propTypes = {
     className: PropTypes.string,
+    disabled: PropTypes.bool,
     full_editor: PropTypes.bool,
     id: PropTypes.string,
     onChange: PropTypes.func,
@@ -92,6 +93,7 @@ export default class RichTextBox extends React.Component {
         <textarea
           id={this.props.id}
           ref={(elem) => this.target = elem}
+          disabled={this.props.disabled}
         />
       </div>
     )

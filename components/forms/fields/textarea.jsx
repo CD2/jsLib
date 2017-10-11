@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 export default class TextArea extends React.Component {
 
   static propTypes = {
+    disabled: PropTypes.bool,
     initialValue: PropTypes.string,
     name: PropTypes.string,
     onChange: PropTypes.func,
@@ -22,7 +23,16 @@ export default class TextArea extends React.Component {
   }
 
   render() {
-    const { name, value, placeholder, initialValue, onFocus, type, onKeyPress } = this.props
+    const {
+      name,
+      value,
+      placeholder,
+      initialValue,
+      onFocus,
+      type,
+      onKeyPress,
+      disabled
+    } = this.props
 
     return (
       <textarea
@@ -31,6 +41,7 @@ export default class TextArea extends React.Component {
         defaultValue={initialValue}
         value={value || ``}
         placeholder={placeholder}
+        disabled={disabled}
         onChange={this.handleChange}
         onFocus={onFocus}
         onKeyPress={onKeyPress}

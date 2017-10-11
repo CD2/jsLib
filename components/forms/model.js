@@ -47,9 +47,9 @@ export default class Model {
     return Object.keys(errors).length === 0
   }
 
-  save() {
+  save(options = null) {
     if (!this.valid()) return
-    this.onSave(toJS(this.changes))
+    this.onSave(toJS(this.changes), options)
   }
 
   create() {

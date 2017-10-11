@@ -10,6 +10,7 @@ export default class ImageField extends React.Component {
   @observable preview_src = ``
 
   static propTypes = {
+    disabled: PropTypes.bool,
     multiple: PropTypes.bool,
     name: PropTypes.string,
     onChange: PropTypes.func,
@@ -63,6 +64,7 @@ export default class ImageField extends React.Component {
           multiple={multiple}
           onChange={this.handleChange}
           onFocus={onFocus}
+          disabled={this.props.disabled}
         />
       </div>
     )
