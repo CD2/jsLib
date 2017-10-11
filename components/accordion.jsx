@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { observer } from 'mobx-react'
 import { observable, action } from 'mobx'
 
-import { styled, t } from 'utils/theme'
+import { styled } from 'utils/theme'
 import { panel } from 'utils/common_styles'
 import decorate from 'utils/decorate'
 
@@ -27,12 +27,11 @@ export class Accordion extends React.Component {
   render() {
     const { header, onToggle } = this.props
     return (
-      <div
-        className={this.props.className}
-        onClick={() => onToggle ? onToggle() : this.handleToggle()}
-      >
-        {header}
-        <div className={`accordion-content ${this.open ? `accordion-content--open`: ``}`}>
+      <div className={this.props.className}>
+        <div className="accordion__header" onClick={() => onToggle ? onToggle() : this.handleToggle()}>
+          {header}
+        </div>
+        <div className={`accordion__content ${this.open ? `accordion__content--open`: ``}`}>
           {this.open ? this.props.children : null}
         </div>
       </div>
@@ -42,10 +41,11 @@ export class Accordion extends React.Component {
 }
 export default decorate(
   styled`
-  ${panel}
-  margin: 10px 0;
-
-    .accordion-content {
+    .accordion__header {
+      ${panel}
+      margin: 10px 0;
+    }
+    .accordion__content {
       min-height: 0px;
       opacity: 0;
       overflow: hidden;
