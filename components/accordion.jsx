@@ -50,6 +50,7 @@ export default decorate(
       padding: ${t(`gutterWidth`, w=>w/2)}px;
       font-weight: 600;
       cursor: pointer;
+      font-size: 0.8em;
     }
     .accordion__content {
       min-height: 0px;
