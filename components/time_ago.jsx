@@ -42,7 +42,6 @@ export class TimeAgo extends React.Component {
       return MINUTE*15
     } 
     return null
-    
   }
 
   timeout = (firstLoad=false) => {
@@ -62,5 +61,6 @@ export class TimeAgo extends React.Component {
       <span>{this.state.displayTime}</span>
     )
   }
+
 }
 export default TimeAgo

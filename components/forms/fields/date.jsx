@@ -42,6 +42,7 @@ function YearMonthForm({ date, localeUtils, onChange }) {
 }
 
 export default class Example extends React.Component {
+
   state = {
     month: fromMonth,
   };
@@ -73,4 +74,5 @@ export default class Example extends React.Component {
       </div>
     )
   }
+
 }

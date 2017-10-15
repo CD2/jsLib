@@ -17,5 +17,4 @@ t.describe_component(Wrapper, { theme: { siteWidth: 10 }, width: 10, overlay: `t
     c.has_css(`div`).with_attr(`className`, `wrapper__overlay`)
     c.has_css(`div`).with_attr(`className`, `wrapper__inner`)
   })
-
 })

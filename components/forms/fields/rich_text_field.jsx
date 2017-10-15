@@ -36,4 +36,5 @@ export default class RichTextBox extends React.Component {
       />
     )
   }
+
 }

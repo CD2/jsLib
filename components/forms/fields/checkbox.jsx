@@ -32,4 +32,5 @@ export default class Checkbox extends React.Component {
       </label>
     )
   }
+
 }

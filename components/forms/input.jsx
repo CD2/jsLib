@@ -116,8 +116,6 @@ export default class Input extends React.Component {
         <p className="description">{description}</p>
       </div>
     )
-
-
   }
 
 }

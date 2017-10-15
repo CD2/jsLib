@@ -4,7 +4,7 @@ import { styled } from 'utils/theme'
 import { p } from 'utils/theme'
 import { observer } from 'mobx-react'
 import decorate from 'utils/decorate'
-import Image from "./image";
+import Image from "./image"
 
 export class Wrapper extends React.Component {
 
@@ -32,23 +32,25 @@ export class Wrapper extends React.Component {
     const width = this.props.width || this.props.theme.siteWidth
     if(backgroundImage || backgroundImageUid) {
       return(
-        <Image className={className} background defaultSrc={backgroundImage} uid={backgroundImageUid} size={backgroundSize} crop>
-          {overlay && <div className="wrapper__overlay"/>}
+        <Image
+          className={className} background defaultSrc={backgroundImage}
+          uid={backgroundImageUid} size={backgroundSize} crop
+        >
+          {overlay && <div className="wrapper__overlay" />}
           <div className="wrapper__inner" style={{ maxWidth: `${width}px` }}>
             {children}
           </div>
         </Image>
       )
-    } else {
-      return (
-        <div className={className}>
-          {overlay && <div className="wrapper__overlay"/>}
-          <div className="wrapper__inner" style={{ maxWidth: `${width}px` }}>
-            {children}
-          </div>
+    } 
+    return (
+      <div className={className}>
+        {overlay && <div className="wrapper__overlay" />}
+        <div className="wrapper__inner" style={{ maxWidth: `${width}px` }}>
+          {children}
         </div>
-      )
-    }
+      </div>
+    )
   }
 
 }

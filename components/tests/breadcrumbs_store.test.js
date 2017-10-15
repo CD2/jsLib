@@ -11,5 +11,4 @@ t.describe_component(Breadcrumbs, { theme: { secondary: 1 }}, (c) => {
     })
     c.has_css(`GridItem`).with_attr(`align`, `right`).with_attr(`weight`, 1/6)
   })
-
 })

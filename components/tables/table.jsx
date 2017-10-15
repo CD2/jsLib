@@ -121,7 +121,6 @@ export default class Table extends React.Component {
       return (<tr key={key} onClick={redirect(url)}>{data}</tr>)
     } 
     return (<tr key={key} onClick={redirect(url)}>{data}</tr>)
-    
   }
 
   renderRows() {

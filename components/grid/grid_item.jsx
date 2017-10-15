@@ -25,4 +25,5 @@ export default class GridItem extends React.Component {
       </div>
     )
   }
+
 }

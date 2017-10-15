@@ -12,5 +12,4 @@ t.describe_component(Breadcrumbs, { theme: { secondary: `tst` }, breadcrumbs: [{
   })
   c.has_link({ href: `/href1`, text: `test1` })
   c.has_css(`GridItem`).with_attr(`weight`, 1/6).has_css(`a`).with_attr(`onClick`)
-
 })

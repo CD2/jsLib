@@ -38,7 +38,6 @@ export default class List extends React.Component {
         return [<ListSeparator spacing={spacing} key={i} />, child]
       } 
       return child
-      
     })
 
     return (

@@ -47,6 +47,7 @@ export class Breadcrumbs extends React.Component {
       </Wrapper>
     )
   }
+
 }
 export default decorate(
   styled`

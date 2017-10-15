@@ -44,7 +44,6 @@ export default decorate(
       `
     }
     return `background-color: #ddd;`
-
   }
 
 }

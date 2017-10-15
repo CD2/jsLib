@@ -31,6 +31,7 @@ export class FaIcon extends React.Component {
       <i className={this.className} onClick={onClick} />
     )
   }
+
 }
 export default decorate(
   styled`

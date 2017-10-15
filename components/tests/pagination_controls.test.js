@@ -47,5 +47,4 @@ t.describe_component(PaginationControls, { page: 1, per_page: 2, total_records: 
       c.has_css(`div`).with_text(`5`)
     })
   })
-
 })

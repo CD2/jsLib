@@ -1,6 +1,7 @@
 import React from 'react'
 
 export default class ListItem extends React.Component {
+
   render() {
     const { children, className=`` } = this.props
     return (
@@ -9,4 +10,5 @@ export default class ListItem extends React.Component {
       </div>
     )
   }
+
 }

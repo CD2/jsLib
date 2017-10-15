@@ -31,7 +31,6 @@ export default class Grid extends React.Component {
     let gutterWidth
 
     const fitChildren = (qqqq) => {
-
       const totalChildren = toBeFitted.length
 
       if (!qqqq || !gutterWidth || totalWeight===1) gutterWidth = theme.gutterWidth * ((totalChildren - 1) / totalChildren)

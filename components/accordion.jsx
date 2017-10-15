@@ -6,7 +6,7 @@ import { observable, action } from 'mobx'
 import { styled, t } from 'utils/theme'
 import { panel } from 'utils/common_styles'
 import decorate from 'utils/decorate'
-import { dark_panel } from "../../utils/common_styles";
+import { dark_panel } from "../../utils/common_styles"
 
 export class Accordion extends React.Component {
 
@@ -65,7 +65,7 @@ export default decorate(
         top: -10px;
         padding: 16px;
         background: white;
-        border: 1px solid ${t('border')};
+        border: 1px solid ${t(`border`)};
         h3 { display: none; }
       }
     }

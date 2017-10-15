@@ -65,7 +65,6 @@ export default class RichTextBox extends React.Component {
   componentWillUnmount() {
     tinymce.remove(this.editor)
     this.editor = undefined
-
   }
 
   componentWillReceiveProps(props) {
@@ -98,4 +97,5 @@ export default class RichTextBox extends React.Component {
       </div>
     )
   }
+
 }
