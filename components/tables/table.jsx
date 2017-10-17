@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import Wrapper from "components/app/parts/wrapper"
+import Wrapper from "lib/components/wrapper"
 import Pagination from './pagination'
 import { styled, t } from 'utils/theme'
 import { redirect } from 'utils/router'
@@ -119,7 +119,7 @@ export default class Table extends React.Component {
     })
     if (url) {
       return (<tr key={key} onClick={redirect(url)}>{data}</tr>)
-    } 
+    }
     return (<tr key={key} onClick={redirect(url)}>{data}</tr>)
   }
 
