@@ -163,7 +163,7 @@ export default class TagField extends React.Component {
   }
 
   componentWillMount() {
-    if (this.props.value) this.tags.replace(this.props.value)
+    if (this.props.value) this.tags.replace(this.props.value.map(tag => tag.name || tag))
   }
 
   componentDidUpdate() {
@@ -182,7 +182,7 @@ export default class TagField extends React.Component {
     // Sometimes tag is a string, sometimes it's an object
     const tagName = tag.name || tag
     return (
-      <span key={tag} onClick={this.handleTagClick.bind(this, tag)}>
+      <span key={tag} onClick={this.handleTagClick.bind(this, tagName)}>
         {tagName}
         <FaIcon icon="cross" onClick={this.handleRemoveTag.bind(this, tag)} />
       </span>
