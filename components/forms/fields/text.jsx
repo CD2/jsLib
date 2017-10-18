@@ -8,6 +8,7 @@ export default class TextField extends React.Component {
     disabled: PropTypes.bool,
     initialValue: PropTypes.string,
     name: PropTypes.string,
+    onBlur: PropTypes.func,
     onChange: PropTypes.func,
     onFocus: PropTypes.func,
     onKeyPress: PropTypes.func,
@@ -15,6 +16,10 @@ export default class TextField extends React.Component {
     placeholder: PropTypes.string,
     type: PropTypes.string,
     value: PropTypes.string,
+  }
+
+  static defaultProps = {
+    onBlur: () => null,
   }
 
   handleChange = (e) => {
@@ -30,6 +35,7 @@ export default class TextField extends React.Component {
       autoFocus,
       placeholder,
       initialValue,
+      onBlur,
       onFocus,
       type,
       onKeyPress,
@@ -44,6 +50,7 @@ export default class TextField extends React.Component {
         defaultValue={initialValue}
         value={value || ``}
         placeholder={placeholder}
+        onBlur={onBlur}
         onChange={this.handleChange}
         onFocus={onFocus}
         onKeyPress={onKeyPress}
