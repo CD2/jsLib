@@ -179,9 +179,11 @@ export default class TagField extends React.Component {
   //////RENDERING
 
   renderTag(tag) {
+    // Sometimes tag is a string, sometimes it's an object
+    const tagName = tag.name || tag
     return (
       <span key={tag} onClick={this.handleTagClick.bind(this, tag)}>
-        {tag}
+        {tagName}
         <FaIcon icon="cross" onClick={this.handleRemoveTag.bind(this, tag)} />
       </span>
     )
