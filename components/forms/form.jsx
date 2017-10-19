@@ -7,13 +7,13 @@ import { styled } from 'utils/theme'
     margin-top: 4px;
   }
 `
-
 export default class Form extends React.Component {
 
   static propTypes = {
     children: PropTypes.node,
-    onSubmit: PropTypes.func,
+    className: PropTypes.string,
     errors: PropTypes.arrayOf(PropTypes.string),
+    onSubmit: PropTypes.func,
     preventDefault: PropTypes.bool,
   }
 

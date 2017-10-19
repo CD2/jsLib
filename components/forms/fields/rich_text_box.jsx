@@ -33,16 +33,16 @@ export default class RichTextBox extends React.Component {
     onBlur: () => null,
   };
 
-  @observable value = ``
-  @observable setup = false
-
   componentDidMount() {
     let toolbar = `bold italic removeformat | bullist numlist | table | link`
     let height = `150`
     if (this.props.full_editor) {
-      toolbar = `formatselect | bold italic strikethrough forecolor backcolor | link anchor | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat`
+      toolbar = `formatselect | bold italic strikethrough forecolor backcolor
+        | link anchor | alignleft aligncenter alignright alignjustify
+        | numlist bullist outdent indent  | removeformat`
       height = `400`
     }
+
     tinymce.init({
       target: this.target,
       skin_url: `/tinymce/lightgray`,
@@ -67,11 +67,6 @@ export default class RichTextBox extends React.Component {
     })
   }
 
-  componentWillUnmount() {
-    tinymce.remove(this.editor)
-    this.editor = undefined
-  }
-
   componentWillReceiveProps(props) {
     if (this.editor && props.value !== this.value) {
       this.value = props.value
@@ -84,6 +79,14 @@ export default class RichTextBox extends React.Component {
   shouldComponentUpdate() {
     return false
   }
+
+  componentWillUnmount() {
+    tinymce.remove(this.editor)
+    this.editor = undefined
+  }
+
+  @observable value = ``
+  @observable setup = false
 
   handleChange = (value) => {
     const { onChange } = this.props

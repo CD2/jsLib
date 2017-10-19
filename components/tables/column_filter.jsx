@@ -17,6 +17,7 @@ const types = {
 export default class ColumnFilter extends React.Component {
 
   static propTypes = {
+    className: PropTypes.string,
     type: PropTypes.oneOf([`search`])
   }
 

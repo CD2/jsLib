@@ -7,7 +7,9 @@ import { apiRoute } from 'utils/api_http'
 export class BackgroundImage extends React.Component {
 
   static propTypes = {
+    children: PropTypes.node,
     circular: PropTypes.bool,
+    className: PropTypes.string,
     contain: PropTypes.bool,
     default_src: PropTypes.string,
     height: PropTypes.string,

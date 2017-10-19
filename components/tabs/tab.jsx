@@ -4,12 +4,12 @@ import PropTypes from 'prop-types'
 export default class Tab extends React.Component {
 
   static propTypes = {
-    heading: PropTypes.string.isRequired,
     children: PropTypes.node,
-
+    heading: PropTypes.string.isRequired,
     //automatic props
-    renderHead: PropTypes.bool,
+    name: PropTypes.string,
     onTabHeadClick: PropTypes.func,
+    renderHead: PropTypes.bool,
     selected: PropTypes.bool,
     tabKey: PropTypes.any,
   }
@@ -26,7 +26,7 @@ export default class Tab extends React.Component {
   renderHead() {
     const { heading, selected, name } = this.props
     const className = selected === name ? `selected` : ``
-    return <div onClick={this.handleTabHeadClick} className={className}>{heading}</div>
+    return <div className={className} onClick={this.handleTabHeadClick}>{heading}</div>
   }
 
   render() {

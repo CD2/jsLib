@@ -1,13 +1,15 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import ColumnFilter from './column_filter'
 import FaIcon from 'lib/components/fa_icon'
-
-import Img from "lib/components/img"
 
 export default class TableHeading extends React.Component {
 
   static propTypes = {
-
+    className: PropTypes.string,
+    filter: PropTypes.object,
+    heading: PropTypes.node,
+    sort: PropTypes.string,
   }
 
   state = {

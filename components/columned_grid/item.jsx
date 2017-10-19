@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { styled, p } from 'utils/theme'
 
 @styled`
@@ -11,6 +12,12 @@ import { styled, p } from 'utils/theme'
   }
 `
 export default class GridItem extends React.Component {
+
+  static propTypes = {
+    children: PropTypes.node,
+    className: PropTypes.string,
+    onClick: PropTypes.func,
+  }
 
   render() {
     const { className, children, onClick } = this.props

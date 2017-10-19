@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { styled, t } from 'utils/theme'
 import { panel } from 'utils/common_styles'
+
 @styled`
   position: relative;
   text-align: right;
@@ -30,6 +31,7 @@ import { panel } from 'utils/common_styles'
 export default class PasswordWithHelpField extends React.Component {
 
   static propTypes = {
+    className: PropTypes.string,
     description: PropTypes.string,
     initialValue: PropTypes.string,
     label: PropTypes.oneOfType([
@@ -37,6 +39,7 @@ export default class PasswordWithHelpField extends React.Component {
       PropTypes.bool,
     ]),
     name: PropTypes.string.isRequired,
+    onChange: PropTypes.func,
     placeholder: PropTypes.string,
     type: PropTypes.string,
   }
@@ -117,30 +120,34 @@ export default class PasswordWithHelpField extends React.Component {
 
   getErrorMessages() {
     const display_name = `Password`
-    return this.getErrors().map(error => {
+    return this.getErrors().map((error, index) => {
       return (
-        <div className="field__error-message"> {display_name} {error}</div>
+        <div key={index} className="field__error-message"> {display_name} {error}</div>
       )
     })
   }
 
   getConfirmationErrorMessages() {
-    return this.getConfirmationErrors().map(error => {
+    return this.getConfirmationErrors().map((error, index) => {
       return (
-        <div className="field__error-message">Password Confirmation {error}</div>
+        <div key={index} className="field__error-message">Password Confirmation {error}</div>
       )
     })
   }
 
   getFieldClassName() {
     let className = `field ${this.props.className}`
+
     if (this.hasErrors()) className += ` field__with-errors`
+
     return className
   }
 
   getConfirmationFieldClassName() {
     let className = `field--nested`
+
     if (this.hasConfirmationErrors()) className += ` field__with-errors`
+
     return className
   }
 

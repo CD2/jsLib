@@ -12,13 +12,13 @@ export class Wrapper extends React.Component {
     background: PropTypes.string,
     backgroundImage: PropTypes.string,
     backgroundImageUid: PropTypes.string,
+    backgroundSize: PropTypes.string,
     children: PropTypes.node,
     className: PropTypes.string,
     gutter: PropTypes.number,
     innerBackground: PropTypes.string,
     overlay: PropTypes.string,
     spacing: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    backgroundSize: PropTypes.string,
     theme: PropTypes.shape({
       siteWidth: PropTypes.any
     }),
@@ -28,13 +28,20 @@ export class Wrapper extends React.Component {
   }
 
   render() {
-    const { className, children, overlay, backgroundImage, backgroundImageUid, backgroundSize } = this.props
+    const {
+      className, children, overlay, backgroundImage,
+      backgroundImageUid, backgroundSize
+    } = this.props
     const width = this.props.width || this.props.theme.siteWidth
     if(backgroundImage || backgroundImageUid) {
       return(
         <Image
-          className={className} background defaultSrc={backgroundImage}
-          uid={backgroundImageUid} size={backgroundSize} crop
+          className={className}
+          defaultSrc={backgroundImage}
+          uid={backgroundImageUid}
+          size={backgroundSize}
+          crop
+          background
         >
           {overlay && <div className="wrapper__overlay" />}
           <div className="wrapper__inner" style={{ maxWidth: `${width}px` }}>
@@ -42,7 +49,7 @@ export class Wrapper extends React.Component {
           </div>
         </Image>
       )
-    } 
+    }
     return (
       <div className={className}>
         {overlay && <div className="wrapper__overlay" />}
@@ -78,7 +85,8 @@ export default decorate(
       ${({ innerBackground: bg }) => bg ? `background-color: ${bg};` : ``};
       margin: 0 auto;
       ${({ spacing, theme, gutter }) => {
-    return `padding: ${(theme.spacing[spacing] || spacing || theme.spacing.small)}px ${gutter || theme.gutterWidth}px;`
+    return `padding: ${(theme.spacing[spacing]
+        || spacing || theme.spacing.small)}px ${gutter || theme.gutterWidth}px;`
   }
 }
   `,

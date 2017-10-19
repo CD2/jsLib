@@ -4,11 +4,11 @@ import PropTypes from 'prop-types'
 export default class Pagination extends React.Component {
 
   static propTypes = {
-    page: PropTypes.number.isRequired,
-    per_page: PropTypes.number.isRequired,
-    page_button_limit: PropTypes.number,
-    total_items: PropTypes.number.isRequired,
     onPageChange: PropTypes.func.isRequired,
+    page: PropTypes.number.isRequired,
+    page_button_limit: PropTypes.number,
+    per_page: PropTypes.number.isRequired,
+    total_items: PropTypes.number.isRequired,
   }
 
   static defaultProps = {

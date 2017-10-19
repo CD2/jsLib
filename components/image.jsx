@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { buildUrl } from 'utils/api_http'
 import invariant from 'invariant'
-import { styled, p } from 'utils/theme'
+import { styled } from 'utils/theme'
 import decorate from 'utils/decorate'
 
 export class Image extends React.Component {
@@ -11,13 +11,14 @@ export class Image extends React.Component {
     alt: PropTypes.string,
     background: PropTypes.bool,
     children: PropTypes.node,
+    className: PropTypes.string,
     crop: PropTypes.bool,
     defaultSrc: PropTypes.string,
     height: PropTypes.number,
     onClick: PropTypes.func,
+    size: PropTypes.string,
     uid: PropTypes.string,
     width: PropTypes.number,
-    size: PropTypes.string,
   }
 
   static defaultProps = {
@@ -46,9 +47,9 @@ export class Image extends React.Component {
       return (
         <div
           style={{ backgroundImage: `url(${url})` }}
-          onClick={this.props.onClick}
           children={children}
           className={this.props.className}
+          onClick={this.props.onClick}
         />
       )
     }
@@ -57,8 +58,10 @@ export class Image extends React.Component {
 
     return (
       <img
-        alt={alt} onClick={this.props.onClick} src={url}
+        alt={alt}
+        src={url}
         className={`image ${this.props.className}`}
+        onClick={this.props.onClick}
       />
     )
   }

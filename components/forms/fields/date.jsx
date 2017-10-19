@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import DayPicker from 'react-day-picker'
 
 import 'react-day-picker/lib/style.css'
@@ -43,26 +44,33 @@ function YearMonthForm({ date, localeUtils, onChange }) {
 
 export default class Example extends React.Component {
 
+  static propTypes = {
+    disabled: PropTypes.bool,
+    name: PropTypes.string,
+    onChange: PropTypes.func,
+    value: PropTypes.string,
+  }
+
   state = {
     month: fromMonth,
   };
+
   handleYearMonthChange = month => {
     this.setState({ month })
   };
+
   handleChange = (day) => {
     const { onChange, name } = this.props
     if (onChange) onChange({ name, value: day })
   }
+
   render() {
     return (
       <div className="YearNavigation">
         {JSON.stringify(this.props.value)}
         <DayPicker
-          enableOutsideDays
           todayButton="Go to Today"
-          onDayClick={this.handleChange}
           month={this.state.month}
-          onChange={this.handleChange}
           selectedDays={new Date(this.props.value)}
           fromMonth={fromMonth}
           toMonth={toMonth}
@@ -70,6 +78,9 @@ export default class Example extends React.Component {
             <YearMonthForm onChange={this.handleYearMonthChange} />
           }
           disabled={this.props.disabled}
+          enableOutsideDays
+          onDayClick={this.handleChange}
+          onChange={this.handleChange}
         />
       </div>
     )

@@ -50,11 +50,12 @@ export default class TextField extends React.Component {
         defaultValue={initialValue}
         value={value || ``}
         placeholder={placeholder}
+        disabled={disabled}
         onBlur={onBlur}
         onChange={this.handleChange}
         onFocus={onFocus}
         onKeyPress={onKeyPress}
-        disabled={disabled}
+
       />
     )
   }

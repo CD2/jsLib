@@ -14,6 +14,8 @@ import { styled } from 'utils/theme'
 export default class Checkbox extends React.Component {
 
   static propTypes = {
+    className: PropTypes.string,
+    labelText: PropTypes.string,
     onChange: PropTypes.func,
     onRawChange: PropTypes.func,
   }

@@ -6,6 +6,7 @@ import decorate from 'utils/decorate'
 export class PaginationControls extends React.Component {
 
   static propTypes = {
+    className: PropTypes.string,
     onPageChange: PropTypes.func.isRequired,
     page: PropTypes.number.isRequired,
     per_page: PropTypes.number.isRequired,
@@ -61,7 +62,15 @@ export class PaginationControls extends React.Component {
       if (i === this.props.page) {
         page_numbers.push(<div className={`pagination__button current_page`}>{i}</div>)
       } else {
-        page_numbers.push(<div className={`pagination__button`} key={i} onClick={() => this.changePage(i)} >{i}</div>)
+        page_numbers.push(
+          <div
+            className={`pagination__button`}
+            key={i}
+            onClick={() => this.changePage(i)}
+          >
+            {i}
+          </div>
+        )
       }
     }
     return page_numbers

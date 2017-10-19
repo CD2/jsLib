@@ -2,10 +2,6 @@ import React from 'react'
 
 export default class ColumnFilterSearch extends React.Component {
 
-  static propTypes = {
-
-  }
-
   state = {
     value: ``,
   }
@@ -15,7 +11,7 @@ export default class ColumnFilterSearch extends React.Component {
   }
 
   handleSubmit = (e) => {
-
+    // TODO
   }
 
   handleKeyPress = (e) => {
@@ -25,7 +21,11 @@ export default class ColumnFilterSearch extends React.Component {
   render() {
     return (
       <div>
-        <input onChange={this.handleChange} value={this.state.value} onKeyPress={this.handleKeyPress} />
+        <input
+          value={this.state.value}
+          onKeyPress={this.handleKeyPress}
+          onChange={this.handleChange}
+        />
         <button onClick={this.handleSubmit}>Apply</button>
       </div>
     )

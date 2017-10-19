@@ -22,5 +22,4 @@ export default class PresenceValidator extends BaseValidator {
     return !!value
   }
 
-
 }

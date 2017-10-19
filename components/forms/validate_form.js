@@ -18,6 +18,7 @@ function validateForm(values, validations) {
       if (!validator.validate(value)) addError(fieldname, validator.message())
     })
   })
+  
   return errors
 }
 

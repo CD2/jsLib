@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import { history } from 'utils/router'
 import { Grid, GridItem } from 'lib/components/grid'
@@ -11,6 +12,12 @@ import decorate from 'utils/decorate'
 import FaIcon from 'lib/components/fa_icon'
 
 export class Breadcrumbs extends React.Component {
+  
+  static propTypes = {
+    breadcrumbs: PropTypes.arrayOf(PropTypes.object),
+    className: PropTypes.string,
+    theme: PropTypes.object,
+  }
 
   static defaultProps = {
     breadcrumbs: [],
@@ -19,7 +26,7 @@ export class Breadcrumbs extends React.Component {
   renderBreadcrumb({ name, href }) {
     return (
       <span key={href}>
-        <span> > </span>
+        <span> {`>`} </span>
         <Link className="breadcrumb__link" to={href}>{name}</Link>
       </span>
     )
@@ -28,7 +35,11 @@ export class Breadcrumbs extends React.Component {
   render() {
     if (BreadcrumbStore.breadcrumbs.filter(crumb=>crumb).length === 0) return null
     return(
-      <Wrapper width={1600} className={this.props.className} background={this.props.theme.secondary}>
+      <Wrapper
+        width={1600}
+        className={this.props.className}
+        background={this.props.theme.secondary}
+      >
         <Grid>
           <GridItem weight={5/6}>
             <span>
@@ -39,7 +50,7 @@ export class Breadcrumbs extends React.Component {
             {BreadcrumbStore.breadcrumbs.filter(crumb=>crumb).map(this.renderBreadcrumb)}
           </GridItem>
           <GridItem align="right" weight={1/6}>
-            <a onClick={history.goBack} >Back</a>
+            <a onClick={() => history.goBack()} >Back</a>
           </GridItem>
         </Grid>
       </Wrapper>

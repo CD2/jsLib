@@ -30,24 +30,22 @@ import { styled, t } from 'utils/theme'
 export default class Column extends React.Component {
 
   static propTypes = {
+    className: PropTypes.string,
+    filterable: PropTypes.shape({
+      type: PropTypes.oneOf([`search`, `choice`])
+    }),
     heading: PropTypes.string,
-    value: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.func,
-    ]),
+    renderHeading: PropTypes.bool,
+    row: PropTypes.any,
     sort: PropTypes.shape({
       current: PropTypes.oneOf([`asc`, `desc`]),
       onChange: PropTypes.func,
     }),
-    filterable: PropTypes.shape({
-      type: PropTypes.oneOf([`search`, `choice`])
-    }),
-
-    //internal props
-    renderHeading: PropTypes.bool,
-    row: PropTypes.any,
-
-    sticky: PropTypes.bool
+    sticky: PropTypes.bool,
+    value: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.func,
+    ]),
   }
 
   static defaultProps = {

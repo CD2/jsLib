@@ -13,6 +13,8 @@ export class Breadcrumbs extends React.Component {
 
   static propTypes = {
     breadcrumbs: PropTypes.arrayOf(PropTypes.object),
+    className: PropTypes.string,
+    theme: PropTypes.object,
   }
 
   static defaultProps = {
@@ -22,7 +24,7 @@ export class Breadcrumbs extends React.Component {
   renderBreadcrumb({ name, href }) {
     return (
       <span key={href}>
-        <span> > </span>
+        <span>{`>`}</span>
         <Link className="breadcrumb__link" to={href}>{name}</Link>
       </span>
     )
@@ -30,7 +32,11 @@ export class Breadcrumbs extends React.Component {
 
   render() {
     return(
-      <Wrapper width={1600} className={this.props.className} background={this.props.theme.secondary}>
+      <Wrapper
+        width={1600}
+        className={this.props.className}
+        background={this.props.theme.secondary}
+      >
         <Grid>
           <GridItem weight={5/6}>
             <span>
@@ -41,7 +47,7 @@ export class Breadcrumbs extends React.Component {
             {this.props.breadcrumbs.map(this.renderBreadcrumb)}
           </GridItem>
           <GridItem align="right" weight={1/6}>
-            <a onClick={history.goBack} >Back</a>
+            <a onClick={() => history.goBack()}>Back</a>
           </GridItem>
         </Grid>
       </Wrapper>

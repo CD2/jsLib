@@ -45,6 +45,8 @@ import { redirect } from 'utils/router'
 export default class Table extends React.Component {
 
   static propTypes = {
+    children: PropTypes.node,
+    className: PropTypes.string,
     pagination: PropTypes.oneOfType([
       PropTypes.bool,
       PropTypes.shape({
@@ -127,7 +129,10 @@ export default class Table extends React.Component {
     const rows = this.getPaginatedRows()
     const columns = this.props.children
     const renderer = this.props.renderRow || this.defaultRowRenderer
-    return rows.map(row => renderer(row, columns, { key: this.getRowKey(row), url: this.getRowUrl(row) }))
+
+    return rows.map(row => {
+      return renderer(row, columns, { key: this.getRowKey(row), url: this.getRowUrl(row) })
+    })
   }
 
   renderPagination() {
@@ -138,15 +143,14 @@ export default class Table extends React.Component {
       <Pagination
         per_page={per_page}
         page={page}
-        onPageChange={this.handlePageChange}
         total_items={this.rowCount()}
+        onPageChange={this.handlePageChange}
       />
     )
   }
 
   render() {
     return (
-
       <Wrapper className={this.props.className} wide>
         {this.renderPagination()}
         <div className="table-wrapper">

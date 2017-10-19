@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import ListSeparator from './list_separator'
 import { styled } from 'utils/theme'
 
@@ -21,6 +22,14 @@ import { styled } from 'utils/theme'
 `
 export default class List extends React.Component {
 
+  static propTypes = {
+    children: PropTypes.node,
+    className: PropTypes.string,
+    itemClass: PropTypes.string,
+    separator: PropTypes.bool,
+    spacing: PropTypes.string,
+  }
+
   static defaultProps = {
     spacing: `medium`,
     separator: false,
@@ -33,10 +42,13 @@ export default class List extends React.Component {
       if (!child) return
       let childClass = child.props.className || ``
       childClass += ` ${itemClass}`
-      child = React.cloneElement(child, { key: `child_${i}`, ...child.props, className: childClass })
+      child = React.cloneElement(
+        child,
+        { key: `child_${i}`, ...child.props, className: childClass }
+      )
       if (separator && i!==0) {
         return [<ListSeparator spacing={spacing} key={i} />, child]
-      } 
+      }
       return child
     })
 

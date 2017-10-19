@@ -21,27 +21,15 @@ import { styled, theme } from 'utils/theme'
 @observer
 export default class ImageField extends React.Component {
 
-  @observable preview_src = ``
-
   static propTypes = {
+    className: PropTypes.string,
     disabled: PropTypes.bool,
     multiple: PropTypes.bool,
     name: PropTypes.string,
     onChange: PropTypes.func,
     onFocus: PropTypes.func,
     onRawChange: PropTypes.func,
-  }
-
-  handleChange = (e) => {
-    const { onRawChange, onChange } = this.props
-    if (onRawChange) onRawChange(e)
-    if (onChange) {onChange({
-      name: e.target.name,
-      value: e.target.files[0],
-      filename: e.target.files[0].name,
-      size: e.target.files[`0`].size,
-      type: e.target.files[`0`].type,
-    })}
+    value: PropTypes.string,
   }
 
   componentWillReceiveProps(props) {
@@ -55,13 +43,24 @@ export default class ImageField extends React.Component {
     }
   }
 
+  @observable preview_src = ``
+
+  handleChange = (e) => {
+    const { onRawChange, onChange } = this.props
+    if (onRawChange) onRawChange(e)
+    if (onChange) {onChange({
+      name: e.target.name,
+      value: e.target.files[0],
+      filename: e.target.files[0].name,
+      size: e.target.files[`0`].size,
+      type: e.target.files[`0`].type,
+    })}
+  }
+
   renderPreview() {
-    const { value } = this.props
-    if (value instanceof File) {
-    }
     return (
       <div>
-        <img src={this.preview_src} />
+        <img src={this.preview_src} alt="Upload preview" />
       </div>
     )
   }
@@ -78,9 +77,9 @@ export default class ImageField extends React.Component {
           name={name}
           id={`${name}File`}
           multiple={multiple}
+          disabled={this.props.disabled}
           onChange={this.handleChange}
           onFocus={onFocus}
-          disabled={this.props.disabled}
         />
         <label htmlFor={`${name}File`} className="image-input__label">Choose file</label>
       </div>

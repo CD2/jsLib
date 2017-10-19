@@ -8,6 +8,7 @@ import FaIcon from 'lib/components/fa_icon'
 import { observable, computed, action, reaction } from 'mobx'
 import { observer } from 'mobx-react'
 import { tag, panel } from 'utils/common_styles'
+
 @styled`
   .wrapper {
     z-index: 5000;
@@ -29,6 +30,7 @@ import { tag, panel } from 'utils/common_styles'
 export default class TagField extends React.Component {
 
   static propTypes = {
+    className: PropTypes.string,
     disabled: PropTypes.bool,
     name: PropTypes.string,
     onChange: PropTypes.func,
@@ -40,8 +42,29 @@ export default class TagField extends React.Component {
       PropTypes.func,
       PropTypes.arrayOf(PropTypes.string),
     ]),
+    value: PropTypes.array,
   }
 
+  componentWillMount() {
+    if (this.props.value) this.tags.replace(this.props.value.map(tag => tag.name || tag))
+  }
+
+  componentDidMount() {
+    reaction(
+      () => this.tags.map(tag=>tag),
+      () => this.props.onChange({ name: this.props.name, value: this.tags.toJS() })
+    )
+  }
+
+  componentWillReceiveProps(props) {
+    if (JSON.stringify(props.value) !== JSON.stringify(this.tags)) {
+      if (props.value) this.tags.replace(props.value)
+    }
+  }
+
+  componentDidUpdate() {
+    if (this.input) this.input.focus()
+  }
 
   @observable focussed = false
   @observable tags = []
@@ -50,22 +73,22 @@ export default class TagField extends React.Component {
   @observable suggestions = []
   @observable suggestion_query = ``
 
-  @computed get current_value() { return this.tags[this.current_index] }
-  set current_value(value) { this.tags[this.current_index] = value }
-  @computed get tag_except_current() { return this.tags.filter((_, i)=>i!==this.current_index) }
-  @computed get filtered_suggestions() { return this.suggestions.filter(sug => this.tag_except_current.indexOf(sug) === -1) }
-  @computed get any_popular_suggestions() { return !!this.props.popularSuggestions }
-  @computed get popular_suggestions() { return this.props.popularSuggestions.filter(sug => this.tag_except_current.indexOf(sug) === -1) }
 
+  set current_value(value) { this.tags[this.current_index] = value }
+
+  @computed get current_value() { return this.tags[this.current_index] }
+  @computed get tag_except_current() {
+    return this.tags.filter((_, i)=>i!==this.current_index)
+  }
+  @computed get filtered_suggestions() {
+    return this.suggestions.filter(sug => this.tag_except_current.indexOf(sug) === -1)
+  }
+  @computed get any_popular_suggestions() { return !!this.props.popularSuggestions }
+  @computed get popular_suggestions() {
+    return this.props.popularSuggestions.filter(sug => this.tag_except_current.indexOf(sug) === -1)
+  }
   @computed get suggestions_up_to_date() { return this.current_value === this.suggestion_query }
 
-
-  componentDidMount() {
-    reaction(
-      () => this.tags.map(tag=>tag),
-      () => this.props.onChange({ name: this.props.name, value: this.tags.toJS() })
-    )
-  }
 
   // replaces current editing with suggestion
   @action use_suggestion(suggestion) {
@@ -162,20 +185,6 @@ export default class TagField extends React.Component {
     this.fetchSuggestions()
   }
 
-  componentWillMount() {
-    if (this.props.value) this.tags.replace(this.props.value.map(tag => tag.name || tag))
-  }
-
-  componentDidUpdate() {
-    if (this.input) this.input.focus()
-  }
-
-  componentWillReceiveProps(props) {
-    if (JSON.stringify(props.value) !== JSON.stringify(this.tags)) {
-      if (props.value) this.tags.replace(props.value)
-    }
-  }
-
   //////RENDERING
 
   renderTag(tag) {
@@ -253,8 +262,8 @@ export default class TagField extends React.Component {
   render() {
     return (
       <div className={this.props.className}>
-        {this.focussed && <Overlay onClick={this.handleBlur} clickThrough />}
-        <div onClick={this.handleFocus} className="wrapper">
+        {this.focussed && <Overlay clickThrough onClick={this.handleBlur} />}
+        <div className="wrapper" onClick={this.handleFocus}>
           {this.renderPopularSuggestions}
           <div className="tag-input">
             {this.renderValue()}

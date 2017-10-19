@@ -24,7 +24,11 @@ import { styled, t } from 'utils/theme'
 class ColumnedGrid extends React.Component {
 
   static propTypes = {
-    columns: PropTypes.number.isRequired
+    children: PropTypes.node,
+    className: PropTypes.string,
+    columns: PropTypes.number.isRequired,
+    gutterWidth: PropTypes.number,
+    theme: PropTypes.object,
   }
 
   render() {
@@ -45,7 +49,12 @@ class ColumnedGrid extends React.Component {
     const items = React.Children.map(children, (child, i)=>{
       if (!child) return
 
-      const colSpan = child.props.colSpan ? child.props.colSpan===`fill` ? columns - takenColumns <= 0 ? columns : columns-takenColumns : child.props.colSpan: 1
+      const colSpan = child.props.colSpan
+        ? child.props.colSpan===`fill`
+          ? columns - takenColumns <= 0
+            ? columns : columns-takenColumns
+          : child.props.colSpan
+        : 1
       const childWithWidth = React.cloneElement(child, { ...child.props, width: getWidth(colSpan) })
       let neededGutter = gutter
       takenColumns += colSpan

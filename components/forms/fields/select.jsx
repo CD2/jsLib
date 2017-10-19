@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 
 export default class SelectField extends React.Component {
 
-
   static propTypes = {
     choices: PropTypes.arrayOf(PropTypes.string),
     includeBlank: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
@@ -22,10 +21,12 @@ export default class SelectField extends React.Component {
   renderChoices() {
     const { choices, includeBlank } = this.props
     const choiceHtml = []
+    
     if (includeBlank) {
       const text = typeof includeBlank === `string` ? includeBlank : `--select--`
       choiceHtml.push(<option key="$BLANK$" value="">{text}</option>)
     }
+
     choices.forEach(choice => {
       let text
       let value
@@ -38,6 +39,7 @@ export default class SelectField extends React.Component {
       }
       choiceHtml.push(<option key={value} value={value}>{text}</option>)
     })
+
     return choiceHtml
   }
 

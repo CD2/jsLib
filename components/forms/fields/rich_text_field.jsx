@@ -14,6 +14,7 @@ export default class RichTextBox extends React.Component {
     className: PropTypes.string,
     disabled: PropTypes.bool,
     full_editor: PropTypes.bool,
+    name: PropTypes.string,
     onBlur: PropTypes.func,
     onChange: PropTypes.func,
     onRawChange: PropTypes.func,

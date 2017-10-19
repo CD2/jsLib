@@ -16,8 +16,12 @@ export default class SelectField extends React.Component {
 
   static propTypes = {
     choices: PropTypes.arrayOf(PropTypes.string),
+    className: PropTypes.string,
+    disabled: PropTypes.bool,
+    name: PropTypes.string,
     onChange: PropTypes.func,
     onRawChange: PropTypes.func,
+    value: PropTypes.sting,
   }
 
   handleChange = (e) => {
@@ -29,7 +33,7 @@ export default class SelectField extends React.Component {
   render() {
     const { choices, disabled } = this.props
     return (
-      <radiogroup {...this.props} onChange={undefined} className={this.props.className}>
+      <radiogroup {...this.props} className={this.props.className} onChange={undefined}>
         {choices.map(choice => (
           <label key={`${choice.text}_${choice.value}`}>
             <input

@@ -5,6 +5,7 @@ export default class ColumnFilterSearch extends React.Component {
 
   static propTypes = {
     name: PropTypes.string,
+    onChange: PropTypes.func,
     options: PropTypes.arrayOf(PropTypes.shape({
       label: PropTypes.string,
       value: PropTypes.string,
@@ -17,6 +18,7 @@ export default class ColumnFilterSearch extends React.Component {
 
   handleChange = (e) => {
     const { name, checked } = e.target
+    
     this.setState(prevState => {
       let values = checked
         ? [...prevState.values, name]

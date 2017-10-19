@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { styled, t } from 'utils/theme'
-import load from 'images/load.gif'
+import load from 'images/load'
 
 @styled`
     position: relative;
@@ -42,9 +42,9 @@ import load from 'images/load.gif'
 export default class Submit extends React.Component {
 
   static propTypes = {
-    value: PropTypes.string,
     className: PropTypes.string,
     submitting: PropTypes.bool,
+    value: PropTypes.string,
   }
 
   static defaultProps = {

@@ -8,11 +8,12 @@ export class FaIcon extends React.Component {
   static prefix= `fa`
 
   static propTypes = {
-    icon: PropTypes.string.isRequired,
-    hoverColor: PropTypes.string,
+    className: PropTypes.string,
     color: PropTypes.string,
-    size: PropTypes.number,
+    hoverColor: PropTypes.string,
+    icon: PropTypes.string.isRequired,
     onClick: PropTypes.func,
+    size: PropTypes.number,
   }
 
   get prefix() {

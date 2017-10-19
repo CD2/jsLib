@@ -8,8 +8,9 @@ import decorate from 'utils/decorate'
 export class Modal extends React.Component {
 
   static propTypes = {
-    onClose: PropTypes.func,
     children: PropTypes.node.isRequired,
+    className: PropTypes.string,
+    onClose: PropTypes.func,
   }
 
   handleClose = () => {

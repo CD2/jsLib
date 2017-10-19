@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { styled } from 'utils/theme'
+
 @styled`
   display: inline-block;
   width: ${props =>`calc(${props.weight * 100}% - ${props.gutterWidth}px)`};
@@ -15,6 +16,8 @@ export default class GridItem extends React.Component {
 
   static propTypes = {
     align: PropTypes.string,
+    children: PropTypes.node,
+    className: PropTypes.string,
   }
 
   render() {

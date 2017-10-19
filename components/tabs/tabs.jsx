@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { styled, t } from 'utils/theme'
 
 @styled`
@@ -26,6 +27,8 @@ import { styled, t } from 'utils/theme'
 export default class Tabs extends React.Component {
 
   static propTypes = {
+    children: PropTypes.node,
+    className: PropTypes.string,
   }
 
   state = {

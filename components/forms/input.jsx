@@ -76,9 +76,10 @@ margin-bottom: 10px;
 export default class Input extends React.Component {
 
   static propTypes = {
-    label: PropTypes.string,
+    className: PropTypes.string,
     description: PropTypes.string,
     errors: PropTypes.arrayOf(PropTypes.string),
+    label: PropTypes.string,
     type: PropTypes.string,
   }
 
@@ -89,7 +90,7 @@ export default class Input extends React.Component {
   renderErrors() {
     const { errors } = this.props
     if (errors) {
-      return errors.map(err => <span className="validation-error">{err}</span>)
+      return errors.map((err, index) => <span key={index} className="validation-error">{err}</span>)
     }
   }
 
@@ -108,7 +109,8 @@ export default class Input extends React.Component {
           </label>
         </div>
       )
-    } 
+    }
+
     return (
       <div className={this.props.className}>
         {this.renderErrors()}

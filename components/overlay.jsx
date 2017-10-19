@@ -6,10 +6,10 @@ import decorate from 'utils/decorate'
 export class Overlay extends React.Component {
 
   static propTypes = {
+    className: PropTypes.string,
+    clickThrough: PropTypes.bool.isRequired,
     onClick: PropTypes.func.isRequired,
     visible: PropTypes.bool.isRequired,
-    clickThrough: PropTypes.bool.isRequired,
-    className: PropTypes.string,
   }
 
   static defaultProps = {
