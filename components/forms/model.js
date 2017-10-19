@@ -52,9 +52,9 @@ export default class Model {
     this.onSave(toJS(this.changes), options)
   }
 
-  create() {
+  create(options=null) {
     if (!this.valid()) return
-    this.onCreate(toJS(this.changes))
+    this.onCreate(toJS(this.changes), options)
   }
 
   reset(newValues) {

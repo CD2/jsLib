@@ -1,9 +1,23 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import { observable, action, computed } from 'mobx'
+import { observable, action } from 'mobx'
 import { observer } from 'mobx-react'
+import { styled, theme } from 'utils/theme'
 
+@styled`
+  .image-input__input {
+    display: none;
+  }
+
+  .image-input__label {
+    display: inline-block;
+    border: ${theme.border} 1px solid;
+    background-color: #FFF;
+    border-radius: 4px;
+    padding: 10px;
+  }
+`
 @observer
 export default class ImageField extends React.Component {
 
@@ -56,16 +70,19 @@ export default class ImageField extends React.Component {
     const { name, multiple, onFocus } = this.props
 
     return (
-      <div>
+      <div className={this.props.className}>
         {this.renderPreview()}
         <input
+          className="image-input__input"
           type="file"
           name={name}
+          id={`${name}File`}
           multiple={multiple}
           onChange={this.handleChange}
           onFocus={onFocus}
           disabled={this.props.disabled}
         />
+        <label htmlFor={`${name}File`} className="image-input__label">Choose file</label>
       </div>
     )
   }
