@@ -30,7 +30,7 @@ export class Breadcrumbs extends React.Component {
 
   render() {
     return(
-      <Wrapper width="1600" className={this.props.className} background={this.props.theme.secondary}>
+      <Wrapper width={1600} className={this.props.className} background={this.props.theme.secondary}>
         <Grid>
           <GridItem weight={5/6}>
             <span>
