@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import DayPicker from 'react-day-picker'
-
 import 'react-day-picker/lib/style.css'
 
 const currentYear = new Date().getFullYear()
@@ -9,7 +8,7 @@ const fromMonth = new Date(currentYear, -10)
 const toMonth = new Date(currentYear + 10, 11)
 
 // Component will receive date, locale and localeUtils props
-function YearMonthForm({ date, localeUtils, onChange }) {
+function YearMonthForm({ date, localeUtils, onChange, disabled }) {
   const months = localeUtils.getMonths()
 
   const years = []
@@ -25,7 +24,7 @@ function YearMonthForm({ date, localeUtils, onChange }) {
       <select
         name="month"
         value={date.getMonth()}
-        disabled={this.props.disabled}
+        disabled={disabled}
         onChange={handleChange}
       >
         {months.map((month, i) => <option key={i} value={i}>{month}</option>)}
@@ -33,7 +32,7 @@ function YearMonthForm({ date, localeUtils, onChange }) {
       <select
         name="year"
         value={date.getFullYear()}
-        disabled={this.props.disabled}
+        disabled={disabled}
         onChange={handleChange}
       >
         {years.map((year, i) => <option key={i} value={year}>{year}</option>)}
@@ -75,7 +74,7 @@ export default class Example extends React.Component {
           fromMonth={fromMonth}
           toMonth={toMonth}
           captionElement={
-            <YearMonthForm onChange={this.handleYearMonthChange} />
+            <YearMonthForm onChange={this.handleYearMonthChange} disabled={this.props.disabled}/>
           }
           disabled={this.props.disabled}
           enableOutsideDays
