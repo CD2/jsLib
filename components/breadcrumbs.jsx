@@ -7,7 +7,7 @@ import BreadcrumbStore from 'stores/breadcrumbs'
 import { observer } from 'mobx-react'
 import decorate from 'utils/decorate'
 
-import Wrapper from "./wrapper"
+import Wrapper from './wrapper'
 
 export class Breadcrumbs extends React.Component {
 

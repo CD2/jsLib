@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 
 import { styled } from 'utils/theme'
-import Button from "lib/components/button"
+import Button from 'lib/components/button'
 
 @styled`
 

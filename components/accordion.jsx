@@ -5,7 +5,7 @@ import { observable, action, computed } from 'mobx'
 
 import { styled, t } from 'utils/theme'
 import decorate from 'utils/decorate'
-import { dark_panel } from "../../utils/common_styles"
+import { dark_panel } from '../../utils/common_styles'
 
 export class Accordion extends React.Component {
 
