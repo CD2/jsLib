@@ -1,9 +1,30 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { styled, t } from 'utils/theme'
-import decorate from 'utils/decorate'
 
-export class PaginationControls extends React.Component {
+import { styled, t } from 'utils/theme'
+
+@styled`
+  padding: 10px 10px 0;
+  text-align: center;
+
+  .pagination__button {
+    border-radius: 5px 5px 0 0;
+    font-size: .9rem;
+    font-weight: 600;
+    display: inline-block;
+    opacity: .6;
+    padding: 16px;
+    cursor: pointer;
+  }
+
+  .current_page {
+    opacity: 1;
+    span {
+      border-bottom: 2px solid  ${t(`text`)};
+    }
+  }
+`
+export default class PaginationControls extends React.Component {
 
   static propTypes = {
     className: PropTypes.string,
@@ -31,28 +52,26 @@ export class PaginationControls extends React.Component {
   }
 
   renderLeft() {
-    const  className = `pagination__control`
-    const str = `‹ Left`
+    const  className = `pagination__button`
     if (this.firstPage()) {
       return (
-        <div className={`${className} disabled`}>{str}</div>
+        <div className={`${className} disabled`}>Left</div>
       )
     }
     return (
-      <div className={className} onClick={() => this.changePage(this.props.page - 1)}>{str}</div>
+      <div className={className} onClick={() => this.changePage(this.props.page - 1)}>Left</div>
     )
   }
 
   renderRight() {
-    const  className = `pagination__control`
-    const str = `Right ›`
+    const  className = `pagination__button`
     if (this.lastPage()) {
       return (
-        <div className={`${className} disabled`}>{str}</div>
+        <div className={`${className} disabled`}>Right</div>
       )
     }
     return (
-      <div className={className} onClick={() => this.changePage(this.props.page + 1)}>{str}</div>
+      <div className={className} onClick={() => this.changePage(this.props.page + 1)}>Right</div>
     )
   }
 
@@ -60,15 +79,15 @@ export class PaginationControls extends React.Component {
     const page_numbers = []
     for(let i=1; i<=this.totalPages(); i++) {
       if (i === this.props.page) {
-        page_numbers.push(<div className={`pagination__button current_page`}>{i}</div>)
+        page_numbers.push(
+          <div className="pagination__button current_page" key={i}>
+            <span>{i}</span>
+          </div>
+        )
       } else {
         page_numbers.push(
-          <div
-            className={`pagination__button`}
-            key={i}
-            onClick={() => this.changePage(i)}
-          >
-            {i}
+          <div className="pagination__button" key={i} onClick={() => this.changePage(i)}>
+            <span>{i}</span>
           </div>
         )
       }
@@ -77,8 +96,9 @@ export class PaginationControls extends React.Component {
   }
 
   render() {
+    const { className } = this.props
     return (
-      <div className={this.props.className}>
+      <div className={`${className} pagination`} >
         {this.renderLeft()}
         {this.renderPageNumbers()}
         {this.renderRight()}
@@ -87,29 +107,3 @@ export class PaginationControls extends React.Component {
   }
 
 }
-export default decorate(
-  styled`
-    text-align: center;
-    padding: ${t(`gutterWidth`)}px 0;
-
-    .pagination__control {
-      display: inline-block;
-      color: ${t(`primary`)};
-      font-weight: bold;
-      transition: color ${t(`globalTransitionSpeed`)};
-      margin: 0 9px;
-      &:hover {
-        color: ${t(`primaryLight`)};
-      }
-    }
-    .pagination__button {
-      display: inline-block;
-      margin: 0 6px;
-    }
-    .current_page {
-      font-weight: bold;
-      border-bottom: 2px solid ${t(`primary`)};
-    }
-  `,
-  PaginationControls
-)

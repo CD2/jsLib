@@ -23,7 +23,8 @@ export class Overlay extends React.Component {
     if (onClick) onClick()
     if (clickThrough) {
       e.target.style.pointerEvents = `none`
-      document.elementFromPoint(e.pageX, e.pageY).click()
+      const element = document.elementFromPoint(e.pageX, e.pageY)
+      element && element.click()
       e.target.style.pointerEvents = ``
     }
   }

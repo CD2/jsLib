@@ -1,6 +1,6 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import ListSeparator from './list_separator'
+import PropTypes from 'prop-types'
 import { styled } from 'utils/theme'
 
 @styled`
@@ -13,7 +13,7 @@ import { styled } from 'utils/theme'
 
   }
   > .list_item {
-    ${({ endSpace, spacing, separator, theme }) => {
+    ${({ endSpace, spacing, theme }) => {
   if (endSpace) {
     return `padding-bottom: ${theme.spacing[spacing] || spacing}px`
   }
@@ -23,11 +23,14 @@ import { styled } from 'utils/theme'
 export default class List extends React.Component {
 
   static propTypes = {
-    children: PropTypes.node,
+    children: PropTypes.any,
     className: PropTypes.string,
     itemClass: PropTypes.string,
     separator: PropTypes.bool,
-    spacing: PropTypes.string,
+    spacing: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.number,
+    ]),
   }
 
   static defaultProps = {
@@ -37,24 +40,21 @@ export default class List extends React.Component {
   }
 
   render() {
-    const { className, separator, spacing, itemClass=`` } = this.props
-    const children = React.Children.map(this.props.children, (child, i) => {
+    const { className, children, separator, spacing, itemClass=`` } = this.props
+    const mappedChildren = React.Children.map(children, (child, i) => {
       if (!child) return
       let childClass = child.props.className || ``
       childClass += ` ${itemClass}`
-      child = React.cloneElement(
-        child,
-        { key: `child_${i}`, ...child.props, className: childClass }
-      )
+      child = React.cloneElement(child, { key: `c_${i}`, ...child.props, className: childClass })
       if (separator && i!==0) {
         return [<ListSeparator spacing={spacing} key={i} />, child]
-      }
+      } 
       return child
     })
 
     return (
       <div className={className}>
-        {children}
+        {mappedChildren}
       </div>
     )
   }

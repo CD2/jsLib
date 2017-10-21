@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import dropdown from 'images/dropdown.svg'
 import { styled, t } from 'utils/theme'
 
 const FIELD_TYPES = {
@@ -46,6 +47,7 @@ margin-bottom: 10px;
   }
 
   .select{
+    background-image: url(${dropdown});
     background-size: 10px;
     background-position: 98% 50%;
     background-repeat: no-repeat;
@@ -90,17 +92,21 @@ export default class Input extends React.Component {
   renderErrors() {
     const { errors } = this.props
     if (errors) {
-      return errors.map((err, index) => <span key={index} className="validation-error">{err}</span>)
+      return (
+        errors.map(
+          (err, index) => <span key={`inputError${index}`} className="validation-error">{err}</span>
+        )
+      )
     }
   }
 
   render() {
-    const { label, type, description } = this.props
+    const { className, label, type, description } = this.props
     const Field = this.getType(type)
 
     if (label) {
       return (
-        <div className={this.props.className}>
+        <div className={className}>
           {this.renderErrors()}
           <label>
             {label}
@@ -110,7 +116,6 @@ export default class Input extends React.Component {
         </div>
       )
     }
-
     return (
       <div className={this.props.className}>
         {this.renderErrors()}

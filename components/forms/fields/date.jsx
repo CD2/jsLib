@@ -1,8 +1,10 @@
+/* eslint-disable react/prop-types */
 import React from 'react'
-import PropTypes from 'prop-types'
 import DayPicker from 'react-day-picker'
-
+import { observer } from 'mobx-react'
+import { observable } from 'mobx'
 import 'react-day-picker/lib/style.css'
+import PropTypes from 'prop-types'
 
 const currentYear = new Date().getFullYear()
 const fromMonth = new Date(currentYear, -10)
@@ -16,71 +18,57 @@ function YearMonthForm({ date, localeUtils, onChange }) {
   for (let i = fromMonth.getFullYear(); i <= toMonth.getFullYear(); i += 1)  years.push(i)
 
   const handleChange = function handleChange(e) {
-    const { year, month } = e.target.form
+    const { year, month } = e.target.parentNode.children
     onChange(new Date(year.value, month.value))
   }
 
   return (
-    <form className="DayPicker-Caption">
-      <select
-        name="month"
-        value={date.getMonth()}
-        disabled={this.props.disabled}
-        onChange={handleChange}
-      >
+    <div className="DayPicker-Caption">
+      <select name="month" value={date.getMonth()} onChange={handleChange}>
         {months.map((month, i) => <option key={i} value={i}>{month}</option>)}
       </select>
-      <select
-        name="year"
-        value={date.getFullYear()}
-        disabled={this.props.disabled}
-        onChange={handleChange}
-      >
+      <select name="year" value={date.getFullYear()} onChange={handleChange}>
         {years.map((year, i) => <option key={i} value={year}>{year}</option>)}
       </select>
-    </form>
+    </div>
   )
 }
 
+@observer
 export default class Example extends React.Component {
 
   static propTypes = {
-    disabled: PropTypes.bool,
+    className: PropTypes.string,
     name: PropTypes.string,
     onChange: PropTypes.func,
-    value: PropTypes.string,
+    value: PropTypes.number,
   }
 
-  state = {
-    month: fromMonth,
-  };
+  // noinspection JSAnnotator
+  @observable month: fromMonth
 
   handleYearMonthChange = month => {
-    this.setState({ month })
+    this.month = month
   };
-
   handleChange = (day) => {
     const { onChange, name } = this.props
     if (onChange) onChange({ name, value: day })
   }
-
   render() {
     return (
       <div className="YearNavigation">
-        {JSON.stringify(this.props.value)}
         <DayPicker
           todayButton="Go to Today"
-          month={this.state.month}
+          month={this.month}
           selectedDays={new Date(this.props.value)}
           fromMonth={fromMonth}
           toMonth={toMonth}
           captionElement={
             <YearMonthForm onChange={this.handleYearMonthChange} />
           }
-          disabled={this.props.disabled}
           enableOutsideDays
-          onDayClick={this.handleChange}
           onChange={this.handleChange}
+          onDayClick={this.handleChange}
         />
       </div>
     )

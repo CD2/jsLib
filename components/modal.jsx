@@ -2,8 +2,9 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Overlay from 'lib/components/overlay'
 import { active_card } from 'utils/common_styles'
-import { styled, t } from 'utils/theme'
+import { styled } from 'utils/theme'
 import decorate from 'utils/decorate'
+import windowStore from 'stores/window'
 
 export class Modal extends React.Component {
 
@@ -19,10 +20,11 @@ export class Modal extends React.Component {
   }
 
   render() {
+    const { className, children } = this.props
     return (
-      <div className={this.props.className}>
-        <div className="modal">
-          {this.props.children}
+      <div className={`${className}`}>
+        <div className={`modal ${windowStore.isSmall ? `modal--s` : ``}`}>
+          {children}
         </div>
         <Overlay visible onClick={this.handleClose} />
       </div>
@@ -30,6 +32,7 @@ export class Modal extends React.Component {
   }
 
 }
+
 export default decorate(
   styled`
     position: fixed;
@@ -41,15 +44,20 @@ export default decorate(
     .modal {
       ${active_card};
       z-index: 100000;
-      padding: ${t(`gutterWidth`)}px;
+      padding: ${props => props.theme.gutterWidth.value}px;
       width: 90%;
-      max-width: 600px;
+      max-width: 800px;
       max-height: 600px;
       overflow: auto;
       position: absolute;
       left: 50%;
       top: 50%;
       transform: translateX(-50%) translateY(-50%);
+
+      &--s {
+        max-height: 390px;
+      }
+
     }
   `,
   Modal

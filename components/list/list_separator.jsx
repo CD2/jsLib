@@ -1,6 +1,6 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { styled, t } from 'utils/theme'
+import PropTypes from 'prop-types'
 
 @styled`
   border-bottom: 1px solid ${t(`border`)};

@@ -17,11 +17,10 @@ export default class SelectField extends React.Component {
   static propTypes = {
     choices: PropTypes.arrayOf(PropTypes.string),
     className: PropTypes.string,
-    disabled: PropTypes.bool,
     name: PropTypes.string,
     onChange: PropTypes.func,
     onRawChange: PropTypes.func,
-    value: PropTypes.sting,
+    value: PropTypes.object,
   }
 
   handleChange = (e) => {
@@ -31,17 +30,17 @@ export default class SelectField extends React.Component {
   }
 
   render() {
-    const { choices, disabled } = this.props
+    const { choices, value, className, name } = this.props
     return (
-      <radiogroup {...this.props} className={this.props.className} onChange={undefined}>
-        {choices.map(choice => (
-          <label key={`${choice.text}_${choice.value}`}>
+      <radiogroup {...this.props} className={className} onChange={undefined}>
+        {choices.map((choice, index) => (
+          <label key={choice.value}>
             <input
-              name={this.props.name}
+              key={`${choice.text}_${choice.value}`}
+              name={name}
               type="radio"
               value={choice.value}
-              checked={this.props.value === choice.value}
-              disabled={disabled}
+              checked={value === choice.value}
               onChange={this.handleChange}
             />
             <span>{choice.text}</span>

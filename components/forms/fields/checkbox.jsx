@@ -27,10 +27,11 @@ export default class Checkbox extends React.Component {
   }
 
   render() {
+    const { className, labelText } = this.props
     return (
-      <label className={this.props.className}>
+      <label className={className}>
         <input {...this.props} className="input" onChange={this.handleChange} />
-        <span>{this.props.labelText}</span>
+        <span>{labelText}</span>
       </label>
     )
   }

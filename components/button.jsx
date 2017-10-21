@@ -71,6 +71,14 @@ export default decorate(
         }
       }
 
+      &.feature {
+        background-color: ${t(`secondary`)};
+        padding: 13px 25px 15px;
+        &:hover {
+          color: white;
+        }
+      }
+
       &.small {
         font-size: 0.9rem;
         font-weight: 600;

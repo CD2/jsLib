@@ -4,56 +4,39 @@ import { styled } from 'utils/theme'
 import { p } from 'utils/theme'
 import { observer } from 'mobx-react'
 import decorate from 'utils/decorate'
-import Image from "./image"
 
 export class Wrapper extends React.Component {
 
   static propTypes = {
     background: PropTypes.string,
     backgroundImage: PropTypes.string,
-    backgroundImageUid: PropTypes.string,
-    backgroundSize: PropTypes.string,
-    children: PropTypes.node,
+    children: PropTypes.any,
     className: PropTypes.string,
     gutter: PropTypes.number,
     innerBackground: PropTypes.string,
     overlay: PropTypes.string,
-    spacing: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    theme: PropTypes.shape({
-      siteWidth: PropTypes.any
-    }),
+    spacing: PropTypes.oneOfType([
+      PropTypes.number,
+      PropTypes.string
+    ]),
+    theme: PropTypes.object,
     wide: PropTypes.bool,
-    width: PropTypes.number,
-
+    width: PropTypes.oneOfType([
+      PropTypes.number,
+      PropTypes.string
+    ]),
   }
 
   render() {
-    const {
-      className, children, overlay, backgroundImage,
-      backgroundImageUid, backgroundSize
-    } = this.props
+    const { className, children, overlay } = this.props
     const width = this.props.width || this.props.theme.siteWidth
-    if(backgroundImage || backgroundImageUid) {
-      return(
-        <Image
-          className={className}
-          defaultSrc={backgroundImage}
-          uid={backgroundImageUid}
-          size={backgroundSize}
-          crop
-          background
-        >
-          {overlay && <div className="wrapper__overlay" />}
-          <div className="wrapper__inner" style={{ maxWidth: `${width}px` }}>
-            {children}
-          </div>
-        </Image>
-      )
-    }
     return (
       <div className={className}>
-        {overlay && <div className="wrapper__overlay" />}
-        <div className="wrapper__inner" style={{ maxWidth: `${width}px` }}>
+        { overlay && <div className="wrapper__overlay" /> }
+        <div
+          className="wrapper__inner"
+          style={{ maxWidth: typeof width === `string` ? width : `${width}px` }}
+        >
           {children}
         </div>
       </div>
@@ -74,19 +57,29 @@ export default decorate(
       opacity: 0.8;
     }
 
-    background-color: ${({ background, theme }) => background || theme.background};
+    background-color: ${({ background, theme }) => background || `white`};
+
+    ${({ backgroundImage }) => {
+    if (backgroundImage) {
+      return `
+              background-image: url(${backgroundImage});
+              background-size: cover;
+              background-position: 50%;
+              background-repeat: no-repeat;
+      `
+    }
   }}
 
     position: relative;
     > .wrapper__inner {
       width: 100%;
       position: relative;
-      z-index: 1001;
       ${({ innerBackground: bg }) => bg ? `background-color: ${bg};` : ``};
       margin: 0 auto;
       ${({ spacing, theme, gutter }) => {
-    return `padding: ${(theme.spacing[spacing]
-        || spacing || theme.spacing.small)}px ${gutter || theme.gutterWidth}px;`
+    return `padding: ${
+      (theme.spacing[spacing] || spacing || theme.spacing.small)}px ${gutter || theme.gutterWidth
+    }px;`
   }
 }
   `,

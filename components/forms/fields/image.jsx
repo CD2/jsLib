@@ -3,39 +3,24 @@ import PropTypes from 'prop-types'
 
 import { observable, action } from 'mobx'
 import { observer } from 'mobx-react'
-import { styled, theme } from 'utils/theme'
 
-@styled`
-  .image-input__input {
-    display: none;
-  }
-
-  .image-input__label {
-    display: inline-block;
-    border: ${theme.border} 1px solid;
-    background-color: #FFF;
-    border-radius: 4px;
-    padding: 10px;
-  }
-`
 @observer
 export default class ImageField extends React.Component {
 
   static propTypes = {
-    className: PropTypes.string,
-    disabled: PropTypes.bool,
     multiple: PropTypes.bool,
     name: PropTypes.string,
     onChange: PropTypes.func,
     onFocus: PropTypes.func,
     onRawChange: PropTypes.func,
-    value: PropTypes.string,
+    value: PropTypes.object,
   }
+
 
   componentWillReceiveProps(props) {
     if (!props.value) return
     if (props.value instanceof File) {
-      var reader = new FileReader()
+      let reader = new FileReader()
       reader.onload = action((e) => this.preview_src = e.target.result)
       reader.readAsDataURL(props.value)
     } else {
@@ -58,9 +43,11 @@ export default class ImageField extends React.Component {
   }
 
   renderPreview() {
+    const { value } = this.props
+    if (value instanceof File) return null
     return (
       <div>
-        <img src={this.preview_src} alt="Upload preview" />
+        <img alt="" src={this.preview_src} />
       </div>
     )
   }
@@ -69,19 +56,15 @@ export default class ImageField extends React.Component {
     const { name, multiple, onFocus } = this.props
 
     return (
-      <div className={this.props.className}>
+      <div>
         {this.renderPreview()}
         <input
-          className="image-input__input"
           type="file"
           name={name}
-          id={`${name}File`}
           multiple={multiple}
-          disabled={this.props.disabled}
           onChange={this.handleChange}
           onFocus={onFocus}
         />
-        <label htmlFor={`${name}File`} className="image-input__label">Choose file</label>
       </div>
     )
   }

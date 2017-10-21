@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import moment from 'moment'
 
-export class DateTime extends React.Component {
+export default class DateTime extends React.Component {
 
   static propTypes = {
     date: PropTypes.any,
@@ -15,7 +15,7 @@ export class DateTime extends React.Component {
 
   predefinedFormats = {
     short_date: `DD MMM YYYY`,
-    long_date: `Do M YY`,
+    long_date: `Do MMMM YYYY`,
   }
 
   render() {
@@ -28,7 +28,7 @@ export class DateTime extends React.Component {
   }
 
 }
-export default DateTime
+
 // YEAR, MONTH, DAY
 // YYYY        2014            4 or 2 digit year
 // YY          14              2 digit year
@@ -60,7 +60,7 @@ export default DateTime
 // H HH       0..23       Hours (24 hour time)
 // h hh       1..12       Hours (12 hour time used with a A.)
 // k kk       1..24       Hours (24 hour time from 1 to 24)
-// a A        am pm       Post or ante meridiem (Note the one character a p are also considered valid)
+// a A        am pm       Post or ante meridian
 // m mm       0..59       Minutes
 // s ss       0..59       Seconds
 // S SS SSS   0..999      Fractional seconds

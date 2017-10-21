@@ -7,6 +7,7 @@ import { styled } from 'utils/theme'
     margin-top: 4px;
   }
 `
+
 export default class Form extends React.Component {
 
   static propTypes = {
@@ -38,10 +39,11 @@ export default class Form extends React.Component {
   }
 
   render() {
+    const { className, children } = this.props
     return (
-      <form className={this.props.className} onSubmit={this.handleSubmit}>
+      <form className={className} onSubmit={this.handleSubmit}>
         {this.renderErrors()}
-        {this.props.children}
+        {children}
       </form>
     )
   }

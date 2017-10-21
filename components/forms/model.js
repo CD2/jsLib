@@ -24,12 +24,16 @@ export default class Model {
     return this.changes.has(key) ? this.changes.get(key) : this.values.get(key)
   }
 
-  getAll() {
-    return toJS(this.changes)
-  }
-
   getError(key) {
     return this.errors.get(key)
+  }
+
+  getErrors() {
+    return toJS(this.errors)
+  }
+
+  getChanges() {
+    return toJS(this.changes)
   }
 
   @action set(key, value) {
@@ -44,14 +48,19 @@ export default class Model {
     return Object.keys(errors).length === 0
   }
 
-  save(options = null) {
+  save() {
     if (!this.valid()) return
-    this.onSave(toJS(this.changes), options)
+    return this.onSave(toJS(this.changes))
   }
 
-  create(options=null) {
+  create() {
     if (!this.valid()) return
-    this.onCreate(toJS(this.changes), options)
+    return this.onCreate(toJS(this.changes))
+  }
+
+  perform(action, formatValues=null) {
+    if (!this.valid()) return
+    return this.onPerform(action, toJS(this.changes), formatValues)
   }
 
   reset(newValues) {

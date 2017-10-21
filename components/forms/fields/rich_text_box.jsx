@@ -21,28 +21,21 @@ export default class RichTextBox extends React.Component {
 
   static propTypes = {
     className: PropTypes.string,
-    disabled: PropTypes.bool,
     full_editor: PropTypes.bool,
     id: PropTypes.string,
-    onBlur: PropTypes.func,
     onChange: PropTypes.func,
     value: PropTypes.string,
-  };
-
-  static defaultProps = {
-    onBlur: () => null,
   };
 
   componentDidMount() {
     let toolbar = `bold italic removeformat | bullist numlist | table | link`
     let height = `150`
     if (this.props.full_editor) {
-      toolbar = `formatselect | bold italic strikethrough forecolor backcolor
-        | link anchor | alignleft aligncenter alignright alignjustify
-        | numlist bullist outdent indent  | removeformat`
+      toolbar = `formatselect | bold italic strikethrough forecolor backcolor | link anchor | 
+      alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | 
+      removeformat`
       height = `400`
     }
-
     tinymce.init({
       target: this.target,
       skin_url: `/tinymce/lightgray`,
@@ -70,7 +63,7 @@ export default class RichTextBox extends React.Component {
   componentWillReceiveProps(props) {
     if (this.editor && props.value !== this.value) {
       this.value = props.value
-      var bookmark = this.editor.selection.getBookmark(2, true)
+      let bookmark = this.editor.selection.getBookmark(2, true)
       this.editor.setContent(props.value)
       this.editor.selection.moveToBookmark(bookmark)
     }
@@ -100,8 +93,6 @@ export default class RichTextBox extends React.Component {
         <textarea
           id={this.props.id}
           ref={(elem) => this.target = elem}
-          disabled={this.props.disabled}
-          onBlur={this.props.onBlur}
         />
       </div>
     )

@@ -1,20 +1,19 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
-import { history } from 'utils/router'
-import { Grid, GridItem } from 'lib/components/grid'
+import PropTypes from 'prop-types'
+import Grid from 'lib/components/grid'
 import { styled, t } from 'utils/theme'
-import { small_icon } from 'utils/common_styles'
-import Wrapper from "./wrapper"
+import BreadcrumbStore from 'stores/breadcrumbs'
+import { observer } from 'mobx-react'
 import decorate from 'utils/decorate'
-import FaIcon from 'lib/components/fa_icon'
+
+import Wrapper from "./wrapper"
 
 export class Breadcrumbs extends React.Component {
 
   static propTypes = {
-    breadcrumbs: PropTypes.arrayOf(PropTypes.object),
     className: PropTypes.string,
-    theme: PropTypes.object,
+    theme: PropTypes.object
   }
 
   static defaultProps = {
@@ -24,31 +23,25 @@ export class Breadcrumbs extends React.Component {
   renderBreadcrumb({ name, href }) {
     return (
       <span key={href}>
-        <span>{`>`}</span>
+        <span>{` > `}</span>
         <Link className="breadcrumb__link" to={href}>{name}</Link>
       </span>
     )
   }
 
   render() {
+    if (BreadcrumbStore.breadcrumbs.filter(crumb=>crumb).length === 0) return null
     return(
-      <Wrapper
-        width={1600}
-        className={this.props.className}
-        background={this.props.theme.secondary}
-      >
-        <Grid>
-          <GridItem weight={5/6}>
+      <Wrapper className={this.props.className} background={this.props.theme.secondary}>
+        <Grid columns={6}>
+          <Grid.Item colSpan={5}>
             <span>
               <Link className="breadcrumb__link" to="/">
-                <FaIcon icon="home" />
+                Home
               </Link>
             </span>
-            {this.props.breadcrumbs.map(this.renderBreadcrumb)}
-          </GridItem>
-          <GridItem align="right" weight={1/6}>
-            <a onClick={() => history.goBack()}>Back</a>
-          </GridItem>
+            {BreadcrumbStore.breadcrumbs.filter(crumb=>crumb).map(this.renderBreadcrumb)}
+          </Grid.Item>
         </Grid>
       </Wrapper>
     )
@@ -58,18 +51,22 @@ export class Breadcrumbs extends React.Component {
 export default decorate(
   styled`
     color: ${t(`lightText`)};
-    box-shadow: ${t(`shadow1`)};
+    font-size: 14px;
+    border-bottom: 1px solid ${t(`secondary`)};
+    max-width: ${t(`siteWidth`)}px;
+    margin: 0 auto;
     color: white;
-    font-weight: 600;
     .breadcrumb__link {
       border-bottom: 0;
+      color: inherit;
     }
     img {
-      ${small_icon}
-    }
-    a {
-      color: white;
+      max-width: 18px;
+      opacity: 0.5;
+      position: relative;
+      top: 4px;
     }
   `,
+  observer,
   Breadcrumbs
 )

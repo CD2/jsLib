@@ -1,14 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-
 import { styled } from 'utils/theme'
 import Overlay from 'lib/components/overlay'
 import FaIcon from 'lib/components/fa_icon'
-
 import { observable, computed, action, reaction } from 'mobx'
 import { observer } from 'mobx-react'
 import { tag, panel } from 'utils/common_styles'
-
 @styled`
   .wrapper {
     z-index: 5000;
@@ -31,22 +28,26 @@ export default class TagField extends React.Component {
 
   static propTypes = {
     className: PropTypes.string,
-    disabled: PropTypes.bool,
     name: PropTypes.string,
     onChange: PropTypes.func,
     onFocus: PropTypes.func,
     onRawChange: PropTypes.func,
+    onlyAllowSuggestions: PropTypes.bool,
     placeholder: PropTypes.string,
     popularSuggestions: PropTypes.arrayOf(PropTypes.string),
     suggestions: PropTypes.oneOfType([
       PropTypes.func,
       PropTypes.arrayOf(PropTypes.string),
     ]),
-    value: PropTypes.array,
+    value: PropTypes.string,
+  }
+
+  static defaultProps = {
+    onlyAllowSuggestions: false,
   }
 
   componentWillMount() {
-    if (this.props.value) this.tags.replace(this.props.value.map(tag => tag.name || tag))
+    if (this.props.value) this.tags.replace(this.props.value)
   }
 
   componentDidMount() {
@@ -73,13 +74,9 @@ export default class TagField extends React.Component {
   @observable suggestions = []
   @observable suggestion_query = ``
 
-
-  set current_value(value) { this.tags[this.current_index] = value }
-
   @computed get current_value() { return this.tags[this.current_index] }
-  @computed get tag_except_current() {
-    return this.tags.filter((_, i)=>i!==this.current_index)
-  }
+  set current_value(value) { this.tags[this.current_index] = value }
+  @computed get tag_except_current() { return this.tags.filter((_, i)=>i!==this.current_index) }
   @computed get filtered_suggestions() {
     return this.suggestions.filter(sug => this.tag_except_current.indexOf(sug) === -1)
   }
@@ -87,8 +84,8 @@ export default class TagField extends React.Component {
   @computed get popular_suggestions() {
     return this.props.popularSuggestions.filter(sug => this.tag_except_current.indexOf(sug) === -1)
   }
-  @computed get suggestions_up_to_date() { return this.current_value === this.suggestion_query }
 
+  @computed get suggestions_up_to_date() { return this.current_value === this.suggestion_query }
 
   // replaces current editing with suggestion
   @action use_suggestion(suggestion) {
@@ -158,6 +155,7 @@ export default class TagField extends React.Component {
     case `Enter`:
     case `,`:
       e.preventDefault()
+      if (this.props.onlyAllowSuggestions) return null
       if (this.tag_except_current.indexOf(this.current_value) !== -1) this.current_value = ``
       else {
         if (this.current_index < this.tags.length - 1) { //just move to next one
@@ -185,14 +183,10 @@ export default class TagField extends React.Component {
     this.fetchSuggestions()
   }
 
-  //////RENDERING
-
   renderTag(tag) {
-    // Sometimes tag is a string, sometimes it's an object
-    const tagName = tag.name || tag
     return (
-      <span key={tag} onClick={this.handleTagClick.bind(this, tagName)}>
-        {tagName}
+      <span key={tag} onClick={this.handleTagClick.bind(this, tag)}>
+        {tag}
         <FaIcon icon="cross" onClick={this.handleRemoveTag.bind(this, tag)} />
       </span>
     )
@@ -201,7 +195,6 @@ export default class TagField extends React.Component {
   renderInput(tag=``) {
     return (
       <input
-        disabled={this.props.disabled}
         ref={elem => this.input = elem}
         key="input"
         value={tag}
@@ -260,8 +253,9 @@ export default class TagField extends React.Component {
   }
 
   render() {
+    const { className } = this.props
     return (
-      <div className={this.props.className}>
+      <div className={className}>
         {this.focussed && <Overlay clickThrough onClick={this.handleBlur} />}
         <div className="wrapper" onClick={this.handleFocus}>
           {this.renderPopularSuggestions}

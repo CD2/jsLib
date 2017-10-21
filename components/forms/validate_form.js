@@ -2,6 +2,8 @@ const validators_types = {
   presence: require(`./validators/presence`).default,
   acceptance: require(`./validators/acceptance`).default,
   format: require(`./validators/format`).default,
+  email: require(`./validators/email`).default,
+  password: require(`./validators/password`).default,
 }
 
 function validateForm(values, validations) {
@@ -13,12 +15,12 @@ function validateForm(values, validations) {
     Object.entries(validators).map(([validator_name, options]) => {
       const validator_class = validators_types[validator_name]
       if (!validator_class) throw new Error(`unknown validator ${validator_name}`)
+      if (options === false) return
       if (options === true) options = {}
       const validator = new validator_class(options)
       if (!validator.validate(value)) addError(fieldname, validator.message())
     })
   })
-  
   return errors
 }
 

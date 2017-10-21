@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 export default class ListItem extends React.Component {
 
   static propTypes = {
-    children: PropTypes.node,
+    children: PropTypes.any,
     className: PropTypes.string,
   }
 

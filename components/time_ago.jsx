@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-
+import { observable, action, computed } from 'mobx'
+import { observer } from 'mobx-react'
 import moment from 'moment'
 
 const SECOND = 1000
@@ -8,19 +9,11 @@ const MINUTE = SECOND * 60
 const HOUR = MINUTE * 60
 const DAY = HOUR * 24
 
-export class TimeAgo extends React.Component {
+@observer
+export default class TimeAgo extends React.Component {
 
   static propTypes = {
     time: PropTypes.string.isRequired,
-  }
-
-  constructor(props) {
-    super(props)
-
-    this.state = {
-      time: new Date(props.time).getTime(),
-      displayTime: ``,
-    }
   }
 
   componentDidMount() {
@@ -31,8 +24,13 @@ export class TimeAgo extends React.Component {
     clearTimeout(this.timer)
   }
 
+  @observable displayTime = ``
+  @computed get time() {
+    return new Date(this.props.time).getTime()
+  }
+
   getInterval() {
-    const diff = Date.now() - this.state.time
+    const diff = Date.now() - this.time
 
     if(diff < MINUTE) {
       return SECOND*5
@@ -40,17 +38,14 @@ export class TimeAgo extends React.Component {
       return SECOND*15
     } else if(diff < DAY) {
       return MINUTE*15
-    } 
+    }
     return null
   }
 
-  timeout = (firstLoad=false) => {
+  @action timeout = () => {
     let interval = this.getInterval()
-    const displayTime = moment(new Date(this.props.time)).fromNow()
+    this.displayTime = moment(new Date(this.props.time)).fromNow()
 
-    if(!firstLoad && this.state.displayTime !== displayTime) {
-      this.setState({ displayTime })
-    }
     if(interval) {
       this.timer = setTimeout(this.timeout, interval)
     }
@@ -58,9 +53,8 @@ export class TimeAgo extends React.Component {
 
   render() {
     return (
-      <span>{this.state.displayTime}</span>
+      <span>{this.displayTime}</span>
     )
   }
 
 }
-export default TimeAgo

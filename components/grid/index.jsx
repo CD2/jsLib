@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Item from './item'
-import { styled, t } from 'utils/theme'
+import { styled } from 'utils/theme'
 
 @styled`
   display: flex;
@@ -9,7 +9,7 @@ import { styled, t } from 'utils/theme'
 
   .gutter {
     display: inline-block;
-    min-width: ${props => props.gutterWidth || props.theme.gutterWidth}px;
+    min-width: ${props => props.gutterWidth || props.theme.gutterWidth.value}px;
     vertical-align: top;
     & + .gutter {
       display: none;
@@ -17,26 +17,33 @@ import { styled, t } from 'utils/theme'
   }
 
   .gutter__horizontal {
-    min-height: ${t(`gutterHeight`)}px;
+    min-height: ${props => props.gutterHeight || props.theme.gutterHeight.value}px;
     width: 100%;
   }
 `
-class ColumnedGrid extends React.Component {
+class Grid extends React.Component {
 
   static propTypes = {
-    children: PropTypes.node,
+    children: PropTypes.any,
     className: PropTypes.string,
     columns: PropTypes.number.isRequired,
     gutterWidth: PropTypes.number,
+    noGutters: PropTypes.bool,
     theme: PropTypes.object,
   }
 
+  static defaultProps = {
+    align: `left`,
+    noGutters: false,
+  }
+
   render() {
-    const { columns, children, className } = this.props
+    const { columns, children, className, noGutters } = this.props
     const gutter = <div className="gutter" />
     const gutterHorizontal = <div className="gutter__horizontal" />
 
-    const gutterWidth = this.props.gutterWidth || this.props.theme.gutterWidth
+    let gutterWidth = this.props.gutterWidth || this.props.theme.gutterWidth.value
+    if (noGutters) gutterWidth = 0
 
     const getWidth = (span=1) => {
       const colSpans = `${span/columns*100  }%`
@@ -49,12 +56,13 @@ class ColumnedGrid extends React.Component {
     const items = React.Children.map(children, (child, i)=>{
       if (!child) return
 
-      const colSpan = child.props.colSpan
-        ? child.props.colSpan===`fill`
-          ? columns - takenColumns <= 0
-            ? columns : columns-takenColumns
-          : child.props.colSpan
-        : 1
+      const colSpan = child.props.colSpan ?
+        child.props.colSpan===`fill` ?
+          columns - takenColumns <= 0 ?
+            columns :
+            columns-takenColumns :
+          child.props.colSpan: 1
+
       const childWithWidth = React.cloneElement(child, { ...child.props, width: getWidth(colSpan) })
       let neededGutter = gutter
       takenColumns += colSpan
@@ -64,6 +72,7 @@ class ColumnedGrid extends React.Component {
       }
 
       if (i === 0) return childWithWidth
+      if (noGutters) return childWithWidth
       return [neededGutter, childWithWidth]
     })
 
@@ -76,6 +85,6 @@ class ColumnedGrid extends React.Component {
 
 }
 
-ColumnedGrid.Item = Item
+Grid.Item = Item
 
-export default ColumnedGrid
+export default Grid

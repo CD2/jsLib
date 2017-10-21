@@ -2,7 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { styled, t } from 'utils/theme'
 import { panel } from 'utils/common_styles'
-
+import { observer } from 'mobx-react'
+import { observable } from 'mobx'
 @styled`
   position: relative;
   text-align: right;
@@ -28,6 +29,7 @@ import { panel } from 'utils/common_styles'
     }
   }
 `
+@observer
 export default class PasswordWithHelpField extends React.Component {
 
   static propTypes = {
@@ -50,35 +52,35 @@ export default class PasswordWithHelpField extends React.Component {
     const rand = Math.random()
     this.id = `${rand}_field`
     this.confirmation_id = `${rand}_confirmation_field`
-    this.state = {
-      value: props.initialValue || ``,
-      errors: [],
-      confirmation_value: ``,
-      confirmation_errors: [],
-      helper_errors: false,
-    }
   }
+  @observable value = this.props.initialValue || ``
+  @observable errors = []
+  @observable confirmation_errors = []
+  @observable confirmation_value = ``
+  @observable helper_errors = false
 
   getValue() {
-    return this.state.value
+    return this.value
   }
 
   getConfirmationValue() {
-    return this.state.confirmation_value
+    return this.confirmation_value
   }
 
   updateForm() {
     const name=`password`
-    const value = this.valid() ? this.state.value : ``
+    const value = this.valid() ? this.value : ``
     this.props.onChange({ name, value })
   }
 
   handleChange = (e) => {
-    this.setState({ value: e.target.value }, this.updateForm)
+    this.value =  e.target.value
+    this.updateForm()
   }
 
   handleConfirmationChange = (e) => {
-    this.setState({ confirmation_value: e.target.value }, this.updateForm)
+    this.confirmation_value = e.target.value
+    this.updateForm()
   }
 
   valid() {
@@ -86,28 +88,30 @@ export default class PasswordWithHelpField extends React.Component {
     const confirmation_errors = []
     let helper_errors = false
 
-    if (this.state.value === ``) {
+    if (this.value === ``) {
       errors.push(`cant be blank`)
     }
 
     Object.values(this.helpers).forEach(tester => {
-      if (!tester(this.state.value)) helper_errors = true
+      if (!tester(this.value)) helper_errors = true
     })
 
-    if (this.state.value !== this.state.confirmation_value) {
+    if (this.value !== this.confirmation_value) {
       confirmation_errors.push(`must match`)
     }
 
-    this.setState({ helper_errors, errors, confirmation_errors })
+    this.helper_errors = helper_errors
+    this.errors = errors
+    this.confirmation_errors = confirmation_errors
     return !helper_errors && errors.length === 0 && confirmation_errors.length === 0
   }
 
   getErrors() {
-    return this.state.errors
+    return this.errors
   }
 
   getConfirmationErrors() {
-    return this.state.confirmation_errors
+    return this.confirmation_errors
   }
 
   hasErrors() {
@@ -120,34 +124,30 @@ export default class PasswordWithHelpField extends React.Component {
 
   getErrorMessages() {
     const display_name = `Password`
-    return this.getErrors().map((error, index) => {
+    return this.getErrors().map((error, i) => {
       return (
-        <div key={index} className="field__error-message"> {display_name} {error}</div>
+        <div key={i} className="field__error-message"> {display_name} {error}</div>
       )
     })
   }
 
   getConfirmationErrorMessages() {
-    return this.getConfirmationErrors().map((error, index) => {
+    return this.getConfirmationErrors().map((error, i) => {
       return (
-        <div key={index} className="field__error-message">Password Confirmation {error}</div>
+        <div key={i} className="field__error-message">Password Confirmation {error}</div>
       )
     })
   }
 
   getFieldClassName() {
     let className = `field ${this.props.className}`
-
     if (this.hasErrors()) className += ` field__with-errors`
-
     return className
   }
 
   getConfirmationFieldClassName() {
     let className = `field--nested`
-
     if (this.hasConfirmationErrors()) className += ` field__with-errors`
-
     return className
   }
 
@@ -155,7 +155,7 @@ export default class PasswordWithHelpField extends React.Component {
     let className = ``
     if (tester(this.getValue())) {
       className += `complete`
-    } else if (this.state.helper_errors) {
+    } else if (this.helper_errors) {
       className += `error`
     }
     return (
@@ -178,7 +178,7 @@ export default class PasswordWithHelpField extends React.Component {
     let className = ``
     if (this.getValue() && this.getValue() === this.getConfirmationValue()) {
       className += `complete`
-    } else if (this.state.helper_errors) {
+    } else if (this.helper_errors) {
       className += `error`
     }
 

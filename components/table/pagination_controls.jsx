@@ -1,9 +1,26 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-export default class Pagination extends React.Component {
+
+import { styled } from 'utils/theme'
+import Button from "lib/components/button"
+
+@styled`
+
+  .pagination__button {
+    opacity: .6;
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  .current_page {
+    opacity: 1;
+  }
+`
+export default class PaginationControls extends React.Component {
 
   static propTypes = {
+    className: PropTypes.string,
     onPageChange: PropTypes.func.isRequired,
     page: PropTypes.number.isRequired,
     page_button_limit: PropTypes.number,
@@ -35,17 +52,30 @@ export default class Pagination extends React.Component {
 
   renderLeft() {
     let className = `pagination__button`
-    if (this.firstPage()) className = ` pagination__button--disabled`
+    if (this.firstPage()) className += ` pagination__button--disabled`
+
     return (
-      <div className={className} onClick={() => this.changePage(this.props.page - 1)}>Left</div>
+      <Button
+        buttonStyle="pagination"
+        className={className}
+        onClick={() => this.changePage(this.props.page - 1)}
+      >
+        Left
+      </Button>
     )
   }
 
   renderRight() {
     let className = `pagination__button`
-    if (this.lastPage()) className = ` pagination__button--disabled`
+    if (this.lastPage()) className += ` pagination__button--disabled`
     return (
-      <div className={className} onClick={() => this.changePage(this.props.page + 1)}>Right</div>
+      <Button
+        buttonStyle="pagination"
+        className={className}
+        onClick={() => this.changePage(this.props.page + 1)}
+      >
+        Right
+      </Button>
     )
   }
 
@@ -55,8 +85,24 @@ export default class Pagination extends React.Component {
     const visibility = 2
     const count = this.totalPages()
 
-    const elipsis = (<div>...</div>)
-    const number = (n) => (<div key={n} onClick={() => this.changePage(n)}>{n}</div>)
+    const elipsis = (<div className="pagination__button">...</div>)
+    const number = (n) => (
+      <Button
+        key={n}
+        buttonStyle="pagination"
+        className={`pagination__button ${current === n ? `current_page` : `` }`}
+        onClick={() => this.changePage(n)}
+      >
+        {n}
+      </Button>
+    )
+
+    if (count < 5 + visibility*2) {
+      for(let i = 1; i<=count; i++) {
+        page_numbers.push(number(i))
+      }
+      return page_numbers
+    }
 
     page_numbers.push(number(1))
     const min = Math.max(current - visibility, 2)
@@ -70,9 +116,9 @@ export default class Pagination extends React.Component {
   }
 
   render() {
+    if (this.props.total_items < this.props.per_page) return null
     return (
-      <div className="pagination">
-        {this.props.page}
+      <div className={this.props.className}>
         {this.renderLeft()}
         {this.renderPageNumbers()}
         {this.renderRight()}

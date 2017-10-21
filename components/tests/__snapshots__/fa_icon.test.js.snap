@@ -1,7 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`Component <FaIcon /> renders correctly 1`] = `
-<i
-  className="test fa fa-test_icon"
-/>
-`;
