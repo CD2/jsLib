@@ -1,7 +1,7 @@
-import t from 'utils/test_helper'
-
+import React from 'react'
 import { Breadcrumbs } from '../breadcrumbs'
+import { shallow } from 'enzyme'
+import toJson from 'enzyme-to-json'
 
-t.describe_component(Breadcrumbs, {}, (c) => {
-
-})
+const wrapper = shallow(<Breadcrumbs />)
+it(`snapshot`, ()=>expect(toJson(wrapper)).toMatchSnapshot())
