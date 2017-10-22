@@ -23,9 +23,12 @@ export class SectionIntro extends React.Component {
           heading === 3 ?
             <h3 className="page-intro__heading">{title}</h3> :
             <h1 className="page-intro__heading">{title}</h1>}
-        <div className="intro-text">
-          {children}
-        </div>
+        {
+          children &&
+          <div className="intro-text">
+            {children}
+          </div>
+        }
       </div>
     )
   }
@@ -35,7 +38,11 @@ export class SectionIntro extends React.Component {
 export default decorate(
   styled`
     .modal & { padding-top: 0; }
-    padding-bottom: ${t(`gutterHeight`, t=>t/16)}em;
+    ${({ children, theme }) => {
+      if(children){
+        return `padding-bottom: ${theme.gutterHeight.value / 16}em;`  
+      }
+    }}
     .intro-text {
       ${({ light, theme }) => {
     const color = light ? theme.background : theme.lightText
@@ -44,7 +51,6 @@ export default decorate(
     }
     .page-intro__heading {
       color: ${t(`headingText`)};
-      // margin: 0 0 ${t(`spacing.small`, t=>t/16)}em;
       margin: 0;
       ${windowStore.isSmall ? `font-size: 2em;` : ``};
       ${({ light }) => {
