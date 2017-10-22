@@ -20,7 +20,9 @@ export class SectionIntro extends React.Component {
       <div className={className}>
         {heading === 2 ?
           <h2 className="page-intro__heading">{title}</h2> :
-          <h1 className="page-intro__heading">{title}</h1>}
+          heading === 3 ?
+            <h3 className="page-intro__heading">{title}</h3> :
+            <h1 className="page-intro__heading">{title}</h1>}
         <div className="intro-text">
           {children}
         </div>
@@ -40,7 +42,7 @@ export default decorate(
     return `color: ${color};`
   }}
     }
-    h1.page-intro__heading, h2.page-intro__heading {
+    .page-intro__heading {
       color: ${t(`headingText`)};
       // margin: 0 0 ${t(`spacing.small`, t=>t/16)}em;
       margin: 0;
@@ -65,7 +67,6 @@ export default decorate(
     p {
       margin: 0;
       max-width: 800px;
-      font-size: 1.125em;
     }
     input {
       margin-top: ${t(`spacing.medium`, t=>t/16)}em;
