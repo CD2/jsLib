@@ -136,6 +136,13 @@ export default decorate(
           color: white;
         }
       }
+      &.teaser {
+        background-color: ${t(`primary`)};
+        margin-top: 16px;
+        &:hover {
+          color: white;
+        }
+      }
 
     }
     + .btn {
