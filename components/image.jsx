@@ -72,11 +72,12 @@ export default decorate(
     background-size: cover;
     background-position: 50%;
     background-repeat: no-repeat;
+    
     ${({ height }) => {
-    if(height) {
-      return `height: ${height}px;`
-    }
-  }}
+      if(height) {
+        return `height: ${height}px;`
+      }
+    }}
   `,
   Image
 )
