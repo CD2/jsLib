@@ -103,6 +103,10 @@ export default class Input extends React.Component {
   render() {
     const { className, label, type, description } = this.props
     const Field = this.getType(type)
+    const props = { ...this.props }
+    delete props.errors
+    delete props.labelText
+    delete props.theme
 
     if (label) {
       return (
@@ -110,7 +114,7 @@ export default class Input extends React.Component {
           {this.renderErrors()}
           <label>
             {label}
-            <Field {...this.props} className="field" />
+            <Field {...props} className="field" />
             <p className="description">{description}</p>
           </label>
         </div>
@@ -119,7 +123,7 @@ export default class Input extends React.Component {
     return (
       <div className={this.props.className}>
         {this.renderErrors()}
-        <Field {...this.props} className="field" />
+        <Field {...props} className="field" />
         <p className="description">{description}</p>
       </div>
     )

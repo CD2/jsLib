@@ -8,7 +8,7 @@ export default class Tab extends React.Component {
     heading: PropTypes.string.isRequired,
     onTabHeadClick: PropTypes.func,
     renderHead: PropTypes.bool,
-    selected: PropTypes.bool,
+    selected: PropTypes.any,
     tabKey: PropTypes.any,
   }
 

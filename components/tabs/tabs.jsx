@@ -29,7 +29,7 @@ import { observable } from 'mobx'
 export default class Tabs extends React.Component {
 
   static propTypes = {
-    children: PropTypes.object,
+    children: PropTypes.any,
     className: PropTypes.string,
     current: PropTypes.string,
     onChange: PropTypes.func,
