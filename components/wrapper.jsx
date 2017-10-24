@@ -98,7 +98,7 @@ export default decorate(
     if(!noGutters) {
       return `padding: ${
         (theme.spacing[spacing] || spacing || theme.spacing.small)}px ${gutter || theme.gutterWidth
-        }px;`
+      }px;`
     }
   }
 }
