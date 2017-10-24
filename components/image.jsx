@@ -76,7 +76,8 @@ export default decorate(
     
     ${({ circular }) => {
       if(circular) {
-        return `border-radius: 50%;`
+        return `border-radius: 50%;
+        `
       }
     }}
     ${({ height }) => {

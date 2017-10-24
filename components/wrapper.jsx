@@ -4,12 +4,14 @@ import { styled } from 'utils/theme'
 import { p } from 'utils/theme'
 import { observer } from 'mobx-react'
 import decorate from 'utils/decorate'
+import Image from "./image"
 
 export class Wrapper extends React.Component {
 
   static propTypes = {
     background: PropTypes.string,
     backgroundImage: PropTypes.string,
+    backgroundImageUid: PropTypes.string,
     children: PropTypes.any,
     className: PropTypes.string,
     gutter: PropTypes.number,
@@ -28,18 +30,33 @@ export class Wrapper extends React.Component {
     ]),
   }
 
-  render() {
-    const { className, children, overlay } = this.props
+  renderContent(){
+    const { children } = this.props
     const width = this.props.width || this.props.theme.siteWidth
+    return (
+      <div
+        className="wrapper__inner"
+        style={{ maxWidth: typeof width === `string` ? width : `${width}px` }}
+      >
+        {children}
+      </div>
+    )
+  }
+
+  render() {
+    const { className, overlay, backgroundImageUid } = this.props
+    if(backgroundImageUid){
+      return(
+        <Image className={className} uid={backgroundImageUid} background>
+          { overlay && <div className="wrapper__overlay" /> }
+          { this.renderContent() }
+        </Image>
+      )
+    }
     return (
       <div className={className}>
         { overlay && <div className="wrapper__overlay" /> }
-        <div
-          className="wrapper__inner"
-          style={{ maxWidth: typeof width === `string` ? width : `${width}px` }}
-        >
-          {children}
-        </div>
+        { this.renderContent() }
       </div>
     )
   }
