@@ -22,6 +22,7 @@ margin-bottom: 10px;
   input[type=text],
   input[type=search],
   input[type=password],
+  input[type=number],
   textarea,
   .select{
     box-sizing: border-box;
