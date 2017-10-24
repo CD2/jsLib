@@ -47,7 +47,10 @@ export default class TagField extends React.Component {
   }
 
   componentWillMount() {
-    if (this.props.value) this.tags.replace(this.props.value)
+    if (this.props.value) {
+      const tags = this.props.value.map(tag => tag.name || tag)
+      this.tags.replace(tags)
+    }
   }
 
   componentDidMount() {
@@ -59,7 +62,10 @@ export default class TagField extends React.Component {
 
   componentWillReceiveProps(props) {
     if (JSON.stringify(props.value) !== JSON.stringify(this.tags)) {
-      if (props.value) this.tags.replace(props.value)
+      if (props.value) {
+        const tags = props.value.map(tag => tag.name || tag)
+        this.tags.replace(tags)
+      }
     }
   }
 
