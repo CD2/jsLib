@@ -60,7 +60,7 @@ export default decorate(
   }}
     }
     .intro-text h3 {
-      margin: 0;
+      margin: 0 0 ${props => props.gutterHeight || props.theme.gutterHeight.value}px;;
       max-width: 800px;
       color: ${t(`lightText`)};
       ${({ light }) => {
@@ -71,8 +71,11 @@ export default decorate(
       font-weight: 500;
     }
     p {
-      margin: 0;
+      margin: 0 0 ${props => props.gutterHeight || props.theme.gutterHeight.value}px;
       max-width: 800px;
+      &:last-child {
+        margin-bottom: 0;
+      }
     }
     input {
       margin-top: ${t(`spacing.medium`, t=>t/16)}em;
