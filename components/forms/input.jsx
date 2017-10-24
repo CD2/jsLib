@@ -45,7 +45,7 @@ margin-bottom: 10px;
       border: 1px solid ${t(`primary`)};
       outline: none;
     }
-    
+
     ${({ compact }) => {
     if (compact) {
       return `
@@ -55,7 +55,7 @@ margin-bottom: 10px;
     }
   }}
   }
-  
+
 
   .select{
     background-image: url(${dropdown});
@@ -116,7 +116,6 @@ export default class Input extends React.Component {
     const Field = this.getType(type)
     const props = { ...this.props }
     delete props.errors
-    delete props.labelText
     delete props.theme
 
     if (label) {
