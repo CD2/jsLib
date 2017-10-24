@@ -44,7 +44,17 @@ margin-bottom: 10px;
       border: 1px solid ${t(`primary`)};
       outline: none;
     }
+    
+    ${({ compact }) => {
+    if (compact) {
+      return `
+        height: 36px;
+        padding: 6px;
+      `
+    }
+  }}
   }
+  
 
   .select{
     background-image: url(${dropdown});
