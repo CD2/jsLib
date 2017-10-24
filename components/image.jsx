@@ -11,6 +11,7 @@ export class Image extends React.Component {
     alt: PropTypes.string,
     background: PropTypes.bool,
     children: PropTypes.node,
+    circular: PropTypes.bool,
     className: PropTypes.string,
     crop: PropTypes.bool,
     defaultSrc: PropTypes.string,
@@ -73,11 +74,16 @@ export default decorate(
     background-position: 50%;
     background-repeat: no-repeat;
     
+    ${({ circular }) => {
+      if(circular) {
+        return `border-radius: 50%;`
+      }
+    }}
     ${({ height }) => {
-    if(height) {
-      return `height: ${height}px;`
-    }
-  }}
+      if(height) {
+        return `height: ${height}px;`
+      }
+    }}
   `,
   Image
 )
