@@ -1,6 +1,6 @@
+
 import React from 'react'
 import PropTypes from 'prop-types'
-
 import { observable, action } from 'mobx'
 import { observer } from 'mobx-react'
 
@@ -44,10 +44,9 @@ export default class ImageField extends React.Component {
 
   renderPreview() {
     const { value } = this.props
-    if (value instanceof File) return null
     return (
       <div>
-        <img alt="" src={this.preview_src} />
+        <img alt="" src={this.preview_src} height={240} />
       </div>
     )
   }
