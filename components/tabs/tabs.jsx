@@ -7,20 +7,19 @@ import { observable } from 'mobx'
 @styled`
   .tab-content {
     padding: 25px;
-    border-top: 5px solid #ddd;
+    border-top: 1px solid #ddd;
   }
   .tab-heads {
     display: flex;
 
     > div {
       padding: ${t(`gutterWidth`, w=>w/2)}px;
-      font-weight: 600;
       cursor: pointer;
-      filter: brightness(0.95);
+      opacity: 0.7;
       &.selected {
-        filter: brightness(1);
-        border-bottom: 5px solid ${t(`primary`)};
-        margin-bottom: -5px;
+        opacity: 1;
+        border-bottom: 3px solid ${t(`primary`)};
+        margin-bottom: -3px;
       }
     }
   }
