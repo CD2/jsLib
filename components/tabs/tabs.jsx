@@ -38,8 +38,9 @@ export default class Tabs extends React.Component {
 
   getSelected() {
     const { current, children } = this.props
-    const selected = current !== undefined ? current : this.selected
 
+    const selected = current !== undefined ? current : this.selected
+    if (!children[0]) return
     return selected !== null ? selected : children[0].key
   }
 
@@ -51,6 +52,7 @@ export default class Tabs extends React.Component {
 
   renderTabHeads() {
     const headings = React.Children.map(this.props.children, child => {
+      if (!child) return
       return React.cloneElement(child, {
         ...child.props,
         tabKey: child.key,
@@ -67,6 +69,7 @@ export default class Tabs extends React.Component {
     const selected = this.getSelected()
     let tab = null
     React.Children.forEach(this.props.children, child => {
+      if (!child) return
       if (tab === null) tab=child //default to first child
       if (child.key === selected) tab=child
     })
