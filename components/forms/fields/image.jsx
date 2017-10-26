@@ -3,6 +3,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { observable, action } from 'mobx'
 import { observer } from 'mobx-react'
+import Image from "lib/components/image"
 
 @observer
 export default class ImageField extends React.Component {
@@ -44,11 +45,8 @@ export default class ImageField extends React.Component {
 
   renderPreview() {
     const { value } = this.props
-    return (
-      <div>
-        <img alt="" src={this.preview_src} height={240} />
-      </div>
-    )
+    if(this.preview_src) return <img alt="" src={this.preview_src} height={240} />
+    return <Image size={'150x150'} uid={value.image_uid} />
   }
 
   render() {
@@ -56,7 +54,9 @@ export default class ImageField extends React.Component {
 
     return (
       <div>
-        {this.renderPreview()}
+        <div>
+          {this.renderPreview()}
+        </div>
         <input
           type="file"
           name={name}
