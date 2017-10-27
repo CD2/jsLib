@@ -44,7 +44,7 @@ export default decorate(
     }
   }}
     .intro-text {
-      ${({ light, theme }) => {
+  ${({ light, theme }) => {
     const color = light ? theme.background : theme.lightText
     return `color: ${color};`
   }}
@@ -52,8 +52,8 @@ export default decorate(
     .page-intro__heading {
       color: ${t(`headingText`)};
       margin: 0;
-      ${windowStore.isSmall ? `font-size: 2em;` : ``};
-      ${({ light }) => {
+  ${windowStore.isSmall ? `font-size: 2em;` : ``};
+  ${({ light }) => {
     if(light) {
       return `color: white;`
     }
@@ -63,7 +63,7 @@ export default decorate(
       margin: 0 0 ${props => props.gutterHeight || props.theme.gutterHeight.value}px;;
       max-width: 800px;
       color: ${t(`lightText`)};
-      ${({ light }) => {
+  ${({ light }) => {
     if (light) {
       return `color: white;`
     }

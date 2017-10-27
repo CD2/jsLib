@@ -92,9 +92,9 @@ export default decorate(
     > .wrapper__inner {
       width: 100%;
       position: relative;
-      ${({ innerBackground: bg }) => bg ? `background-color: ${bg};` : ``};
+  ${({ innerBackground: bg }) => bg ? `background-color: ${bg};` : ``};
       margin: 0 auto;
-      ${({ spacing, theme, noGutters, gutter }) => {
+  ${({ spacing, theme, noGutters, gutter }) => {
     if(!noGutters) {
       return `padding: ${
         (theme.spacing[spacing] || spacing || theme.spacing.small)}px ${gutter || theme.gutterWidth

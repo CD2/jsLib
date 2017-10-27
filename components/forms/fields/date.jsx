@@ -44,7 +44,9 @@ function YearMonthForm({ date, localeUtils, onChange, disabled }) {
 export default class Example extends React.Component {
 
   static propTypes = {
+    date: PropTypes.number,
     disabled: PropTypes.bool,
+    localUtils: PropTypes.object,
     name: PropTypes.string,
     onChange: PropTypes.func,
     value: PropTypes.string,
@@ -74,7 +76,7 @@ export default class Example extends React.Component {
           fromMonth={fromMonth}
           toMonth={toMonth}
           captionElement={
-            <YearMonthForm onChange={this.handleYearMonthChange} disabled={this.props.disabled} />
+            <YearMonthForm  disabled={this.props.disabled} onChange={this.handleYearMonthChange}/>
           }
           disabled={this.props.disabled}
           enableOutsideDays
