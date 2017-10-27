@@ -75,16 +75,16 @@ export default decorate(
     background-repeat: no-repeat;
     
     ${({ circular }) => {
-      if(circular) {
-        return `border-radius: 50%;
-        `
-      }
-    }}
+    if(circular) {
+      return `border-radius: 50%;
+      `
+    }
+  }}
     ${({ height }) => {
-      if(height) {
-        return `height: ${height}px;`
-      }
-    }}
+    if(height) {
+      return `height: ${height}px;`
+    }
+  }}
   `,
   Image
 )

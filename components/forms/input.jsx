@@ -47,13 +47,13 @@ margin-bottom: 10px;
     }
 
     ${({ compact }) => {
-    if (compact) {
-      return `
+  if (compact) {
+    return `
         height: 36px;
         padding: 6px;
-      `
-    }
-  }}
+    `
+  }
+}}
   }
 
 

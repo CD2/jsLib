@@ -46,7 +46,7 @@ export default class ImageField extends React.Component {
   renderPreview() {
     const { value } = this.props
     if(this.preview_src) return <img alt="" src={this.preview_src} height={240} />
-    if(value) return <Image size={'150x150'} uid={value.image_uid} />
+    if(value) return <Image size={`150x150`} uid={value.image_uid} />
   }
 
   render() {

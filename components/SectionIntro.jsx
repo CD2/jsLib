@@ -39,10 +39,10 @@ export default decorate(
   styled`
     .modal & { padding-top: 0; }
     ${({ children, theme }) => {
-      if(children){
-        return `padding-bottom: ${theme.gutterHeight.value / 16}em;`  
-      }
-    }}
+    if(children){
+      return `padding-bottom: ${theme.gutterHeight.value / 16}em;`  
+    }
+  }}
     .intro-text {
       ${({ light, theme }) => {
     const color = light ? theme.background : theme.lightText
