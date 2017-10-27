@@ -85,6 +85,7 @@ export default decorate(
       return `height: ${height}px;`
     }
   }}
+  
   `,
   Image
 )
