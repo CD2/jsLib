@@ -1,5 +1,5 @@
 # The Lib
-Common components, functions, and utilities used accross cd2 systems.
+Common components, functions, and utilities used across cd2 systems.
 
 ## Components
 

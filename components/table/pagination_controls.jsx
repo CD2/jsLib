@@ -33,7 +33,7 @@ export default class PaginationControls extends React.Component {
   }
 
   changePage(page_number) {
-    if (0 < page_number && page_number <= this.totalPages())
+    if (page_number > 0 && page_number <= this.totalPages())
     {this.props.onPageChange(page_number)}
   }
 
