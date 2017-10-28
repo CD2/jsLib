@@ -2,11 +2,12 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import decorate from 'utils/decorate'
 import windowStore from 'stores/window'
-import { styled, t } from 'utils/theme'
+import { styled, t, p } from 'utils/theme'
 
 export class SectionIntro extends React.Component {
 
   static propTypes = {
+    align: PropTypes.string,
     children: PropTypes.node,
     className: PropTypes.string,
     heading: PropTypes.number,
@@ -37,6 +38,7 @@ export class SectionIntro extends React.Component {
 
 export default decorate(
   styled`
+    text-align: ${p(`align`, `left`)};
     .modal & { padding-top: 0; }
     ${({ children, theme }) => {
     if(children){
@@ -60,8 +62,7 @@ export default decorate(
   }}
     }
     .intro-text h3 {
-      margin: 0 0 ${props => props.gutterHeight || props.theme.gutterHeight.value}px;;
-      max-width: 800px;
+      margin: 10px 0 ${props => props.gutterHeight || props.theme.gutterHeight.value}px;
       color: ${t(`lightText`)};
   ${({ light }) => {
     if (light) {
@@ -71,8 +72,7 @@ export default decorate(
       font-weight: 500;
     }
     p {
-      margin: 0 0 ${props => props.gutterHeight || props.theme.gutterHeight.value}px;
-      max-width: 800px;
+      margin: 10px 0 ${props => props.gutterHeight || props.theme.gutterHeight.value}px;
       &:last-child {
         margin-bottom: 0;
       }
@@ -82,7 +82,7 @@ export default decorate(
     }
     + {
       p, h1, h2, h3, h4 {
-        margin-top: 0;
+        margin-top: 10px;
       }
     }
     .btn {
