@@ -76,7 +76,7 @@ export default class Example extends React.Component {
           fromMonth={fromMonth}
           toMonth={toMonth}
           captionElement={
-            <YearMonthForm  disabled={this.props.disabled} onChange={this.handleYearMonthChange}/>
+            <YearMonthForm  disabled={this.props.disabled} onChange={this.handleYearMonthChange} />
           }
           disabled={this.props.disabled}
           enableOutsideDays

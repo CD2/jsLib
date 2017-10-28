@@ -14,10 +14,10 @@ import { styled } from 'utils/theme'
   }
   > .list_item {
     ${({ endSpace, spacing, theme }) => {
-      if (endSpace) {
-        return `padding-bottom: ${theme.spacing[spacing] || spacing}px`
-      }
-    }}
+  if (endSpace) {
+    return `padding-bottom: ${theme.spacing[spacing] || spacing}px`
+  }
+}}
   }
 `
 export default class List extends React.Component {
