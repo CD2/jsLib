@@ -70,6 +70,13 @@ export default decorate(
           color: white;
         }
       }
+      
+      &.more_link {
+        background-color: ${t(`darkBackground`)};
+        &:hover {
+          color: white;
+        }
+      }
 
       &.feature {
         background-color: ${t(`secondary`)};
