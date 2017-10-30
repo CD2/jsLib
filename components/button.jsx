@@ -109,6 +109,10 @@ export default decorate(
         color: ${t(`white`)};
         border: 2px solid ${t(`white`)};
       }
+      &.dark-solid {
+        border: 2px solid ${t(`white`)};
+        background: white;
+      }
 
       &:hover {
         filter: brightness(1.15);
