@@ -6,7 +6,7 @@ import { observable } from 'mobx'
 
 @styled`
   .tab-content {
-    padding: 25px;
+    padding: 25px 0 0;
     border-top: 1px solid #ddd;
   }
   .tab-heads {
