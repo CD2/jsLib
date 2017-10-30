@@ -5,7 +5,7 @@ import DayPicker from 'react-day-picker'
 import 'react-day-picker/lib/style.css'
 
 const currentYear = new Date().getFullYear()
-const fromMonth = new Date(currentYear, -10)
+const fromMonth = new Date(currentYear, -1200)
 const toMonth = new Date(currentYear + 10, 11)
 
 // Component will receive date, locale and localeUtils props
@@ -47,6 +47,7 @@ export default class Example extends React.Component {
   static propTypes = {
     date: PropTypes.number,
     disabled: PropTypes.bool,
+    fromYear: PropTypes.number,
     localUtils: PropTypes.object,
     name: PropTypes.string,
     onChange: PropTypes.func,
