@@ -71,6 +71,10 @@ export default decorate(
         }
       }
       
+      &.download {
+        font-size: 0.9em;
+      }
+      
       &.more_link {
         background-color: ${t(`darkBackground`)};
         &:hover {
