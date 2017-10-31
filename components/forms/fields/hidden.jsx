@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-export default class TextField extends React.Component {
+export class TextField extends React.Component {
 
   static propTypes = {
     initialValue: PropTypes.string,
@@ -37,3 +37,4 @@ export default class TextField extends React.Component {
   }
 
 }
+export default TextField
