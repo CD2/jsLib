@@ -1,6 +1,6 @@
 import BaseValidator from './base'
 
-export default class PresenceValidator extends BaseValidator {
+export class PresenceValidator extends BaseValidator {
 
   static message = `must be accepted`
 
@@ -16,3 +16,4 @@ export default class PresenceValidator extends BaseValidator {
 
 
 }
+export default PresenceValidator

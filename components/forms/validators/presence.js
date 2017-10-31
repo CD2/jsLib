@@ -1,7 +1,7 @@
 import BaseValidator from './base'
 import { toJS } from 'mobx'
 
-export default class PresenceValidator extends BaseValidator {
+export class PresenceValidator extends BaseValidator {
 
   static message = `is required`
 
@@ -25,3 +25,4 @@ export default class PresenceValidator extends BaseValidator {
 
 
 }
+export default PresenceValidator

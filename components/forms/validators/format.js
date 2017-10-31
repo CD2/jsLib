@@ -1,6 +1,6 @@
 import BaseValidator from './base'
 
-export default class FormatValidator extends BaseValidator {
+export class FormatValidator extends BaseValidator {
 
   defaultOptions() {
     return {
@@ -13,3 +13,4 @@ export default class FormatValidator extends BaseValidator {
   }
 
 }
+export default FormatValidator

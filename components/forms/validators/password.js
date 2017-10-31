@@ -1,6 +1,6 @@
 import BaseValidator from './base'
 
-export default class PasswordValidator extends BaseValidator {
+export class PasswordValidator extends BaseValidator {
 
   static message = `must be at least 8 characters`
 
@@ -9,3 +9,4 @@ export default class PasswordValidator extends BaseValidator {
   }
 
 }
+export default PasswordValidator
