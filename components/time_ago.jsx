@@ -10,7 +10,7 @@ const HOUR = MINUTE * 60
 const DAY = HOUR * 24
 
 @observer
-export default class TimeAgo extends React.Component {
+export class TimeAgo extends React.Component {
 
   static propTypes = {
     time: PropTypes.string.isRequired,
@@ -58,3 +58,4 @@ export default class TimeAgo extends React.Component {
   }
 
 }
+export default TimeAgo

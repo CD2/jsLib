@@ -24,7 +24,7 @@ import { styled, t } from 'utils/theme'
     }
   }
 `
-export default class PaginationControls extends React.Component {
+export class PaginationControls extends React.Component {
 
   static propTypes = {
     className: PropTypes.string,
@@ -107,3 +107,4 @@ export default class PaginationControls extends React.Component {
   }
 
 }
+export default PaginationControls
