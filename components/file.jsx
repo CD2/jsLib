@@ -25,7 +25,7 @@ export class File extends React.Component {
   get url() {
     const { uid } = this.props
     const params = { uid }
-    return buildUrl([`file`], params)
+    return buildUrl([`/file`], params)
   }
 
   render() {

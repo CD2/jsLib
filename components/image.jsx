@@ -33,7 +33,7 @@ export class Image extends React.Component {
     const params = { uid, size }
     if (height && !size) params.size = `${width || height*1.5}x${height}`
     if (crop) params.crop = true
-    return buildUrl([`image`], params)
+    return buildUrl([`/image`], params)
   }
 
   render() {
