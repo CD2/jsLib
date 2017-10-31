@@ -49,7 +49,7 @@ export class Image extends React.Component {
         <div
           style={{ backgroundImage: `url(${url})` }}
           children={children}
-          className={this.props.className}
+          className={`background-image ${this.props.className}`}
           onClick={this.props.onClick}
         />
       )
