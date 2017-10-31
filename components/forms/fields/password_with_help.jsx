@@ -30,7 +30,7 @@ import { observable } from 'mobx'
   }
 `
 @observer
-export default class PasswordWithHelpField extends React.Component {
+export class PasswordWithHelpField extends React.Component {
 
   static propTypes = {
     className: PropTypes.string,
@@ -216,3 +216,4 @@ export default class PasswordWithHelpField extends React.Component {
   }
 
 }
+export default PasswordWithHelpField

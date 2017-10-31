@@ -6,7 +6,7 @@ import { observer } from 'mobx-react'
 import Image from "lib/components/image"
 
 @observer
-export default class ImageField extends React.Component {
+export class ImageField extends React.Component {
 
   static propTypes = {
     multiple: PropTypes.bool,
@@ -69,3 +69,4 @@ export default class ImageField extends React.Component {
   }
 
 }
+export default ImageField
