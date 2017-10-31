@@ -1,29 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-
+import decorate from 'utils/decorate'
 import { styled, t } from 'utils/theme'
 
-@styled`
-  padding: 10px 10px 0;
-  text-align: center;
 
-  .pagination__button {
-    border-radius: 5px 5px 0 0;
-    font-size: .9rem;
-    font-weight: 600;
-    display: inline-block;
-    opacity: .6;
-    padding: 16px;
-    cursor: pointer;
-  }
-
-  .current_page {
-    opacity: 1;
-    span {
-      border-bottom: 2px solid  ${t(`text`)};
-    }
-  }
-`
 export class PaginationControls extends React.Component {
 
   static propTypes = {
@@ -107,4 +87,26 @@ export class PaginationControls extends React.Component {
   }
 
 }
-export default PaginationControls
+export default decorate(
+  styled`
+  padding: 10px 10px 0;
+  text-align: center;
+
+  .pagination__button {
+    border-radius: 5px 5px 0 0;
+    font-size: .9rem;
+    font-weight: 600;
+    display: inline-block;
+    opacity: .6;
+    padding: 16px;
+    cursor: pointer;
+  }
+
+  .current_page {
+    opacity: 1;
+    span {
+      border-bottom: 2px solid  ${t(`text`)};
+    }
+  }
+`,
+PaginationControls)
