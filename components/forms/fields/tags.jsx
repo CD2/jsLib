@@ -24,7 +24,7 @@ import { tag, panel } from 'utils/common_styles'
   }
 `
 @observer
-export default class TagField extends React.Component {
+export class TagField extends React.Component {
 
   static propTypes = {
     className: PropTypes.string,
@@ -275,3 +275,4 @@ export default class TagField extends React.Component {
   }
 
 }
+export default TagField

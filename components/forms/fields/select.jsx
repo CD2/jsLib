@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-export default class SelectField extends React.Component {
+export class SelectField extends React.Component {
 
   static propTypes = {
     choices: PropTypes.arrayOf(PropTypes.object),
@@ -55,3 +55,4 @@ export default class SelectField extends React.Component {
   }
 
 }
+export default SelectField
