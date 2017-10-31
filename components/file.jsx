@@ -4,13 +4,13 @@ import { buildUrl } from 'utils/api_http'
 import { styled } from 'utils/theme'
 import decorate from 'utils/decorate'
 import Button from "./button"
-import FaIcon from "./fa_icon";
+import FaIcon from "./fa_icon"
 
 export class File extends React.Component {
 
   static propTypes = {
-    className: PropTypes.string,
     children: PropTypes.any,
+    className: PropTypes.string,
     defaultSrc: PropTypes.string,
     onClick: PropTypes.func,
     uid: PropTypes.string,
@@ -38,11 +38,11 @@ export class File extends React.Component {
       <Button
         href={url}
         className={`file ${this.props.className}`}
+        target="_blank"
+        buttonStyle="download common"
         onClick={this.props.onClick}
-        target='_blank'
-        buttonStyle='download common'
       >
-        <FaIcon icon='download' size={1.3} />
+        <FaIcon icon="download" size={1.3} />
         { children }
       </Button>
     )
