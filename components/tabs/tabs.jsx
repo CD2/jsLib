@@ -25,7 +25,7 @@ import { observable } from 'mobx'
   }
 `
 @observer
-export default class Tabs extends React.Component {
+export class Tabs extends React.Component {
 
   static propTypes = {
     children: PropTypes.any,
@@ -86,3 +86,4 @@ export default class Tabs extends React.Component {
   }
 
 }
+export default Tabs

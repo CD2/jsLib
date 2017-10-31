@@ -19,7 +19,7 @@ import { observer, inject } from 'mobx-react'
 `
 @inject(`query`)
 @observer
-export default class TableFilter extends React.Component {
+export class TableFilter extends React.Component {
 
   static propTypes = {
     className: PropTypes.string,
@@ -93,3 +93,4 @@ export default class TableFilter extends React.Component {
   }
 
 }
+export default TableFilter
