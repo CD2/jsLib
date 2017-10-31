@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-export default class THead extends React.Component {
+export class THead extends React.Component {
   
   static propTypes = {
     children: PropTypes.node,
@@ -19,3 +19,4 @@ export default class THead extends React.Component {
   }
 
 }
+export default THead

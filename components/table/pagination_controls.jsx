@@ -17,7 +17,7 @@ import Button from 'lib/components/button'
     opacity: 1;
   }
 `
-export default class PaginationControls extends React.Component {
+export class PaginationControls extends React.Component {
 
   static propTypes = {
     className: PropTypes.string,
@@ -133,3 +133,6 @@ export default class PaginationControls extends React.Component {
 // 1  -  3  4  5  6  7  - 70  on 5
 // 1  - 64 65 66 67 68  - 70  on 66
 // 1  - 64 65 66 67 68 69 70  on > 66
+
+export default PaginationControls
+

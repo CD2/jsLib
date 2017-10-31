@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-export default class ListItem extends React.Component {
+export class ListItem extends React.Component {
 
   static propTypes = {
     children: PropTypes.any,
@@ -18,3 +18,4 @@ export default class ListItem extends React.Component {
   }
 
 }
+export default ListItem

@@ -17,7 +17,7 @@ import { styled } from 'utils/theme'
 `
 @inject(`query`)
 @observer
-export default class Th extends React.Component {
+export class Th extends React.Component {
 
   static propTypes = {
     children: PropTypes.node,
@@ -68,3 +68,4 @@ export default class Th extends React.Component {
   }
 
 }
+export default Th
