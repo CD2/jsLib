@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 
-export default class LinkOrDiv extends React.Component {
+export class LinkOrDiv extends React.Component {
 
   static propTypes = {
     noLink: PropTypes.bool
@@ -22,3 +22,4 @@ export default class LinkOrDiv extends React.Component {
   }
 
 }
+export default LinkOrDiv
