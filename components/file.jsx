@@ -36,7 +36,7 @@ export class File extends React.Component {
 
     return (
       <Button
-        href={url}
+        to={url}
         className={`file ${this.props.className}`}
         onClick={this.props.onClick}
         target='_blank'
