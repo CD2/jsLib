@@ -72,7 +72,7 @@ export default decorate(
       font-weight: 500;
     }
     p {
-      margin: 10px 0 ${props => props.gutterHeight || props.theme.gutterHeight.value}px;
+      margin: 10px 0 ${props => props.gutterHeight || props.theme.gutterHeight.value / 2}px;
       &:last-child {
         margin-bottom: 0;
       }
