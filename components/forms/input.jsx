@@ -15,6 +15,7 @@ const FIELD_TYPES = {
   radiogroup: require(`./fields/radiogroup`).default,
   image: require(`./fields/image`).default,
   hidden: require(`./fields/hidden`).default,
+  country: require(`./fields/country`).default,
 }
 
 @styled`
