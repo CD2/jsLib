@@ -47,11 +47,7 @@ exports[`<Wrapper /> snapshot 2`] = `
         "width": "100%",
       }
     }
-  >
-    <div
-      className="unique"
-    />
-  </div>
+  />
 </withTheme(StyledComponent)>
 `;
 
@@ -88,10 +84,6 @@ exports[`<Wrapper /> snapshot 3`] = `
         "width": "100%",
       }
     }
-  >
-    <div
-      className="unique"
-    />
-  </div>
+  />
 </div>
 `;
