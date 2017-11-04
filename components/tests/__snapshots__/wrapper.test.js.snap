@@ -52,7 +52,18 @@ exports[`<Wrapper /> snapshot 3`] = `
   }
 >
   <div
-    className="wrapper__overlay"
+    style={
+      Object {
+        "backgroundAttachment": "fixed",
+        "backgroundColor": "green",
+        "height": "100%",
+        "left": "0",
+        "opacity": "0.8",
+        "position": "absolute",
+        "top": "0",
+        "width": "100%",
+      }
+    }
   />
   <div
     className="wrapper__inner"

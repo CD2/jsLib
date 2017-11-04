@@ -44,13 +44,25 @@ export class Wrapper extends React.Component {
     )
   }
 
-  render() {
-    const { className, overlay, backgroundImageUid, backgroundImage, background } = this.props
+  renderOverlay(){
+    const { overlay } = this.props
 
     const overlayStyle = {
-      position: `absolute`, width: `100%`, height: `100%`, left: `0`, top: `0`,
-      backgroundAttachment: `fixed`, opacity: `0.8`, backgroundColor: overlay || `black`
+      position: `absolute`,
+      width: `100%`,
+      height: `100%`,
+      left: `0`,
+      top: `0`,
+      backgroundAttachment: `fixed`,
+      opacity: `0.8`,
+      backgroundColor: overlay || `black`
     }
+
+    if(overlay) return <div style={overlayStyle} />
+  }
+
+  render() {
+    const { className, backgroundImageUid, backgroundImage, background } = this.props
 
     if(backgroundImageUid || backgroundImage){
       return(
@@ -60,14 +72,14 @@ export class Wrapper extends React.Component {
           defaultSrc={backgroundImage}
           background
         >
-          { overlay && <div style={overlayStyle} /> }
+          { this.renderOverlay() }
           { this.renderContent() }
         </Image>
       )
     }
     return (
       <div className={className} style={{ backgroundColor: background || `white` }}>
-        { overlay && <div style={overlayStyle} /> }
+        { this.renderOverlay() }
         { this.renderContent() }
       </div>
     )
