@@ -73,6 +73,7 @@ export default decorate(
     background-size: cover;
     background-position: 50%;
     background-repeat: no-repeat;
+    position: relative;
 
     ${({ circular }) => {
     if(circular) {

@@ -4,32 +4,30 @@ import { Wrapper } from '../wrapper'
 import { shallow } from 'enzyme'
 import toJson from 'enzyme-to-json'
 
-describe('<Wrapper />', () => {
-
+describe(`<Wrapper />`, () => {
   const wrapper = shallow((
-    <Wrapper theme={{siteWidth: 1}}>
+    <Wrapper theme={{ siteWidth: 1 }}>
       <div className="unique" />
     </Wrapper>
-  ));
+  ))
 
   const wrapperWithBg = shallow((
-    <Wrapper theme={{siteWidth: 1}} backgroundImageUid={'xxx'}>
+    <Wrapper theme={{ siteWidth: 1 }} backgroundImageUid={`xxx`}>
       <div className="unique" />
     </Wrapper>
-  ));
+  ))
 
   const wrapperWithOverlay = shallow((
-    <Wrapper theme={{siteWidth: 1}} overlay={'green'}>
+    <Wrapper theme={{ siteWidth: 1 }} overlay={`green`}>
       <div className="unique" />
     </Wrapper>
-  ));
+  ))
 
   it(`snapshot`, ()=>expect(toJson(wrapper)).toMatchSnapshot())
   it(`snapshot`, ()=>expect(toJson(wrapperWithBg)).toMatchSnapshot())
   it(`snapshot`, ()=>expect(toJson(wrapperWithOverlay)).toMatchSnapshot())
 
-  it('should render children when passed in', () => {
-    expect(wrapper.contains(<div className="unique" />)).toBe(true);
-  });
-
+  it(`should render children when passed in`, () => {
+    expect(wrapper.contains(<div className="unique" />)).toBe(true)
+  })
 })

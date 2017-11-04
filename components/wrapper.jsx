@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { styled } from 'utils/theme'
-import { p } from 'utils/theme'
+import theme from 'styles/theme'
 import { observer } from 'mobx-react'
 import decorate from 'utils/decorate'
 import Image from "./image"
@@ -13,7 +12,6 @@ export class Wrapper extends React.Component {
     backgroundImage: PropTypes.string,
     backgroundImageUid: PropTypes.string,
     children: PropTypes.any,
-    className: PropTypes.string,
     gutter: PropTypes.number,
     innerBackground: PropTypes.string,
     noGutters: PropTypes.bool,
@@ -32,13 +30,21 @@ export class Wrapper extends React.Component {
 
 
   renderContent(){
-    const { children } = this.props
-    const width = this.props.width || this.props.theme.siteWidth
+    const { children, noGutters, spacing } = this.props
+    const width = this.props.width || theme.siteWidth
+    const gutters = noGutters ? 0 : theme.gutterWidth
+    const spacingHeight = spacing ? spacing : theme.gutterHeight
+    
+    const contentStyle = {
+      width: `100%`,
+      position: `relative`,
+      margin: `0 auto`,
+      padding: `${spacingHeight}px ${gutters}px`,
+      maxWidth: typeof width === `string` ? width : `${width}px`,
+    }
+
     return (
-      <div
-        className="wrapper__inner"
-        style={{ maxWidth: typeof width === `string` ? width : `${width}px` }}
-      >
+      <div style={contentStyle}>
         {children}
       </div>
     )
@@ -62,14 +68,14 @@ export class Wrapper extends React.Component {
   }
 
   render() {
-    const { className, backgroundImageUid, backgroundImage, background } = this.props
+    const { backgroundImageUid, backgroundImage, background } = this.props
 
     if(backgroundImageUid || backgroundImage){
       return(
         <Image
-          className={className}
           uid={backgroundImageUid}
           defaultSrc={backgroundImage}
+          style={{ position: `relative` }}
           background
         >
           { this.renderOverlay() }
@@ -78,7 +84,7 @@ export class Wrapper extends React.Component {
       )
     }
     return (
-      <div className={className} style={{ backgroundColor: background || `white` }}>
+      <div style={{ backgroundColor: background || `white`, position: `relative` }}>
         { this.renderOverlay() }
         { this.renderContent() }
       </div>
@@ -87,22 +93,6 @@ export class Wrapper extends React.Component {
 
 }
 export default decorate(
-  styled`
-    position: relative;
-    > .wrapper__inner {
-      width: 100%;
-      position: relative;
-  ${({ innerBackground: bg }) => bg ? `background-color: ${bg};` : ``};
-      margin: 0 auto;
-  ${({ spacing, theme, noGutters, gutter }) => {
-    if(!noGutters) {
-      return `padding: ${
-        (theme.spacing[spacing] || spacing || theme.spacing.small)}px ${gutter || theme.gutterWidth
-      }px;`
-    }
-  }
-}
-  `,
   observer,
   Wrapper
 )

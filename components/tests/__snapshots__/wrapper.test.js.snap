@@ -5,14 +5,18 @@ exports[`<Wrapper /> snapshot 1`] = `
   style={
     Object {
       "backgroundColor": "white",
+      "position": "relative",
     }
   }
 >
   <div
-    className="wrapper__inner"
     style={
       Object {
-        "maxWidth": "1px",
+        "margin": "0 auto",
+        "maxWidth": "1000px",
+        "padding": "50px 50px",
+        "position": "relative",
+        "width": "100%",
       }
     }
   >
@@ -26,13 +30,21 @@ exports[`<Wrapper /> snapshot 1`] = `
 exports[`<Wrapper /> snapshot 2`] = `
 <withTheme(StyledComponent)
   background={true}
+  style={
+    Object {
+      "position": "relative",
+    }
+  }
   uid="xxx"
 >
   <div
-    className="wrapper__inner"
     style={
       Object {
-        "maxWidth": "1px",
+        "margin": "0 auto",
+        "maxWidth": "1000px",
+        "padding": "50px 50px",
+        "position": "relative",
+        "width": "100%",
       }
     }
   >
@@ -48,6 +60,7 @@ exports[`<Wrapper /> snapshot 3`] = `
   style={
     Object {
       "backgroundColor": "white",
+      "position": "relative",
     }
   }
 >
@@ -66,10 +79,13 @@ exports[`<Wrapper /> snapshot 3`] = `
     }
   />
   <div
-    className="wrapper__inner"
     style={
       Object {
-        "maxWidth": "1px",
+        "margin": "0 auto",
+        "maxWidth": "1000px",
+        "padding": "50px 50px",
+        "position": "relative",
+        "width": "100%",
       }
     }
   >
