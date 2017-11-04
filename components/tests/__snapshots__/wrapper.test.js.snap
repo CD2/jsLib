@@ -1,0 +1,70 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Wrapper /> snapshot 1`] = `
+<div
+  style={
+    Object {
+      "backgroundColor": "white",
+    }
+  }
+>
+  <div
+    className="wrapper__inner"
+    style={
+      Object {
+        "maxWidth": "1px",
+      }
+    }
+  >
+    <div
+      className="unique"
+    />
+  </div>
+</div>
+`;
+
+exports[`<Wrapper /> snapshot 2`] = `
+<withTheme(StyledComponent)
+  background={true}
+  uid="xxx"
+>
+  <div
+    className="wrapper__inner"
+    style={
+      Object {
+        "maxWidth": "1px",
+      }
+    }
+  >
+    <div
+      className="unique"
+    />
+  </div>
+</withTheme(StyledComponent)>
+`;
+
+exports[`<Wrapper /> snapshot 3`] = `
+<div
+  style={
+    Object {
+      "backgroundColor": "white",
+    }
+  }
+>
+  <div
+    className="wrapper__overlay"
+  />
+  <div
+    className="wrapper__inner"
+    style={
+      Object {
+        "maxWidth": "1px",
+      }
+    }
+  >
+    <div
+      className="unique"
+    />
+  </div>
+</div>
+`;

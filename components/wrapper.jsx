@@ -30,6 +30,7 @@ export class Wrapper extends React.Component {
     ]),
   }
 
+
   renderContent(){
     const { children } = this.props
     const width = this.props.width || this.props.theme.siteWidth
@@ -44,18 +45,29 @@ export class Wrapper extends React.Component {
   }
 
   render() {
-    const { className, overlay, backgroundImageUid } = this.props
-    if(backgroundImageUid){
+    const { className, overlay, backgroundImageUid, backgroundImage, background } = this.props
+
+    const overlayStyle = {
+      position: `absolute`, width: `100%`, height: `100%`, left: `0`, top: `0`,
+      backgroundAttachment: `fixed`, opacity: `0.8`, backgroundColor: overlay || `black`
+    }
+
+    if(backgroundImageUid || backgroundImage){
       return(
-        <Image className={className} uid={backgroundImageUid} background>
-          { overlay && <div className="wrapper__overlay" /> }
+        <Image
+          className={className}
+          uid={backgroundImageUid}
+          defaultSrc={backgroundImage}
+          background
+        >
+          { overlay && <div style={overlayStyle} /> }
           { this.renderContent() }
         </Image>
       )
     }
     return (
-      <div className={className}>
-        { overlay && <div className="wrapper__overlay" /> }
+      <div className={className} style={{ backgroundColor: background || `white` }}>
+        { overlay && <div style={overlayStyle} /> }
         { this.renderContent() }
       </div>
     )
@@ -64,30 +76,6 @@ export class Wrapper extends React.Component {
 }
 export default decorate(
   styled`
-   .wrapper__overlay {
-      background-color: ${p(`overlay`, `#000`)};
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      left: 0;
-      top: 0;
-      background-attachment: fixed;
-      opacity: 0.8;
-    }
-
-    background-color: ${({ background, theme }) => background || `white`};
-
-    ${({ backgroundImage }) => {
-    if (backgroundImage) {
-      return `
-              background-image: url(${backgroundImage});
-              background-size: cover;
-              background-position: 50%;
-              background-repeat: no-repeat;
-      `
-    }
-  }}
-
     position: relative;
     > .wrapper__inner {
       width: 100%;
