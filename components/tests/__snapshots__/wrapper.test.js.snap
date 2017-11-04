@@ -2,6 +2,7 @@
 
 exports[`<Wrapper /> snapshot 1`] = `
 <div
+  className=""
   style={
     Object {
       "backgroundColor": "white",
@@ -30,6 +31,7 @@ exports[`<Wrapper /> snapshot 1`] = `
 exports[`<Wrapper /> snapshot 2`] = `
 <withTheme(StyledComponent)
   background={true}
+  className=""
   style={
     Object {
       "position": "relative",
@@ -53,6 +55,7 @@ exports[`<Wrapper /> snapshot 2`] = `
 
 exports[`<Wrapper /> snapshot 3`] = `
 <div
+  className=""
   style={
     Object {
       "backgroundColor": "white",
