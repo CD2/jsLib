@@ -12,6 +12,7 @@ export class Wrapper extends React.Component {
     backgroundImage: PropTypes.string,
     backgroundImageUid: PropTypes.string,
     children: PropTypes.any,
+    className: PropTypes.string,
     gutter: PropTypes.number,
     innerBackground: PropTypes.string,
     noGutters: PropTypes.bool,
@@ -73,7 +74,7 @@ export class Wrapper extends React.Component {
     if(backgroundImageUid || backgroundImage){
       return(
         <Image
-          className={this.props.className || ''}
+          className={this.props.className || ``}
           uid={backgroundImageUid}
           defaultSrc={backgroundImage}
           style={{ position: `relative` }}
@@ -85,7 +86,10 @@ export class Wrapper extends React.Component {
       )
     }
     return (
-      <div className={this.props.className || ''} style={{ backgroundColor: background || `white`, position: `relative` }}>
+      <div
+        className={this.props.className || ``}
+        style={{ backgroundColor: background || `white`, position: `relative` }}
+      >
         { this.renderOverlay() }
         { this.renderContent() }
       </div>
