@@ -61,7 +61,7 @@ export class Wrapper extends React.Component {
       left: `0`,
       top: `0`,
       backgroundAttachment: `fixed`,
-      opacity: `0.8`,
+      opacity: `0.93`,
       backgroundColor: overlay || `black`
     }
 
