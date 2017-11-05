@@ -51,7 +51,7 @@ export default decorate(
     &.visible {
       background: ${t(`darkBackground`)};
       cursor: pointer;
-      opacity: .4;
+      opacity: .7;
     }
   `,
   Overlay
