@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import decorate from 'utils/decorate'
 import windowStore from 'stores/window'
 import { styled, t, p } from 'utils/theme'
+import theme from 'styles/theme'
 
 export class SectionIntro extends React.Component {
 
@@ -12,13 +13,23 @@ export class SectionIntro extends React.Component {
     className: PropTypes.string,
     heading: PropTypes.number,
     light: PropTypes.bool,
+    noPad: PropTypes.bool,
+    style: PropTypes.object,
     title: PropTypes.string,
+    wrapperIntro: PropTypes.bool,
   }
 
   render() {
-    const { className, children, title, heading } = this.props
+    const { className, children, title, heading, style, wrapperIntro } = this.props
+
+    const wrapperIntroStyle = {
+      borderBottom: `1px solid ${theme.border}`,
+      paddingBottom: `${theme.gutterHeight.value/2}px`,
+      marginBottom: `${theme.gutterHeight.value/2}px`,
+    }
+
     return (
-      <div className={className}>
+      <div className={className} style={wrapperIntro ? wrapperIntroStyle : {}}>
         {heading === 2 ?
           <h2 className="page-intro__heading">{title}</h2> :
           heading === 3 ?
@@ -40,8 +51,8 @@ export default decorate(
   styled`
     text-align: ${p(`align`, `left`)};
     .modal & { padding-top: 0; }
-    ${({ children, theme }) => {
-    if(children){
+    ${({ children, noPad, theme }) => {
+    if(children && !noPad){
       return `padding-bottom: ${theme.gutterHeight.value / 16}em;`  
     }
   }}

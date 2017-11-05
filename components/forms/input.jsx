@@ -83,7 +83,7 @@ margin-bottom: 10px;
     color: ${t(`lightText`)};
   }
   label {
-    color: black;
+    color: ${t(`lightText`)};
     font-weight: 600;
   }
 

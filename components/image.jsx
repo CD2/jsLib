@@ -31,7 +31,7 @@ export class Image extends React.Component {
   get url() {
     const { uid, width, height, crop, size } = this.props
     const params = { uid, size }
-    if (height && !size) params.size = `${width || height*1.5}x${height}`
+    if (height && !size) params.size = `${width || Math.round(height*1.5)}x${height}`
     if (crop) params.crop = true
     return buildUrl([`/image`], params)
   }
