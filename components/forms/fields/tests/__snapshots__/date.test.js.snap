@@ -1,3 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`<date /> snapshot 1`] = `<date />`;
+
 exports[`snapshot 1`] = `<date />`;

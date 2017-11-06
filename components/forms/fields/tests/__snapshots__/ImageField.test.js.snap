@@ -1,5 +1,15 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`<ImageField /> snapshot 1`] = `
+<div>
+  <div />
+  <input
+    onChange={[Function]}
+    type="file"
+  />
+</div>
+`;
+
 exports[`snapshot 1`] = `
 <div>
   <div />
