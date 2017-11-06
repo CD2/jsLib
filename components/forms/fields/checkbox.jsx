@@ -11,7 +11,7 @@ import { styled } from 'utils/theme'
     margin-right: 6px;
   }
 `
-export default class Checkbox extends React.Component {
+export class Checkbox extends React.Component {
 
   static propTypes = {
     className: PropTypes.string,
@@ -37,3 +37,4 @@ export default class Checkbox extends React.Component {
   }
 
 }
+export default Checkbox

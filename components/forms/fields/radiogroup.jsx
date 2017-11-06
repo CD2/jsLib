@@ -12,7 +12,7 @@ import { styled } from 'utils/theme'
     margin-right: 6px;
   }
 `
-export default class SelectField extends React.Component {
+export class SelectField extends React.Component {
 
   static propTypes = {
     choices: PropTypes.arrayOf(PropTypes.string),
@@ -51,3 +51,4 @@ export default class SelectField extends React.Component {
   }
 
 }
+export default SelectField

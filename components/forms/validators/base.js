@@ -1,4 +1,4 @@
-export default class BaseValidator {
+export class BaseValidator {
 
   static message
 
@@ -16,3 +16,4 @@ export default class BaseValidator {
   }
 
 }
+export default BaseValidator

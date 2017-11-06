@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import moment from 'moment'
 
-export default class DateTime extends React.Component {
+export class DateTime extends React.Component {
 
   static propTypes = {
     date: PropTypes.any,
@@ -65,3 +65,5 @@ export default class DateTime extends React.Component {
 // s ss       0..59       Seconds
 // S SS SSS   0..999      Fractional seconds
 // Z ZZ       +12:00      Offset from UTC as +-HH:mm, +-HHmm, or Z
+
+export default DateTime

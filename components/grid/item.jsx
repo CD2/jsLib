@@ -11,7 +11,7 @@ import PropTypes from 'prop-types'
     margin-top: 0;
   }
 `
-export default class GridItem extends React.Component {
+export class GridItem extends React.Component {
 
   static propTypes = {
     children: PropTypes.any,
@@ -30,3 +30,4 @@ export default class GridItem extends React.Component {
   }
 
 }
+export default GridItem

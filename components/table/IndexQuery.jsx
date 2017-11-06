@@ -3,7 +3,7 @@ import { observable, action, computed, toJS } from 'mobx'
 
 import FaIcon from 'lib/components/fa_icon'
 
-export default class IndexQuery {
+export class IndexQuery {
 
   @observable ids = []
   @observable fetching = false
@@ -106,3 +106,4 @@ export default class IndexQuery {
   }
 
 }
+export default IndexQuery

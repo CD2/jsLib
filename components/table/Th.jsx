@@ -8,16 +8,8 @@ import { observable, action, computed } from 'mobx'
 import { observer, inject } from 'mobx-react'
 import { styled } from 'utils/theme'
 
-@styled`
-  i { color: white; }
-  cursor: pointer;
-  &.sortable {
-    cursor: pointer;
-  }
-`
-@inject(`query`)
-@observer
-export default class Th extends React.Component {
+import decorate from 'utils/decorate'
+export class Th extends React.Component {
 
   static propTypes = {
     children: PropTypes.node,
@@ -68,3 +60,15 @@ export default class Th extends React.Component {
   }
 
 }
+export default decorate(
+  styled`
+    i { color: white; }
+    cursor: pointer;
+    &.sortable {
+      cursor: pointer;
+    }
+  `,
+  inject(`query`),
+  observer,
+  Th
+)

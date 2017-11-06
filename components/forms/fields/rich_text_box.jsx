@@ -17,7 +17,7 @@ import { observable } from 'mobx'
   ${panel};
 `
 @observer
-export default class RichTextBox extends React.Component {
+export class RichTextBox extends React.Component {
 
   static propTypes = {
     className: PropTypes.string,
@@ -99,3 +99,4 @@ export default class RichTextBox extends React.Component {
   }
 
 }
+export default RichTextBox

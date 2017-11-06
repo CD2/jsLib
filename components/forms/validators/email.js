@@ -1,7 +1,7 @@
 /* eslint-disable max-len,no-useless-escape */
 import BaseValidator from './base'
 
-export default class EmailValidator extends BaseValidator {
+export class EmailValidator extends BaseValidator {
 
   static message = `must be a valid email`
 
@@ -10,3 +10,4 @@ export default class EmailValidator extends BaseValidator {
   }
 
 }
+export default EmailValidator

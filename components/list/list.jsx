@@ -20,7 +20,7 @@ import { styled } from 'utils/theme'
 }}
   }
 `
-export default class List extends React.Component {
+export class List extends React.Component {
 
   static propTypes = {
     children: PropTypes.any,
@@ -60,3 +60,4 @@ export default class List extends React.Component {
   }
 
 }
+export default List

@@ -18,7 +18,7 @@ import { styled } from 'utils/theme'
 
 `
 @observer
-export default class IndexFilters extends React.Component {
+export class IndexFilters extends React.Component {
 
   static propTypes = {
     className: PropTypes.string,
@@ -48,3 +48,4 @@ export default class IndexFilters extends React.Component {
   }
 
 }
+export default IndexFilters

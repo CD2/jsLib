@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-export default class Tab extends React.Component {
+export class Tab extends React.Component {
 
   static propTypes = {
     children: PropTypes.node,
@@ -38,3 +38,4 @@ export default class Tab extends React.Component {
   }
 
 }
+export default Tab

@@ -45,7 +45,7 @@ import { panel } from 'utils/common_styles'
   }
 `
 @observer
-export default class IndexTable extends React.Component {
+export class IndexTable extends React.Component {
 
   static propTypes = {
     className: PropTypes.string,
@@ -113,3 +113,4 @@ export default class IndexTable extends React.Component {
   }
 
 }
+export default IndexTable

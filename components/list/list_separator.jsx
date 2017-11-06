@@ -10,7 +10,7 @@ import PropTypes from 'prop-types'
     `
   }}
 `
-export default class ListSeparator extends React.Component {
+export class ListSeparator extends React.Component {
 
   static propTypes = {
     className: PropTypes.string,
@@ -23,3 +23,4 @@ export default class ListSeparator extends React.Component {
   }
 
 }
+export default ListSeparator
