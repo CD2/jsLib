@@ -6,10 +6,3 @@ exports[`<TextArea /> snapshot 1`] = `
   value=""
 />
 `;
-
-exports[`snapshot 1`] = `
-<textarea
-  onChange={[Function]}
-  value=""
-/>
-`;

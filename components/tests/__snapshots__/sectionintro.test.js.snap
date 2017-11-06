@@ -9,13 +9,3 @@ exports[`<SectionIntro /> snapshot 1`] = `
   />
 </div>
 `;
-
-exports[`snapshot 1`] = `
-<div
-  style={Object {}}
->
-  <h1
-    className="page-intro__heading"
-  />
-</div>
-`;

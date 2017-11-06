@@ -9,13 +9,3 @@ exports[`<ImageField /> snapshot 1`] = `
   />
 </div>
 `;
-
-exports[`snapshot 1`] = `
-<div>
-  <div />
-  <input
-    onChange={[Function]}
-    type="file"
-  />
-</div>
-`;

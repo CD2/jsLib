@@ -5,9 +5,3 @@ exports[`<Button /> snapshot 1`] = `
   className="undefined common btn"
 />
 `;
-
-exports[`snapshot 1`] = `
-<div
-  className="undefined common btn"
-/>
-`;

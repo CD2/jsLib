@@ -5,9 +5,3 @@ exports[`<THead /> snapshot 1`] = `
   <tr />
 </thead>
 `;
-
-exports[`snapshot 1`] = `
-<thead>
-  <tr />
-</thead>
-`;

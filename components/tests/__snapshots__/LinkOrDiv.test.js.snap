@@ -5,9 +5,3 @@ exports[`<LinkOrDiv /> snapshot 1`] = `
   replace={false}
 />
 `;
-
-exports[`snapshot 1`] = `
-<Link
-  replace={false}
-/>
-`;

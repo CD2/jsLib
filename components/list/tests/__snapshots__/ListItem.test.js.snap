@@ -5,9 +5,3 @@ exports[`<ListItem /> snapshot 1`] = `
   className="list_item "
 />
 `;
-
-exports[`snapshot 1`] = `
-<div
-  className="list_item "
-/>
-`;

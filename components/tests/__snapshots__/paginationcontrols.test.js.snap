@@ -18,22 +18,3 @@ exports[`<PaginationControls /> snapshot 1`] = `
   </div>
 </div>
 `;
-
-exports[`snapshot 1`] = `
-<div
-  className="undefined pagination"
->
-  <div
-    className="pagination__button"
-    onClick={[Function]}
-  >
-    Left
-  </div>
-  <div
-    className="pagination__button"
-    onClick={[Function]}
-  >
-    Right
-  </div>
-</div>
-`;

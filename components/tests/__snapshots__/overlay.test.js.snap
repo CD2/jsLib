@@ -6,10 +6,3 @@ exports[`<Overlay /> snapshot 1`] = `
   onClick={[Function]}
 />
 `;
-
-exports[`snapshot 1`] = `
-<div
-  className=""
-  onClick={[Function]}
-/>
-`;
