@@ -11,16 +11,16 @@ export class SectionIntro extends React.Component {
     align: PropTypes.string,
     children: PropTypes.node,
     className: PropTypes.string,
-    heading: PropTypes.number,
+    heading: PropTypes.any,
     light: PropTypes.bool,
     noPad: PropTypes.bool,
     style: PropTypes.object,
-    title: PropTypes.string,
+    title: PropTypes.any,
     wrapperIntro: PropTypes.bool,
   }
 
   render() {
-    const { className, children, title, heading, style, wrapperIntro } = this.props
+    const { className, children, title, heading, wrapperIntro } = this.props
 
     const wrapperIntroStyle = {
       borderBottom: `1px solid ${theme.border}`,
