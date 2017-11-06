@@ -56,7 +56,7 @@ export default class Submit extends React.Component {
     let val = value
     if (submitting) val = ``
     return (
-      <input className={`btn ${className}`} type="submit" value={val} />
+      <input className={`btn ${className}`} type="submit" value={val || 'Submit'} />
     )
   }
 
