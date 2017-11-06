@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import decorate from 'utils/decorate'
 import windowStore from 'stores/window'
 import { styled, t, p } from 'utils/theme'
+import theme from 'styles/theme'
 
 export class SectionIntro extends React.Component {
 
@@ -10,15 +11,25 @@ export class SectionIntro extends React.Component {
     align: PropTypes.string,
     children: PropTypes.node,
     className: PropTypes.string,
-    heading: PropTypes.number,
+    heading: PropTypes.any,
     light: PropTypes.bool,
-    title: PropTypes.string,
+    noPad: PropTypes.bool,
+    style: PropTypes.object,
+    title: PropTypes.any,
+    wrapperIntro: PropTypes.bool,
   }
 
   render() {
-    const { className, children, title, heading } = this.props
+    const { className, children, title, heading, wrapperIntro } = this.props
+
+    const wrapperIntroStyle = {
+      borderBottom: `1px solid ${theme.border}`,
+      paddingBottom: `${theme.gutterHeight.value/2}px`,
+      marginBottom: `${theme.gutterHeight.value/2}px`,
+    }
+
     return (
-      <div className={className}>
+      <div className={className} style={wrapperIntro ? wrapperIntroStyle : {}}>
         {heading === 2 ?
           <h2 className="page-intro__heading">{title}</h2> :
           heading === 3 ?
@@ -40,8 +51,8 @@ export default decorate(
   styled`
     text-align: ${p(`align`, `left`)};
     .modal & { padding-top: 0; }
-    ${({ children, theme }) => {
-    if(children){
+    ${({ children, noPad, theme }) => {
+    if(children && !noPad){
       return `padding-bottom: ${theme.gutterHeight.value / 16}em;`  
     }
   }}
@@ -72,7 +83,7 @@ export default decorate(
       font-weight: 500;
     }
     p {
-      margin: 10px 0 ${props => props.gutterHeight || props.theme.gutterHeight.value}px;
+      margin: 10px 0 ${props => props.gutterHeight || props.theme.gutterHeight.value / 2}px;
       &:last-child {
         margin-bottom: 0;
       }

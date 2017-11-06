@@ -25,7 +25,7 @@ export class File extends React.Component {
   get url() {
     const { uid } = this.props
     const params = { uid }
-    return buildUrl([`file`], params)
+    return buildUrl([`/file`], params)
   }
 
   render() {
@@ -36,7 +36,7 @@ export class File extends React.Component {
 
     return (
       <Button
-        href={url}
+        to={url}
         className={`file ${this.props.className}`}
         target="_blank"
         buttonStyle="download common"

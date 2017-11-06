@@ -1,0 +1,92 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Wrapper /> snapshot 1`] = `
+<div
+  className=""
+  style={
+    Object {
+      "backgroundColor": "white",
+      "position": "relative",
+    }
+  }
+>
+  <div
+    style={
+      Object {
+        "margin": "0 auto",
+        "maxWidth": "1000px",
+        "padding": "50px 50px",
+        "position": "relative",
+        "width": "100%",
+      }
+    }
+  >
+    <div
+      className="unique"
+    />
+  </div>
+</div>
+`;
+
+exports[`<Wrapper /> snapshot 2`] = `
+<withTheme(StyledComponent)
+  background={true}
+  className=""
+  style={
+    Object {
+      "position": "relative",
+    }
+  }
+  uid="xxx"
+>
+  <div
+    style={
+      Object {
+        "margin": "0 auto",
+        "maxWidth": "1000px",
+        "padding": "50px 50px",
+        "position": "relative",
+        "width": "100%",
+      }
+    }
+  />
+</withTheme(StyledComponent)>
+`;
+
+exports[`<Wrapper /> snapshot 3`] = `
+<div
+  className=""
+  style={
+    Object {
+      "backgroundColor": "white",
+      "position": "relative",
+    }
+  }
+>
+  <div
+    style={
+      Object {
+        "backgroundAttachment": "fixed",
+        "backgroundColor": "green",
+        "height": "100%",
+        "left": "0",
+        "opacity": "0.8",
+        "position": "absolute",
+        "top": "0",
+        "width": "100%",
+      }
+    }
+  />
+  <div
+    style={
+      Object {
+        "margin": "0 auto",
+        "maxWidth": "1000px",
+        "padding": "50px 50px",
+        "position": "relative",
+        "width": "100%",
+      }
+    }
+  />
+</div>
+`;
