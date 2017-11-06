@@ -6,6 +6,9 @@ exports[`<Wrapper /> snapshot 1`] = `
   style={
     Object {
       "backgroundColor": "white",
+      "borderRadius": "0",
+      "boxShadow": "none",
+      "marginBottom": "0",
       "position": "relative",
     }
   }
@@ -59,6 +62,9 @@ exports[`<Wrapper /> snapshot 3`] = `
   style={
     Object {
       "backgroundColor": "white",
+      "borderRadius": "0",
+      "boxShadow": "none",
+      "marginBottom": "0",
       "position": "relative",
     }
   }
@@ -70,7 +76,7 @@ exports[`<Wrapper /> snapshot 3`] = `
         "backgroundColor": "green",
         "height": "100%",
         "left": "0",
-        "opacity": "0.8",
+        "opacity": "0.93",
         "position": "absolute",
         "top": "0",
         "width": "100%",
