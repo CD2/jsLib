@@ -1,5 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`<THead /> snapshot 1`] = `
+<thead>
+  <tr />
+</thead>
+`;
+
 exports[`snapshot 1`] = `
 <thead>
   <tr />

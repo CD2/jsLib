@@ -4,5 +4,10 @@ import { IndexFilters } from '../IndexFilters'
 import { shallow } from 'enzyme'
 import toJson from 'enzyme-to-json'
 
-const wrapper = shallow(<IndexFilters />)
-it(`snapshot`, ()=>expect(toJson(wrapper)).toMatchSnapshot())
+describe(`<IndexFilters />`, () => {
+  const view = shallow((
+    <IndexFilters />
+  ))
+
+  it(`snapshot`, ()=>expect(toJson(view)).toMatchSnapshot())
+})

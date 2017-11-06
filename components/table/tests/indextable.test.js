@@ -4,5 +4,10 @@ import { IndexTable } from '../Table'
 import { shallow } from 'enzyme'
 import toJson from 'enzyme-to-json'
 
-const wrapper = shallow(<IndexTable />)
-it(`snapshot`, ()=>expect(toJson(wrapper)).toMatchSnapshot())
+describe(`<IndexTable />`, () => {
+  const view = shallow((
+    <IndexTable />
+  ))
+
+  it(`snapshot`, ()=>expect(toJson(view)).toMatchSnapshot())
+})

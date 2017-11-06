@@ -1,3 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`<Breadcrumbs /> snapshot 1`] = `null`;
+
 exports[`snapshot 1`] = `null`;

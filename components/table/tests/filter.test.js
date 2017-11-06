@@ -4,5 +4,10 @@ import { TableFilter } from '../Filter'
 import { shallow } from 'enzyme'
 import toJson from 'enzyme-to-json'
 
-const wrapper = shallow(<TableFilter />)
-it(`snapshot`, ()=>expect(toJson(wrapper)).toMatchSnapshot())
+describe(`<TableFilter />`, () => {
+  const view = shallow((
+    <TableFilter />
+  ))
+
+  it(`snapshot`, ()=>expect(toJson(view)).toMatchSnapshot())
+})

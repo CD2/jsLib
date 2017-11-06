@@ -1,5 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`<Button /> snapshot 1`] = `
+<div
+  className="undefined common btn"
+/>
+`;
+
 exports[`snapshot 1`] = `
 <div
   className="undefined common btn"
