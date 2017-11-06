@@ -4,5 +4,10 @@ import { SectionIntro } from '../SectionIntro'
 import { shallow } from 'enzyme'
 import toJson from 'enzyme-to-json'
 
-const wrapper = shallow(<SectionIntro />)
-it(`snapshot`, ()=>expect(toJson(wrapper)).toMatchSnapshot())
+describe(`<SectionIntro />`, () => {
+  const view = shallow((
+    <SectionIntro />
+  ))
+
+  it(`snapshot`, ()=>expect(toJson(view)).toMatchSnapshot())
+})

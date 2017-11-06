@@ -4,5 +4,10 @@ import { File } from '../file'
 import { shallow } from 'enzyme'
 import toJson from 'enzyme-to-json'
 
-const wrapper = shallow(<File />)
-it(`snapshot`, ()=>expect(toJson(wrapper)).toMatchSnapshot())
+describe(`<File />`, () => {
+  const view = shallow((
+    <File />
+  ))
+
+  it(`snapshot`, ()=>expect(toJson(view)).toMatchSnapshot())
+})

@@ -4,5 +4,10 @@ import { faIcon } from '../fa_icon'
 import { shallow } from 'enzyme'
 import toJson from 'enzyme-to-json'
 
-const wrapper = shallow(<faIcon />)
-it(`snapshot`, ()=>expect(toJson(wrapper)).toMatchSnapshot())
+describe(`<faIcon />`, () => {
+  const view = shallow((
+    <faIcon />
+  ))
+
+  it(`snapshot`, ()=>expect(toJson(view)).toMatchSnapshot())
+})

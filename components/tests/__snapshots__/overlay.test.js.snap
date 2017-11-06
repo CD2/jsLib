@@ -1,5 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`<Overlay /> snapshot 1`] = `
+<div
+  className=""
+  onClick={[Function]}
+/>
+`;
+
 exports[`snapshot 1`] = `
 <div
   className=""

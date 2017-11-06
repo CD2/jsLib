@@ -4,5 +4,10 @@ import { PaginationControls } from '../pagination_controls'
 import { shallow } from 'enzyme'
 import toJson from 'enzyme-to-json'
 
-const wrapper = shallow(<PaginationControls />)
-it(`snapshot`, ()=>expect(toJson(wrapper)).toMatchSnapshot())
+describe(`<PaginationControls />`, () => {
+  const view = shallow((
+    <PaginationControls />
+  ))
+
+  it(`snapshot`, ()=>expect(toJson(view)).toMatchSnapshot())
+})

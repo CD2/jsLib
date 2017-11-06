@@ -4,5 +4,10 @@ import { Overlay } from '../overlay'
 import { shallow } from 'enzyme'
 import toJson from 'enzyme-to-json'
 
-const wrapper = shallow(<Overlay />)
-it(`snapshot`, ()=>expect(toJson(wrapper)).toMatchSnapshot())
+describe(`<Overlay />`, () => {
+  const view = shallow((
+    <Overlay />
+  ))
+
+  it(`snapshot`, ()=>expect(toJson(view)).toMatchSnapshot())
+})

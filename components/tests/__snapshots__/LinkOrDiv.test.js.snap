@@ -1,5 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`<LinkOrDiv /> snapshot 1`] = `
+<Link
+  replace={false}
+/>
+`;
+
 exports[`snapshot 1`] = `
 <Link
   replace={false}

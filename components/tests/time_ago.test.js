@@ -4,5 +4,10 @@ import { TimeAgo } from '../time_ago'
 import { shallow } from 'enzyme'
 import toJson from 'enzyme-to-json'
 
-const wrapper = shallow(<TimeAgo />)
-it(`snapshot`, ()=>expect(toJson(wrapper)).toMatchSnapshot())
+describe(`<TimeAgo />`, () => {
+  const view = shallow((
+    <TimeAgo />
+  ))
+
+  it(`snapshot`, ()=>expect(toJson(view)).toMatchSnapshot())
+})
