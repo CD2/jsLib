@@ -4,5 +4,10 @@ import { ListSeparator } from '../lsit_separator'
 import { shallow } from 'enzyme'
 import toJson from 'enzyme-to-json'
 
-const wrapper = shallow(<ListSeparator />)
-it(`snapshot`, ()=>expect(toJson(wrapper)).toMatchSnapshot())
+describe(`<ListSeparator />`, () => {
+  const view = shallow((
+    <ListSeparator />
+  ))
+
+  it(`snapshot`, ()=>expect(toJson(view)).toMatchSnapshot())
+})

@@ -4,5 +4,10 @@ import { FormatValidator } from '../format'
 import { shallow } from 'enzyme'
 import toJson from 'enzyme-to-json'
 
-const wrapper = shallow(<FormatValidator />)
-it(`snapshot`, ()=>expect(toJson(wrapper)).toMatchSnapshot())
+describe(`<FormatValidator />`, () => {
+  const view = shallow((
+    <FormatValidator />
+  ))
+
+  it(`snapshot`, ()=>expect(toJson(view)).toMatchSnapshot())
+})

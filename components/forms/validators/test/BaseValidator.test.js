@@ -4,5 +4,10 @@ import { BaseValidator } from '../base'
 import { shallow } from 'enzyme'
 import toJson from 'enzyme-to-json'
 
-const wrapper = shallow(<BaseValidator />)
-it(`snapshot`, ()=>expect(toJson(wrapper)).toMatchSnapshot())
+describe(`<BaseValidator />`, () => {
+  const view = shallow((
+    <BaseValidator />
+  ))
+
+  it(`snapshot`, ()=>expect(toJson(view)).toMatchSnapshot())
+})

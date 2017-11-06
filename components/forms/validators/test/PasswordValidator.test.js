@@ -4,5 +4,10 @@ import { PasswordValidator } from '../password'
 import { shallow } from 'enzyme'
 import toJson from 'enzyme-to-json'
 
-const wrapper = shallow(<PasswordValidator />)
-it(`snapshot`, ()=>expect(toJson(wrapper)).toMatchSnapshot())
+describe(`<PasswordValidator />`, () => {
+  const view = shallow((
+    <PasswordValidator />
+  ))
+
+  it(`snapshot`, ()=>expect(toJson(view)).toMatchSnapshot())
+})

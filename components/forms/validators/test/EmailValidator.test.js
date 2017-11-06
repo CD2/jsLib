@@ -4,5 +4,10 @@ import { EmailValidator } from '../email'
 import { shallow } from 'enzyme'
 import toJson from 'enzyme-to-json'
 
-const wrapper = shallow(<EmailValidator />)
-it(`snapshot`, ()=>expect(toJson(wrapper)).toMatchSnapshot())
+describe(`<EmailValidator />`, () => {
+  const view = shallow((
+    <EmailValidator />
+  ))
+
+  it(`snapshot`, ()=>expect(toJson(view)).toMatchSnapshot())
+})

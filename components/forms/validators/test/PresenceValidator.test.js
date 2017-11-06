@@ -4,5 +4,10 @@ import { PresenceValidator } from '../acceptance'
 import { shallow } from 'enzyme'
 import toJson from 'enzyme-to-json'
 
-const wrapper = shallow(<PresenceValidator />)
-it(`snapshot`, ()=>expect(toJson(wrapper)).toMatchSnapshot())
+describe(`<PresenceValidator />`, () => {
+  const view = shallow((
+    <PresenceValidator />
+  ))
+
+  it(`snapshot`, ()=>expect(toJson(view)).toMatchSnapshot())
+})

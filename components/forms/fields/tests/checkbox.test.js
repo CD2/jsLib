@@ -4,5 +4,10 @@ import { checkbox } from '../checkbox'
 import { shallow } from 'enzyme'
 import toJson from 'enzyme-to-json'
 
-const wrapper = shallow(<checkbox />)
-it(`snapshot`, ()=>expect(toJson(wrapper)).toMatchSnapshot())
+describe(`<checkbox />`, () => {
+  const view = shallow((
+    <xheckbox />
+  ))
+
+  it(`snapshot`, ()=>expect(toJson(view)).toMatchSnapshot())
+})
