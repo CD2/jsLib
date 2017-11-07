@@ -78,7 +78,14 @@ export class Wrapper extends React.Component {
           className={this.props.className || ``}
           uid={backgroundImageUid}
           defaultSrc={backgroundImage}
-          style={{ position: `relative` }}
+          style={{
+            position: `relative`,
+            boxShadow: floating ? theme.shadow0 : `none`,
+            borderRadius: floating ? `6px` : `0`,
+            marginBottom: floating ? theme.gutterHeight.value : `0`,
+            overflow: `hidden`,
+          }}
+
           background
         >
           { this.renderOverlay() }

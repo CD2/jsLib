@@ -47,7 +47,9 @@ export class Image extends React.Component {
     if (background) {
       return (
         <div
-          style={{ backgroundImage: `url(${url})` }}
+          style={
+            Object.assign({backgroundImage: `url(${url})`}, this.props.style)
+          }
           children={children}
           className={`background-image ${this.props.className}`}
           onClick={this.props.onClick}
