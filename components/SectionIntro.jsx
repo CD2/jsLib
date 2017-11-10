@@ -65,7 +65,6 @@ export default decorate(
     .page-intro__heading {
       color: ${t(`headingText`)};
       margin: 0;
-  ${windowStore.isSmall ? `font-size: 2em;` : ``};
   ${({ light }) => {
     if(light) {
       return `color: white;`
