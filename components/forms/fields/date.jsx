@@ -2,18 +2,23 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import DayPicker from 'react-day-picker'
+import DayPickerInput from 'react-day-picker/DayPickerInput'
 import 'react-day-picker/lib/style.css'
 
 const currentYear = new Date().getFullYear()
 const fromMonth = new Date(currentYear, -1200)
 const toMonth = new Date(currentYear + 10, 11)
 
+const DAY_FORMAT = `DD/MM/YYYY`
+
 // Component will receive date, locale and localeUtils props
-function YearMonthForm({ date, localeUtils, onChange, disabled }) {
+function YearMonthForm({ date, localeUtils, onChange }) {
   const months = localeUtils.getMonths()
 
   const years = []
-  for (let i = fromMonth.getFullYear(); i <= toMonth.getFullYear(); i += 1)  years.push(i)
+  for (let i = fromMonth.getFullYear(); i <= toMonth.getFullYear(); i += 1) {
+    years.push(i)
+  }
 
   const handleChange = function handleChange(e) {
     const { year, month } = e.target.form
@@ -22,21 +27,15 @@ function YearMonthForm({ date, localeUtils, onChange, disabled }) {
 
   return (
     <form className="DayPicker-Caption">
-      <select
-        name="month"
-        value={date.getMonth()}
-        disabled={disabled}
-        onChange={handleChange}
-      >
+      <select name="month" onChange={handleChange} value={date.getMonth()}>
         {months.map((month, i) => <option key={i} value={i}>{month}</option>)}
       </select>
-      <select
-        name="year"
-        value={date.getFullYear()}
-        disabled={disabled}
-        onChange={handleChange}
-      >
-        {years.map((year, i) => <option key={i} value={year}>{year}</option>)}
+      <select name="year" onChange={handleChange} value={date.getFullYear()}>
+        {years.map((year, i) =>
+          (<option key={i} value={year}>
+            {year}
+          </option>)
+        )}
       </select>
     </form>
   )
@@ -68,20 +67,22 @@ export default class Example extends React.Component {
   }
 
   render() {
+    const dayPickerProps = {
+      todayButton: `Go to Today`,
+      captionElement: <YearMonthForm disabled={this.props.disabled} onChange={this.handleYearMonthChange} />,
+      fromMonth: fromMonth,
+      toMonth: toMonth
+    }
     return (
       <div className="YearNavigation">
         {JSON.stringify(this.props.value)}
-        <DayPicker
-          todayButton="Go to Today"
+        <DayPickerInput
           month={this.state.month}
           selectedDays={new Date(this.props.value)}
-          fromMonth={fromMonth}
-          toMonth={toMonth}
-          captionElement={
-            <YearMonthForm  disabled={this.props.disabled} onChange={this.handleYearMonthChange} />
-          }
+          dayPickerProps={dayPickerProps}
           disabled={this.props.disabled}
           enableOutsideDays
+          format={DAY_FORMAT}
           onDayClick={this.handleChange}
           onChange={this.handleChange}
         />

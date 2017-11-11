@@ -25,6 +25,7 @@ margin-bottom: 10px;
   input[type=search],
   input[type=password],
   input[type=number],
+  .DayPickerInput input,
   textarea,
   .select{
     box-sizing: border-box;
@@ -58,7 +59,7 @@ margin-bottom: 10px;
 }}
   }
 
-
+  .DayPickerInput { display: block; }
   .select{
     background-image: url(${dropdown});
     background-size: 10px;
