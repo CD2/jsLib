@@ -10,6 +10,7 @@ export class SelectField extends React.Component {
     onChange: PropTypes.func,
     onRawChange: PropTypes.func,
     value: PropTypes.string,
+    default_value: PropTypes.string
   }
 
   handleChange = (e) => {
@@ -35,7 +36,11 @@ export class SelectField extends React.Component {
         text = choice.text
         value = choice.value
       }
-      choiceHtml.push(<option key={value} value={value}>{text}</option>)
+      if(this.props.default_value == value){
+        choiceHtml.push(<option key={value} value={value} selected="selected">{text}</option>)
+      }else{
+        choiceHtml.push(<option key={value} value={value}>{text}</option>)        
+      }
     })
     return choiceHtml
   }
