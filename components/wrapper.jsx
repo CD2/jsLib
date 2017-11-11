@@ -66,14 +66,14 @@ export class Wrapper extends React.Component {
       backgroundColor: overlay || `black`
     }
 
-    if(overlay) return <div style={overlayStyle} />
+    if (overlay) return <div style={overlayStyle} />
   }
 
   render() {
     const { backgroundImageUid, backgroundImage, background, floating } = this.props
 
-    if(backgroundImageUid || backgroundImage){
-      return(
+    if (backgroundImageUid || backgroundImage){
+      return (
         <Image
           className={this.props.className || ``}
           uid={backgroundImageUid}

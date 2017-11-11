@@ -7,14 +7,16 @@ import 'tinymce/plugins/lists'
 import 'tinymce/plugins/link'
 import 'tinymce/plugins/table'
 import 'tinymce/plugins/anchor'
-import { styled } from 'utils/theme'
-import { panel } from 'utils/common_styles'
+import { styled, t } from 'utils/theme'
 
 import { observer } from 'mobx-react'
 import { observable } from 'mobx'
 
 @styled`
-  ${panel};
+  border-radius: ${t(`panelRadius`)};
+  overflow: hidden;
+  border: 1px solid ${t(`border`)};
+  background: white;
 `
 @observer
 export class RichTextBox extends React.Component {
@@ -88,7 +90,7 @@ export class RichTextBox extends React.Component {
   }
 
   render() {
-    return(
+    return (
       <div className={this.props.className}>
         <textarea
           id={this.props.id}

@@ -1,9 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { styled, t } from 'utils/theme'
-import { panel } from 'utils/common_styles'
 import { observer } from 'mobx-react'
 import { observable } from 'mobx'
+import Wrapper from "../../wrapper"
 @styled`
   position: relative;
   text-align: right;
@@ -11,16 +11,15 @@ import { observable } from 'mobx'
     margin-bottom: 10px;
   }
   .password_helpers {
-
     display: inline-block;
     font-size: 0.9em;
     text-align: left;
-    border: 1px solid;
-    padding: 8px 12px;
-    list-style: none;
-    margin: 0;
-    ${panel};
     font-weight: 600;
+    ul{
+      padding: 0;
+      margin: 0;
+      list-style: none;   
+    }   
     .error {
       color: ${t(`lightText`)}
     }
@@ -183,10 +182,12 @@ export class PasswordWithHelpField extends React.Component {
     }
 
     return (
-      <ul className="password_helpers">
-        {helperComponents}
-        <li className={className}>Password confirmation must match</li>
-      </ul>
+      <Wrapper className="password_helpers" background={`#f5f5f5`}>
+        <ul>
+          {helperComponents}
+          <li className={className}>Password confirmation must match</li>
+        </ul>
+      </Wrapper>
     )
   }
 

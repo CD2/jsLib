@@ -32,11 +32,11 @@ export class TimeAgo extends React.Component {
   getInterval() {
     const diff = Date.now() - this.time
 
-    if(diff < MINUTE) {
+    if (diff < MINUTE) {
       return SECOND*5
-    } else if(diff < HOUR) {
+    } else if (diff < HOUR) {
       return SECOND*15
-    } else if(diff < DAY) {
+    } else if (diff < DAY) {
       return MINUTE*15
     }
     return null
@@ -46,7 +46,7 @@ export class TimeAgo extends React.Component {
     let interval = this.getInterval()
     this.displayTime = moment(new Date(this.props.time)).fromNow()
 
-    if(interval) {
+    if (interval) {
       this.timer = setTimeout(this.timeout, interval)
     }
   }

@@ -6,7 +6,7 @@ import { styled, t } from 'utils/theme'
 const FIELD_TYPES = {
   text: require(`./fields/text`).default,
   textarea: require(`./fields/textarea`).default,
-  rich_text: require(`./fields/rich_text_field`).default,
+  rich_text: require(`./fields/rich_text_box`).default,
   password_with_help: require(`./fields/password_with_help`).default,
   select: require(`./fields/select`).default,
   checkbox: require(`./fields/checkbox`).default,

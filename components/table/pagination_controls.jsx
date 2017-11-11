@@ -98,7 +98,7 @@ export class PaginationControls extends React.Component {
     )
 
     if (count < 5 + visibility*2) {
-      for(let i = 1; i<=count; i++) {
+      for (let i = 1; i<=count; i++) {
         page_numbers.push(number(i))
       }
       return page_numbers

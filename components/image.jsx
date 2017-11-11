@@ -31,7 +31,9 @@ export class Image extends React.Component {
   get url() {
     const { uid, width, height, crop, size } = this.props
     const params = { uid, size }
-    if (height && !size) params.size = `${width || Math.round(height*1.5)}x${height}`
+    if (height && !size) params.size = `${Math.round(height*1.5*2)}x${height*2}`
+    if (width && !size) params.size = `${width*2}x${Math.round(width/1.5*2)}`
+    if (width && height && !size) params.size = `${width*2}x${height*2}`
     if (crop) params.crop = true
     return buildUrl([`/image`], params)
   }
@@ -48,7 +50,7 @@ export class Image extends React.Component {
       return (
         <div
           style={
-            Object.assign({backgroundImage: `url(${url})`}, this.props.style)
+            Object.assign({ backgroundImage: `url(${url})` }, this.props.style)
           }
           children={children}
           className={`background-image ${this.props.className}`}
@@ -78,14 +80,19 @@ export default decorate(
     position: relative;
 
     ${({ circular }) => {
-    if(circular) {
+    if (circular) {
       return `border-radius: 50%;
       `
     }
   }}
     ${({ height }) => {
-    if(height) {
+    if (height) {
       return `height: ${height}px;`
+    }
+  }}
+    ${({ width }) => {
+    if (width) {
+      return `width: ${width}px;`
     }
   }}
   

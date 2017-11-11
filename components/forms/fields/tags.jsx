@@ -1,18 +1,21 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { styled } from 'utils/theme'
+import { styled, t } from 'utils/theme'
 import Overlay from 'lib/components/overlay'
 import FaIcon from 'lib/components/fa_icon'
 import { observable, computed, action, reaction } from 'mobx'
 import { observer } from 'mobx-react'
-import { tag, panel } from 'utils/common_styles'
+import { tag } from 'utils/common_styles'
 @styled`
   .wrapper {
     z-index: 5000;
     position: relative;
   }
   .tag-input {
-    ${panel};
+    border-radius: ${t(`panelRadius`)};
+    overflow: hidden;
+    border: 1px solid ${t(`border`)};
+    background: white;
     padding: 6px;
     cursor: pointer;
     min-height: 44px;

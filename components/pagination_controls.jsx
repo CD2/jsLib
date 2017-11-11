@@ -57,7 +57,7 @@ export class PaginationControls extends React.Component {
 
   renderPageNumbers() {
     const page_numbers = []
-    for(let i=1; i<=this.totalPages(); i++) {
+    for (let i=1; i<=this.totalPages(); i++) {
       if (i === this.props.page) {
         page_numbers.push(
           <div className="pagination__button current_page" key={i}>
@@ -109,4 +109,4 @@ export default decorate(
     }
   }
 `,
-PaginationControls)
+  PaginationControls)

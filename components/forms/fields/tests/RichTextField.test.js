@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-filename-extension */
 import React from 'react'
-import { RichTextBox } from '../rich_text_field'
+import { RichTextBox } from '../rich_text_box'
 import { shallow } from 'enzyme'
 import toJson from 'enzyme-to-json'
 

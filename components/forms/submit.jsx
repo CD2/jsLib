@@ -23,7 +23,7 @@ import load from 'images/load.gif'
       background-color: ${t(`primaryLight`)};
     }
     ${({ submitting }) => {
-  if(submitting){
+  if (submitting){
     return`
         background: url(${load});
         opacity: 0.7;
@@ -56,7 +56,7 @@ export default class Submit extends React.Component {
     let val = value
     if (submitting) val = ``
     return (
-      <input className={`btn ${className}`} type="submit" value={val || 'Submit'} />
+      <input className={`btn ${className}`} type="submit" value={val || `Submit`} />
     )
   }
 

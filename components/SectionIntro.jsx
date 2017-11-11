@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import decorate from 'utils/decorate'
-import windowStore from 'stores/window'
 import { styled, t, p } from 'utils/theme'
 import theme from 'styles/theme'
 
@@ -52,7 +51,7 @@ export default decorate(
     text-align: ${p(`align`, `left`)};
     .modal & { padding-top: 0; }
     ${({ children, noPad, theme }) => {
-    if(children && !noPad){
+    if (children && !noPad){
       return `padding-bottom: ${theme.gutterHeight.value / 16}em;`  
     }
   }}
@@ -66,7 +65,7 @@ export default decorate(
       color: ${t(`headingText`)};
       margin: 0;
   ${({ light }) => {
-    if(light) {
+    if (light) {
       return `color: white;`
     }
   }}

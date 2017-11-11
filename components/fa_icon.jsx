@@ -47,7 +47,7 @@ export default decorate(
     )
   }}
   ${({ hoverColor }) => {
-    if(hoverColor) {
+    if (hoverColor) {
       return (
         `
           &:hover{

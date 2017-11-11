@@ -5,14 +5,10 @@ import PaginationControls from './pagination_controls'
 import { observable, computed, action } from 'mobx'
 import { observer, Provider } from 'mobx-react'
 import { styled, t } from 'utils/theme'
-import { panel } from 'utils/common_styles'
 
 @styled`
   font-size: 0.9em;
   text-align: left;
-  .table__container {
-    ${panel};
-  }
   table {
     border-spacing: 0;
     width: 100%;

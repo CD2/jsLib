@@ -2,7 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Input } from 'lib/components/forms'
 import { styled, t } from 'utils/theme'
-import { panel } from 'utils/common_styles'
 import { observer, inject } from 'mobx-react'
 
 @styled`
@@ -11,7 +10,6 @@ import { observer, inject } from 'mobx-react'
   > div {
     position: absolute;
     padding: ${t(`gutterWidth`, w=>w/2)}px;
-    ${panel};
   }
   .input-filter:last-child {
     margin-bottom: 0;
