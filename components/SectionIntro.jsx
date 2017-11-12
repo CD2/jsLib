@@ -33,6 +33,8 @@ export class SectionIntro extends React.Component {
           <h2 className="page-intro__heading">{title}</h2> :
           heading === 3 ?
             <h3 className="page-intro__heading">{title}</h3> :
+            heading === 4 ?
+            <h4 className="page-intro__heading">{title}</h4> :
             <h1 className="page-intro__heading">{title}</h1>}
         {
           children &&

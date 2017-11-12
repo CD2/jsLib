@@ -16,6 +16,7 @@ const FIELD_TYPES = {
   image: require(`./fields/image`).default,
   hidden: require(`./fields/hidden`).default,
   country: require(`./fields/country`).default,
+  range: require(`./fields/range`).default,
 }
 
 @styled`
@@ -87,6 +88,9 @@ margin-bottom: 10px;
     color: ${t(`lightText`)};
     font-weight: 600;
   }
+  
+  
+  
 
 `
 export default class Input extends React.Component {
@@ -120,6 +124,7 @@ export default class Input extends React.Component {
     const props = { ...this.props }
     delete props.errors
     delete props.theme
+    console.log(type)
 
     if (label) {
       return (
