@@ -32,10 +32,10 @@ export class Wrapper extends React.Component {
 
 
   renderContent(){
-    const { children, noGutters, spacing } = this.props
+    const { children, noGutters, spacing, noSpacing } = this.props
     const width = this.props.width || theme.siteWidth
     const gutters = noGutters ? 0 : this.props.gutter || theme.gutterWidth
-    const spacingHeight = spacing ? spacing : theme.gutterHeight
+    const spacingHeight = noSpacing ? 0 : spacing ? spacing : theme.gutterHeight
     
     const contentStyle = {
       width: `100%`,
