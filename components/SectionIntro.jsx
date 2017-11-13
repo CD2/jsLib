@@ -99,6 +99,7 @@ export default decorate(
     .btn {
       margin-top: 16px;
     }
+    &:last-child{ padding-bottom: 0; }
   `,
   SectionIntro
 )
