@@ -54,7 +54,7 @@ export default decorate(
     .modal & { padding-top: 0; }
     ${({ children, noPad, theme }) => {
     if (children && !noPad){
-      return `padding-bottom: ${theme.gutterHeight.value / 16}em;`  
+      return `padding-bottom: ${theme.gutterHeight.value / 16}em;`
     }
   }}
     .intro-text {
@@ -65,7 +65,7 @@ export default decorate(
     }
     .page-intro__heading {
       color: ${t(`headingText`)};
-      margin: 0;
+      margin: 0 0 2px;
   ${({ light }) => {
     if (light) {
       return `color: white;`
