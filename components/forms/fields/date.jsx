@@ -54,11 +54,12 @@ export default class Example extends React.Component {
   }
 
   state = {
+    day: new Date(this.props.value),
     month: fromMonth,
   };
 
   handleYearMonthChange = month => {
-    this.setState({ month })
+    this.setState({ month, day: month })
   };
 
   handleChange = (day) => {
@@ -70,21 +71,20 @@ export default class Example extends React.Component {
     const dayPickerProps = {
       todayButton: `Go to Today`,
       captionElement: <YearMonthForm disabled={this.props.disabled} onChange={this.handleYearMonthChange} />,
-      fromMonth: fromMonth,
-      toMonth: toMonth
+      fromMonth,
+      toMonth,
+      onChange: this.handleChange,
+      disabled: this.props.disabled,
+      enableOutsideDays: true,
+      month: this.state.month,
+      selectedDays: this.state.day,
     }
+
     return (
       <div className="YearNavigation">
-        {JSON.stringify(this.props.value)}
         <DayPickerInput
-          month={this.state.month}
-          selectedDays={new Date(this.props.value)}
           dayPickerProps={dayPickerProps}
-          disabled={this.props.disabled}
-          enableOutsideDays
           format={DAY_FORMAT}
-          onDayClick={this.handleChange}
-          onChange={this.handleChange}
         />
       </div>
     )
