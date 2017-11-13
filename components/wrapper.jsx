@@ -11,6 +11,7 @@ export class Wrapper extends React.Component {
     background: PropTypes.string,
     backgroundImage: PropTypes.string,
     backgroundImageUid: PropTypes.string,
+    borderRadius: PropTypes.bool,
     children: PropTypes.any,
     className: PropTypes.string,
     floating: PropTypes.bool,
@@ -36,7 +37,7 @@ export class Wrapper extends React.Component {
     const width = this.props.width || theme.siteWidth
     const gutters = noGutters ? 0 : this.props.gutter || theme.gutterWidth
     const spacingHeight = noSpacing ? 0 : spacing ? spacing : theme.gutterHeight
-    
+
     const contentStyle = {
       width: `100%`,
       position: `relative`,
@@ -100,7 +101,7 @@ export class Wrapper extends React.Component {
           backgroundColor: background || `white`,
           position: `relative`,
           boxShadow: floating ? theme.shadow0 : `none`,
-          borderRadius: floating ? `6px` : `0`,
+          borderRadius: floating || this.props.borderRadius ? `6px` : `0`,
           marginBottom: floating ? theme.gutterHeight.value : `0`,
         }}
       >
