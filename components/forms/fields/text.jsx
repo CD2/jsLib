@@ -25,6 +25,7 @@ export class TextField extends React.Component {
     delete props.initialValue
     delete props.onRawChange
     delete props.theme
+    delete props.model
     props.type = props.type || `text`
     props.value = props.value || ``
 

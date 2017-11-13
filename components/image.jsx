@@ -18,6 +18,7 @@ export class Image extends React.Component {
     height: PropTypes.number,
     onClick: PropTypes.func,
     size: PropTypes.string,
+    style: PropTypes.object,
     uid: PropTypes.string,
     width: PropTypes.number,
   }
@@ -66,6 +67,7 @@ export class Image extends React.Component {
         alt={alt}
         src={url}
         className={`image ${this.props.className}`}
+        style={this.props.style}
         onClick={this.props.onClick}
       />
     )
@@ -95,7 +97,7 @@ export default decorate(
       return `width: ${width}px;`
     }
   }}
-  
+
   `,
   Image
 )
