@@ -24,7 +24,7 @@ export class RichTextBox extends React.Component {
   static propTypes = {
     className: PropTypes.string,
     full_editor: PropTypes.bool,
-    id: PropTypes.string,
+    name: PropTypes.string,
     onChange: PropTypes.func,
     value: PropTypes.string,
   };
@@ -66,7 +66,7 @@ export class RichTextBox extends React.Component {
     if (this.editor && props.value !== this.value) {
       this.value = props.value
       let bookmark = this.editor.selection.getBookmark(2, true)
-      this.editor.setContent(props.value)
+      this.editor.setContent(props.value || ``)
       this.editor.selection.moveToBookmark(bookmark)
     }
   }
@@ -84,16 +84,16 @@ export class RichTextBox extends React.Component {
   @observable setup = false
 
   handleChange = (value) => {
-    const { onChange } = this.props
+    const { onChange, name } = this.props
     this.value = value
-    if (onChange) onChange({name: name, value})
+    if (onChange) onChange({ name, value })
   }
 
   render() {
     return (
       <div className={this.props.className}>
         <textarea
-          id={this.props.id}
+          id={this.props.name}
           ref={(elem) => this.target = elem}
         />
       </div>
