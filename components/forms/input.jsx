@@ -88,9 +88,9 @@ margin-bottom: 10px;
     color: ${t(`lightText`)};
     font-weight: 600;
   }
-  
-  
-  
+
+
+
 
 `
 export default class Input extends React.Component {
@@ -101,6 +101,7 @@ export default class Input extends React.Component {
     errors: PropTypes.arrayOf(PropTypes.string),
     label: PropTypes.string,
     type: PropTypes.string,
+    name: PropTypes.string,
   }
 
   getType(type) {
@@ -124,7 +125,6 @@ export default class Input extends React.Component {
     const props = { ...this.props }
     delete props.errors
     delete props.theme
-    console.log(type)
 
     if (label) {
       return (

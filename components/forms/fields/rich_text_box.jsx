@@ -33,8 +33,8 @@ export class RichTextBox extends React.Component {
     let toolbar = `bold italic removeformat | bullist numlist | table | link`
     let height = `150`
     if (this.props.full_editor) {
-      toolbar = `formatselect | bold italic strikethrough forecolor backcolor | link anchor | 
-      alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | 
+      toolbar = `formatselect | bold italic strikethrough forecolor backcolor | link anchor |
+      alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  |
       removeformat`
       height = `400`
     }
@@ -86,7 +86,7 @@ export class RichTextBox extends React.Component {
   handleChange = (value) => {
     const { onChange } = this.props
     this.value = value
-    if (onChange) onChange(value)
+    if (onChange) onChange({name: name, value})
   }
 
   render() {
