@@ -1,7 +1,8 @@
 /* eslint-disable react/prop-types */
 import React from 'react'
 import PropTypes from 'prop-types'
-import DayPicker from 'react-day-picker'
+import moment from 'moment'
+import DayPicker, { DateUtils } from 'react-day-picker'
 import DayPickerInput from 'react-day-picker/DayPickerInput'
 import 'react-day-picker/lib/style.css'
 
@@ -55,8 +56,12 @@ export default class Example extends React.Component {
 
   state = {
     day: new Date(this.props.value),
-    month: fromMonth,
+    month: this.props.value ? new Date(this.props.value) : fromMonth,
   };
+
+  componentDidMount() {
+    if (this.props.value) this.dayPicker.input.value = moment(this.props.value).format(DAY_FORMAT)
+  }
 
   handleYearMonthChange = month => {
     this.setState({ month, day: month })
@@ -74,15 +79,21 @@ export default class Example extends React.Component {
       fromMonth,
       toMonth,
       onChange: this.handleChange,
+      onDayClick: this.handleChange,
       disabled: this.props.disabled,
       enableOutsideDays: true,
       month: this.state.month,
-      selectedDays: this.state.day,
+      modifiers: {
+        selected: date => {
+          return DateUtils.isSameDay(this.state.day, date)
+        }
+      },
     }
 
     return (
       <div className="YearNavigation">
         <DayPickerInput
+          ref={ele => this.dayPicker = ele}
           dayPickerProps={dayPickerProps}
           format={DAY_FORMAT}
         />
