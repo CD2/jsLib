@@ -21,6 +21,7 @@ export class Image extends React.Component {
     style: PropTypes.object,
     uid: PropTypes.string,
     width: PropTypes.number,
+    contain: PropTypes.bool,
   }
 
   static defaultProps = {
@@ -80,6 +81,12 @@ export default decorate(
     background-position: 50%;
     background-repeat: no-repeat;
     position: relative;
+    ${({ contain }) => {
+    if (contain) {
+      return `background-size: contain;
+      `
+    }
+  }}
 
     ${({ circular }) => {
     if (circular) {
