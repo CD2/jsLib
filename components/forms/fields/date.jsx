@@ -9,7 +9,7 @@ import 'react-day-picker/lib/style.css'
 const currentYear = new Date().getFullYear()
 const fromMonth = new Date(currentYear, -1200)
 const toMonth = new Date(currentYear + 10, 11)
-
+const defaultTime = moment(new Date()).subtract(25, 'years')
 const DAY_FORMAT = `DD/MM/YYYY`
 
 // Component will receive date, locale and localeUtils props
@@ -56,7 +56,7 @@ export default class Example extends React.Component {
 
   state = {
     day: new Date(this.props.value),
-    month: this.props.value ? new Date(this.props.value) : fromMonth,
+    month: this.props.value ? new Date(this.props.value) : new Date(defaultTime),
   };
 
   componentDidMount() {
