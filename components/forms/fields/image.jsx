@@ -9,12 +9,21 @@ import Image from "lib/components/image"
 export class ImageField extends React.Component {
 
   static propTypes = {
+    accepts: PropTypes.array,
     multiple: PropTypes.bool,
     name: PropTypes.string,
     onChange: PropTypes.func,
     onFocus: PropTypes.func,
     onRawChange: PropTypes.func,
+    onlyImages: PropTypes.bool,
+    onlySpreadsheets: PropTypes.bool,
     value: PropTypes.object,
+  }
+
+  static defaultProps = {
+    accepts: [],
+    onlyImages: false,
+    onlySpreadsheets: false,
   }
 
 
@@ -50,7 +59,14 @@ export class ImageField extends React.Component {
   }
 
   render() {
-    const { name, multiple, onFocus } = this.props
+    const { name, multiple, onFocus, onlyImages, onlySpreadsheets } = this.props
+    let acceptedTypes = null
+
+    if (onlyImages) {
+      acceptedTypes = `.jpg,.png,.jpeg,.gif,.tiff,.svg,bmp`
+    } else if (onlySpreadsheets) {
+      acceptedTypes = `.xls,.xlw,.xlt,.xml,.xlsx,.xlsm,.xltx,.xltm,.xlsb`
+    }
 
     return (
       <div>
@@ -61,6 +77,7 @@ export class ImageField extends React.Component {
           type="file"
           name={name}
           multiple={multiple}
+          accepts={acceptedTypes || this.props.accepts.join()}
           onChange={this.handleChange}
           onFocus={onFocus}
         />
