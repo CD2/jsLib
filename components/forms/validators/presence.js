@@ -19,6 +19,7 @@ export class PresenceValidator extends BaseValidator {
       return (this.options.allow_blank ? value : value.filter(x=>x)).length !== 0
     }
     if (typeof value === `boolean`) return true
+    if (typeof value === `object` && value.toString() === `[object File]`) return value.name
     if (typeof value === `object`) return Object.keys(value).length !== 0
     return !!value
   }
