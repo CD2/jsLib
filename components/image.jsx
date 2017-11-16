@@ -15,11 +15,13 @@ export class Image extends React.Component {
     className: PropTypes.string,
     crop: PropTypes.bool,
     defaultSrc: PropTypes.string,
+    embed: PropTypes.bool,
     height: PropTypes.number,
     onClick: PropTypes.func,
     size: PropTypes.string,
     style: PropTypes.object,
     uid: PropTypes.string,
+    url: PropTypes.string,
     width: PropTypes.number,
     contain: PropTypes.bool,
   }
@@ -28,10 +30,13 @@ export class Image extends React.Component {
     crop: false,
     background: false,
     alt: ``,
+    embed: false,
+    url: null,
   }
 
   get url() {
-    const { uid, width, height, crop, size } = this.props
+    const { uid, url, width, height, crop, size } = this.props
+    if (url) return url
     const params = { uid, size }
     if (height && !size) params.size = `${Math.round(height*1.5*2)}x${height*2}`
     if (width && !size) params.size = `${width*2}x${Math.round(width/1.5*2)}`
@@ -41,12 +46,25 @@ export class Image extends React.Component {
   }
 
   render() {
-    const { alt, background, children, defaultSrc, uid } = this.props
+    const { alt, background, children, defaultSrc, uid, embed, width, height } = this.props
 
     invariant(!(background && alt), `background images don't accept alt tags`)
 
     let url = this.url
-    if (!uid) { url = defaultSrc }
+    if (!uid && !this.props.url) { url = defaultSrc }
+
+    if (embed) {
+      return (
+        <embed
+          width={`${width}px`}
+          height={`${height}px`}
+          style={this.props.style}
+          className={`image ${this.props.className}`}
+          src={url}
+          onClick={this.props.onClick}
+        />
+      )
+    }
 
     if (background) {
       return (
