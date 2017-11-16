@@ -27,6 +27,7 @@ export class TextField extends React.Component {
     delete props.theme
     delete props.model
     delete props.compact
+    delete props.description
     props.type = props.type || `text`
     props.value = props.value || ``
 

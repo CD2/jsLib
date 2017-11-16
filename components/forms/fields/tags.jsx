@@ -42,7 +42,7 @@ export class TagField extends React.Component {
       PropTypes.func,
       PropTypes.arrayOf(PropTypes.string),
     ]),
-    value: PropTypes.string,
+    value: PropTypes.array,
   }
 
   static defaultProps = {
