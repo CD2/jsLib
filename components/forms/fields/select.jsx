@@ -5,12 +5,12 @@ export class SelectField extends React.Component {
 
   static propTypes = {
     choices: PropTypes.arrayOf(PropTypes.object),
+    default_value: PropTypes.string,
     includeBlank: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
     name: PropTypes.string,
     onChange: PropTypes.func,
     onRawChange: PropTypes.func,
     value: PropTypes.string,
-    default_value: PropTypes.string
   }
 
   handleChange = (e) => {
@@ -36,9 +36,9 @@ export class SelectField extends React.Component {
         text = choice.text
         value = choice.value
       }
-      if(this.props.default_value == value){
+      if (this.props.default_value == value){
         choiceHtml.push(<option key={value} value={value} selected="selected">{text}</option>)
-      }else{
+      } else {
         choiceHtml.push(<option key={value} value={value}>{text}</option>)        
       }
     })

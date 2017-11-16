@@ -100,8 +100,8 @@ export default class Input extends React.Component {
     description: PropTypes.string,
     errors: PropTypes.arrayOf(PropTypes.string),
     label: PropTypes.string,
-    type: PropTypes.string,
     name: PropTypes.string,
+    type: PropTypes.string,
   }
 
   getType(type) {
