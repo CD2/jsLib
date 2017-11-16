@@ -64,13 +64,13 @@ export class Tabs extends React.Component {
     })
     return (<div className="tab-heads">{headings}</div>)
   }
-
+  //default to first child
   renderSelectedTab() {
     const selected = this.getSelected()
     let tab = null
     React.Children.forEach(this.props.children, child => {
       if (!child) return
-      if (tab === null) tab=child //default to first child
+      if (tab === null) tab=child
       if (child.key === selected) tab=child
     })
     return <div className="tab-content">{tab}</div>

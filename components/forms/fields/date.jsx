@@ -28,7 +28,7 @@ function YearMonthForm({ date, localeUtils, onChange }) {
 
   return (
     <form className="DayPicker-Caption">
-      <select name="month" } value={date.getMonth()} onChange={handleChange>
+      <select name="month"} value={date.getMonth()} onChange={handleChange>
         {months.map((month, i) => <option key={i} value={i}>{month}</option>)}
       </select>
       <select name="year"  value={date.getFullYear()} onChange={handleChange}>

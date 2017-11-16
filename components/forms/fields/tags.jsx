@@ -150,7 +150,7 @@ export class TagField extends React.Component {
     this.tags.replace(this.tags.filter(tag=>tag))
     this.current_index = this.tags.indexOf(tag)
   }
-
+  //just move to next one
   @action handleInputKeyDown = (e) => {
     switch (e.key) {
     case `Backspace`:
@@ -167,7 +167,7 @@ export class TagField extends React.Component {
       if (this.props.onlyAllowSuggestions) return null
       if (this.tag_except_current.indexOf(this.current_value) !== -1) this.current_value = ``
       else {
-        if (this.current_index < this.tags.length - 1) { //just move to next one
+        if (this.current_index < this.tags.length - 1) {
           this.tags.replace(this.tags.filter(tag=>tag))
           this.current_index = this.tags.indexOf(this.current_value) + 1
         } else if (this.current_index === this.tags.length - 1 && this.current_value !== ``){
