@@ -28,6 +28,7 @@ export class ImageField extends React.Component {
 
 
   componentWillReceiveProps(props) {
+    if (props.value === null && this.props.value) this.fileInput.value = ``
     if (!props.value) return
     if (props.value instanceof File) {
       let reader = new FileReader()
@@ -43,13 +44,17 @@ export class ImageField extends React.Component {
   handleChange = (e) => {
     const { onRawChange, onChange } = this.props
     if (onRawChange) onRawChange(e)
-    if (onChange) {onChange({
-      name: e.target.name,
-      value: e.target.files[0],
-      filename: e.target.files[0].name,
-      size: e.target.files[`0`].size,
-      type: e.target.files[`0`].type,
-    })}
+    if (onChange) {
+      const file = e.target.files[0] || {}
+
+      onChange({
+        name: e.target.name,
+        value: file,
+        filename: file.name,
+        size: file.size,
+        type: file.type,
+      })
+    }
   }
 
   renderPreview() {
@@ -74,10 +79,11 @@ export class ImageField extends React.Component {
           {this.renderPreview()}
         </div>
         <input
+          ref={element => this.fileInput = element}
           type="file"
           name={name}
           multiple={multiple}
-          accepts={acceptedTypes || this.props.accepts.join()}
+          accept={acceptedTypes || this.props.accepts.join()}
           onChange={this.handleChange}
           onFocus={onFocus}
         />
