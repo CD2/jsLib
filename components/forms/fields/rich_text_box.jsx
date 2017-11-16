@@ -7,6 +7,7 @@ import 'tinymce/plugins/lists'
 import 'tinymce/plugins/link'
 import 'tinymce/plugins/table'
 import 'tinymce/plugins/anchor'
+import 'tinymce/plugins/code'
 import { styled, t } from 'utils/theme'
 
 import { observer } from 'mobx-react'
@@ -35,7 +36,7 @@ export class RichTextBox extends React.Component {
     if (this.props.full_editor) {
       toolbar = `formatselect | bold italic strikethrough forecolor backcolor | link anchor |
       alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  |
-      removeformat`
+      removeformat code`
       height = `400`
     }
     tinymce.init({
@@ -47,7 +48,7 @@ export class RichTextBox extends React.Component {
       browser_spellcheck: true,
 
       plugins: [
-        `lists link table anchor`
+        `lists link table anchor code`
       ],
       toolbar,
       height,
