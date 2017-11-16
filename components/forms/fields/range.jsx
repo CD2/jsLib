@@ -15,6 +15,7 @@ export class Range extends React.Component {
     onKeyPress: PropTypes.func,
     onRawChange: PropTypes.func,
     placeholder: PropTypes.string,
+    theme: PropTypes.object,
     type: PropTypes.string,
   }
 
