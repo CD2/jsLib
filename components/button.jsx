@@ -158,6 +158,12 @@ export default decorate(
           color: white;
         }
       }
+      &.action {
+        font-size: 1.2em;
+        color: ${t(`primary`)};
+        font-weight: 600;
+        border: 2px solid ${t(`primary`)};
+      }
 
     }
     + .btn {
