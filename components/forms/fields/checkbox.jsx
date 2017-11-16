@@ -28,9 +28,13 @@ export class Checkbox extends React.Component {
 
   render() {
     const { className, labelText } = this.props
+    const props = { ...this.props }
+    delete props.labelText
+    delete props.model
+    delete props.theme
     return (
       <label className={className}>
-        <input {...this.props} className="input" onChange={this.handleChange} />
+        <input {...props} className="input" onChange={this.handleChange} />
         <span>{labelText}</span>
       </label>
     )
