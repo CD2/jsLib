@@ -166,9 +166,7 @@ export default decorate(
       }
 
     }
-    + .btn {
-      margin-left: 10px;
-    }
+    margin-right: 6px;
   `,
   Button
 )
