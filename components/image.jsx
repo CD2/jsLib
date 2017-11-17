@@ -117,7 +117,7 @@ export default decorate(
       return `height: ${height}px;`
     }
   }}
-    ${({ width }) => {
+  ${({ width }) => {
     if (width) {
       return `width: ${width}px;`
     }

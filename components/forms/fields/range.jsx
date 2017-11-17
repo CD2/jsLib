@@ -1,12 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { styled, t } from "utils/theme/index";
-import Wrapper from "../../wrapper";
+import { styled, t } from "utils/theme/index"
+import Wrapper from "../../wrapper"
 import decorate from 'utils/decorate'
 
 export class Range extends React.Component {
 
   static propTypes = {
+    className: PropTypes.string,
     initialValue: PropTypes.string,
     name: PropTypes.string,
     onChange: PropTypes.func,
@@ -14,6 +15,7 @@ export class Range extends React.Component {
     onKeyPress: PropTypes.func,
     onRawChange: PropTypes.func,
     placeholder: PropTypes.string,
+    theme: PropTypes.object,
     type: PropTypes.string,
   }
 
@@ -33,14 +35,14 @@ export class Range extends React.Component {
     return (
       <div className={this.props.className}>
         <Wrapper background={this.props.theme.background} spacing={10} floating>
-          <p className='value'>{props.value === 'null' ? 'Choose value' : props.value}</p>
-          <div className={'slider'}>
+          <p className="value">{props.value === `null` ? `Choose value` : props.value}</p>
+          <div className={`slider`}>
             <b>0</b>
             <input
               {...props}
-              onChange={this.handleChange}
               min={0}
               max={10}
+              onChange={this.handleChange}
             />
             <b>10</b>
           </div>
@@ -57,7 +59,7 @@ export default decorate(
       b { 
         font-size: 0.9em;
         font-weight: 600;
-        color: ${t('lightText')};
+        color: ${t(`lightText`)};
         flex: 0 0 25px;
         text-align: center; 
       }
@@ -66,7 +68,7 @@ export default decorate(
       margin: 0;
       text-align: center;
       font-size: 0.9em;
-      color: ${t('lightText')};
+      color: ${t(`lightText`)};
     }
     input[type=range] {
   -webkit-appearance: none;
