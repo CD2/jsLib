@@ -45,6 +45,7 @@ function YearMonthForm({ date, localeUtils, onChange }) {
 export default class Example extends React.Component {
 
   static propTypes = {
+    asDateString: PropTypes.bool,
     date: PropTypes.number,
     disabled: PropTypes.bool,
     fromYear: PropTypes.number,
@@ -55,6 +56,7 @@ export default class Example extends React.Component {
   }
 
   state = {
+    asDateString: false,
     day: new Date(this.props.value),
     month: this.props.value ? new Date(this.props.value) : new Date(defaultTime),
   };
@@ -68,8 +70,8 @@ export default class Example extends React.Component {
   };
 
   handleChange = (day) => {
-    const { onChange, name } = this.props
-    if (onChange) onChange({ name, value: day })
+    const { onChange, name, asDateString } = this.props
+    if (onChange) onChange({ name, value: asDateString ? day.toDateString() : day })
   }
 
   render() {
