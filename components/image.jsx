@@ -13,6 +13,7 @@ export class Image extends React.Component {
     children: PropTypes.node,
     circular: PropTypes.bool,
     className: PropTypes.string,
+    contain: PropTypes.bool,
     crop: PropTypes.bool,
     defaultSrc: PropTypes.string,
     embed: PropTypes.bool,
@@ -23,7 +24,6 @@ export class Image extends React.Component {
     uid: PropTypes.string,
     url: PropTypes.string,
     width: PropTypes.number,
-    contain: PropTypes.bool,
   }
 
   static defaultProps = {
@@ -117,7 +117,7 @@ export default decorate(
       return `height: ${height}px;`
     }
   }}
-    ${({ width }) => {
+  ${({ width }) => {
     if (width) {
       return `width: ${width}px;`
     }

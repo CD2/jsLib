@@ -9,7 +9,7 @@ import 'react-day-picker/lib/style.css'
 const currentYear = new Date().getFullYear()
 const fromMonth = new Date(currentYear, -1200)
 const toMonth = new Date(currentYear + 10, 11)
-const defaultTime = moment(new Date()).subtract(25, 'years')
+const defaultTime = moment(new Date()).subtract(25, `years`)
 const DAY_FORMAT = `DD/MM/YYYY`
 
 // Component will receive date, locale and localeUtils props
@@ -28,10 +28,10 @@ function YearMonthForm({ date, localeUtils, onChange }) {
 
   return (
     <form className="DayPicker-Caption">
-      <select name="month" onChange={handleChange} value={date.getMonth()}>
+      <select name="month" value={date.getMonth()} onChange={handleChange}>
         {months.map((month, i) => <option key={i} value={i}>{month}</option>)}
       </select>
-      <select name="year" onChange={handleChange} value={date.getFullYear()}>
+      <select name="year"  value={date.getFullYear()} onChange={handleChange}>
         {years.map((year, i) =>
           (<option key={i} value={year}>
             {year}
@@ -75,7 +75,11 @@ export default class Example extends React.Component {
   render() {
     const dayPickerProps = {
       todayButton: `Go to Today`,
-      captionElement: <YearMonthForm disabled={this.props.disabled} onChange={this.handleYearMonthChange} />,
+      captionElement:
+  <YearMonthForm
+    disabled={this.props.disabled}
+    onChange={this.handleYearMonthChange}
+  />,
       fromMonth,
       toMonth,
       onChange: this.handleChange,
