@@ -36,7 +36,7 @@ export class SelectField extends React.Component {
         text = choice.text
         value = choice.value
       }
-      if (this.props.default_value == value){
+      if (this.props.default_value === value){
         choiceHtml.push(<option key={value} value={value} selected="selected">{text}</option>)
       } else {
         choiceHtml.push(<option key={value} value={value}>{text}</option>)        

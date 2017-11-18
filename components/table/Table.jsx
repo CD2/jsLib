@@ -8,11 +8,6 @@ import { styled, t } from 'utils/theme'
 
 @styled`
   font-size: 0.9em;
-  text-align: left;
-  table {
-    border-spacing: 0;
-    width: 100%;
-  }
   thead tr {
     background: ${t(`darkBackground`)};
     color: white;
@@ -30,14 +25,28 @@ import { styled, t } from 'utils/theme'
     }
   }
   th{
-    padding: ${t(`gutterWidth`, w=>w/4)}px;
+    padding: ${t(`gutterWidth`, w=>w/2)}px;
     white-space: nowrap;
   }
+  img {
+    border-radius: 5px;
+  }
   td {
-    padding: ${t(`gutterWidth`, w=>w/4)}px;
+    padding: ${t(`gutterWidth`, w=>w/4)}px ${t(`gutterWidth`, w=>w/2)}px;
+    &.primary { font-weight: 600 }
+  }
+  tr:first-child, tr:last-child {
+    td {
+      padding: ${t(`gutterWidth`, w=>w/2)}px;
+    }
   }
   .nowrap {
     white-space: nowrap;
+  }
+  .table__container {
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: ${t('shadow0')};
   }
 `
 @observer
@@ -91,8 +100,8 @@ export class IndexTable extends React.Component {
     return (
       <div className={this.props.className}>
         {this.pagination_controls}
-        <div className="table__container">
           <Provider query={this.props.query}>
+            <div className="table__container">
             <table>
               {headings}
               <tbody>
@@ -101,8 +110,9 @@ export class IndexTable extends React.Component {
                 })}
               </tbody>
             </table>
+            </div>
           </Provider>
-        </div>
+
         {this.pagination_controls}
       </div>
     )

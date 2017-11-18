@@ -1,6 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { styled } from 'utils/theme'
+import { observer } from 'mobx-react'
+import { observable, action } from 'mobx'
 
 @styled`
   display: block;
@@ -11,6 +13,7 @@ import { styled } from 'utils/theme'
     margin-right: 6px;
   }
 `
+@observer
 export class Checkbox extends React.Component {
 
   static propTypes = {
@@ -20,10 +23,15 @@ export class Checkbox extends React.Component {
     onRawChange: PropTypes.func,
   }
 
-  handleChange = (e) => {
+  @observable checked = this.props.model.get(this.props.name)
+
+  @action handleChange = (e) => {
     const { onRawChange, onChange } = this.props
     if (onRawChange) onRawChange(e)
-    if (onChange) onChange({ name: e.target.name, value: e.target.checked })
+    if (onChange) {
+      onChange({ name: e.target.name, value: e.target.checked })
+      this.checked = e.target.checked
+    }
   }
 
   render() {
@@ -34,7 +42,12 @@ export class Checkbox extends React.Component {
     delete props.theme
     return (
       <label className={className}>
-        <input {...props} className="input" onChange={this.handleChange} />
+        <input
+          {...props}
+          className="input"
+          onChange={this.handleChange}
+          checked={this.checked}
+        />
         <span>{labelText}</span>
       </label>
     )
