@@ -30,6 +30,7 @@ import { styled, t } from 'utils/theme'
   }
   img {
     border-radius: 5px;
+    display: block;
   }
   td {
     padding: ${t(`gutterWidth`, w=>w/4)}px ${t(`gutterWidth`, w=>w/2)}px;
