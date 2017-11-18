@@ -47,6 +47,11 @@ export default decorate(
       padding: ${props => props.theme.gutterWidth.value}px;
       width: 90%;
       max-width: 800px;
+        ${({ narrow }) => {
+    if (narrow) {
+      return `max-width: 500px;`
+    }
+  }}
       max-height: 600px;
       overflow: auto;
       position: absolute;
