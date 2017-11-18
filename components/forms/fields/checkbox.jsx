@@ -23,7 +23,7 @@ export class Checkbox extends React.Component {
     onRawChange: PropTypes.func,
   }
 
-  @observable checked = this.props.model.get(this.props.name)
+  @observable checked = this.props.model && this.props.model.get(this.props.name)
 
   @action handleChange = (e) => {
     const { onRawChange, onChange } = this.props
