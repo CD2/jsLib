@@ -46,8 +46,12 @@ export default decorate(
     position: fixed;
     top: 0;
     width: 100%;
-    z-index: 4999;
-
+    z-index: 24999;
+  ${({ belowAppBar }) => {
+    if (belowAppBar) {
+      return `z-index: 4999;`
+    }
+  }}
     &.visible {
       background: ${t(`darkBackground`)};
       cursor: pointer;

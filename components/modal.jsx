@@ -43,7 +43,7 @@ export default decorate(
     z-index: 25000;
     .modal {
       ${active_card};
-      z-index: 100000;
+      z-index: 250000;
       padding: ${props => props.theme.gutterWidth.value}px;
       width: 90%;
       max-width: 800px;
