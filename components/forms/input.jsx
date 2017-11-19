@@ -106,7 +106,7 @@ export default class Input extends React.Component {
   }
 
   getType(type) {
-    return FIELD_TYPES[type] || FIELD_TYPES[`text`]
+    return FIELD_TYPES[type] || FIELD_TYPES.text
   }
 
   renderErrors() {

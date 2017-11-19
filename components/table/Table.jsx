@@ -28,9 +28,8 @@ import { styled, t } from 'utils/theme'
     padding: ${t(`gutterWidth`, w=>w/2)}px;
     white-space: nowrap;
   }
-  img {
+  .background-image {
     border-radius: 5px;
-    display: block;
   }
   td {
     padding: ${t(`gutterWidth`, w=>w/4)}px ${t(`gutterWidth`, w=>w/2)}px;
@@ -47,7 +46,7 @@ import { styled, t } from 'utils/theme'
   .table__container {
     border-radius: 6px;
     overflow: hidden;
-    box-shadow: ${t('shadow0')};
+    box-shadow: ${t(`shadow0`)};
   }
 `
 @observer
@@ -101,8 +100,8 @@ export class IndexTable extends React.Component {
     return (
       <div className={this.props.className}>
         {this.pagination_controls}
-          <Provider query={this.props.query}>
-            <div className="table__container">
+        <Provider query={this.props.query}>
+          <div className="table__container">
             <table>
               {headings}
               <tbody>
@@ -111,8 +110,8 @@ export class IndexTable extends React.Component {
                 })}
               </tbody>
             </table>
-            </div>
-          </Provider>
+          </div>
+        </Provider>
 
         {this.pagination_controls}
       </div>

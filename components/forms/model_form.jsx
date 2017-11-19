@@ -51,7 +51,9 @@ export default class ModelForm extends React.Component {
       />
     )
 
-    if (this.props.renderField) return this.props.renderField(inputComponent, this.model, field, index)
+    if (this.props.renderField) {
+      return this.props.renderField(inputComponent, this.model, field, index)
+    }
 
     return inputComponent
   }
