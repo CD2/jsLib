@@ -1,6 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
+import { titleCase } from 'utils/helpers'
+
 import Model from './form_model'
 import Form from './form'
 import Submit from './submit'
@@ -62,6 +64,7 @@ export default class ModelForm extends React.Component {
       <Input
         key={index}
         model={this.model}
+        label={field.label || titleCase(field.name) }
         {...field}
       />
     )
