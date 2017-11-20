@@ -1,5 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { observer } from 'mobx-react'
+import { observable, action } from 'mobx'
 
 import { titleCase } from 'utils/helpers'
 
@@ -7,8 +9,9 @@ import Model from './form_model'
 import Form from './form'
 import Submit from './submit'
 import Input from './model_input'
+import decorate from 'utils/decorate'
 
-export default class ModelForm extends React.Component {
+class ModelForm extends React.Component {
 
   static propTypes = {
     fields: PropTypes.array,
@@ -47,17 +50,24 @@ export default class ModelForm extends React.Component {
 
     this.model = new ModelType({
       fields: props.fields,
-      options: props.modelOptions
+      options: props.modelOptions,
+      onSuccess: this.stopSubmitting,
+      onError: this.stopSubmitting,
     })
   }
 
-  handleSubmit  = () => {
+  @observable formSubmitting = false
+
+  @action handleSubmit  = () => {
+    this.formSubmitting = true
     const { onSubmit } = this.props
 
     if (onSubmit) return onSubmit(this.model)
 
     return this.model.submit()
   }
+
+  @action stopSubmitting = () => this.formSubmitting = false
 
   renderField = (field, index) => {
     const inputComponent = (
@@ -96,9 +106,17 @@ export default class ModelForm extends React.Component {
             ? this.props.renderContents(this.renderFields(), this.model)
             : this.renderFields()
         }
-        {this.props.submit}
+        {React.cloneElement(
+          this.props.submit,
+          { ...this.props.submit.props, submitting: this.formSubmitting }
+        )}
       </Form>
     )
   }
 
 }
+
+export default decorate(
+  observer,
+  ModelForm
+)
