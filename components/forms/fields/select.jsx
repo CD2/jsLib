@@ -13,6 +13,10 @@ export class SelectField extends React.Component {
     value: PropTypes.string,
   }
 
+  static defaultProps = {
+    choices: [],
+  }
+
   handleChange = (e) => {
     const { onRawChange, onChange } = this.props
     if (onRawChange) onRawChange(e)

@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import dropdown from 'images/dropdown.svg'
 import { styled, t } from 'utils/theme'
+import loader from './loader'
 
 const FIELD_TYPES = {
   text: require(`./fields/text`).default,
@@ -102,8 +103,13 @@ export default class Input extends React.Component {
     description: PropTypes.string,
     errors: PropTypes.arrayOf(PropTypes.string),
     label: PropTypes.string,
+    loader: PropTypes.object,
     name: PropTypes.string,
     type: PropTypes.string,
+  }
+
+  static defaultProps = {
+    loader: null,
   }
 
   getType(type) {
@@ -123,10 +129,14 @@ export default class Input extends React.Component {
 
   render() {
     const { className, label, type, description } = this.props
-    const Field = this.getType(type)
+    let Field = this.getType(type)
     const props = { ...this.props }
     delete props.errors
     delete props.theme
+
+    if (this.props.loader) {
+      Field = loader(Field, this.props.loader)
+    }
 
     if (label) {
       return (
