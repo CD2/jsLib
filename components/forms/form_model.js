@@ -50,15 +50,19 @@ export default class FormModel {
 
   @action valid() {
     if (!this.validations) return true
+    const { onError } = this.options
     const errors = validateForm(this.completeValues, this.validations)
+    const hasErrors = Object.keys(errors).length === 0
 
     this.errors.replace(errors)
-    return Object.keys(errors).length === 0
+    onError && onError(errors)
+
+    return hasErrors
   }
 
   submit() {
     if (!this.valid()) return
-    if (this.options.handleSubmit) return this.options.handleSubmit(toJS(this.changes))
+    if (this.options.onSubmit) return this.options.onSubmit(toJS(this.changes))
     if (this.options.perform) return this.perform()
   }
 

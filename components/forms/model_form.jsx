@@ -26,6 +26,7 @@ class ModelForm extends React.Component {
       flash: PropTypes.string,
       onSubmit: PropTypes.func,
       onSuccess: PropTypes.func,
+      onError: PropTypes.func,
     }),
     onSubmit: PropTypes.func,
     renderContents: PropTypes.func,
@@ -50,9 +51,17 @@ class ModelForm extends React.Component {
 
     this.model = new ModelType({
       fields: props.fields,
-      options: props.modelOptions,
-      onSuccess: this.stopSubmitting,
-      onError: this.stopSubmitting,
+      options: {
+        ...props.modelOptions,
+        onSuccess: () => {
+          props.modelOptions.onSuccess && props.modelOptions.onSuccess()
+          this.stopSubmitting()
+        },
+        onError: () => {
+          props.modelOptions.onError && props.modelOptions.onError()
+          this.stopSubmitting()
+        },
+      },
     })
   }
 
