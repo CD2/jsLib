@@ -4,7 +4,7 @@ export default function inputLoader(Component, options) {
   switch (options.type) {
   case `records`: {
     return decorate(
-      options.cord.connectIds(options.scope || null),
+      options.cord.connectIds(options.scope || `all`),
       options.cord.connectRecord({
         id: props => options.scope ? props[`${options.scope}_ids`] : props.all_ids,
         as: options.as || `records`,
@@ -28,7 +28,7 @@ export default function inputLoader(Component, options) {
   }
   case `ids`: {
     return decorate(
-      options.cord.connectIds(options.scope || options.scopes || null),
+      options.cord.connectIds(options.scope || options.scopes || `all`),
       Component,
     )
   }
