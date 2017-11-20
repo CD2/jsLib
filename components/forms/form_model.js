@@ -63,7 +63,7 @@ export default class FormModel {
   }
 
   perform() {
-    const { redirectTo, cord, flash, then, handleError, perform, formatPayload } = this.options
+    const { redirectTo, cord, flash, onSuccess, handleError, perform, formatPayload } = this.options
     let params = null
     const values = this.changes
 
@@ -76,7 +76,7 @@ export default class FormModel {
     const payload = formatPayload ? formatPayload(toJS(values)) : params
 
     cord.perform(perform, payload).then(response => {
-      then && then(values, response)
+      onSuccess && onSuccess(values, response)
       if (flash) flashStore.add(flash)
       if (redirectTo) redirect(redirectTo(toJS(values), response))
     }).catch(error => {

@@ -19,6 +19,8 @@ export default class ModelForm extends React.Component {
       redirectTo: PropTypes.func,
       formatPayload: PropTypes.func,
       flash: PropTypes.string,
+      onSubmit: PropTypes.func,
+      onSuccess: PropTypes.func,
     }),
     onSubmit: PropTypes.func,
     renderContents: PropTypes.func,
