@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import Model from './model'
+import Model from './form_model'
 import Form from './form'
 import Submit from './submit'
 import Input from './model_input'
@@ -12,12 +12,17 @@ export default class ModelForm extends React.Component {
     fields: PropTypes.array,
     fieldsAsObject: PropTypes.bool,
     model: PropTypes.object,
-    modelOptions: PropTypes.object,
+    modelOptions: PropTypes.shape({
+      values: PropTypes.object,
+      cord: PropTypes.object,
+      perform: PropTypes.string,
+      redirectTo: PropTypes.func,
+      formatPayload: PropTypes.func,
+    }),
     onSubmit: PropTypes.func,
     renderContents: PropTypes.func,
     renderField: PropTypes.func,
     submit: PropTypes.node,
-    values: PropTypes.object,
   }
 
   static defaultProps = {
@@ -36,10 +41,17 @@ export default class ModelForm extends React.Component {
     const ModelType = props.model || Model
 
     this.model = new ModelType({
-      validations: props.fields.map(field => field.validation),
-      values: props.values,
-      ...props.modelOptions
+      fields: props.fields,
+      options: props.modelOptions
     })
+  }
+
+  handleSubmit  = () => {
+    const { onSubmit } = this.props
+
+    if (onSubmit) return onSubmit(this.model)
+
+    return this.model.submit()
   }
 
   renderField = (field, index) => {
@@ -72,7 +84,7 @@ export default class ModelForm extends React.Component {
 
   render() {
     return (
-      <Form onSubmit={this.props.onSubmit}>
+      <Form onSubmit={this.handleSubmit}>
         {
           this.props.renderContents
             ? this.props.renderContents(this.renderFields(), this.model)
