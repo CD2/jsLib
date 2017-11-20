@@ -30,6 +30,9 @@ export class RichTextBox extends React.Component {
     value: PropTypes.string,
   };
 
+  static defaultProps = {
+    full_editor: true
+  }
   componentDidMount() {
     let toolbar = `bold italic removeformat | bullist numlist | table | link`
     let height = `150`
