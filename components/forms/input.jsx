@@ -18,6 +18,7 @@ const FIELD_TYPES = {
   country: require(`./fields/country`).default,
   range: require(`./fields/range`).default,
   color: require(`./fields/color`).default,
+  file: require(`./fields/file`).default,
 }
 
 @styled`
