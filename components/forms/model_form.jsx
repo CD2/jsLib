@@ -74,7 +74,7 @@ class ModelForm extends React.Component {
       <Input
         key={index}
         model={this.model}
-        label={field.label || titleCase(field.name) }
+        label={field.label || titleCase(field.name)}
         {...field}
       />
     )

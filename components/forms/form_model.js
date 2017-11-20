@@ -19,7 +19,7 @@ export default class FormModel {
     this.values.replace(options.values || {})
 
     const validations = fields.reduce((newValidations, field) => {
-      newValidations[field.name] = field.validations
+      newValidations[field.name] = field.validations || {}
       return newValidations
     }, {})
 
@@ -63,7 +63,7 @@ export default class FormModel {
   }
 
   perform() {
-    const { redirectTo, cord, flash, onSuccess, handleError, perform, formatPayload } = this.options
+    const { redirectTo, cord, flash, onSuccess, onError, perform, formatPayload } = this.options
     let params = null
     const values = this.changes
 
@@ -80,7 +80,7 @@ export default class FormModel {
       if (flash) flashStore.add(flash)
       if (redirectTo) redirect(redirectTo(toJS(values), response))
     }).catch(error => {
-      if (handleError) return handleError(error)
+      if (onError) return onError(error)
       console.error(error)
       flashStore.add(
         error.
