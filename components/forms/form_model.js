@@ -16,7 +16,16 @@ export default class FormModel {
   }
 
   constructor({ fields, options }={}) {
+    const changes = fields.reduce((defaults, field) => {
+      if (field.default && (!options.values || !options.values[field.name])) {
+        defaults[field.name] = field.default
+      }
+
+      return defaults
+    }, {})
+
     this.values.replace(options.values || {})
+    this.changes.replace(changes)
 
     const validations = fields.reduce((newValidations, field) => {
       newValidations[field.name] = field.validations || {}
