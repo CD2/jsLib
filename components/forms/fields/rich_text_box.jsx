@@ -57,7 +57,7 @@ export class RichTextBox extends React.Component {
       height,
       init_instance_callback: editor => {
         this.editor = editor
-        // editor.on(`keyup change`, () => this.handleChange(editor.getContent()))
+        editor.on(`keyup change`, () => this.handleChange(editor.getContent()))
         if (this.props.value) {
           this.value = this.props.value
           editor.setContent(this.props.value)
