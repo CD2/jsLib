@@ -32,6 +32,17 @@ export default function inputLoader(Component, options) {
       Component,
     )
   }
+  case `fields`: {
+    return decorate(
+      options.cord.connectFields({
+        as: options.as || `records`,
+        fields: options.fields || [],
+        scope: options.scope || `all`,
+        formatter: options.formatter,
+      }),
+      Component,
+    )
+  }
   default:
     return Component
   }
