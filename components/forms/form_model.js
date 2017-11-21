@@ -53,6 +53,10 @@ export default class FormModel {
     return toJS(this.changes)
   }
 
+  hasChanges() {
+    return Object.keys(toJS(this.changes)).length > 0
+  }
+
   @action set(key, value) {
     this.changes.set(key, value)
   }
@@ -76,6 +80,7 @@ export default class FormModel {
   }
 
   perform() {
+    if (!this.hasChanges()) return
     const { redirectTo, cord, flash, onSuccess, onError, perform, formatPayload } = this.options
     let params = null
     const values = this.changes
