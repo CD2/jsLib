@@ -1,8 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { buildUrl } from 'utils/api_http'
-import { styled } from 'utils/theme'
-import decorate from 'utils/decorate'
+import { buildUrl } from 'lib/utils/api_http'
+import { styled } from 'lib/utils/theme'
+import decorate from 'lib/utils/decorate'
 import Button from "./button"
 import FaIcon from "./fa_icon"
 

@@ -2,10 +2,10 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import Grid from 'lib/components/grid'
-import { styled, t } from 'utils/theme'
+import { styled, t } from 'lib/utils/theme'
 import BreadcrumbStore from 'stores/breadcrumbs'
 import { observer } from 'mobx-react'
-import decorate from 'utils/decorate'
+import decorate from 'lib/utils/decorate'
 
 import Wrapper from './wrapper'
 

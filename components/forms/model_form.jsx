@@ -3,13 +3,13 @@ import PropTypes from 'prop-types'
 import { observer } from 'mobx-react'
 import { observable, action } from 'mobx'
 
-import { titleCase } from 'utils/helpers'
+import { titleCase } from 'lib/utils/helpers'
 
 import Model from './form_model'
 import Form from './form'
 import Submit from './submit'
 import Input from './model_input'
-import decorate from 'utils/decorate'
+import decorate from 'lib/utils/decorate'
 
 class ModelForm extends React.Component {
 

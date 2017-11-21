@@ -1,9 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Overlay from 'lib/components/overlay'
-import { active_card } from 'utils/common_styles'
-import { styled } from 'utils/theme'
-import decorate from 'utils/decorate'
+import { active_card } from 'lib/utils/common_styles'
+import { styled } from 'lib/utils/theme'
+import decorate from 'lib/utils/decorate'
 import windowStore from 'stores/window'
 
 export class Modal extends React.Component {

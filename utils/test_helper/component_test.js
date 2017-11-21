@@ -3,14 +3,14 @@ import React from 'react'
 import { Router } from 'react-router-dom'
 import { createMemoryHistory } from 'history'
 import theme from 'styles/theme'
-import { Provider as ThemeProvider } from 'utils/theme'
+import { Provider as ThemeProvider } from 'lib/utils/theme'
 import { shallow } from 'enzyme'
 import toJson from 'enzyme-to-json'
 import FunctionTester from './function_tester'
 import ElementTester from './element_tester'
 import InputTester from './input_tester'
-import { Provider as CordProvider } from 'utils/cord'
-import cord_store from 'utils/cord_store'
+import { Provider as CordProvider } from 'lib/utils/cord'
+import cord_store from 'lib/utils/cord_store'
 
 export class ComponentTest {
 

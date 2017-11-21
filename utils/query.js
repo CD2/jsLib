@@ -1,5 +1,5 @@
 import { observable, action, computed } from 'mobx'
-import { get } from 'utils/api_http'
+import { get } from 'lib/utils/api_http'
 export default class Query {
 
   @observable fetching = false

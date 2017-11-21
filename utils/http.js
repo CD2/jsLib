@@ -37,3 +37,15 @@ export const getSubdomain = () => {
   const parts = window.location.hostname.split(`.`)
   return parts.length >= 3 ? parts[0] : null
 }
+
+export const getHostWithoutSubdomain = () => {
+  let url = window.location.host
+  url = url.replace(/(https?:\/\/)?(www.)?/i, ``)
+
+  const last_thing = url.match(/((\.co\.uk|\.com|\.me).*$)/, ``)[1]
+  url = url.replace(/(\.co\.uk|\.com|\.me).*$/, ``)
+
+  url = url.split(`.`)
+  url = url[url.length - 1]
+  return `${url}${last_thing}`
+}

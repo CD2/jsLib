@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import theme from 'styles/theme'
 import { observer } from 'mobx-react'
-import decorate from 'utils/decorate'
+import decorate from 'lib/utils/decorate'
 import Image from "./image"
 
 export class Wrapper extends React.Component {

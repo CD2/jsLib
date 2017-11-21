@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import { Form, Input, Submit } from 'lib/components/forms'
 
 import { observer } from 'mobx-react'
-import { styled } from 'utils/theme'
+import { styled } from 'lib/utils/theme'
 
 @styled`
   position: relative;

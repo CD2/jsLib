@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { redirect } from 'utils/router'
+import { redirect } from 'lib/utils/router'
 import objectToFormData from 'object-to-formdata'
 import API_ROUTE from 'constants/api_host'
 import qs from 'qs'

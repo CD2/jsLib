@@ -1,9 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { buildUrl } from 'utils/api_http'
+import { buildUrl } from 'lib/utils/api_http'
 import invariant from 'invariant'
-import { styled } from 'utils/theme'
-import decorate from 'utils/decorate'
+import { styled } from 'lib/utils/theme'
+import decorate from 'lib/utils/decorate'
 
 export class Image extends React.Component {
 

@@ -1,11 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { styled, t } from 'utils/theme'
+import { styled, t } from 'lib/utils/theme'
 import Overlay from 'lib/components/overlay'
 import FaIcon from 'lib/components/fa_icon'
 import { observable, computed, action, reaction } from 'mobx'
 import { observer } from 'mobx-react'
-import { tag } from 'utils/common_styles'
+import { tag } from 'lib/utils/common_styles'
 @styled`
   .wrapper {
     z-index: 5000;

@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import decorate from 'utils/decorate'
-import { styled, t, p } from 'utils/theme'
+import decorate from 'lib/utils/decorate'
+import { styled, t, p } from 'lib/utils/theme'
 import theme from 'styles/theme'
 
 export class SectionIntro extends React.Component {

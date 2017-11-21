@@ -8,7 +8,7 @@ import 'tinymce/plugins/link'
 import 'tinymce/plugins/table'
 import 'tinymce/plugins/anchor'
 import 'tinymce/plugins/code'
-import { styled, t } from 'utils/theme'
+import { styled, t } from 'lib/utils/theme'
 
 import { observer } from 'mobx-react'
 import { observable } from 'mobx'

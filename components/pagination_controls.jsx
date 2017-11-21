@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import decorate from 'utils/decorate'
-import { styled, t } from 'utils/theme'
+import decorate from 'lib/utils/decorate'
+import { styled, t } from 'lib/utils/theme'
 
 
 export class PaginationControls extends React.Component {

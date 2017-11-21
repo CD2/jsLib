@@ -4,7 +4,7 @@ import PaginationControls from './pagination_controls'
 
 import { observable, computed, action } from 'mobx'
 import { observer, Provider } from 'mobx-react'
-import { styled, t } from 'utils/theme'
+import { styled, t } from 'lib/utils/theme'
 
 @styled`
   font-size: 0.9em;

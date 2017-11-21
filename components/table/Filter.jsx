@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Input } from 'lib/components/forms'
-import { styled, t } from 'utils/theme'
+import { styled, t } from 'lib/utils/theme'
 import { observer, inject } from 'mobx-react'
 
 @styled`

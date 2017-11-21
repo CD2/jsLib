@@ -1,5 +1,5 @@
-import { post, del, put, clearApiHeaders } from 'utils/api_http'
-import { redirect } from 'utils/router'
+import { post, del, put, clearApiHeaders } from 'lib/utils/api_http'
+import { redirect } from 'lib/utils/router'
 
 export const signIn = (params) => {
   return post(`/auth/sign_in`, params).then(response => response.data)

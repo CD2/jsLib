@@ -1,7 +1,7 @@
 import React from 'react'
 import ListSeparator from './list_separator'
 import PropTypes from 'prop-types'
-import { styled } from 'utils/theme'
+import { styled } from 'lib/utils/theme'
 
 @styled`
   > .list_item:not(:last-child) {

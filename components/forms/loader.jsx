@@ -1,4 +1,4 @@
-import decorate from 'utils/decorate'
+import decorate from 'lib/utils/decorate'
 
 export default function inputLoader(Component, options) {
   switch (options.type) {

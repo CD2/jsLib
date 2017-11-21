@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { styled, t } from 'utils/theme'
+import { styled, t } from 'lib/utils/theme'
 import { observer } from 'mobx-react'
 import { observable } from 'mobx'
 import Wrapper from "../../wrapper"

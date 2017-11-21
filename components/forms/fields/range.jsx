@@ -1,8 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { styled, t } from "utils/theme/index"
+import { styled, t } from "lib/utils/theme"
 import Wrapper from "../../wrapper"
-import decorate from 'utils/decorate'
+import decorate from 'lib/utils/decorate'
 
 export class Range extends React.Component {
 

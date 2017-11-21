@@ -1,4 +1,4 @@
-import { get } from 'utils/http'
+import { get } from 'lib/utils/http'
 import memoize from 'lodash/memoize'
 
 export function hasGeolocation() {

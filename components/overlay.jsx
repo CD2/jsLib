@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { styled, t } from 'utils/theme'
-import decorate from 'utils/decorate'
+import { styled, t } from 'lib/utils/theme'
+import decorate from 'lib/utils/decorate'
 
 export class Overlay extends React.Component {
 

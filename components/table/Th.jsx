@@ -6,9 +6,9 @@ import FaIcon from 'lib/components/fa_icon'
 
 import { observable, action, computed } from 'mobx'
 import { observer, inject } from 'mobx-react'
-import { styled } from 'utils/theme'
+import { styled } from 'lib/utils/theme'
 
-import decorate from 'utils/decorate'
+import decorate from 'lib/utils/decorate'
 export class Th extends React.Component {
 
   static propTypes = {

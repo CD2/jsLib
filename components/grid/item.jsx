@@ -1,5 +1,5 @@
 import React from 'react'
-import { styled, p } from 'utils/theme'
+import { styled, p } from 'lib/utils/theme'
 import PropTypes from 'prop-types'
 
 @styled`
