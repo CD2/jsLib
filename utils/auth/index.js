@@ -12,15 +12,7 @@ export { default as AuthNavLink } from './auth_nav_link'
 import HasPermission from './has_permission'
 export { HasPermission }
 
-export const isAuthed = (auth, needed) => {
-  if (needed === `anonymous` && !auth.person_id) return true
-  if (needed === `admin` && (auth.access_level === `admin` || auth.access_level === `editor`)) {
-    return true
-  }
-  if (needed === `superuser` && auth.access_level === `admin`) return true
-  if (needed === `blocked` && auth.access_level === `blocked`) return true
-  return needed.person_id === auth.person_id
-}
+export { default as isAuthed } from 'libDependencies/isAuthed'
 
 export const hasPermission = (permission) => (Comp) => {
   return class PermissionComponent extends React.Component {
