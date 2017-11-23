@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { observable, action } from 'mobx'
+import { observable, action, reaction, toJS, computed } from 'mobx'
 import { observer } from 'mobx-react'
 
 import { tag } from 'lib/utils/common_styles'
@@ -12,11 +12,14 @@ import FaIcon from 'lib/components/fa_icon'
 
 import Popover from 'lib/components/popover'
 
+const NEW_INPUT = `new/text/input`
+
 export class TagsInput extends React.Component {
 
   static propTypes = {
     className: PropTypes.string,
     dropdown: PropTypes.bool,
+    format: PropTypes.oneOf([`id`, `text`, `object`]),
     label: PropTypes.string,
     name: PropTypes.string,
     onChange: PropTypes.func,
@@ -37,6 +40,7 @@ export class TagsInput extends React.Component {
   }
 
   static defaultProps = {
+    format: `text`,
     onlyAllowSuggestions: false,
     dropdown: false,
     value: [],
@@ -44,86 +48,158 @@ export class TagsInput extends React.Component {
     popularSuggestions: []
   }
 
-  @observable current_tag_index = null
+  componentDidMount() {
+    this.setVals(`tags`, `value`)
+    this.setVals(`suggestions`)
+    this.setVals(`popularSuggestions`)
+    reaction(
+      () => this.tags.map(tag=>tag),
+      () => {
+        this.props.onChange({ name: this.props.name, value: this.getTagsFormat() })
+      }
+    )
+  }
+
+  componentDidUpdate(props) {
+    if (this.input) this.input.focus()
+    if (this.props.suggestions !== props.suggestions) this.setVals(`suggestions`)
+  }
+
+  @observable tags = []
+  @observable current_tag = null
+  @observable suggestions = []
+  @observable popularSuggestions = []
+
+  @computed get allSuggestions() {
+    return new Set(this.suggestions, this.popularSuggestions)
+  }
+
+  getTagsFormat = () => {
+    const { format } = this.props
+
+    if (format === `text`) return toJS(this.tags)
+
+    const tags = this.getTagObjects()
+
+    if (format === `object`) return tags
+    if (format === `id`) return tags.map(tag => tag.id)
+  }
+
+  getTagObjects = () => {
+    const { suggestions, popularSuggestions } = this.props
+    const mapedToPopularSuggestions = this.tags.map(tag => popularSuggestions.find(sug => sug.text === tag.text) || tag)
+    const mapedToSuggestions = mapedToPopularSuggestions.map(tag => {
+      if (typeof tag === `string`) {
+        const found = suggestions.find(sug => sug.text === tag.text)
+
+        if (found) return found
+      }
+
+      return { id: null, text: tag }
+    })
+
+    return mapedToSuggestions
+  }
+
+  setVals = (name, fromNameRaw = null) => {
+    const { format } = this.props
+    let fromName = fromNameRaw || name
+
+    if (format === `text`) this[name].replace(this.props[fromName])
+    if (format === `object` || format === `id`) {
+      this[name].replace(this.props[fromName].map(tag => tag.text))
+    }
+  }
 
   handleChange = value => {
-    const { suggestions, popularSuggestions } = this.props
-    const mapedToPopularSuggestions = value.map(tag => (tag.id && popularSuggestions.find(sug => sug.text === tag.text)) || tag)
-    const mapedToSuggestions = mapedToPopularSuggestions.map(tag => (tag.id && suggestions.find(sug => sug.text === tag.text)) || tag)
-    const filteredForRepeats = mapedToSuggestions.reduce((filtered, tag) => {
-      if (!filtered.find(found => (tag.id && tag.id === found.id) || tag.text === found.text)) {
-        filtered.push(tag)
-      }
+    const filteredForRepeats = value.reduce((filtered, tag) => {
+      if (!filtered.find(found => tag === found)) filtered.push(tag)
 
       return filtered
     }, [])
 
-    this.props.onChange({ name: this.props.name, value: filteredForRepeats })
+    this.tags.replace(filteredForRepeats)
   }
 
   filterAgainstValues = toFilter => {
-    return toFilter.filter(suggestion => !this.props.value.find(val => val.text === suggestion.text))
+    return toFilter.filter(suggestion => !this.tags.find(val => val === suggestion))
   }
+
+  getCurrentTagIndex = () => this.tags.findIndex(tag => tag === this.current_tag)
 
   @action handleInput = (e = null) => {
     const textValue = this.textInput.value
 
     if(textValue !== `` && (!e || e.key === `Enter` || e.key === `Tab` || e.key === `,`)) { // enter
-      if (this.current_tag_index === -1) {
-        this.handleChange([...this.props.value, { id: null, text: textValue }])
-        return this.textInput.value = ``
-      } else {
-        const valueCopy = [...this.props.value]
+      e && e.stopPropagation()
+      if (this.current_tag === NEW_INPUT) {
+        let newValue = null
 
-        valueCopy[this.current_tag_index] = {
-          id: valueCopy[this.current_tag_index],
-          text: textValue
+        if(this.props.onlyAllowSuggestions) {
+          newValue = this.allSuggestions.find(sug => sug === textValue)
+        } else {
+          newValue = textValue
         }
+
+        if (newValue) this.handleChange([...this.tags, newValue])
+      } else {
+        const valueCopy = this.tags.slice()
+        let newValue = null
+
+        if(this.props.onlyAllowSuggestions) {
+          newValue = this.allSuggestions.find(sug => sug === textValue)
+        } else {
+          newValue = textValue
+        }
+
+        if (newValue) valueCopy[this.getCurrentTagIndex()] = newValue
 
         this.handleChange(valueCopy)
       }
 
-      this.current_tag_index = null
-    } else if(e && this.props.value.length > 0 && textValue === `` && e.key === `Backspace`) { //backspace
+      this.current_tag = null
+    } else if(e && this.tags.length > 0 && textValue === `` && e.key === `Backspace`) { //backspace
       this.handleRemoveTag()
-    } else if(e) {
-      this.props.updateSuggestions && this.props.updateSuggestions(textValue)
+    } else {
+      return this.props.updateSuggestions && this.props.updateSuggestions(textValue)
     }
   }
 
-  @action handleRemoveTag = (e = null, tagIndex = null) => {
+  @action handleRemoveTag = (e = null, selectedTag = null) => {
     e && e.stopPropagation()
-    if (tagIndex) {
-      this.handleChange(this.props.value.filter((tag, index) => index !== tagIndex))
-    } else if (this.current_tag_index > 0) {
-      const newTags = this.props.value.filter((tag, index) => index !== this.current_tag_index)
+    if (selectedTag !== null) {
+      this.handleChange(this.tags.filter(tag => tag !== selectedTag))
+    } else if (this.getCurrentTagIndex() > 0) {
+      const newTags = this.tags.filter(tag => tag !== this.current_tag)
 
       this.handleChange(newTags)
-      if (newTags.length > 0 && this.current_tag_index > 0) return this.current_tag_index = this.current_tag_index - 1
+      if (newTags.length > 0 && this.getCurrentTagIndex() > 0) {
+        return this.current_tag = this.getCurrentTagIndex()- 1
+      }
     } else {
-      const newTags = this.props.value.slice(0, this.props.value.length - 1)
+      const newTags = this.tags.slice(0, this.tags.length - 1)
 
-      if (newTags.length > 0) return this.current_tag_index = newTags.length
+      if (newTags.length > 0) return this.current_tag = newTags.length
     }
 
-    this.current_tag_index = null
+    this.current_tag = null
   }
 
   handleAddTag = tag => {
-    this.handleChange([...this.props.value, tag])
+    this.handleChange([...this.tags, tag])
   }
 
-   @action handleTagClick = (e, tagIndex) => {
+   @action handleTagClick = (e, tag) => {
      e.stopPropagation()
-     this.current_tag_index = tagIndex
+     this.current_tag = tag
    }
    @action handleBlur = e => {
      e.stopPropagation()
-     this.current_tag_index && this.handleInput()
-     this.current_tag_index = null
+     this.current_tag && this.handleInput()
+     this.current_tag = null
    }
    @action handleFocus = () => {
-     this.current_tag_index = -1
+     this.current_tag = NEW_INPUT
    }
 
    renderInput(tag=``) {
@@ -131,53 +207,57 @@ export class TagsInput extends React.Component {
        <input
          ref={elem => this.textInput = elem}
          key="input"
-         value={tag.text}
+         defaultValue={tag}
          onKeyDown={this.handleInput}
        />
      )
    }
 
-   renderTag(tag, index) {
+   renderTag(tag) {
      return (
        <span
          className="tag-input__tag"
-         key={index}
-         onClick={e => this.handleTagClick(e, index)}
+         key={tag}
+         onClick={e => this.handleTagClick(e, tag)}
        >
-         {tag.text}
+         {tag}
          <FaIcon
            icon="cross"
            className="tag-input__tag-remove"
-           onClick={e => this.handleRemoveTag(e, index)}
+           onClick={e => this.handleRemoveTag(e, tag)}
          />
        </span>
      )
    }
 
    renderPopularSuggestions() {
-     return this.filterAgainstValues(this.props.popularSuggestions).map((suggestion, index) => {
+     return this.filterAgainstValues(this.popularSuggestions).map(suggestion => {
        return (
          <span
-           key={index}
+           key={suggestion}
            className="suggestion-tag tag-input__tag"
            onClick={this.handleAddTag.bind(this, suggestion)}
          >
-           + {suggestion.text}
+           + {suggestion}
          </span>
        )
      })
    }
 
    renderSuggestions() {
-     if (!this.current_tag_index) return
+     if (!this.current_tag) return
 
-     const suggestionsComponent = this.filterAgainstValues(this.props.suggestions).map((suggestion, index) => (
+     const suggestionsComponent = this.filterAgainstValues(this.suggestions).map(suggestion => (
        <span
-         key={index}
-         className={this.props.dropdown ? `tag-input__suggestion tag-input__tag tag-input__dropdown-suggestion` : `tag-input__suggestion tag-input__tag`}
+         key={suggestion}
+         className={
+           this.props.dropdown
+             ? `tag-input__suggestion tag-input__tag tag-input__dropdown-suggestion`
+             : `tag-input__suggestion tag-input__tag`
+         }
          onClick={this.handleAddTag.bind(this, suggestion)}
        >
-         {suggestion.text}
+         {suggestion}
        </span>
      ))
 
@@ -202,15 +282,15 @@ export class TagsInput extends React.Component {
    }
 
    renderValue() {
-     const result = this.props.value.map((tag, i) => {
-       if (i === this.current_tag_index && this.current_tag_index !== -1) {
+     const result = this.tags.map(tag => {
+       if (tag === this.current_tag) {
          return this.renderInput(tag)
        }
 
-       return this.renderTag(tag, i)
+       return this.renderTag(tag)
      })
 
-     if (this.current_tag_index === -1) result.push(this.renderInput())
+     if (this.current_tag === NEW_INPUT) result.push(this.renderInput())
 
      return result
    }
@@ -218,7 +298,7 @@ export class TagsInput extends React.Component {
    render() {
      return (
        <div className={this.props.className}>
-         {this.current_tag_index && <Overlay clickThrough onClick={this.handleBlur} />}
+         {this.current_tag && <Overlay clickThrough onClick={this.handleBlur} />}
          <div className="wrapper" onClick={this.handleFocus}>
            {this.renderPopularSuggestions()}
            <div className="tag-input">
