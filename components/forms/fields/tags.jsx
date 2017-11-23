@@ -24,19 +24,29 @@ export class TagsInput extends React.Component {
     name: PropTypes.string,
     onChange: PropTypes.func,
     onlyAllowSuggestions: PropTypes.bool,
-    popularSuggestions: PropTypes.arrayOf(PropTypes.shape({
-      id: PropTypes.number,
-      text: PropTypes.string,
-    })),
-    suggestions: PropTypes.arrayOf(PropTypes.shape({
-      id: PropTypes.number,
-      text: PropTypes.string,
-    })),
+    popularSuggestions: PropTypes.oneOfType([
+      PropTypes.arrayOf(PropTypes.shape({
+        id: PropTypes.number,
+        text: PropTypes.string,
+      })),
+      PropTypes.arrayOf(PropTypes.string),
+    ]),
+    suggestions: PropTypes.oneOfType([
+      PropTypes.arrayOf(PropTypes.shape({
+        id: PropTypes.number,
+        text: PropTypes.string,
+      })),
+      PropTypes.arrayOf(PropTypes.string),
+    ]),
     updateSuggestions: PropTypes.func,
-    value: PropTypes.arrayOf(PropTypes.shape({
-      id: PropTypes.number,
-      text: PropTypes.string,
-    })),
+    value: PropTypes.oneOfType([
+      PropTypes.arrayOf(PropTypes.shape({
+        id: PropTypes.number,
+        text: PropTypes.string,
+      })),
+      PropTypes.arrayOf(PropTypes.string),
+      PropTypes.arrayOf(PropTypes.number),
+    ]),
   }
 
   static defaultProps = {
