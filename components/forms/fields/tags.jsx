@@ -61,7 +61,6 @@ export class TagsInput extends React.Component {
   }
 
   componentDidUpdate(props) {
-    if (this.input) this.input.focus()
     if (this.props.suggestions !== props.suggestions) this.setVals(`suggestions`)
   }
 
@@ -128,7 +127,7 @@ export class TagsInput extends React.Component {
   getCurrentTagIndex = () => this.tags.findIndex(tag => tag === this.current_tag)
 
   @action handleInput = (e = null) => {
-    const textValue = this.textInput.value
+    const textValue = this.textInput && this.textInput.value
 
     if(textValue !== `` && (!e || e.key === `Enter` || e.key === `Tab` || e.key === `,`)) { // enter
       e && e.stopPropagation()
@@ -141,7 +140,7 @@ export class TagsInput extends React.Component {
           newValue = textValue
         }
 
-        if (newValue) this.handleChange([...this.tags, newValue])
+        if (newValue) return this.handleChange([...this.tags, newValue])
       } else {
         const valueCopy = this.tags.slice()
         let newValue = null
@@ -156,8 +155,6 @@ export class TagsInput extends React.Component {
 
         this.handleChange(valueCopy)
       }
-
-      this.current_tag = null
     } else if(e && this.tags.length > 0 && textValue === `` && e.key === `Backspace`) { //backspace
       this.handleRemoveTag()
     } else {
@@ -169,17 +166,15 @@ export class TagsInput extends React.Component {
     e && e.stopPropagation()
     if (selectedTag !== null) {
       this.handleChange(this.tags.filter(tag => tag !== selectedTag))
-    } else if (this.getCurrentTagIndex() > 0) {
+    } else if (this.current_tag && this.current_tag !== NEW_INPUT) {
       const newTags = this.tags.filter(tag => tag !== this.current_tag)
 
       this.handleChange(newTags)
       if (newTags.length > 0 && this.getCurrentTagIndex() > 0) {
-        return this.current_tag = this.getCurrentTagIndex()- 1
+        return this.current_tag = newTags[newTags.length - 1]
       }
     } else {
-      const newTags = this.tags.slice(0, this.tags.length - 1)
-
-      if (newTags.length > 0) return this.current_tag = newTags.length
+      if (this.tags.length > 0) return this.current_tag = this.tags.get(this.tags.length - 1)
     }
 
     this.current_tag = null
@@ -196,10 +191,9 @@ export class TagsInput extends React.Component {
    @action handleBlur = e => {
      e.stopPropagation()
      this.current_tag && this.handleInput()
-     this.current_tag = null
    }
    @action handleFocus = () => {
-     this.current_tag = NEW_INPUT
+     if(!this.current_tag) this.current_tag = NEW_INPUT
    }
 
    renderInput(tag=``) {
@@ -245,7 +239,7 @@ export class TagsInput extends React.Component {
    }
 
    renderSuggestions() {
-     if (!this.current_tag) return
+     if (!this.current_tag && this.suggestions.length > 0) return
 
      const suggestionsComponent = this.filterAgainstValues(this.suggestions).map(suggestion => (
        <span
@@ -281,7 +275,7 @@ export class TagsInput extends React.Component {
      )
    }
 
-   renderValue() {
+   renderValue = () => {
      const result = this.tags.map(tag => {
        if (tag === this.current_tag) {
          return this.renderInput(tag)
