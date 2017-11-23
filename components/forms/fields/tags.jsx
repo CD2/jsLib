@@ -1,281 +1,277 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { observable, action } from 'mobx'
+import { observer } from 'mobx-react'
+
+import { tag } from 'lib/utils/common_styles'
+import decorate from 'lib/utils/decorate'
 import { styled, t } from 'lib/utils/theme'
+
 import Overlay from 'lib/components/overlay'
 import FaIcon from 'lib/components/fa_icon'
-import { observable, computed, action, reaction } from 'mobx'
-import { observer } from 'mobx-react'
-import { tag } from 'lib/utils/common_styles'
-@styled`
-  .wrapper {
-    z-index: 5000;
-    position: relative;
-  }
-  .tag-input {
-    border-radius: ${t(`panelRadius`)};
-    overflow: hidden;
-    border: 1px solid ${t(`border`)};
-    background: white;
-    padding: 6px;
-    cursor: pointer;
-    min-height: 44px;
-  }
-  span {
-    ${tag}
-    margin-top: 2px;
 
-  }
-`
-@observer
-export class TagField extends React.Component {
+import Popover from 'lib/components/popover'
+
+export class TagsInput extends React.Component {
 
   static propTypes = {
     className: PropTypes.string,
+    dropdown: PropTypes.bool,
+    label: PropTypes.string,
     name: PropTypes.string,
     onChange: PropTypes.func,
-    onFocus: PropTypes.func,
-    onRawChange: PropTypes.func,
     onlyAllowSuggestions: PropTypes.bool,
-    placeholder: PropTypes.string,
-    popularSuggestions: PropTypes.arrayOf(PropTypes.string),
-    suggestions: PropTypes.oneOfType([
-      PropTypes.func,
-      PropTypes.arrayOf(PropTypes.string),
-    ]),
-    value: PropTypes.array,
+    popularSuggestions: PropTypes.arrayOf(PropTypes.shape({
+      id: PropTypes.number,
+      text: PropTypes.string,
+    })),
+    suggestions: PropTypes.arrayOf(PropTypes.shape({
+      id: PropTypes.number,
+      text: PropTypes.string,
+    })),
+    updateSuggestions: PropTypes.func,
+    value: PropTypes.arrayOf(PropTypes.shape({
+      id: PropTypes.number,
+      text: PropTypes.string,
+    })),
   }
 
   static defaultProps = {
     onlyAllowSuggestions: false,
+    dropdown: false,
+    value: [],
+    suggestions: [],
+    popularSuggestions: []
   }
 
-  componentWillMount() {
-    if (this.props.value) {
-      const tags = this.props.value.map(tag => tag.name || tag)
-      this.tags.replace(tags)
-    }
-  }
+  @observable current_tag_index = null
 
-  componentDidMount() {
-    reaction(
-      () => this.tags.map(tag=>tag),
-      () => this.props.onChange({ name: this.props.name, value: this.tags.toJS() })
-    )
-  }
-
-  componentWillReceiveProps(props) {
-    if (JSON.stringify(props.value) !== JSON.stringify(this.tags)) {
-      if (props.value) {
-        const tags = props.value.map(tag => tag.name || tag)
-        this.tags.replace(tags)
+  handleChange = value => {
+    const { suggestions, popularSuggestions } = this.props
+    const mapedToPopularSuggestions = value.map(tag => (tag.id && popularSuggestions.find(sug => sug.text === tag.text)) || tag)
+    const mapedToSuggestions = mapedToPopularSuggestions.map(tag => (tag.id && suggestions.find(sug => sug.text === tag.text)) || tag)
+    const filteredForRepeats = mapedToSuggestions.reduce((filtered, tag) => {
+      if (!filtered.find(found => (tag.id && tag.id === found.id) || tag.text === found.text)) {
+        filtered.push(tag)
       }
-    }
+
+      return filtered
+    }, [])
+
+    this.props.onChange({ name: this.props.name, value: filteredForRepeats })
   }
 
-  componentDidUpdate() {
-    if (this.input) this.input.focus()
+  filterAgainstValues = toFilter => {
+    return toFilter.filter(suggestion => !this.props.value.find(val => val.text === suggestion.text))
   }
 
-  @observable focussed = false
-  @observable tags = []
-  @observable current_index = -1
+  @action handleInput = (e = null) => {
+    const textValue = this.textInput.value
 
-  @observable suggestions = []
-  @observable suggestion_query = ``
-
-  @computed get current_value() { return this.tags[this.current_index] }
-  set current_value(value) { this.tags[this.current_index] = value }
-  @computed get tag_except_current() { return this.tags.filter((_, i)=>i!==this.current_index) }
-  @computed get filtered_suggestions() {
-    return this.suggestions.filter(sug => this.tag_except_current.indexOf(sug) === -1)
-  }
-  @computed get any_popular_suggestions() { return !!this.props.popularSuggestions }
-  @computed get popular_suggestions() {
-    return this.props.popularSuggestions.filter(sug => this.tag_except_current.indexOf(sug) === -1)
-  }
-
-  @computed get suggestions_up_to_date() { return this.current_value === this.suggestion_query }
-
-  // replaces current editing with suggestion
-  @action use_suggestion(suggestion) {
-    if (this.current_index === -1) this.tags.push(suggestion)
-    else {
-      this.current_value = suggestion
-      this.suggestions.clear()
-      this.current_index++
-      if (this.current_index >= this.tags.length) {
-        this.tags.push(``)
-      }
-    }
-  }
-
-  @observable fetchingSuggestions = false
-
-  @action fetchSuggestions() {
-    if (this.fetchingSuggestions || this.suggestions_up_to_date) return
-    const { suggestions } = this.props
-    const query = this.current_value
-    if (suggestions && this.current_value) {
-      this.fetchingSuggestions = true
-      if (typeof suggestions === `function`) {
-        window.Promise.resolve(suggestions(query)).then(
-          action(`fetchSuggestionsFulfilled`, array => {
-            this.fetchingSuggestions = false
-            this.suggestion_query = query
-            this.suggestions.replace(array)
-          })
-        )
+    if(textValue !== `` && (!e || e.key === `Enter` || e.key === `Tab` || e.key === `,`)) { // enter
+      if (this.current_tag_index === -1) {
+        this.handleChange([...this.props.value, { id: null, text: textValue }])
+        return this.textInput.value = ``
       } else {
-        this.fetchingSuggestions = false
-        this.suggestions.replace(suggestions.filter(sug => sug.indexOf(query) !== -1))
-        this.suggestion_query = query
-      }
-    }
-  }
+        const valueCopy = [...this.props.value]
 
-  @action handleBlur = () => {
-    this.focussed = false
-    this.tags.replace(this.tags.filter(tag=>tag))
-    this.current_index = -1
-  }
-  @action handleFocus = () => {
-    this.focussed = true
-    if (this.current_index === -1) {
-      this.current_index = this.tags.length
-      this.tags.push(``)
-    }
-  }
-
-  @action handleTagClick = (tag) => {
-    this.tags.replace(this.tags.filter(tag=>tag))
-    this.current_index = this.tags.indexOf(tag)
-  }
-  //just move to next one
-  @action handleInputKeyDown = (e) => {
-    switch (e.key) {
-    case `Backspace`:
-      if (this.current_index !== 0 && this.current_value === ``) {
-        e.preventDefault()
-        this.current_index--
-        this.tags.replace(this.tags.filter(tag=>tag))
-      }
-      break
-    case `Tab`:
-    case `Enter`:
-    case `,`:
-      e.preventDefault()
-      if (this.props.onlyAllowSuggestions) return null
-      if (this.tag_except_current.indexOf(this.current_value) !== -1) this.current_value = ``
-      else {
-        if (this.current_index < this.tags.length - 1) {
-          this.tags.replace(this.tags.filter(tag=>tag))
-          this.current_index = this.tags.indexOf(this.current_value) + 1
-        } else if (this.current_index === this.tags.length - 1 && this.current_value !== ``){
-          this.current_index = this.tags.length
-          this.tags.push(``)
+        valueCopy[this.current_tag_index] = {
+          id: valueCopy[this.current_tag_index],
+          text: textValue
         }
+
+        this.handleChange(valueCopy)
       }
-      break
-    default:
+
+      this.current_tag_index = null
+    } else if(e && this.props.value.length > 0 && textValue === `` && e.key === `Backspace`) { //backspace
+      this.handleRemoveTag()
+    } else if(e) {
+      this.props.updateSuggestions && this.props.updateSuggestions(textValue)
     }
   }
 
-  @action handleRemoveTag = (tag, e) => {
-    e.stopPropagation()
-    const cv = this.current_value
-    this.tags.replace(this.tags.filter(t => t!==tag))
-    this.current_index = this.tags.indexOf(cv)
-  }
+  @action handleRemoveTag = (e = null, tagIndex = null) => {
+    e && e.stopPropagation()
+    if (tagIndex) {
+      this.handleChange(this.props.value.filter((tag, index) => index !== tagIndex))
+    } else if (this.current_tag_index > 0) {
+      const newTags = this.props.value.filter((tag, index) => index !== this.current_tag_index)
 
-  @action handleCurrentTagChange = (e) => {
-    this.current_value = e.target.value
-    this.fetchSuggestions()
-  }
+      this.handleChange(newTags)
+      if (newTags.length > 0 && this.current_tag_index > 0) return this.current_tag_index = this.current_tag_index - 1
+    } else {
+      const newTags = this.props.value.slice(0, this.props.value.length - 1)
 
-  renderTag(tag) {
-    return (
-      <span key={tag} onClick={this.handleTagClick.bind(this, tag)}>
-        {tag}
-        <FaIcon icon="cross" onClick={this.handleRemoveTag.bind(this, tag)} />
-      </span>
-    )
-  }
-
-  renderInput(tag=``) {
-    return (
-      <input
-        ref={elem => this.input = elem}
-        key="input"
-        value={tag}
-        onKeyDown={this.handleInputKeyDown}
-        onChange={this.handleCurrentTagChange}
-      />
-    )
-  }
-
-  renderValue() {
-    const result = this.tags.map((tag, i) => {
-      return i === this.current_index ?
-        this.renderInput(tag) :
-        this.renderTag(tag, i)
-    })
-    if (this.focussed && (this.current_index === -1 || this.current_index >= this.tags.length)) {
-      result.push(this.renderInput())
+      if (newTags.length > 0) return this.current_tag_index = newTags.length
     }
-    return result
+
+    this.current_tag_index = null
   }
 
-  @computed get renderPopularSuggestions() {
-    if (!this.any_popular_suggestions) return
-    return this.popular_suggestions.map(suggestion => {
-      return (
-        <span
-          key={suggestion}
-          className="suggestion-tag"
-          onClick={this.use_suggestion.bind(this, suggestion)}
-        >
-          + {suggestion}
-        </span>
-      )
-    })
+  handleAddTag = tag => {
+    this.handleChange([...this.props.value, tag])
   }
 
-  @computed get renderSuggestions() {
-    if (!this.focussed) return
+   @action handleTagClick = (e, tagIndex) => {
+     e.stopPropagation()
+     this.current_tag_index = tagIndex
+   }
+   @action handleBlur = e => {
+     e.stopPropagation()
+     this.current_tag_index && this.handleInput()
+     this.current_tag_index = null
+   }
+   @action handleFocus = () => {
+     this.current_tag_index = -1
+   }
 
-    const suggestionsComponent = this.filtered_suggestions.map(suggestion => {
-      return (
-        <span
-          key={suggestion}
-          className="tag-input__suggestion tag-input__tag"
-          onClick={this.use_suggestion.bind(this, suggestion)}
-        >
-          {suggestion}
-        </span>
-      )
-    })
-    return (
-      <div className="tag-input__suggestion-container">
-        {suggestionsComponent}
-      </div>
-    )
-  }
+   renderInput(tag=``) {
+     return (
+       <input
+         ref={elem => this.textInput = elem}
+         key="input"
+         value={tag.text}
+         onKeyDown={this.handleInput}
+       />
+     )
+   }
 
-  render() {
-    const { className } = this.props
-    return (
-      <div className={className}>
-        {this.focussed && <Overlay clickThrough onClick={this.handleBlur} />}
-        <div className="wrapper" onClick={this.handleFocus}>
-          {this.renderPopularSuggestions}
-          <div className="tag-input">
-            {this.renderValue()}
-          </div>
-          {this.renderSuggestions}
-        </div>
-      </div>
-    )
-  }
+   renderTag(tag, index) {
+     return (
+       <span
+         className="tag-input__tag"
+         key={index}
+         onClick={e => this.handleTagClick(e, index)}
+       >
+         {tag.text}
+         <FaIcon
+           icon="cross"
+           className="tag-input__tag-remove"
+           onClick={e => this.handleRemoveTag(e, index)}
+         />
+       </span>
+     )
+   }
+
+   renderPopularSuggestions() {
+     return this.filterAgainstValues(this.props.popularSuggestions).map((suggestion, index) => {
+       return (
+         <span
+           key={index}
+           className="suggestion-tag tag-input__tag"
+           onClick={this.handleAddTag.bind(this, suggestion)}
+         >
+           + {suggestion.text}
+         </span>
+       )
+     })
+   }
+
+   renderSuggestions() {
+     if (!this.current_tag_index) return
+
+     const suggestionsComponent = this.filterAgainstValues(this.props.suggestions).map((suggestion, index) => (
+       <span
+         key={index}
+         className={this.props.dropdown ? `tag-input__suggestion tag-input__tag tag-input__dropdown-suggestion` : `tag-input__suggestion tag-input__tag`}
+         onClick={this.handleAddTag.bind(this, suggestion)}
+       >
+         {suggestion.text}
+       </span>
+     ))
+
+     if (this.props.dropdown) {
+       return (
+         <Popover
+           containerClassName="tag-input__suggestion-dropdown-container"
+           className="tag-input__suggestion-dropdown"
+           open
+           closeOnOutsideClick
+         >
+           {suggestionsComponent}
+         </Popover>
+       )
+     }
+
+     return (
+       <div className="tag-input__suggestion-container">
+         {suggestionsComponent}
+       </div>
+     )
+   }
+
+   renderValue() {
+     const result = this.props.value.map((tag, i) => {
+       if (i === this.current_tag_index && this.current_tag_index !== -1) {
+         return this.renderInput(tag)
+       }
+
+       return this.renderTag(tag, i)
+     })
+
+     if (this.current_tag_index === -1) result.push(this.renderInput())
+
+     return result
+   }
+
+   render() {
+     return (
+       <div className={this.props.className}>
+         {this.current_tag_index && <Overlay clickThrough onClick={this.handleBlur} />}
+         <div className="wrapper" onClick={this.handleFocus}>
+           {this.renderPopularSuggestions()}
+           <div className="tag-input">
+             {this.renderValue()}
+           </div>
+           {this.renderSuggestions()}
+         </div>
+       </div>
+     )
+   }
 
 }
-export default TagField
+
+export default decorate(
+  styled`
+    .wrapper {
+      z-index: 5000;
+    }
+    .tag-input {
+      border-radius: ${t(`panelRadius`)};
+      overflow: hidden;
+      border: 1px solid ${t(`border`)};
+      background: white;
+      padding: 6px;
+      cursor: pointer;
+      min-height: 44px;
+    }
+    .tag-input__tag {
+      ${tag}
+      margin-top: 2px;
+      z-index: 6000;
+    }
+    .tag-input__tag-remove {
+      z-index: 7000;
+    }
+    .tag-input__suggestion-dropdown-container {
+      width: 100%;
+      display: block;
+    }
+    .tag-input__suggestion-dropdown {
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      top: 0;
+      bottom: auto;
+      max-height: 200px;
+      overflow-y: auto;
+    }
+    .tag-input__dropdown-suggestion {
+      width: 100%;
+    }
+  `,
+  observer,
+  TagsInput,
+)
