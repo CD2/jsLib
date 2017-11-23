@@ -112,8 +112,10 @@ export default class Input extends React.Component {
     loader: null,
   }
 
-  getType(type) {
-    return FIELD_TYPES[type] || FIELD_TYPES.text
+  componentWillMount() {
+    const field =  FIELD_TYPES[this.props.type] || FIELD_TYPES.text
+
+    this.field = this.props.loader ? loader(field, this.props.loader) : field
   }
 
   renderErrors() {
@@ -127,16 +129,15 @@ export default class Input extends React.Component {
     }
   }
 
+  renderLoader = field => {
+    return loader(field, this.props.loader)
+  }
+
   render() {
     const { className, label, type, description } = this.props
-    let Field = this.getType(type)
     const props = { ...this.props }
     delete props.errors
     delete props.theme
-
-    if (this.props.loader) {
-      Field = loader(Field, this.props.loader)
-    }
 
     if (label) {
       return (
@@ -144,7 +145,7 @@ export default class Input extends React.Component {
           {this.renderErrors()}
           <label>
             {label}
-            <Field {...props} className="field" />
+            <this.field {...props} className="field" />
             <p className="description">{description}</p>
           </label>
         </div>
@@ -153,7 +154,7 @@ export default class Input extends React.Component {
     return (
       <div className={this.props.className}>
         {this.renderErrors()}
-        <Field {...props} className="field" />
+        <this.field {...props} className="field" />
         <p className="description">{description}</p>
       </div>
     )

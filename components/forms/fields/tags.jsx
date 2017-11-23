@@ -48,7 +48,7 @@ export class TagsInput extends React.Component {
     popularSuggestions: []
   }
 
-  componentDidMount() {
+  @action componentDidMount() {
     this.setVals(`tags`, `value`)
     this.setVals(`suggestions`)
     this.setVals(`popularSuggestions`)
@@ -58,10 +58,19 @@ export class TagsInput extends React.Component {
         this.props.onChange({ name: this.props.name, value: this.getTagsFormat() })
       }
     )
+    reaction(
+      () => this.props.suggestions.map(sug => sug),
+      () => this.setVals(`suggestions`)
+    )
   }
 
-  componentDidUpdate(props) {
-    if (this.props.suggestions !== props.suggestions) this.setVals(`suggestions`)
+  @action componentDidUpdate(props) {
+    if (this.textInput) this.textInput.focus()
+    if (this.textInput && this.current_tag) {
+      this.textInput.selectionStart = this.current_tag.length
+      this.textInput.selectionEnd = this.current_tag.length
+    }
+    if (props.value.length < this.props.value.length) this.current_tag = NEW_INPUT
   }
 
   @observable tags = []
@@ -112,16 +121,14 @@ export class TagsInput extends React.Component {
 
   handleChange = value => {
     const filteredForRepeats = value.reduce((filtered, tag) => {
-      if (!filtered.find(found => tag === found)) filtered.push(tag)
+      const capitalisedTag = tag.toUpperCase()
+
+      if (!filtered.find(found => capitalisedTag === found.toUpperCase())) filtered.push(capitalisedTag)
 
       return filtered
     }, [])
 
     this.tags.replace(filteredForRepeats)
-  }
-
-  filterAgainstValues = toFilter => {
-    return toFilter.filter(suggestion => !this.tags.find(val => val === suggestion))
   }
 
   getCurrentTagIndex = () => this.tags.findIndex(tag => tag === this.current_tag)
@@ -140,7 +147,7 @@ export class TagsInput extends React.Component {
           newValue = textValue
         }
 
-        if (newValue) return this.handleChange([...this.tags, newValue])
+        if (newValue) this.handleChange([...this.tags, newValue])
       } else {
         const valueCopy = this.tags.slice()
         let newValue = null
@@ -155,7 +162,9 @@ export class TagsInput extends React.Component {
 
         this.handleChange(valueCopy)
       }
-    } else if(e && this.tags.length > 0 && textValue === `` && e.key === `Backspace`) { //backspace
+
+      this.current_tag = null
+    } else if(e && textValue === `` && e.key === `Backspace`) { //backspace
       this.handleRemoveTag()
     } else {
       return this.props.updateSuggestions && this.props.updateSuggestions(textValue)
@@ -167,11 +176,12 @@ export class TagsInput extends React.Component {
     if (selectedTag !== null) {
       this.handleChange(this.tags.filter(tag => tag !== selectedTag))
     } else if (this.current_tag && this.current_tag !== NEW_INPUT) {
+      const tagBeforeCurrent = this.tags.get(this.getCurrentTagIndex() - 1)
       const newTags = this.tags.filter(tag => tag !== this.current_tag)
-
       this.handleChange(newTags)
-      if (newTags.length > 0 && this.getCurrentTagIndex() > 0) {
-        return this.current_tag = newTags[newTags.length - 1]
+
+      if (tagBeforeCurrent) {
+        return this.current_tag = tagBeforeCurrent
       }
     } else {
       if (this.tags.length > 0) return this.current_tag = this.tags.get(this.tags.length - 1)
@@ -180,9 +190,7 @@ export class TagsInput extends React.Component {
     this.current_tag = null
   }
 
-  handleAddTag = tag => {
-    this.handleChange([...this.tags, tag])
-  }
+    handleAddTag = tag => this.handleChange([...this.tags, tag])
 
    @action handleTagClick = (e, tag) => {
      e.stopPropagation()
@@ -191,16 +199,25 @@ export class TagsInput extends React.Component {
    @action handleBlur = e => {
      e.stopPropagation()
      this.current_tag && this.handleInput()
+     this.current_tag = null
    }
    @action handleFocus = () => {
      if(!this.current_tag) this.current_tag = NEW_INPUT
+   }
+
+   @computed get filteredSuggestions() {
+     return this.suggestions.filter(suggestion => !this.tags.find(val => val === suggestion.toUpperCase()))
+   }
+
+   @computed get filteredPopularSuggestions() {
+     return this.popularSuggestions.filter(suggestion => !this.tags.find(val => val === suggestion.toUpperCase()))
    }
 
    renderInput(tag=``) {
      return (
        <input
          ref={elem => this.textInput = elem}
-         key="input"
+         key={tag}
          defaultValue={tag}
          onKeyDown={this.handleInput}
        />
@@ -225,7 +242,7 @@ export class TagsInput extends React.Component {
    }
 
    renderPopularSuggestions() {
-     return this.filterAgainstValues(this.popularSuggestions).map(suggestion => {
+     return this.filteredPopularSuggestions.map(suggestion => {
        return (
          <span
            key={suggestion}
@@ -239,9 +256,9 @@ export class TagsInput extends React.Component {
    }
 
    renderSuggestions() {
-     if (!this.current_tag && this.suggestions.length > 0) return
+     if (!this.current_tag || this.filteredSuggestions.length === 0) return
 
-     const suggestionsComponent = this.filterAgainstValues(this.suggestions).map(suggestion => (
+     const suggestionsComponent = this.filteredSuggestions.map(suggestion => (
        <span
          key={suggestion}
          className={
