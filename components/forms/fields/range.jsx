@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { styled, t } from "lib/utils/theme"
-import Wrapper from "../../wrapper"
+import Wrapper from "lib/components/wrapper"
 import decorate from 'lib/utils/decorate'
 
 export class Range extends React.Component {
