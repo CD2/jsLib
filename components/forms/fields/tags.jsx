@@ -55,6 +55,7 @@ export class TagsInput extends React.Component {
     reaction(
       () => this.tags.map(tag=>tag),
       () => {
+        console.log(JSON.stringify(this.getTagsFormat()))
         this.props.onChange({ name: this.props.name, value: this.getTagsFormat() })
       }
     )
@@ -79,7 +80,7 @@ export class TagsInput extends React.Component {
   @observable popularSuggestions = []
 
   @computed get allSuggestions() {
-    return new Set(this.suggestions, this.popularSuggestions)
+    return Array.from(new Set(toJS(this.suggestions), toJS(this.popularSuggestions)))
   }
 
   getTagsFormat = () => {
@@ -95,10 +96,10 @@ export class TagsInput extends React.Component {
 
   getTagObjects = () => {
     const { suggestions, popularSuggestions } = this.props
-    const mapedToPopularSuggestions = this.tags.map(tag => popularSuggestions.find(sug => sug.text === tag.text) || tag)
+    const mapedToPopularSuggestions = this.tags.map(tag => popularSuggestions.find(sug => sug.text && sug.text.toUpperCase() === tag) || tag)
     const mapedToSuggestions = mapedToPopularSuggestions.map(tag => {
       if (typeof tag === `string`) {
-        const found = suggestions.find(sug => sug.text === tag.text)
+        const found = suggestions.find(sug => sug.text && sug.text.toUpperCase() === tag)
 
         if (found) return found
       }
@@ -142,7 +143,8 @@ export class TagsInput extends React.Component {
         let newValue = null
 
         if(this.props.onlyAllowSuggestions) {
-          newValue = this.allSuggestions.find(sug => sug === textValue)
+          const allSuggestions = this.allSuggestions
+          newValue = allSuggestions.find(sug => sug.toUpperCase() === textValue.toUpperCase())
         } else {
           newValue = textValue
         }
@@ -153,7 +155,7 @@ export class TagsInput extends React.Component {
         let newValue = null
 
         if(this.props.onlyAllowSuggestions) {
-          newValue = this.allSuggestions.find(sug => sug === textValue)
+          newValue = this.allSuggestions.find(sug => sug.toUpperCase() === textValue.toUpperCase())
         } else {
           newValue = textValue
         }
