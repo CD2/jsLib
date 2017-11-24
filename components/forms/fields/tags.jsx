@@ -19,7 +19,7 @@ export class TagsInput extends React.Component {
   static propTypes = {
     className: PropTypes.string,
     dropdown: PropTypes.bool,
-    format: PropTypes.oneOf([`id`, `text`, `object`]),
+    format: PropTypes.oneOf([`id`, `name`, `object`]),
     label: PropTypes.string,
     name: PropTypes.string,
     onChange: PropTypes.func,
@@ -27,14 +27,14 @@ export class TagsInput extends React.Component {
     popularSuggestions: PropTypes.oneOfType([
       PropTypes.arrayOf(PropTypes.shape({
         id: PropTypes.number,
-        text: PropTypes.string,
+        name: PropTypes.string,
       })),
       PropTypes.arrayOf(PropTypes.string),
     ]),
     suggestions: PropTypes.oneOfType([
       PropTypes.arrayOf(PropTypes.shape({
         id: PropTypes.number,
-        text: PropTypes.string,
+        name: PropTypes.string,
       })),
       PropTypes.arrayOf(PropTypes.string),
     ]),
@@ -42,7 +42,7 @@ export class TagsInput extends React.Component {
     value: PropTypes.oneOfType([
       PropTypes.arrayOf(PropTypes.shape({
         id: PropTypes.number,
-        text: PropTypes.string,
+        name: PropTypes.string,
       })),
       PropTypes.arrayOf(PropTypes.string),
       PropTypes.arrayOf(PropTypes.number),
@@ -50,7 +50,7 @@ export class TagsInput extends React.Component {
   }
 
   static defaultProps = {
-    format: `text`,
+    format: `name`,
     onlyAllowSuggestions: false,
     dropdown: false,
     value: [],
@@ -96,7 +96,7 @@ export class TagsInput extends React.Component {
   getTagsFormat = () => {
     const { format } = this.props
 
-    if (format === `text`) return toJS(this.tags)
+    if (format === `name`) return toJS(this.tags)
 
     const tags = this.getTagObjects()
 
@@ -106,15 +106,15 @@ export class TagsInput extends React.Component {
 
   getTagObjects = () => {
     const { suggestions, popularSuggestions } = this.props
-    const mapedToPopularSuggestions = this.tags.map(tag => popularSuggestions.find(sug => sug.text && sug.text.toUpperCase() === tag) || tag)
+    const mapedToPopularSuggestions = this.tags.map(tag => popularSuggestions.find(sug => sug.name && sug.name.toUpperCase() === tag) || tag)
     const mapedToSuggestions = mapedToPopularSuggestions.map(tag => {
       if (typeof tag === `string`) {
-        const found = suggestions.find(sug => sug.text && sug.text.toUpperCase() === tag)
+        const found = suggestions.find(sug => sug.name && sug.name.toUpperCase() === tag)
 
         if (found) return found
       }
 
-      return { id: null, text: tag }
+      return { id: null, name: tag }
     })
 
     return mapedToSuggestions
@@ -124,9 +124,9 @@ export class TagsInput extends React.Component {
     const { format } = this.props
     let fromName = fromNameRaw || name
 
-    if (format === `text`) this[name].replace(this.props[fromName])
+    if (format === `name`) this[name].replace(this.props[fromName])
     if (format === `object` || format === `id`) {
-      this[name].replace(this.props[fromName].map(tag => tag.text))
+      this[name].replace(this.props[fromName].map(tag => tag.name))
     }
   }
 
