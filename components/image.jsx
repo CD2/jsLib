@@ -99,12 +99,15 @@ export default decorate(
     background-position: 50%;
     background-repeat: no-repeat;
     position: relative;
+    display: block;
     ${({ contain }) => {
     if (contain) {
       return `background-size: contain;
       `
     }
   }}
+      max-width: 100%;
+    max-height: 100%;
 
     ${({ circular }) => {
     if (circular) {
