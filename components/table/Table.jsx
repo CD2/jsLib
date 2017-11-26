@@ -48,6 +48,7 @@ import { styled, t } from 'lib/utils/theme'
     overflow: hidden;
     box-shadow: ${t(`shadow0`)};
   }
+  .thumb-column { width: 70px; }
 `
 @observer
 export class IndexTable extends React.Component {
