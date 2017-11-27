@@ -16,15 +16,20 @@ export default class FormModel {
   }
 
   constructor({ fields, options }={}) {
+    const values = fields.reduce((newValues, field) => {
+      if (options.values) newValues[field.name] = options.values[field.defaultName || field.name]
+
+      return newValues
+    }, {})
     const changes = fields.reduce((defaults, field) => {
-      if (field.default && (!options.values || !options.values[field.name])) {
+      if (field.default && (!values || !values[field.name])) {
         defaults[field.name] = field.default
       }
 
       return defaults
     }, {})
 
-    this.values.replace(options.values || {})
+    this.values.replace({ ...options.values, ...values })
     this.changes.replace(changes)
 
     const validations = fields.reduce((newValidations, field) => {

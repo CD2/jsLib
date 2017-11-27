@@ -108,7 +108,7 @@ export class TagsInput extends React.Component {
     const mapedToPopularSuggestions = this.tags.map(tag => popularSuggestions.find(sug => sug.name && sug.name.toUpperCase() === tag) || tag)
     const mapedToSuggestions = mapedToPopularSuggestions.map(tag => {
       if (typeof tag === `string`) {
-        const found = suggestions.find(sug => sug.name && sug.name.toUpperCase() === tag)
+        const found = suggestions.find(sug => sug.name && sug.name.toUpperCase() === tag.toUpperCase())
 
         if (found) return found
       }
@@ -144,6 +144,7 @@ export class TagsInput extends React.Component {
   getCurrentTagIndex = () => this.tags.findIndex(tag => tag === this.current_tag)
 
   @action handleInput = (e = null) => {
+    if (!this.textInput) return
     const textValue = this.textInput && this.textInput.value
 
     if(textValue !== `` && (!e || e.key === `Enter` || e.key === `Tab` || e.key === `,`)) { // enter
@@ -217,11 +218,11 @@ export class TagsInput extends React.Component {
    }
 
    @computed get filteredSuggestions() {
-     return this.suggestions.filter(suggestion => !this.tags.find(val => val === suggestion.toUpperCase()))
+     return this.suggestions.filter(suggestion => !this.tags.find(val => val.toUpperCase() === suggestion.toUpperCase()))
    }
 
    @computed get filteredPopularSuggestions() {
-     return this.popularSuggestions.filter(suggestion => !this.tags.find(val => val === suggestion.toUpperCase()))
+     return this.popularSuggestions.filter(suggestion => !this.tags.find(val => val.toUpperCase() === suggestion.toUpperCase()))
    }
 
    renderInput(tag=``) {
@@ -312,7 +313,7 @@ export class TagsInput extends React.Component {
        return this.renderTag(tag)
      })
 
-     if (this.current_tag === NEW_INPUT) result.push(this.renderInput())
+     if (this.current_tag === NEW_INPUT && !this.props.onlyAllowSuggestions) result.push(this.renderInput())
 
      return result
    }
