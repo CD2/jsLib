@@ -29,7 +29,7 @@ export default class FormModel {
       return defaults
     }, {})
 
-    this.values.replace(values)
+    this.values.replace({ ...options.values, ...values })
     this.changes.replace(changes)
 
     const validations = fields.reduce((newValidations, field) => {
