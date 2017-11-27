@@ -103,7 +103,7 @@ export class Wrapper extends React.Component {
           boxShadow: floating ? theme.shadow0 : `none`,
           borderRadius: floating || this.props.borderRadius ? `6px` : `0`,
           marginBottom: floating ? theme.gutterHeight.value : `0`,
-          overflow: 'hidden'
+          overflow: `hidden`
         }}
       >
         { this.renderOverlay() }

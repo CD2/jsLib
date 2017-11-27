@@ -59,7 +59,6 @@ export class ImageField extends React.Component {
 
   renderPreview() {
     const { value } = this.props
-    console.log(value)
     if (this.preview_src) return <img alt="" src={this.preview_src} height={240} />
     if (value) return <Image size={`150x150`} uid={value.uid} />
     if (this.props.model && this.props.model.get(`image_uid`)) {
@@ -76,7 +75,6 @@ export class ImageField extends React.Component {
     } else if (onlySpreadsheets) {
       acceptedTypes = `.xls,.xlw,.xlt,.xml,.xlsx,.xlsm,.xltx,.xltm,.xlsb`
     }
-    console.log(this.props)
     return (
       <div>
         <div>

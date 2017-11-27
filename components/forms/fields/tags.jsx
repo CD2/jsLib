@@ -65,7 +65,6 @@ export class TagsInput extends React.Component {
     reaction(
       () => this.tags.map(tag=>tag),
       () => {
-        console.log(JSON.stringify(this.getTagsFormat()))
         this.props.onChange({ name: this.props.name, value: this.getTagsFormat() })
       }
     )

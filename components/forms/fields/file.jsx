@@ -65,7 +65,6 @@ export class FileField extends React.Component {
     if (onlySpreadsheets) {
       acceptedTypes = `.xls,.xlw,.xlt,.xml,.xlsx,.xlsm,.xltx,.xltm,.xlsb`
     }
-    console.log(this.props)
     return (
       <div>
         <input

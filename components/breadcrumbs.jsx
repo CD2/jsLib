@@ -32,7 +32,10 @@ export class Breadcrumbs extends React.Component {
   render() {
     if (BreadcrumbStore.breadcrumbs.filter(crumb=>crumb).length === 0) return null
     return (
-      <Wrapper width={'100%'} spacing={10} className={this.props.className} background={this.props.background || this.props.theme.secondary}>
+      <Wrapper
+        width={`100%`} spacing={10} className={this.props.className}
+        background={this.props.background || this.props.theme.secondary}
+      >
         <Grid columns={6}>
           <Grid.Item colSpan={5}>
             <span>
@@ -54,7 +57,7 @@ export default decorate(
     font-size: 14px;
     max-width: ${t(`siteWidth`)}px;
     margin: 0 auto;
-    color: ${t('lightText')};
+    color: ${t(`lightText`)};
     .breadcrumb__link {
       border-bottom: 0;
       color: inherit;
