@@ -21,9 +21,18 @@ export class Checkbox extends React.Component {
     labelText: PropTypes.string,
     onChange: PropTypes.func,
     onRawChange: PropTypes.func,
+    value: PropTypes.bool,
   }
 
-  @observable checked = this.props.model && this.props.model.get(this.props.name)
+  static defaultProps = {
+    value: false,
+  }
+
+  @action componentDidUpdate(props) {
+    if (props.value !== this.props.value) this.checked = this.props.value
+  }
+
+  @observable checked = this.props.model ? this.props.model.get(this.props.name) : this.props.value
 
   @action handleChange = (e) => {
     const { onRawChange, onChange } = this.props
