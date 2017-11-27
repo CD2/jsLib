@@ -6,7 +6,8 @@ import qs from 'qs'
 
 const api_auth_keys = [`access-token`, `client`, `expiry`, `token-type`, `uid`]
 const key_prefix = `auth_`
-const getApiHeaders = () => {
+
+export const getApiHeaders = () => {
   const headers = {}
   api_auth_keys.forEach(key => headers[key] = localStorage.getItem(`${key_prefix}${key}`))
   return headers

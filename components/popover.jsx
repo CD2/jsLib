@@ -86,7 +86,7 @@ export default decorate(
     color: rgba(0, 0, 0, 0.7);
     font-weight: 400;
     font-size: 0.9rem;
-    box-shadow: 0 5px 40px rgba(0,0,0,.16);
+    box-shadow: 0 5px 8px rgba(0,0,0,.16);
 
     &--open {
       display: block;
