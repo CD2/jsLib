@@ -62,7 +62,9 @@ margin-bottom: 10px;
   }
 }}
   }
-
+  .DayPickerInput-OverlayWrapper {
+    z-index: 40000;
+  }
   .DayPickerInput { display: block; }
   .select{
     background-image: url(${dropdown});
