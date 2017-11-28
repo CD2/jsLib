@@ -5,7 +5,7 @@ import { observable, action } from 'mobx'
 import PropTypes from 'prop-types'
 import match from './match'
 import { attributesFactories } from './record_factories'
-import LoadingSpinner from 'components/parts/loading_spinner'
+import LoadingSpinner from 'lib/components/loading_spinner'
 
 export default function connectFields({
   scope=`all`,

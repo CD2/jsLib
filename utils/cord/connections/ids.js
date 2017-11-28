@@ -2,7 +2,7 @@
 import React from 'react'
 import { inject, observer } from 'mobx-react'
 import PropTypes from 'prop-types'
-import LoadingSpinner from 'components/parts/loading_spinner'
+import LoadingSpinner from 'lib/components/loading_spinner'
 import defaultConnectIdsFactories from './ids_factories'
 import match from './match'
 
@@ -48,7 +48,7 @@ export default function(connectIds) {
           <Component {...props} />
         )
       }
-    
+
     }
     return ConnectedIds
   }

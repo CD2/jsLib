@@ -53,11 +53,10 @@ export class Breadcrumbs extends React.Component {
 }
 export default decorate(
   styled`
-    color: ${t(`lightText`)};
+    color: ${BreadcrumbStore.color};
     font-size: 14px;
     max-width: ${t(`siteWidth`)}px;
     margin: 0 auto;
-    color: ${t(`lightText`)};
     .breadcrumb__link {
       border-bottom: 0;
       color: inherit;
