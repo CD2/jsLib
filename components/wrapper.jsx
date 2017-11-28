@@ -18,6 +18,7 @@ export class Wrapper extends React.Component {
     gutter: PropTypes.number,
     innerBackground: PropTypes.string,
     noGutters: PropTypes.bool,
+    overflow: PropTypes.bool,
     overlay: PropTypes.string,
     spacing: PropTypes.oneOfType([
       PropTypes.number,
@@ -102,8 +103,8 @@ export class Wrapper extends React.Component {
           position: `relative`,
           boxShadow: floating ? theme.shadow0 : `none`,
           borderRadius: floating || this.props.borderRadius ? `6px` : `0`,
-          marginBottom: floating ? theme.gutterHeight.value : `0`,
-          overflow: `hidden`
+          marginBottom: floating ? this.props.margin || theme.gutterHeight.value : `0`,
+          overflow: this.props.overflow ? `initial` : `hidden`,
         }}
       >
         { this.renderOverlay() }
