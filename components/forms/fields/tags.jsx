@@ -300,11 +300,15 @@ export class TagsInput extends React.Component {
      })
    }
 
+   renderNoSuggestionsMessage = () => (
+     <span className="tag-input__dropdown-suggestion">No suggestions found</span>
+   )
+
    renderSuggestions() {
-     if (!this.current_tag || this.filteredSuggestions.length === 0) return
+     if (!this.current_tag || (this.filteredSuggestions.length === 0 && !this.props.onlyAllowSuggestions)) return
      let style = `tag-input__suggestion tag-input__tag`
 
-     const suggestionsComponent = this.filteredSuggestions.map((suggestion, index) => {
+     let suggestionsComponent = this.filteredSuggestions.map((suggestion, index) => {
        if (this.props.dropdown) style = `tag-input__dropdown-suggestion ${this.dropdownHighlight === index ? `tag-input__dropdown-suggestion--highlight` : ``}`
 
        return (
@@ -317,6 +321,8 @@ export class TagsInput extends React.Component {
          </span>
        )
      })
+
+     if (suggestionsComponent.length === 0) suggestionsComponent = this.renderNoSuggestionsMessage()
 
      if (this.props.dropdown) {
        return (
