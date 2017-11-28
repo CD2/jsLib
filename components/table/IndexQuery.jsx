@@ -15,7 +15,7 @@ export class IndexQuery {
     this.options = options
     this.scope = options.scope || `all`
     this.onChange = options.onChange
-    
+
     if (options.defaultSort) {
       const { column, dir } = options.defaultSort
       this.sort.column = column
@@ -96,11 +96,12 @@ export class IndexQuery {
 
   @action fetch() {
     this.fetching = true
-    this.idFetcher(this.scope, this.query).then(
+    return this.idFetcher(this.scope, this.query).then(
       action(`fetchIdsFulfilled`, response => {
         this.fetching = false
         this.onChange && this.onChange(response[this.scope], this.ids)
         this.ids.replace(response[this.scope])
+        return this.ids
       })
     )
   }
