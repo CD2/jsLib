@@ -15,6 +15,7 @@ export class Popover extends React.Component {
     onMouseEnter: PropTypes.func,
     onMouseLeave: PropTypes.func,
     open: PropTypes.bool,
+    popoverClassName: PropTypes.string,
     toggle: PropTypes.func,
   }
 
@@ -27,13 +28,14 @@ export class Popover extends React.Component {
     onMouseLeave: null,
     closeOnOutsideClick: false,
     toggle: null,
+    popoverClassName: null,
   }
 
   getClassName() {
     let className = `popover__popover`
 
-    if(this.props.className) {
-      className += ` ${this.props.className}`
+    if(this.props.popoverClassName) {
+      className += ` ${this.props.popoverClassName}`
     }
     if(this.props.open) {
       className += ` popover__popover--open`
@@ -45,7 +47,7 @@ export class Popover extends React.Component {
   renderOverlay() {
     return(
       <Overlay
-        className={this.props.open ? `popover__overlay--open` : `popover__overlay`}
+        overlayClassName={this.props.open ? `popover__overlay--open` : `popover__overlay`}
         visible={this.props.open}
         onClick={this.props.toggle}
       />
@@ -54,7 +56,7 @@ export class Popover extends React.Component {
 
   render() {
     return(
-      <span className={`popover ${this.props.containerClassName}`}>
+      <span className={`${this.props.className} ${this.props.containerClassName}`}>
         <div
           className={this.getClassName()}
           onMouseEnter={this.props.onMouseEnter}
@@ -68,11 +70,11 @@ export class Popover extends React.Component {
   }
 
 }
+
 export default decorate(
   styled`
-  .popover {
-    position: relative;
-  }
+  position: relative;
+
   .popover__popover {
     position: absolute;
     display: none;

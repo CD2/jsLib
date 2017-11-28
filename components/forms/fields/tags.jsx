@@ -315,7 +315,7 @@ export class TagsInput extends React.Component {
        return (
          <Popover
            containerClassName="tag-input__suggestion-dropdown-container"
-           className="tag-input__suggestion-dropdown"
+           popoverClassName="tag-input__suggestion-dropdown"
            open
            closeOnOutsideClick
            onMouseEnter={() => this.mouseOverPopover = true}

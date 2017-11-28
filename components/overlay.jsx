@@ -7,6 +7,7 @@ export class Overlay extends React.Component {
 
   static propTypes = {
     className: PropTypes.string,
+    overlayClassName: PropTypes.string,
     clickThrough: PropTypes.bool.isRequired,
     onClick: PropTypes.func.isRequired,
     visible: PropTypes.bool.isRequired,
@@ -16,6 +17,7 @@ export class Overlay extends React.Component {
     visible: false,
     clickThrough: false,
     className: ``,
+    overlayClassName: ``,
   }
 
   handleClick = (e) => {
@@ -30,7 +32,7 @@ export class Overlay extends React.Component {
   }
 
   render() {
-    let className = this.props.className
+    let className = `${this.props.className} ${this.props.overlayClassName}`
     if (this.props.visible) className += ` visible`
 
     return (<div className={className} onClick={this.handleClick} />)
