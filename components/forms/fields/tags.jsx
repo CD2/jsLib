@@ -244,13 +244,13 @@ export class TagsInput extends React.Component {
      if(!this.current_tag) this.current_tag = NEW_INPUT
    }
 
-   getFilteredSuggestions = suggestions => {
+   getFilteredSuggestions = (suggestions, filter = false) => {
      const nonSelected =  suggestions.filter(suggestion => !this.tags.find(val => val.toUpperCase() === suggestion.toUpperCase()))
-     if (this.filterText) return nonSelected.filter(suggestion => suggestion.toUpperCase().indexOf(this.filterText) !== -1)
+     if (filter && this.filterText) return nonSelected.filter(suggestion => suggestion.toUpperCase().indexOf(this.filterText) !== -1)
      return nonSelected
    }
 
-   @computed get filteredSuggestions() { return this.getFilteredSuggestions(this.suggestions)}
+   @computed get filteredSuggestions() { return this.getFilteredSuggestions(this.suggestions, true)}
    @computed get filteredPopularSuggestions() { return this.getFilteredSuggestions(this.popularSuggestions)}
 
    renderInput(tag=``) {
