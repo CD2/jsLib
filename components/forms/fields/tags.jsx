@@ -20,6 +20,7 @@ export class TagsInput extends React.Component {
     className: PropTypes.string,
     dropdown: PropTypes.bool,
     format: PropTypes.oneOf([`id`, `name`, `object`]),
+    hideClear: PropTypes.bool,
     label: PropTypes.string,
     name: PropTypes.string,
     onChange: PropTypes.func,
@@ -55,7 +56,8 @@ export class TagsInput extends React.Component {
     dropdown: false,
     value: [],
     suggestions: [],
-    popularSuggestions: []
+    popularSuggestions: [],
+    hideClear: false,
   }
 
   @action componentDidMount() {
@@ -132,7 +134,7 @@ export class TagsInput extends React.Component {
     }
   }
 
-  handleChange = value => {
+  handleChange = (value, e) => {
     const filteredForRepeats = value.reduce((filtered, tag) => {
       const capitalisedTag = tag.toUpperCase()
 
@@ -143,28 +145,30 @@ export class TagsInput extends React.Component {
 
     this.tags.replace(filteredForRepeats)
     this.filterText = ``
+    if (this.textInput) this.textInput.value = ``
+    e && this.handleBlur(e)
   }
 
   getCurrentTagIndex = () => this.tags.findIndex(tag => tag === this.current_tag)
 
   @action handleInput = (e = null) => {
-    if (!this.textInput) return
-    const textValue = this.textInput && this.textInput.value
-
     if (this.props.dropdown && e) {
-      e && e.stopPropagation()
+      e && e.preventDefault()
       if (e.key === `ArrowUp` && this.dropdownHighlight > 0) this.dropdownHighlight -= 1
       if (e.key === `ArrowDown` && this.dropdownHighlight < this.filteredSuggestions.length) {
         this.dropdownHighlight += 1
         //this.popover.scrollTop = e.target.offsetTop
       }
       if (e.key === `Enter` && this.filteredSuggestions[this.dropdownHighlight]) {
-        return this.handleChange([...this.tags, this.filteredSuggestions[this.dropdownHighlight]])
+        return this.handleChange([...this.tags, this.filteredSuggestions[this.dropdownHighlight]], e)
       }
     }
 
+    if (!this.textInput) return
+    const textValue = this.textInput && this.textInput.value
+
     if(textValue !== `` && (!e || e.key === `Enter` || e.key === `Tab` || e.key === `,`)) { // enter
-      e && e.stopPropagation()
+      e && e.preventDefault()
       if (this.current_tag === NEW_INPUT) {
         let newValue = null
 
@@ -175,7 +179,7 @@ export class TagsInput extends React.Component {
           newValue = textValue
         }
 
-        if (newValue) this.handleChange([...this.tags, newValue])
+        if (newValue) this.handleChange([...this.tags, newValue], e)
       } else {
         const valueCopy = this.tags.slice()
         let newValue = null
@@ -188,12 +192,12 @@ export class TagsInput extends React.Component {
 
         if (newValue) valueCopy[this.getCurrentTagIndex()] = newValue
 
-        this.handleChange(valueCopy)
+        this.handleChange(valueCopy, e)
       }
 
       this.current_tag = null
     } else if(e && textValue === `` && e.key === `Backspace`) { //backspace
-      this.handleRemoveTag()
+      this.handleRemoveTag(e)
     } else {
       this.props.updateSuggestions && this.props.updateSuggestions(textValue)
     }
@@ -202,13 +206,12 @@ export class TagsInput extends React.Component {
   }
 
   @action handleRemoveTag = (e = null, selectedTag = null) => {
-    e && e.stopPropagation()
     if (selectedTag !== null) {
-      this.handleChange(this.tags.filter(tag => tag !== selectedTag))
+      this.handleChange(this.tags.filter(tag => tag !== selectedTag), e)
     } else if (this.current_tag && this.current_tag !== NEW_INPUT) {
       const tagBeforeCurrent = this.tags.get(this.getCurrentTagIndex() - 1)
       const newTags = this.tags.filter(tag => tag !== this.current_tag)
-      this.handleChange(newTags)
+      this.handleChange(newTags, e)
 
       if (tagBeforeCurrent) {
         return this.current_tag = tagBeforeCurrent
@@ -232,7 +235,7 @@ export class TagsInput extends React.Component {
    }
 
    @action handleBlur = e => {
-     e.stopPropagation()
+     e && e.preventDefault()
      if (!this.mouseOverPopover) {
        this.current_tag && this.handleInput()
        this.current_tag = null
@@ -241,7 +244,9 @@ export class TagsInput extends React.Component {
    }
 
    @action handleFocus = () => {
-     if(!this.current_tag) this.current_tag = NEW_INPUT
+     if(!this.current_tag) {
+       this.current_tag = NEW_INPUT
+     }
    }
 
    getFilteredSuggestions = (suggestions, filter = false) => {
@@ -349,13 +354,24 @@ export class TagsInput extends React.Component {
      return result
    }
 
+   renderClearAll = () => {
+     if(this.tags.length > 0 && !this.props.hideClear) {
+       return <div className="tag-input__clear-all"onClick={e => this.handleChange([], e)}>Clear</div>
+     }
+   }
+
    render() {
      return (
        <div className={this.props.className}>
          {this.current_tag && <Overlay clickThrough onClick={this.handleBlur} />}
          <div className="wrapper" onClick={this.handleFocus}>
            {this.renderPopularSuggestions()}
-           <div className="tag-input" tabIndex="0" onFocus={this.handleFocus}>
+           <div className="tag-input" tabIndex="0" onKeyDown={e => {
+             !this.current_tag && e.preventDefault()
+             this.props.onlyAllowSuggestions && this.handleInput(e)
+             this.handleFocus()
+           }}>
+              {this.renderClearAll()}
              {this.renderValue()}
            </div>
            {this.renderSuggestions()}
@@ -379,6 +395,7 @@ export default decorate(
       padding: 6px;
       cursor: pointer;
       min-height: 44px;
+      position: relative;
 
       &:focus-within {
         border: 1px solid #39b5b1;
@@ -389,6 +406,17 @@ export default decorate(
       margin-top: 2px;
       z-index: 6000;
       cursor: pointer;
+    }
+    .tag-input__clear-all {
+      border-radius: 6px;
+      font-size: 0.8rem;
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      background-color: red;
+      color: white;
+      padding: 4px;
+      opacity: 0.5;
     }
     .tag-input__tag-remove {
       z-index: 7000;

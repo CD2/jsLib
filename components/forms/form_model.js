@@ -17,7 +17,11 @@ export default class FormModel {
 
   constructor({ fields, options }={}) {
     const values = fields.reduce((newValues, field) => {
-      if (options.values) newValues[field.name] = options.values[field.defaultName || field.name]
+      let newValue = null
+
+      if (options.values) newValue = options.values[field.defaultName || field.name]
+      if (field.formatValue && newValue) newValue = field.formatValue(newValue)
+      if (newValue) newValues[field.name] = newValue
 
       return newValues
     }, {})
