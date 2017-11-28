@@ -158,7 +158,9 @@ export class TagsInput extends React.Component {
         this.dropdownHighlight += 1
         //this.popover.scrollTop = e.target.offsetTop
       }
-      if (e.key === `Enter`) return this.handleChange([...this.tags, this.filteredSuggestions[this.dropdownHighlight]])
+      if (e.key === `Enter` && this.filteredSuggestions[this.dropdownHighlight]) {
+        return this.handleChange([...this.tags, this.filteredSuggestions[this.dropdownHighlight]])
+      }
     }
 
     if(textValue !== `` && (!e || e.key === `Enter` || e.key === `Tab` || e.key === `,`)) { // enter
@@ -353,7 +355,7 @@ export class TagsInput extends React.Component {
          {this.current_tag && <Overlay clickThrough onClick={this.handleBlur} />}
          <div className="wrapper" onClick={this.handleFocus}>
            {this.renderPopularSuggestions()}
-           <div className="tag-input">
+           <div className="tag-input" tabIndex="0" onFocus={this.handleFocus}>
              {this.renderValue()}
            </div>
            {this.renderSuggestions()}
@@ -377,11 +379,16 @@ export default decorate(
       padding: 6px;
       cursor: pointer;
       min-height: 44px;
+
+      &:focus-within {
+        border: 1px solid #39b5b1;
+      }
     }
     .tag-input__tag {
       ${tag}
       margin-top: 2px;
       z-index: 6000;
+      cursor: pointer;
     }
     .tag-input__tag-remove {
       z-index: 7000;
@@ -404,8 +411,12 @@ export default decorate(
       width: 100%;
       padding: 10px;
       border-bottom: 1px solid ${t(`border`)};
+      cursor: pointer;
 
       &--highlight {
+        background-color: ${t(`background`)};
+      }
+      &:hover {
         background-color: ${t(`background`)};
       }
     }
