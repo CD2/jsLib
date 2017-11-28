@@ -234,9 +234,9 @@ export class TagsInput extends React.Component {
      }
    }
 
-   @action handleBlur = e => {
+   @action handleBlur = (e, force = false) => {
      e && e.preventDefault()
-     if (!this.mouseOverPopover) {
+     if (!this.mouseOverPopover || force) {
        this.current_tag && this.handleInput()
        this.current_tag = null
        this.filterText = ``
@@ -363,7 +363,7 @@ export class TagsInput extends React.Component {
    render() {
      return (
        <div className={this.props.className}>
-         {this.current_tag && <Overlay clickThrough onClick={this.handleBlur} />}
+         {this.current_tag && <Overlay clickThrough onClick={e => this.handleBlur(e, true)} />}
          <div className="wrapper" onClick={this.handleFocus}>
            {this.renderPopularSuggestions()}
            <div className="tag-input" tabIndex="0" onKeyDown={e => {
