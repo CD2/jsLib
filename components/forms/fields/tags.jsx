@@ -18,6 +18,7 @@ export class TagsInput extends React.Component {
 
   static propTypes = {
     className: PropTypes.string,
+    disabled: PropTypes.bool,
     dropdown: PropTypes.bool,
     format: PropTypes.oneOf([`id`, `name`, `object`]),
     hideClear: PropTypes.bool,
@@ -51,6 +52,7 @@ export class TagsInput extends React.Component {
   }
 
   static defaultProps = {
+    disabled: false,
     format: `name`,
     onlyAllowSuggestions: false,
     dropdown: false,
@@ -274,13 +276,13 @@ export class TagsInput extends React.Component {
        <span
          className="tag-input__tag"
          key={tag}
-         onClick={e => this.handleTagClick(e, tag)}
+         onClick={e => !this.props.disabled && this.handleTagClick(e, tag)}
        >
          {tag}
          <FaIcon
            icon="cross"
            className="tag-input__tag-remove"
-           onClick={e => this.handleRemoveTag(e, tag)}
+           onClick={e => !this.props.disabled && this.handleRemoveTag(e, tag)}
          />
        </span>
      )
@@ -370,7 +372,7 @@ export class TagsInput extends React.Component {
      return (
        <div className={this.props.className}>
          {this.current_tag && <Overlay clickThrough onClick={e => this.handleBlur(e, true)} />}
-         <div className="wrapper" onClick={this.handleFocus}>
+         <div className="wrapper" onClick={!this.props.disabled && this.handleFocus}>
            {this.renderPopularSuggestions()}
            <div className="tag-input" tabIndex="0" onKeyDown={e => {
              !this.current_tag && e.preventDefault()
@@ -400,8 +402,9 @@ export default decorate(
       background: white;
       padding: 6px;
       cursor: pointer;
-      min-height: 44px;
+      min-height: 48px;
       position: relative;
+      margin-top: 4px;
 
       &:focus-within {
         border: 1px solid #39b5b1;

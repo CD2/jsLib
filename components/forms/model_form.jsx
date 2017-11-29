@@ -65,6 +65,9 @@ class ModelForm extends React.Component {
     })
   }
 
+  submit = () => this.handleSubmit()
+  getModel = () => this.model
+
   @observable formSubmitting = false
 
   @action handleSubmit  = () => {
@@ -107,6 +110,15 @@ class ModelForm extends React.Component {
     return this.props.fields.map(this.renderField)
   }
 
+  renderSubmit = () => {
+    if (!this.props.submit) return
+
+    return React.cloneElement(
+      this.props.submit,
+      { ...this.props.submit.props, submitting: this.formSubmitting }
+    )
+  }
+
   render() {
     return (
       <Form onSubmit={this.handleSubmit}>
@@ -115,10 +127,7 @@ class ModelForm extends React.Component {
             ? this.props.renderContents(this.renderFields(), this.model)
             : this.renderFields()
         }
-        {React.cloneElement(
-          this.props.submit,
-          { ...this.props.submit.props, submitting: this.formSubmitting }
-        )}
+        {this.renderSubmit()}
       </Form>
     )
   }

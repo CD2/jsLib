@@ -143,7 +143,7 @@ export default class Input extends React.Component {
 
     if (label) {
       return (
-        <div className={className}>
+        <div className={`${className} form-input`}>
           {this.renderErrors()}
           <label>
             {label}
@@ -154,7 +154,7 @@ export default class Input extends React.Component {
       )
     }
     return (
-      <div className={this.props.className}>
+      <div className={`${className} form-input`}>
         {this.renderErrors()}
         <this.field {...props} className="field" />
         <p className="description">{description}</p>

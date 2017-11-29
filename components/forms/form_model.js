@@ -74,12 +74,12 @@ export default class FormModel {
     if (!this.validations) return true
     const { onError } = this.options
     const errors = validateForm(this.completeValues, this.validations)
-    const hasErrors = Object.keys(errors).length === 0
+    const Validates = Object.keys(errors).length === 0
 
     this.errors.replace(errors)
     onError && onError(errors)
 
-    return hasErrors
+    return Validates
   }
 
   submit() {
@@ -88,11 +88,11 @@ export default class FormModel {
     if (this.options.perform) return this.perform()
   }
 
-  perform() {
-    if (!this.hasChanges()) return
+  perform(payloadValues = null) {
+    if (!this.hasChanges() && !payloadValues) return
     const { redirectTo, cord, flash, onSuccess, onError, perform, formatPayload, scroll } = this.options
     let params = null
-    const values = this.changes
+    const values = payloadValues || this.changes
 
     if (perform === `create`) {
       params = { [cord.name]: toJS(values) }
