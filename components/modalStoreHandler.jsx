@@ -4,6 +4,7 @@ import { observer } from 'mobx-react'
 import { observable, action } from 'mobx'
 import Modal from 'lib/components/modal'
 import ModalStore from 'lib/utils/modal_store'
+import FaIcon from 'lib/components/fa_icon'
 @observer
 export default class OrderForm extends React.Component {
 
@@ -20,7 +21,7 @@ export default class OrderForm extends React.Component {
 
   render() {
     return (
-      ModalStore.hasContents ? <Modal onClose={this.closeModal}>{ModalStore.getLast()}</Modal> : null
+      ModalStore.hasContents ? <Modal onClose={this.closeModal}><div onClick={this.closeModal}>X</div><FaIcon icon={`cross`} size={1} />{ModalStore.getLast()}</Modal> : null
     )
   }
 
