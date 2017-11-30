@@ -29,6 +29,7 @@ class ModelForm extends React.Component {
       onError: PropTypes.func,
     }),
     onSubmit: PropTypes.func,
+    onUnmount: PropTypes.func,
     renderContents: PropTypes.func,
     renderField: PropTypes.func,
     returnModel: PropTypes.func,
@@ -68,6 +69,7 @@ class ModelForm extends React.Component {
     props.returnModel && props.returnModel(this.model)
   }
 
+  componentWillUnmount = () => this.props.onUnmount && this.props.onUnmount()
   submit = () => this.handleSubmit()
   getModel = () => this.model
 
