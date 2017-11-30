@@ -10,7 +10,7 @@ export class IndexQuery {
   @observable fetched = false
   @observable fetch_error = false
 
-  constructor(idFetcher, options) {
+  constructor(idFetcher, options = {}) {
     this.idFetcher = idFetcher
     this.options = options
     this.scope = options.scope || `all`
