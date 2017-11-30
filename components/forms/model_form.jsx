@@ -31,6 +31,7 @@ class ModelForm extends React.Component {
     onSubmit: PropTypes.func,
     renderContents: PropTypes.func,
     renderField: PropTypes.func,
+    returnModel: PropTypes.func,
     submit: PropTypes.node,
   }
 
@@ -63,6 +64,8 @@ class ModelForm extends React.Component {
         },
       },
     })
+
+    props.returnModel && props.returnModel(this.model)
   }
 
   submit = () => this.handleSubmit()
