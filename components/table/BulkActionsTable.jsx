@@ -56,7 +56,7 @@ import Button from 'lib/components/button'
   .thumb-column { width: 70px; }
 `
 @observer
-export class IndexTable extends React.Component {
+export class BulkActionTable extends React.Component {
 
   static propTypes = {
     bulkActions: PropTypes.shape({
@@ -214,7 +214,6 @@ export class IndexTable extends React.Component {
                 <Input
                   name="select"
                   type="checkbox"
-                  labelText={`${this.selectAll ? `Unselect` : `Select`} All`}
                   value={this.selectAll}
                   onChange={() => this.handleSelectAll()}
                 />
@@ -228,27 +227,35 @@ export class IndexTable extends React.Component {
   }
 
   // Perform on bulk action //
-  handlePerformAction = () => {
-    const { bulkActions } = this.props
-    console.log(this.selectedIds)
-
-    if(bulkActions.cord){
-      bulkActions.cord.perform(
-        bulkActions.action,
-        { ids: bulkActions.ids, ...bulkActions.payloadFormat(this.selectedIds) }
+  handlePerformAction = (action) => {
+    if(action.cord){
+      action.cord.perform(
+        action.action,
+        { ids: action.ids, ...action.payloadFormat(this.selectedIds) }
       ).then(response=>{
-        bulkActions.onSuccess && bulkActions.onSuccess(response)
+        action.onSuccess && action.onSuccess(response)
       })
     }
-    if(!bulkActions.cord){
+    if(!action.cord){
       this.props.loader.cord.perform(
-        bulkActions.action,
-        { ids: toJS(this.selectedIds), ...bulkActions.payloadFormat(this.selectedIds) }
+        action.action,
+        { ids: toJS(this.selectedIds), ...action.payloadFormat(this.selectedIds) }
       ).then(response=>{
-        bulkActions.onSuccess && bulkActions.onSuccess(response)
+        this.selectAll = false
+        this.selectedIds.replace([])
+        this.props.reload && this.props.reload()
+        action.onSuccess && action.onSuccess(response)
       })
     }
 
+  }
+
+  renderActionsButtons = () => {
+    return this.props.bulkActions.map(action=>(
+      <Button key={action} onClick={()=>this.handlePerformAction(action)}>
+        {action.text ? action.text : titleCase(action.action)}
+      </Button>
+    ))
   }
 
   render() {
@@ -257,9 +264,7 @@ export class IndexTable extends React.Component {
       <Page title={title}>
         <div className="filters">
           {newRoute && <Button to={`/${newRoute}/new`}>New {name}</Button>}
-          {bulkActions && <Button onClick={this.handlePerformAction}>
-            {bulkActions.text ? bulkActions.text : titleCase(bulkActions.action)}
-          </Button>}
+          {bulkActions && this.renderActionsButtons()}
           {!ids && <IndexFilters query={query} />}
         </div>
         <div className={this.props.className}>
@@ -283,4 +288,4 @@ export class IndexTable extends React.Component {
   }
 
 }
-export default IndexTable
+export default BulkActionTable

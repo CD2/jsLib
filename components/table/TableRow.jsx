@@ -23,7 +23,9 @@ export default class PupilTableRow extends React.Component {
   }
 
   handleRowClick = () => {
-    redirect(this.props.onRedirect(this.props.resource))
+    if(this.props.onRedirect){
+      redirect(this.props.onRedirect(this.props.resource))
+    }
   }
 
   fieldMap = (column) => {
