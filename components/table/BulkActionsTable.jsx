@@ -11,6 +11,8 @@ import Row from './TableRow'
 import Page from 'lib/components/SectionIntro'
 import { THead, Th, IndexFilters } from 'lib/components/table'
 import Button from 'lib/components/button'
+import ModalStore from 'lib/utils/modal_store'
+
 @styled`
   font-size: 0.9em;
   thead tr {
@@ -66,6 +68,7 @@ export class BulkActionTable extends React.Component {
       payloadFormat: PropTypes.func.isRequired,
       onSuccess: PropTypes.func,
       ids: PropTypes.array,
+      modalConfirm: PropTypes.string
     }),
     className: PropTypes.string,
     headings: PropTypes.arrayOf(PropTypes.shape({
@@ -81,6 +84,7 @@ export class BulkActionTable extends React.Component {
     onChecked: PropTypes.func,
     onRedirect: PropTypes.func,
     query: PropTypes.object,
+    reload: PropTypes.func,
     rowPath: PropTypes.string,
     rowProps: PropTypes.object,
     title: PropTypes.string,
@@ -226,6 +230,15 @@ export class BulkActionTable extends React.Component {
     )
   }
 
+  confirmAction = (action) => {
+    console.log(action)
+    if(action.modalConfirm){
+      ModalStore.addItem(<div><p>{action.modalConfirm}</p><Button onClick={()=>this.handlePerformAction(action)}>Proceed</Button></div>)
+    } else {
+      this.handlePerformAction(action)
+    }
+  }
+
   // Perform on bulk action //
   handlePerformAction = (action) => {
     if(action.cord){
@@ -241,6 +254,7 @@ export class BulkActionTable extends React.Component {
         action.action,
         { ids: toJS(this.selectedIds), ...action.payloadFormat(this.selectedIds) }
       ).then(response=>{
+        ModalStore.clear()
         this.selectAll = false
         this.selectedIds.replace([])
         this.props.reload && this.props.reload()
@@ -252,7 +266,7 @@ export class BulkActionTable extends React.Component {
 
   renderActionsButtons = () => {
     return this.props.bulkActions.map(action=>(
-      <Button key={action} onClick={()=>this.handlePerformAction(action)}>
+      <Button key={action} onClick={()=>this.confirmAction(action)}>
         {action.text ? action.text : titleCase(action.action)}
       </Button>
     ))
