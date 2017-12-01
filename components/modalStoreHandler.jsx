@@ -9,8 +9,6 @@ import FaIcon from 'lib/components/fa_icon'
 export default class OrderForm extends React.Component {
 
   static propTypes = {
-    order: PropTypes.object,
-    order_id: PropTypes.number,
     update: PropTypes.bool,
     reload: PropTypes.func,
   }
