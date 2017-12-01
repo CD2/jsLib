@@ -235,7 +235,7 @@ export class IndexTable extends React.Component {
     if(bulkActions.cord){
       bulkActions.cord.perform(
         bulkActions.action,
-        { ids: bulkActions.ids, ...bulkActions.payloadFormat(this.resource, this.selectedIds) }
+        { ids: bulkActions.ids, ...bulkActions.payloadFormat(this.selectedIds) }
       ).then(response=>{
         bulkActions.onSuccess && bulkActions.onSuccess(response)
       })
@@ -243,7 +243,7 @@ export class IndexTable extends React.Component {
     if(!bulkActions.cord){
       this.props.loader.cord.perform(
         bulkActions.action,
-        { ids: toJS(this.selectedIds), ...bulkActions.payloadFormat(this.resource, this.selectedIds) }
+        { ids: toJS(this.selectedIds), ...bulkActions.payloadFormat(this.selectedIds) }
       ).then(response=>{
         bulkActions.onSuccess && bulkActions.onSuccess(response)
       })
