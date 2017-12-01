@@ -94,29 +94,6 @@ export class IndexTable extends React.Component {
     this.props.query.fetch()
   }
 
-  // Checkbox methods //
-  @observable ids = []
-  @observable selectedIds = []
-  @action handleChecked = (id, remove, toggle) => {
-    if (this.selectedIds.includes(id) && !toggle) {
-      this.selectedIds.replace(this.selectedIds.filter(checkedId => checkedId !== id))
-    } else {
-      if(!toggle){
-        this.selectedIds.push(id)
-      }
-    }
-    if(toggle){
-      if (this.selectedIds.includes(id) && !remove) {
-        this.selectedIds.replace(this.selectedIds.filter(checkedId => checkedId !== id))
-      } else {
-        if(remove){
-          this.selectedIds.push(id)
-        }
-      }
-    }
-    this.props.onChecked(this.selectedIds)
-  }
-
   // Render table row methods //
   renderRow = (id) => {
     if(this.props.loader){
@@ -199,6 +176,30 @@ export class IndexTable extends React.Component {
       this.paginated_ids.map(id=>this.handleChecked(id, this.selectAll, true))
     }
   }
+
+  // Checkbox methods //
+  @observable ids = []
+  @observable selectedIds = []
+  @action handleChecked = (id, remove, toggle) => {
+    if (this.selectedIds.includes(id) && !toggle) {
+      this.selectedIds.replace(this.selectedIds.filter(checkedId => checkedId !== id))
+    } else {
+      if(!toggle){
+        this.selectedIds.push(id)
+      }
+    }
+    if(toggle){
+      if (this.selectedIds.includes(id) && !remove) {
+        this.selectedIds.replace(this.selectedIds.filter(checkedId => checkedId !== id))
+      } else {
+        if(remove){
+          this.selectedIds.push(id)
+        }
+      }
+    }
+    this.props.onChecked(this.selectedIds)
+  }
+
   // Table heading render //
   @observable selectAll = false
   renderHeadings = () => {
@@ -239,11 +240,11 @@ export class IndexTable extends React.Component {
     return (
       <Page title={title}>
         <div className="filters">
-          {newRoute ? <Button to={`/${newRoute}/new`}>New {name}</Button> : null}
-          {bulkActions ? <Button onClick={this.handlePerformAction}>
+          {newRoute && <Button to={`/${newRoute}/new`}>New {name}</Button>}
+          {bulkActions && <Button onClick={this.handlePerformAction}>
             {bulkActions.text ? bulkActions.text : titleCase(bulkActions.action)}
-          </Button> : null}
-          {ids ? null : <IndexFilters query={query} />}
+          </Button>}
+          {!ids && <IndexFilters query={query} />}
         </div>
         <div className={this.props.className}>
           {this.pagination_controls}
