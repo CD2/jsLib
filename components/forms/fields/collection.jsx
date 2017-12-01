@@ -1,9 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import idsLoader from 'components/generic/ids_loader'
-import loader from 'components/generic/loader'
-
 //import MultiSelect from 'javascript_lib/components/collection_select/multi_select';
 
 export default class CollectionSelect extends React.Component {
