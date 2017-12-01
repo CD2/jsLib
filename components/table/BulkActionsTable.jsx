@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import PaginationControls from './pagination_controls'
 import Input from 'lib/components/forms/input'
-import { observable, computed, action } from 'mobx'
+import { observable, computed, action, toJS } from 'mobx'
 import { observer, Provider } from 'mobx-react'
 import { styled, t } from 'lib/utils/theme'
 import { titleCase } from 'lib/utils/helpers'
@@ -61,9 +61,11 @@ export class IndexTable extends React.Component {
   static propTypes = {
     bulkActions: PropTypes.shape({
       action: PropTypes.string.isRequired,
+      cord: PropTypes.object,
       text: PropTypes.string,
       payloadFormat: PropTypes.func.isRequired,
       onSuccess: PropTypes.func,
+      ids: PropTypes.array,
     }),
     className: PropTypes.string,
     headings: PropTypes.arrayOf(PropTypes.shape({
@@ -228,11 +230,25 @@ export class IndexTable extends React.Component {
   // Perform on bulk action //
   handlePerformAction = () => {
     const { bulkActions } = this.props
-    this.props.loader.cord.perform(
-      bulkActions.action, { ids: this.selectedIds, ...bulkActions.payloadFormat() }
-    ).then(response=>{
-      bulkActions.onSuccess && bulkActions.onSuccess(response)
-    })
+    console.log(this.selectedIds)
+
+    if(bulkActions.cord){
+      bulkActions.cord.perform(
+        bulkActions.action,
+        { ids: bulkActions.ids, ...bulkActions.payloadFormat(this.resource, this.selectedIds) }
+      ).then(response=>{
+        bulkActions.onSuccess && bulkActions.onSuccess(response)
+      })
+    }
+    if(!bulkActions.cord){
+      this.props.loader.cord.perform(
+        bulkActions.action,
+        { ids: toJS(this.selectedIds), ...bulkActions.payloadFormat(this.resource, this.selectedIds) }
+      ).then(response=>{
+        bulkActions.onSuccess && bulkActions.onSuccess(response)
+      })
+    }
+
   }
 
   render() {
