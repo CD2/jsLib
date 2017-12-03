@@ -16,12 +16,21 @@ import { styled, t } from 'lib/utils/theme'
     }
   }
   tbody tr {
-    cursor: pointer;
+    ${({ noLinks }) => {
+      if (!noLinks) {
+        return`
+          cursor: pointer;
+          &:hover {
+            background: #f3f7fb;
+          }
+        `
+      }
+    }}
   }
   tr {
     background: white;
     &:hover {
-      background: ${t(`border`)};
+      background: white;
     }
   }
   th{
