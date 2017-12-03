@@ -164,6 +164,17 @@ export default decorate(
         font-weight: 600;
         border: 2px solid ${t(`primary`)};
       }
+      &.table {
+        margin: 0;
+        background-color: ${t(`primary`)};
+        font-size: 1em;
+        font-weight: 600;
+        padding: 10px 30px;
+        border-radius: 3px;
+            &:hover {
+          color: white;
+        }
+      }
 
     }
     margin-right: 6px;
