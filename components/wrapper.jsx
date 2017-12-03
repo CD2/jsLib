@@ -17,7 +17,9 @@ export class Wrapper extends React.Component {
     floating: PropTypes.bool,
     gutter: PropTypes.number,
     innerBackground: PropTypes.string,
+    margin: PropTypes.number,
     noGutters: PropTypes.bool,
+    noSpacing: PropTypes.bool,
     overflow: PropTypes.bool,
     overlay: PropTypes.string,
     spacing: PropTypes.oneOfType([
@@ -31,7 +33,6 @@ export class Wrapper extends React.Component {
       PropTypes.string
     ]),
   }
-
 
   renderContent(){
     const { children, noGutters, spacing, noSpacing } = this.props
@@ -87,7 +88,7 @@ export class Wrapper extends React.Component {
             marginBottom: floating ? theme.gutterHeight.value : `0`,
             overflow: `hidden`,
           }}
-
+          size={this.props.backgroundImageSize ? this.props.backgroundImageSize : null}
           background
         >
           { this.renderOverlay() }

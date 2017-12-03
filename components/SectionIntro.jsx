@@ -60,7 +60,10 @@ export default decorate(
     .intro-text {
   ${({ light, theme }) => {
     const color = light ? theme.background : theme.lightText
-    return `color: ${color};`
+    return `
+      color: ${color};
+      a { color: white; }  
+    `
   }}
     }
     .page-intro__heading {
