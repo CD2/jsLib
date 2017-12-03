@@ -35,6 +35,9 @@ import { styled, t } from 'lib/utils/theme'
     padding: ${t(`gutterWidth`, w=>w/4)}px ${t(`gutterWidth`, w=>w/2)}px;
     &.primary { font-weight: 600 }
   }
+  th:last-child, td:last-child {
+    text-align: right;
+  }
   tr:first-child, tr:last-child {
     td {
       padding: ${t(`gutterWidth`, w=>w/2)}px;
