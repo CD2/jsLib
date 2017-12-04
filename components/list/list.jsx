@@ -6,18 +6,18 @@ import { styled } from 'lib/utils/theme'
 @styled`
   > .list_item:not(:last-child) {
     ${({ spacing, separator, theme }) => {
-  if (!separator) {
-    return `padding-bottom: ${theme.spacing[spacing] || spacing}px`
-  }
-}}
+      if (!separator) {
+        return `padding-bottom: ${theme.spacing[spacing] || spacing}px`
+      }
+    }}
 
   }
   > .list_item {
     ${({ endSpace, spacing, theme }) => {
-  if (endSpace) {
-    return `padding-bottom: ${theme.spacing[spacing] || spacing}px`
-  }
-}}
+      if (endSpace) {
+        return `padding-bottom: ${theme.spacing[spacing] || spacing}px`
+      }
+    }}
   }
 `
 export class List extends React.Component {
@@ -48,7 +48,7 @@ export class List extends React.Component {
       child = React.cloneElement(child, { key: `c_${i}`, ...child.props, className: childClass })
       if (separator && i!==0) {
         return [<ListSeparator spacing={spacing} key={i} />, child]
-      } 
+      }
       return child
     })
 

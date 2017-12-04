@@ -83,7 +83,7 @@ export class IndexTable extends React.Component {
   @observable per_page=50
 
   @computed get total_items() {
-    return this.props.ids ? this.props.ids.length : this.props.query.ids.length
+    return this.props && this.props.ids ? this.props.ids.length : this.props.query.ids.length
   }
 
   @computed get paginated_ids() {

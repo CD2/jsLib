@@ -1,4 +1,5 @@
 import React from 'react'
+import debounce from 'lodash/debounce'
 import PropTypes from 'prop-types'
 import { observer } from 'mobx-react'
 import { observable, action, computed } from 'mobx'
@@ -18,21 +19,35 @@ export class SlidingView extends React.Component {
     containerClassName: ``,
   }
 
+  componentDidMount() {
+    this.updateViewWidth()
+    window.addEventListener(`resize`, debounce(this.updateViewWidth))
+  }
+
+  @action updateViewWidth = () => {
+    this.clientWidth = this.view.clientWidth
+  }
+
   @observable position = 0
+  @observable clientWidth = 0
 
   @action handleNavClick = index => this.position = index
 
   @computed get viewStyle() {
     return {
       width: `${this.props.views.length * 100}%`,
-      left: `-${this.position * (this.view ? this.view.clientWidth : 0)}px`
+      left: `-${this.position * (this.view ? this.clientWidth : 0)}px`
     }
   }
 
   renderNavButtons = () => this.props.views.map((view, index) => (
     <div
       key={index}
-      className={`sliding-view__nav-button ${index === this.position ? `sliding-view__nav-button--selected` : ``}`}
+      className={
+        `sliding-view__nav-button ${index === this.position
+          ? `sliding-view__nav-button--selected`
+          : ``}`
+      }
       onClick={() => this.handleNavClick(index)}
     >
       {view.name}

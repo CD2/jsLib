@@ -10,15 +10,15 @@ export class FileField extends React.Component {
 
   static propTypes = {
     accepts: PropTypes.array,
+    file_name: PropTypes.string,
     multiple: PropTypes.bool,
     name: PropTypes.string,
     onChange: PropTypes.func,
     onFocus: PropTypes.func,
     onRawChange: PropTypes.func,
     onlySpreadsheets: PropTypes.bool,
-    value: PropTypes.object,
     uid: PropTypes.string,
-    file_name: PropTypes.string
+    value: PropTypes.object,
   }
 
   static defaultProps = {
@@ -59,7 +59,7 @@ export class FileField extends React.Component {
   }
 
   render() {
-    const { name, multiple, onFocus, onlyImages, onlySpreadsheets } = this.props
+    const { name, multiple, onFocus, onlySpreadsheets } = this.props
     let acceptedTypes = null
 
     if (onlySpreadsheets) {

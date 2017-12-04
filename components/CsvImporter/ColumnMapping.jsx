@@ -36,7 +36,7 @@ export default class ColumnMapping extends React.Component {
   }
 
   handleMapping = (databaseKey, csvKey) => {
-    this.setState(state => ({ values: { ...state.values, [databaseKey]: csvKey } }))
+    this.setState(state => ({ values: { ...state.values, [databaseKey]: csvKey }}))
   }
 
   renderChosenColumnValues = (column) => {
@@ -73,7 +73,9 @@ export default class ColumnMapping extends React.Component {
   render = () => (
     <div>
       <h2>Column Mapping</h2>
-      <p>Please check each of the columns from your csv are correctly assigned to a database column.</p>
+      <p>
+        Please check each of the columns from your csv are correctly assigned to a database column.
+      </p>
       <div>
         {this.props.databaseColumns.map(this.renderMappingInput)}
       </div>

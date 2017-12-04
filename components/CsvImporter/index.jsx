@@ -85,7 +85,7 @@ export default class CSVImporter extends React.Component {
           csv={csv}
           onSubmit={this.handleColumnMapping}
         />
-      );
+      )
     case `failure`:
       return <FailureSlide errors={parsingErrors} />
     case `loading`:
@@ -94,4 +94,5 @@ export default class CSVImporter extends React.Component {
       return <FileUploader onChange={this.handleFileUpload} />
     }
   }
+
 }

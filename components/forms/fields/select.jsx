@@ -10,11 +10,12 @@ export class SelectField extends React.Component {
     name: PropTypes.string,
     onChange: PropTypes.func,
     onRawChange: PropTypes.func,
-    value: PropTypes.string,
+    value: PropTypes.PropTypes.any,
   }
 
   static defaultProps = {
     choices: [],
+    value: ``,
   }
 
   handleChange = (e) => {
