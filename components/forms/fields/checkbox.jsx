@@ -20,7 +20,7 @@ export class Checkbox extends React.Component {
     className: PropTypes.string,
     labelText: PropTypes.string,
     model: PropTypes.object,
-    name: PropTypes.object,
+    name: PropTypes.string,
     onChange: PropTypes.func,
     onRawChange: PropTypes.func,
     value: PropTypes.bool,
