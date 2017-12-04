@@ -19,6 +19,8 @@ export class Checkbox extends React.Component {
   static propTypes = {
     className: PropTypes.string,
     labelText: PropTypes.string,
+    model: PropTypes.object,
+    name: PropTypes.object,
     onChange: PropTypes.func,
     onRawChange: PropTypes.func,
     value: PropTypes.bool,
@@ -54,8 +56,8 @@ export class Checkbox extends React.Component {
         <input
           {...props}
           className="input"
-          onChange={this.handleChange}
           checked={this.checked}
+          onChange={this.handleChange}
         />
         <span>{labelText}</span>
       </label>

@@ -1,4 +1,3 @@
-
 import React from 'react'
 import PropTypes from 'prop-types'
 import { observable, action } from 'mobx'
@@ -10,6 +9,7 @@ export class ImageField extends React.Component {
 
   static propTypes = {
     accepts: PropTypes.array,
+    model: PropTypes.object,
     multiple: PropTypes.bool,
     name: PropTypes.string,
     onChange: PropTypes.func,

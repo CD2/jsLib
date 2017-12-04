@@ -43,7 +43,11 @@ export class SlidingView extends React.Component {
   renderNavButtons = () => this.props.views.map((view, index) => (
     <div
       key={index}
-      className={`sliding-view__nav-button ${index === this.position ? `sliding-view__nav-button--selected` : ``}`}
+      className={
+        `sliding-view__nav-button ${index === this.position
+          ? `sliding-view__nav-button--selected`
+          : ``}`
+      }
       onClick={() => this.handleNavClick(index)}
     >
       {view.name}
