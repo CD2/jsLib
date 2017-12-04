@@ -80,7 +80,7 @@ export class IndexTable extends React.Component {
   }
 
   @observable page=1
-  @observable per_page=30
+  @observable per_page=50
 
   @computed get total_items() {
     return this.props.ids ? this.props.ids.length : this.props.query.ids.length
@@ -109,10 +109,10 @@ export class IndexTable extends React.Component {
   }
 
   render() {
-    const { row: Row, headings } = this.props
+    const { row: Row, headings, paginationPosition } = this.props
     return (
       <div className={this.props.className}>
-        {this.pagination_controls}
+        {paginationPosition !== 'bottom' && this.pagination_controls}
         <Provider query={this.props.query}>
           <div className="table__container">
             <table>
@@ -126,7 +126,7 @@ export class IndexTable extends React.Component {
           </div>
         </Provider>
 
-        {this.pagination_controls}
+        { paginationPosition !== 'top' && this.pagination_controls}
       </div>
     )
   }
