@@ -124,6 +124,7 @@ export default decorate(
 
     &--open {
       display: block;
+      width: 100%;
     }
   }
 
@@ -134,6 +135,7 @@ export default decorate(
     height: 0;
     opacity: 0;
     pointer-events: none;
+    width: 100%;
 
     &--open {
       opacity: 1;
