@@ -90,8 +90,8 @@ export default decorate(
     }
 
     .sliding-view__nav-button {
-      background-color: white;
-      color: ${t(`font`)};
+      background-color: ${t(`primary`)};
+      color: white;
       display: flex;
       flex: 1;
       padding: 20px;
@@ -100,10 +100,15 @@ export default decorate(
       cursor: pointer;
       font-size: 1.2rem;
       transition: background-color 0.5s, color 0.1s;
+      border-right: 1px solid ${t(`border`)};
 
       &:hover, &--selected {
-        background-color: ${t(`primary`)};
-        color: white;
+        background-color: white;
+        color: initial;
+      }
+
+      &:last-child {
+        border-right: none;
       }
 
     }
