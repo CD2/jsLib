@@ -144,7 +144,6 @@ export default decorate(
   }
 
   .accordian__row {
-    min-height: 50px;
 
     &--header {
       font-weight: 600;
