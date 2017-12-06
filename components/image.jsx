@@ -46,6 +46,7 @@ export class Image extends React.Component {
   }
 
   render() {
+    console.log(this.props.uid)
     const { alt, background, children, defaultSrc, uid, embed, width, height } = this.props
 
     invariant(!(background && alt), `background images don't accept alt tags`)

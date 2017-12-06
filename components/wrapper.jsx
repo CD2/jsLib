@@ -99,6 +99,7 @@ export class Wrapper extends React.Component {
     return (
       <div
         className={this.props.className || ``}
+        onClick={this.props.onClick}
         style={{
           backgroundColor: background || `white`,
           position: `relative`,
