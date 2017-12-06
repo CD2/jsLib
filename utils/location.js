@@ -43,3 +43,18 @@ export function _geolocationToPostcode({ lat, lng }) {
 }
 const geolocationToPostcode = memoize(_geolocationToPostcode, ({ lat, lng })=>`${lat}${lng}`)
 export { geolocationToPostcode }
+
+const api_key = `AIzaSyAc2UY3q7g6gu8A3_ySkY02YrNeYpSfs3o`
+const google_url = `https://maps.googleapis.com/maps/api/geocode/json?`
+function _googleAddress(address) {
+  console.log(address)
+  const url = `${google_url}${encodeURI(address)}&key=${encodeURI(api_key)}`
+  return get(url).then(response => {
+    if(response.data.status == 'ZERO_RESULTS'){
+      return []
+    }else
+    return response.data.results[0].address_components
+  })
+}
+const googleAddress = memoize(_googleAddress)
+export { googleAddress }
