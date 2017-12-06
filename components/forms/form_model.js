@@ -96,7 +96,7 @@ export default class FormModel {
 
     if (perform === `create`) {
       params = { [cord.name]: toJS(values) }
-    } else if (perform === `update`) {
+    } else {
       params = { ids: [this.values.get(`id`)], [cord.name]: toJS(values) }
     }
 
