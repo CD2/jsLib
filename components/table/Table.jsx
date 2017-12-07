@@ -127,7 +127,6 @@ export default class IndexTable extends React.Component {
 
     if (onSubmit) return onSubmit(this.bulkSelected)
     const payload = formatPayload ? formatPayload(toJS(this.bulkSelected)) : toJS(this.bulkSelected)
-    console.log(payload)
 
     cord.perform(actionType, payload).then(response => {
       onSuccess && onSuccess(response)
@@ -192,7 +191,7 @@ export default class IndexTable extends React.Component {
             name="headerCheck"
             type="checkbox"
             value={this.bulkSelected.includes(id)}
-            onChange={this.handleToggleBulkItem}
+            onChange={() => this.handleToggleBulkItem(id)}
           />
         </td>
       )
