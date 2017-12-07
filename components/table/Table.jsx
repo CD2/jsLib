@@ -131,6 +131,8 @@ export default class IndexTable extends React.Component {
     cord.perform(actionType, payload).then(response => {
       onSuccess && onSuccess(response)
       modalConfirmationText && ModalStore.removeLast()
+      this.bulkSelected.replace([])
+      this.bulkAllToggled = false
     })
   }
 
