@@ -77,6 +77,7 @@ export default class IndexTable extends React.Component {
       text: PropTypes.string,
       formatPayload: PropTypes.func.isRequired,
       onSuccess: PropTypes.func,
+      onSubmit: PropTypes.func,
       modalConfirmationText: PropTypes.string
     })),
     className: PropTypes.string,
@@ -103,7 +104,7 @@ export default class IndexTable extends React.Component {
 
   @action handleToggleAllBulk = () => {
     this.bulkAllToggled = !this.bulkAllToggled
-    this.bulkSelected = this.bulkAllToggled ? this.paginated_ids : []
+    this.bulkSelected.replace(this.bulkAllToggled ? this.paginated_ids : [])
   }
 
   @action handleToggleBulkItem = id => {
@@ -115,18 +116,31 @@ export default class IndexTable extends React.Component {
   }
 
   handleBulkActionSubmit = action => {
-    const { onSubmit, formatPayload, action: actionType, cord, onSuccess } = action
+    const {
+      onSubmit,
+      formatPayload,
+      action: actionType,
+      cord,
+      onSuccess,
+      modalConfirmationText
+    } = action
+
     if (onSubmit) return onSubmit(this.bulkSelected)
     const payload = formatPayload ? formatPayload(toJS(this.bulkSelected)) : toJS(this.bulkSelected)
+    console.log(payload)
 
-    cord.perform(actionType, payload).then(response => onSuccess(response))
+    cord.perform(actionType, payload).then(response => {
+      onSuccess && onSuccess(response)
+      modalConfirmationText && ModalStore.removeLast()
+    })
   }
 
   handleBulkAction = action => {
+    if (!this.bulkSelected) return
     if (action.modalConfirmationText) {
       ModalStore.addItem(
         <div>
-          <p>{action.modalConfirm}</p>
+          <p>{action.modalConfirmationText}</p>
           <Button onClick={()=>this.handleBulkActionSubmit(action)}>Proceed</Button>
         </div>
       )

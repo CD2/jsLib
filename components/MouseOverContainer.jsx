@@ -23,6 +23,10 @@ export default class MouseOverContainer extends React.Component {
     window.addEventListener(`mousemove`, this.setPosition)
   }
 
+  componentWillUnmount() {
+    window.removeEventListener(`mousemove`, this.setPosition)
+  }
+
   @observable x = null
   @observable y = null
 
