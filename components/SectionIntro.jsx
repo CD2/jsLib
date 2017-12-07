@@ -62,8 +62,13 @@ export default decorate(
     const color = light ? theme.background : theme.lightText
     return `
       color: ${color};
-      a { color: white; }  
     `
+  }}
+  ${({ light, theme }) => {
+    if (light){
+    return `
+      a { color: white; }  
+    `}
   }}
     }
     .page-intro__heading {
@@ -102,7 +107,6 @@ export default decorate(
     .btn {
       margin-top: 16px;
     }
-    &:last-child{ padding-bottom: 0; }
   `,
   SectionIntro
 )
