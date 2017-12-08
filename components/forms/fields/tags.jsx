@@ -113,10 +113,14 @@ export class TagsInput extends React.Component {
 
   getTagObjects = () => {
     const { suggestions, popularSuggestions } = this.props
-    const mapedToPopularSuggestions = this.tags.map(tag => popularSuggestions.find(sug => sug.name && sug.name.toUpperCase() === tag) || tag)
+    const mapedToPopularSuggestions = this.tags.map(tag => popularSuggestions.find(sug => {
+      return sug.name && sug.name.toUpperCase() === tag
+    }) || tag)
     const mapedToSuggestions = mapedToPopularSuggestions.map(tag => {
       if (typeof tag === `string`) {
-        const found = suggestions.find(sug => sug.name && sug.name.toUpperCase() === tag.toUpperCase())
+        const found = suggestions.find(sug => {
+          return sug.name && sug.name.toUpperCase() === tag.toUpperCase()
+        })
 
         if (found) return found
       }
@@ -141,7 +145,9 @@ export class TagsInput extends React.Component {
     const filteredForRepeats = value.reduce((filtered, tag) => {
       const capitalisedTag = tag.toUpperCase()
 
-      if (!filtered.find(found => capitalisedTag === found.toUpperCase())) filtered.push(capitalisedTag)
+      if (!filtered.find(found => capitalisedTag === found.toUpperCase())) {
+        filtered.push(capitalisedTag)
+      }
 
       return filtered
     }, [])
@@ -163,7 +169,10 @@ export class TagsInput extends React.Component {
         //this.popover.scrollTop = e.target.offsetTop
       }
       if (e.key === `Enter` && this.filteredSuggestions[this.dropdownHighlight]) {
-        return this.handleChange([...this.tags, this.filteredSuggestions[this.dropdownHighlight]], e)
+        return this.handleChange([
+          ...this.tags,
+          this.filteredSuggestions[this.dropdownHighlight]
+        ], e)
       }
     }
 
@@ -205,7 +214,9 @@ export class TagsInput extends React.Component {
       this.props.updateSuggestions && this.props.updateSuggestions(textValue)
     }
 
-    this.filterText = e && e.key === `Backspace` ? textValue.toUpperCase().substring(0, textValue.length - 1) : textValue.toUpperCase()
+    this.filterText = e && e.key === `Backspace`
+      ? textValue.toUpperCase().substring(0, textValue.length - 1)
+      : textValue.toUpperCase()
   }
 
   @action handleRemoveTag = (e = null, selectedTag = null) => {
@@ -226,168 +237,196 @@ export class TagsInput extends React.Component {
     this.current_tag = null
   }
 
-    handleAddTag = tag => this.handleChange([...this.tags, tag])
+  handleAddTag = tag => this.handleChange([...this.tags, tag])
 
-   @action handleTagClick = (e, tag) => {
-     e.stopPropagation()
-     if (this.props.onlyAllowSuggestions) {
-       this.handleRemoveTag(e, tag)
-     } else {
-       this.current_tag = tag
-     }
-   }
+  @action handleTagClick = (e, tag) => {
+    e.stopPropagation()
+    if (this.props.onlyAllowSuggestions) {
+      this.handleRemoveTag(e, tag)
+    } else {
+      this.current_tag = tag
+    }
+  }
 
-   @action handleBlur = (e, force = false) => {
-     e && e.preventDefault()
-     if (!this.mouseOverPopover || force) {
-       this.current_tag && this.handleInput()
-       this.current_tag = null
-       this.filterText = ``
-     }
-   }
+  @action handleBlur = (e, force = false) => {
+    e && e.preventDefault()
+    if (!this.mouseOverPopover || force) {
+      this.current_tag && this.handleInput()
+      this.current_tag = null
+      this.filterText = ``
+    }
+  }
 
-   @action handleFocus = () => {
-     if(!this.current_tag) {
-       this.current_tag = NEW_INPUT
-     }
-   }
+  @action handleFocus = () => {
+    if(!this.current_tag) {
+      this.current_tag = NEW_INPUT
+    }
+  }
 
-   getFilteredSuggestions = (suggestions, filter = false) => {
-     const nonSelected =  suggestions.filter(suggestion => !this.tags.find(val => val.toUpperCase() === suggestion.toUpperCase()))
-     if (filter && this.filterText) return nonSelected.filter(suggestion => suggestion.toUpperCase().indexOf(this.filterText) !== -1)
-     return nonSelected
-   }
+  getFilteredSuggestions = (suggestions, filter = false) => {
+    const nonSelected =  suggestions.filter(suggestion => {
+      return !this.tags.find(val => val.toUpperCase() === suggestion.toUpperCase())
+    })
 
-   @computed get filteredSuggestions() { return this.getFilteredSuggestions(this.suggestions, true)}
-   @computed get filteredPopularSuggestions() { return this.getFilteredSuggestions(this.popularSuggestions)}
+    if (filter && this.filterText) {
+      return nonSelected.filter(suggestion => {
+        return suggestion.toUpperCase().indexOf(this.filterText) !== -1
+      })
+    }
 
-   renderInput(tag=``) {
-     return (
-       <input
-         ref={elem => this.textInput = elem}
-         key={tag}
-         defaultValue={tag}
-         onKeyDown={this.handleInput}
-       />
-     )
-   }
+    return nonSelected
+  }
 
-   renderTag(tag) {
-     return (
-       <span
-         className="tag-input__tag"
-         key={tag}
-         onClick={e => !this.props.disabled && this.handleTagClick(e, tag)}
-       >
-         {tag}
-         <FaIcon
-           icon="cross"
-           className="tag-input__tag-remove"
-           onClick={e => !this.props.disabled && this.handleRemoveTag(e, tag)}
-         />
-       </span>
-     )
-   }
+  @computed get filteredSuggestions() {
+    return this.getFilteredSuggestions(this.suggestions, true)
+  }
 
-   renderPopularSuggestions() {
-     return this.filteredPopularSuggestions.map(suggestion => {
-       return (
-         <span
-           key={suggestion}
-           className="suggestion-tag tag-input__tag"
-           onClick={this.handleAddTag.bind(this, suggestion)}
-         >
-           + {suggestion}
-         </span>
-       )
-     })
-   }
+  @computed get filteredPopularSuggestions() {
+    return this.getFilteredSuggestions(this.popularSuggestions)
+  }
 
-   renderNoSuggestionsMessage = () => (
-     <span className="tag-input__dropdown-suggestion">No suggestions found</span>
-   )
+  renderInput(tag=``) {
+    return (
+      <input
+        ref={elem => this.textInput = elem}
+        key={tag}
+        defaultValue={tag}
+        onKeyDown={this.handleInput}
+      />
+    )
+  }
 
-   renderSuggestions() {
-     if (!this.current_tag || (this.filteredSuggestions.length === 0 && !this.props.onlyAllowSuggestions)) return
-     let style = `tag-input__suggestion tag-input__tag`
+  renderTag(tag) {
+    return (
+      <span
+        className="tag-input__tag"
+        key={tag}
+        onClick={e => !this.props.disabled && this.handleTagClick(e, tag)}
+      >
+        {tag}
+        <FaIcon
+          icon="cross"
+          className="tag-input__tag-remove"
+          onClick={e => !this.props.disabled && this.handleRemoveTag(e, tag)}
+        />
+      </span>
+    )
+  }
 
-     let suggestionsComponent = this.filteredSuggestions.map((suggestion, index) => {
-       if (this.props.dropdown) style = `tag-input__dropdown-suggestion ${this.dropdownHighlight === index ? `tag-input__dropdown-suggestion--highlight` : ``}`
+  renderPopularSuggestions() {
+    return this.filteredPopularSuggestions.map(suggestion => {
+      return (
+        <span
+          key={suggestion}
+          className="suggestion-tag tag-input__tag"
+          onClick={this.handleAddTag.bind(this, suggestion)}
+        >
+          + {suggestion}
+        </span>
+      )
+    })
+  }
 
-       return (
-         <span
-           key={suggestion}
-           className={style}
-           onClick={this.handleAddTag.bind(this, suggestion)}
-         >
-           {suggestion}
-         </span>
-       )
-     })
+  renderNoSuggestionsMessage = () => (
+    <span className="tag-input__dropdown-suggestion">No suggestions found</span>
+  )
 
-     if (suggestionsComponent.length === 0) suggestionsComponent = this.renderNoSuggestionsMessage()
+  renderSuggestions() {
+    if (
+      !this.current_tag
+      || this.filteredSuggestions.length === 0 && !this.props.onlyAllowSuggestions
+    ) return
+    let style = `tag-input__suggestion tag-input__tag`
 
-     if (this.props.dropdown) {
-       return (
-         <Popover
-           containerClassName="tag-input__suggestion-dropdown-container"
-           popoverClassName="tag-input__suggestion-dropdown"
-           open
-           closeOnOutsideClick
-           onMouseEnter={() => this.mouseOverPopover = true}
-           onMouseLeave={() => this.mouseOverPopover = false}
-         >
-           {suggestionsComponent}
-         </Popover>
-       )
-     }
+    let suggestionsComponent = this.filteredSuggestions.map((suggestion, index) => {
+      if (this.props.dropdown) {
+        style = `tag-input__dropdown-suggestion ${this.dropdownHighlight === index
+          ? `tag-input__dropdown-suggestion--highlight`
+          : ``}`
+      }
 
-     return (
-       <div className="tag-input__suggestion-container">
-         {suggestionsComponent}
-       </div>
-     )
-   }
+      return (
+        <span
+          key={suggestion}
+          className={style}
+          onClick={this.handleAddTag.bind(this, suggestion)}
+        >
+          {suggestion}
+        </span>
+      )
+    })
 
-   renderValue = () => {
-     const result = this.tags.map(tag => {
-       if (tag === this.current_tag) {
-         return this.renderInput(tag)
-       }
+    if (suggestionsComponent.length === 0) suggestionsComponent = this.renderNoSuggestionsMessage()
 
-       return this.renderTag(tag)
-     })
+    if (this.props.dropdown) {
+      return (
+        <Popover
+          containerClassName="tag-input__suggestion-dropdown-container"
+          popoverClassName="tag-input__suggestion-dropdown"
+          open
+          closeOnOutsideClick
+          onMouseEnter={() => this.mouseOverPopover = true}
+          onMouseLeave={() => this.mouseOverPopover = false}
+        >
+          {suggestionsComponent}
+        </Popover>
+      )
+    }
 
-     if (this.current_tag === NEW_INPUT && !this.props.onlyAllowSuggestions) result.push(this.renderInput())
+    return (
+      <div className="tag-input__suggestion-container">
+        {suggestionsComponent}
+      </div>
+    )
+  }
 
-     return result
-   }
+  renderValue = () => {
+    const result = this.tags.map(tag => {
+      if (tag === this.current_tag) {
+        return this.renderInput(tag)
+      }
 
-   renderClearAll = () => {
-     if(this.tags.length > 0 && !this.props.hideClear) {
-       return <div className="tag-input__clear-all"onClick={e => this.handleChange([], e)}>Clear</div>
-     }
-   }
+      return this.renderTag(tag)
+    })
 
-   render() {
-     return (
-       <div className={this.props.className}>
-         {this.current_tag && <Overlay clickThrough onClick={e => this.handleBlur(e, true)} />}
-         <div className="wrapper" onClick={!this.props.disabled && this.handleFocus}>
-           {this.renderPopularSuggestions()}
-           <div className="tag-input" tabIndex="0" onKeyDown={e => {
-             !this.current_tag && e.preventDefault()
-             this.props.onlyAllowSuggestions && this.handleInput(e)
-             this.handleFocus()
-           }}>
-              {this.renderClearAll()}
-             {this.renderValue()}
-           </div>
-           {this.renderSuggestions()}
-         </div>
-       </div>
-     )
-   }
+    if (this.current_tag === NEW_INPUT && !this.props.onlyAllowSuggestions) {
+      result.push(this.renderInput())
+    }
+
+    return result
+  }
+
+  renderClearAll = () => {
+    if(this.tags.length > 0 && !this.props.hideClear) {
+      return (
+        <div className="tag-input__clear-all"onClick={e => this.handleChange([], e)}>
+          Clear
+        </div>
+      )
+    }
+  }
+
+  render = () => (
+    <div className={this.props.className}>
+      {this.current_tag && <Overlay clickThrough onClick={e => this.handleBlur(e, true)} />}
+      <div className="wrapper" onClick={!this.props.disabled && this.handleFocus}>
+        {this.renderPopularSuggestions()}
+        <div
+          className="tag-input"
+          tabIndex="0"
+          onKeyDown={e => {
+            !this.current_tag && e.preventDefault()
+            this.props.onlyAllowSuggestions && this.handleInput(e)
+            this.handleFocus()
+          }}
+        >
+          {this.renderClearAll()}
+          {this.renderValue()}
+        </div>
+        {this.renderSuggestions()}
+      </div>
+    </div>
+  )
 
 }
 
