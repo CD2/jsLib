@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { styled, t } from 'lib/utils/theme'
 import { observer } from 'mobx-react'
-import { observable } from 'mobx'
+import { observable, action, computed } from 'mobx'
 
 @styled`
   .tab-content {
@@ -25,7 +25,7 @@ import { observable } from 'mobx'
   }
 `
 @observer
-export class Tabs extends React.Component {
+export default class Tabs extends React.Component {
 
   static propTypes = {
     children: PropTypes.any,
@@ -34,9 +34,15 @@ export class Tabs extends React.Component {
     onChange: PropTypes.func,
   }
 
+  componentDidMount() {
+    const { onChange } = this.props
+
+    onChange && onChange(this.getSelected)
+  }
+
   @observable selected = null
 
-  getSelected() {
+  @computed get getSelected() {
     const { current, children } = this.props
 
     const selected = current !== undefined ? current : this.selected
@@ -44,10 +50,10 @@ export class Tabs extends React.Component {
     return selected !== null ? selected : children[0].key
   }
 
-  handleTabHeadClick = (key) => {
+  @action handleTabHeadClick = (key) => {
     const { onChange } = this.props
     this.selected = key
-    if (onChange) onChange(key)
+    if (onChange) onChange(this.getSelected)
   }
 
   renderTabHeads() {
@@ -59,14 +65,14 @@ export class Tabs extends React.Component {
         renderHead: true,
         onTabHeadClick: this.handleTabHeadClick,
         className: `tab-head`,
-        selected: this.getSelected(),
+        selected: this.getSelected,
       })
     })
     return (<div className="tab-heads">{headings}</div>)
   }
   //default to first child
   renderSelectedTab() {
-    const selected = this.getSelected()
+    const selected = this.getSelected
     let tab = null
     React.Children.forEach(this.props.children, child => {
       if (!child) return
@@ -86,4 +92,3 @@ export class Tabs extends React.Component {
   }
 
 }
-export default Tabs
