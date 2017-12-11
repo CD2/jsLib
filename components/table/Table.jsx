@@ -97,7 +97,7 @@ export default class IndexTable extends React.Component {
   }
 
   @observable page=1
-  @observable per_page=50
+  @observable per_page=20
   // bulk state
   @observable bulkAllToggled = false
   @observable bulkSelected = []
