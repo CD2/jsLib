@@ -9,7 +9,7 @@ export class Accordian extends React.PureComponent {
   static propTypes = {
     className: PropTypes.string,
     headerContent: PropTypes.node,
-    noAnimation: PropTypes.string,
+    noAnimation: PropTypes.bool,
     open: PropTypes.bool,
     rowHeight: PropTypes.number,
     rows: PropTypes.array,
@@ -24,6 +24,7 @@ export class Accordian extends React.PureComponent {
     open: null,
     rowHeight: 50,
     toggle: null,
+    noAnimation: false,
   }
 
   state = {
