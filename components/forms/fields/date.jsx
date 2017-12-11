@@ -57,21 +57,9 @@ export default class Example extends React.Component {
 
   state = {
     asDateString: false,
-    day: new Date(this.props.value),
-    month: this.props.value ? new Date(this.props.value) : new Date(defaultTime),
+    day: this.props.value ? new Date(this.props.value) : new Date(),
+    month: this.props.value ? new Date(this.props.value) : new Date(),
   };
-
-  componentDidMount() {
-    if (this.props.value) this.setValueToProps()
-  }
-
-  componentDidUpdate(props) {
-    if (props.value !== this.props.value) this.setValueToProps()
-  }
-
-  setValueToProps = () => {
-    this.dayPicker.input.value = moment(this.props.value).format(DAY_FORMAT)
-  }
 
   handleYearMonthChange = month => {
     this.setState({ month, day: month })
@@ -109,6 +97,7 @@ export default class Example extends React.Component {
         <DayPickerInput
           ref={ele => this.dayPicker = ele}
           dayPickerProps={dayPickerProps}
+          value={moment(this.props.value).format(DAY_FORMAT)}
           format={DAY_FORMAT}
         />
       </div>
