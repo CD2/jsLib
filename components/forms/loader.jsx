@@ -6,7 +6,15 @@ export default function inputLoader(Component, options) {
     return decorate(
       options.cord.connectIds(options.scope || `all`),
       options.cord.connectRecord({
-        id: props => options.scope ? props[`${options.scope}_ids`] : props.all_ids,
+        id: props => {
+          if (options.scope) {
+            props[`${options.scope}_ids`]
+          } else if (options.ids) {
+            return options.ids
+          }
+
+          return props.all_ids
+        },
         as: options.as || `records`,
         attributes: options.attributes || [],
         formatter: options.formatter,

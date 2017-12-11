@@ -8,10 +8,10 @@ history.listen((location, action) => {
   if (cont) cont.scrollTop = 0
 })
 
-export const redirect = (url, { reload=false }={}) => {
+export const redirect = (url, { reload=false, state={}}={}) => {
   reload ?
     window.location.href = url :
-    history.push(url)
+    history.push(url, state)
 }
 
 export const renderComponent = (Component, default_props={}) => {
@@ -46,5 +46,3 @@ export const routes = {
   forum_question: (id) => `${routes.forum()}/question/${id}`,
   forum_answer: (id) => `${routes.forum()}/answer/${id}`,
 }
-
-

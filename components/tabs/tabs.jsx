@@ -34,6 +34,10 @@ export default class Tabs extends React.Component {
     onChange: PropTypes.func,
   }
 
+  static defaultProps = {
+    current: null,
+  }
+
   componentDidMount() {
     const { onChange } = this.props
 
@@ -45,7 +49,7 @@ export default class Tabs extends React.Component {
   @computed get getSelected() {
     const { current, children } = this.props
 
-    const selected = current !== undefined ? current : this.selected
+    const selected = current !== null ? current : this.selected
     if (!children[0]) return
     return selected !== null ? selected : children[0].key
   }
@@ -53,7 +57,7 @@ export default class Tabs extends React.Component {
   @action handleTabHeadClick = (key) => {
     const { onChange } = this.props
     this.selected = key
-    if (onChange) onChange(this.getSelected)
+    if (onChange) onChange(key)
   }
 
   renderTabHeads() {

@@ -141,6 +141,7 @@ export default class Input extends React.Component {
     delete props.errors
     delete props.theme
 
+    if (type === `hidden`) return <this.field {...props} className="field" />
     if (label) {
       return (
         <div className={`${className} form-input`}>
