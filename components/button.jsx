@@ -2,8 +2,10 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import invariant from 'invariant'
 import { Link } from 'react-router-dom'
+
 import { styled, t } from 'lib/utils/theme'
 import decorate from 'lib/utils/decorate'
+import load from 'images/load.gif'
 
 export class Button extends React.Component {
 
@@ -13,6 +15,7 @@ export class Button extends React.Component {
     className: PropTypes.string,
     external: PropTypes.bool,
     onClick: PropTypes.func,
+    processing: PropTypes.bool,
     target: PropTypes.string,
     to: PropTypes.string,
   }
@@ -20,6 +23,16 @@ export class Button extends React.Component {
   static defaultProps = {
     buttonStyle: `common`,
     external: false,
+    processing: false,
+  }
+
+  getChildren = () => {
+    const { processing, children } = this.props
+    if (processing) {
+      return null
+    } else {
+      return children
+    }
   }
 
   render() {
@@ -41,8 +54,9 @@ export class Button extends React.Component {
         Comp = Link
       }
     }
+
     return (
-      <Comp {...props}>{children}</Comp>
+      <Comp {...props}>{this.getChildren()}</Comp>
     )
   }
 
@@ -70,11 +84,11 @@ export default decorate(
           color: white;
         }
       }
-      
+
       &.download {
         font-size: 0.9em;
       }
-      
+
       &.more_link {
         background-color: ${t(`darkBackground`)};
         &:hover {
@@ -121,7 +135,7 @@ export default decorate(
       &:hover {
         filter: brightness(1.15);
       }
-      
+
       &.minor {
         background-color: ${t(`background`)};
         color: ${t(`lightText`)};
@@ -131,7 +145,7 @@ export default decorate(
           background-color: #cecece;
         }
       }
-      
+
       &.cancel {
         background-color: ${t(`background`)};
         color: ${t(`lightText`)};
@@ -139,7 +153,7 @@ export default decorate(
           background-color: #cecece;
         }
       }
-      
+
       &.pagination {
         background-color: ${t(`primary`)};
         font-size: 0.9em;
@@ -178,6 +192,23 @@ export default decorate(
 
     }
     margin-right: 6px;
+
+    ${({ processing }) => {
+    if (processing){
+      return`
+          background: url(${load});
+          opacity: 0.7;
+          background-size: 100%;
+          background-repeat: no-repeat;
+          background-color: #2c2d2d;
+          background-position: 50%;
+          min-height: 2.2rem;
+          min-width: 3rem;
+          &:hover{
+            background-color: #2c2d2d;
+          }
+      `}
+  }}
   `,
   Button
 )
