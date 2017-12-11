@@ -6,6 +6,7 @@ export class SelectField extends React.Component {
   static propTypes = {
     choices: PropTypes.arrayOf(PropTypes.object),
     default_value: PropTypes.string,
+    disabled: PropTypes.bool,
     includeBlank: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
     name: PropTypes.string,
     onChange: PropTypes.func,
@@ -15,6 +16,7 @@ export class SelectField extends React.Component {
 
   static defaultProps = {
     choices: [],
+    disable: false,
     value: ``,
   }
 
@@ -51,12 +53,13 @@ export class SelectField extends React.Component {
   }
 
   render() {
-    const { name, value } = this.props
+    const { name, value, disabled } = this.props
     return (
       <select
         name={name}
         className="select"
         value={value}
+        disabled={disabled}
         onChange={this.handleChange}
       >
         {this.renderChoices()}
