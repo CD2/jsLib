@@ -86,7 +86,7 @@ export class Wrapper extends React.Component {
             boxShadow: floating ? theme.shadow0 : `none`,
             borderRadius: floating ? `6px` : `0`,
             marginBottom: floating ? theme.gutterHeight.value : `0`,
-            overflow: `hidden`,
+            overflow: this.props.overflow ? `initial` : `hidden`,
           }}
           size={this.props.backgroundImageSize ? this.props.backgroundImageSize : null}
           background

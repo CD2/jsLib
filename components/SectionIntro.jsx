@@ -66,9 +66,9 @@ export default decorate(
   }}
   ${({ light, theme }) => {
     if (light){
-    return `
+      return `
       a { color: white; }  
-    `}
+      `}
   }}
     }
     .page-intro__heading {

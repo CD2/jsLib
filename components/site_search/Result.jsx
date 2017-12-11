@@ -58,6 +58,7 @@ export class Result extends React.Component {
         ref={elem => this.elem = elem}
         to={`/${models[type]}/${this.props.result.searchable_id}`}
         onClick={this.props.onClick}
+        style={{color: '#444'}}
       >
         <b>{this.props.type}</b>
         <p>{this.props.result.content}</p>
