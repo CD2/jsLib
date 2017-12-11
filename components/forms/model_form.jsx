@@ -14,6 +14,7 @@ import decorate from 'lib/utils/decorate'
 class ModelForm extends React.Component {
 
   static propTypes = {
+    disableAll: PropTypes.bool,
     fields: PropTypes.array,
     fieldsAsObject: PropTypes.bool,
     model: PropTypes.object,
@@ -37,6 +38,7 @@ class ModelForm extends React.Component {
   }
 
   static defaultProps = {
+    disableAll: false,
     fieldsAsObject: false,
     model: null,
     modelOptions: {},
@@ -89,6 +91,7 @@ class ModelForm extends React.Component {
   renderField = (field, index) => {
     const inputComponent = (
       <Input
+        disabled={this.props.disableAll}
         key={index}
         model={this.model}
         label={field.label || titleCase(field.name)}
