@@ -112,7 +112,6 @@ export class TagsInput extends React.Component {
 
   @action handleInput = (e = null) => {
     if (this.props.dropdown && e) {
-      e && e.preventDefault()
       if (e.key === `ArrowUp` && TagsStore.dropdownHighlight > 0) TagsStore.dropdownHighlight -= 1
       if (e.key === `ArrowDown` && TagsStore.dropdownHighlight < TagsStore.filteredSuggestions.length) {
         TagsStore.dropdownHighlight += 1
