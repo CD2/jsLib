@@ -73,12 +73,12 @@ export class TagsInput extends React.Component {
     reaction(
       () => TagsStore.tags.map(tag=>tag),
       () => {
-        this.props.onChange({ name: this.props.name, value: TagsStore.getTagsFormat(props) })
+        this.props.onChange({ name: this.props.name, value: TagsStore.getTagsFormat(this.props) })
       }
     )
     reaction(
       () => this.props.suggestions.map(sug => sug),
-      () => TagsStore.setVals(props, `suggestions`)
+      () => TagsStore.setVals(this.props, `suggestions`)
     )
   }
 
