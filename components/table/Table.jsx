@@ -87,6 +87,7 @@ export default class IndexTable extends React.Component {
     query: PropTypes.object,
     row: PropTypes.func,
     rowProps: PropTypes.object,
+    storePageName: PropTypes.string,
   }
 
   static defaultProps = {
@@ -94,6 +95,7 @@ export default class IndexTable extends React.Component {
     rowProps: {},
     ids: null,
     paginationPosition: `bottom`,
+    storePageName: null,
   }
 
   @observable page=1
@@ -167,6 +169,7 @@ export default class IndexTable extends React.Component {
   @computed get pagination_controls() {
     return (
       <PaginationControls
+        storePageName={this.props.storePageName}
         page={this.page}
         per_page={this.per_page}
         total_items={this.total_items}

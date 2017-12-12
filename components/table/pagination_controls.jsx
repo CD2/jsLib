@@ -1,6 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-
+import { withRouter } from 'react-router-dom'
+import { observer } from 'mobx-react'
+import { computed } from 'mobx'
 
 import { styled } from 'lib/utils/theme'
 import Button from 'lib/components/button'
@@ -17,24 +19,48 @@ import Button from 'lib/components/button'
     opacity: 1;
   }
 `
+@withRouter
+@observer
 export class PaginationControls extends React.Component {
 
   static propTypes = {
     className: PropTypes.string,
+    history: PropTypes.object,
+    location: PropTypes.object,
     onPageChange: PropTypes.func.isRequired,
     page: PropTypes.number.isRequired,
     page_button_limit: PropTypes.number,
     per_page: PropTypes.number.isRequired,
+    storePageName: PropTypes.string,
     total_items: PropTypes.number.isRequired,
   }
 
   static defaultProps = {
     page_button_limit: 6,
+    storePageName: null,
   }
 
   changePage(page_number) {
     if (page_number > 0 && page_number <= this.totalPages())
-    {this.props.onPageChange(page_number)}
+    {
+      const { storePageName } = this.props
+
+      if (storePageName) {
+        console.log(storePageName)
+        this.props.history.replace({
+          state: { ...location.state, [`${storePageName}PageNumber`]: page_number }
+        })
+      }
+      this.props.onPageChange(page_number)
+    }
+  }
+
+  @computed get page() {
+    const { storePageName, page } = this.props
+    const locationPage = this.props.location.state
+      && this.props.location.state[`${storePageName}PageNumber`]
+
+    return locationPage || page
   }
 
   totalPages() {
@@ -43,11 +69,11 @@ export class PaginationControls extends React.Component {
   }
 
   firstPage() {
-    return this.props.page === 1
+    return this.page === 1
   }
 
   lastPage() {
-    return this.props.page === this.totalPages()
+    return this.page === this.totalPages()
   }
 
   renderLeft() {
@@ -58,7 +84,7 @@ export class PaginationControls extends React.Component {
       <Button
         buttonStyle="pagination"
         className={className}
-        onClick={() => this.changePage(this.props.page - 1)}
+        onClick={() => this.changePage(this.page - 1)}
       >
         Left
       </Button>
@@ -72,7 +98,7 @@ export class PaginationControls extends React.Component {
       <Button
         buttonStyle="pagination"
         className={className}
-        onClick={() => this.changePage(this.props.page + 1)}
+        onClick={() => this.changePage(this.page + 1)}
       >
         Right
       </Button>
@@ -81,7 +107,7 @@ export class PaginationControls extends React.Component {
 
   renderPageNumbers() {
     const page_numbers = []
-    const current = this.props.page
+    const current = this.page
     const visibility = 2
     const count = this.totalPages()
 
@@ -135,4 +161,3 @@ export class PaginationControls extends React.Component {
 // 1  - 64 65 66 67 68 69 70  on > 66
 
 export default PaginationControls
-

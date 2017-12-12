@@ -1,21 +1,46 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { withRouter } from 'react-router-dom'
+import { observer } from 'mobx-react'
+import { computed } from 'mobx'
+
 import decorate from 'lib/utils/decorate'
 import { styled, t } from 'lib/utils/theme'
-
 
 export class PaginationControls extends React.Component {
 
   static propTypes = {
     className: PropTypes.string,
+    history: PropTypes.object,
+    location: PropTypes.object,
     onPageChange: PropTypes.func.isRequired,
     page: PropTypes.number.isRequired,
     per_page: PropTypes.number.isRequired,
+    storePageName: PropTypes.string,
     total_records: PropTypes.number.isRequired,
   }
 
+  static defaultProps = {
+    storePageName: null,
+  }
+
   changePage(page_number) {
+    const { storePageName } = this.props
+
+    if (storePageName) {
+      this.props.history.replace({
+        state: { ...location.state, [`${storePageName}PageNumber`]: page_number }
+      })
+    }
     this.props.onPageChange(page_number)
+  }
+
+  @computed get page() {
+    const { storePageName, page } = this.props
+    const locationPage = this.props.location.state
+      && this.props.location.state[`${storePageName}PageNumber`]
+
+    return locationPage || page
   }
 
   totalPages() {
@@ -24,11 +49,11 @@ export class PaginationControls extends React.Component {
   }
 
   firstPage() {
-    return this.props.page === 1
+    return this.page === 1
   }
 
   lastPage() {
-    return this.props.page === this.totalPages()
+    return this.page === this.totalPages()
   }
 
   renderLeft() {
@@ -39,7 +64,7 @@ export class PaginationControls extends React.Component {
       )
     }
     return (
-      <div className={className} onClick={() => this.changePage(this.props.page - 1)}>Left</div>
+      <div className={className} onClick={() => this.changePage(this.page - 1)}>Left</div>
     )
   }
 
@@ -51,14 +76,14 @@ export class PaginationControls extends React.Component {
       )
     }
     return (
-      <div className={className} onClick={() => this.changePage(this.props.page + 1)}>Right</div>
+      <div className={className} onClick={() => this.changePage(this.page + 1)}>Right</div>
     )
   }
 
   renderPageNumbers() {
     const page_numbers = []
     for (let i=1; i<=this.totalPages(); i++) {
-      if (i === this.props.page) {
+      if (i === this.page) {
         page_numbers.push(
           <div className="pagination__button current_page" key={i}>
             <span>{i}</span>
@@ -108,5 +133,8 @@ export default decorate(
       border-bottom: 2px solid  ${t(`text`)};
     }
   }
-`,
-  PaginationControls)
+  `,
+  withRouter,
+  observer,
+  PaginationControls
+)
