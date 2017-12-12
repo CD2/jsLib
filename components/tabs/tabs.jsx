@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { styled, t } from 'lib/utils/theme'
 import { observer } from 'mobx-react'
 import { observable, action, computed } from 'mobx'
+import { withRouter } from 'react-router-dom'
 
 @styled`
   .tab-content {
@@ -24,6 +25,7 @@ import { observable, action, computed } from 'mobx'
     }
   }
 `
+@withRouter
 @observer
 export default class Tabs extends React.Component {
 
@@ -31,11 +33,13 @@ export default class Tabs extends React.Component {
     children: PropTypes.any,
     className: PropTypes.string,
     current: PropTypes.string,
+    history: PropTypes.object,
+    location: PropTypes.object,
     onChange: PropTypes.func,
   }
 
   static defaultProps = {
-    current: null,
+    current: null
   }
 
   componentDidMount() {
@@ -48,7 +52,9 @@ export default class Tabs extends React.Component {
 
   @computed get getSelected() {
     const { current, children } = this.props
+    const locationCurrent = this.props.location.state && this.props.location.state.tabKey
 
+    if (!current && locationCurrent) return locationCurrent
     const selected = current !== null ? current : this.selected
     if (!children[0]) return
     return selected !== null ? selected : children[0].key
@@ -57,6 +63,7 @@ export default class Tabs extends React.Component {
   @action handleTabHeadClick = (key) => {
     const { onChange } = this.props
     this.selected = key
+    this.props.history.replace({ state: { tabKey: key }})
     if (onChange) onChange(key)
   }
 
