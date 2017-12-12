@@ -36,6 +36,10 @@ export default class Model {
     return toJS(this.changes)
   }
 
+  @computed get hasChanges() {
+    return Object.keys(toJS(this.changes)).length > 0
+  }
+
   @action set(key, value) {
     this.changes.set(key, value)
   }

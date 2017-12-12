@@ -73,12 +73,12 @@ export class TagsInput extends React.Component {
     reaction(
       () => TagsStore.tags.map(tag=>tag),
       () => {
-        this.props.onChange({ name: this.props.name, value: TagsStore.getTagsFormat(props) })
+        this.props.onChange({ name: this.props.name, value: TagsStore.getTagsFormat(this.props) })
       }
     )
     reaction(
       () => this.props.suggestions.map(sug => sug),
-      () => TagsStore.setVals(props, `suggestions`)
+      () => TagsStore.setVals(this.props, `suggestions`)
     )
   }
 
@@ -251,6 +251,8 @@ export class TagsInput extends React.Component {
     <span className="tag-input__dropdown-suggestion">No suggestions found</span>
   )
 
+  @action setMouseOver = (isMousedOver = true) => this.mouseOverPopover = isMousedOver
+
   renderSuggestions() {
     if (
       !TagsStore.current_tag
@@ -285,8 +287,8 @@ export class TagsInput extends React.Component {
           popoverClassName="tag-input__suggestion-dropdown"
           open
           closeOnOutsideClick
-          onMouseEnter={() => this.mouseOverPopover = true}
-          onMouseLeave={() => this.mouseOverPopover = false}
+          onMouseEnter={() => this.setMouseOver()}
+          onMouseLeave={() => this.setMouseOver(false)}
         >
           {suggestionsComponent}
         </Popover>
@@ -294,7 +296,11 @@ export class TagsInput extends React.Component {
     }
 
     return (
-      <div className="tag-input__suggestion-container">
+      <div
+        className="tag-input__suggestion-container"
+        onMouseEnter={() => this.setMouseOver()}
+        onMouseLeave={() => this.setMouseOver(false)}
+      >
         {suggestionsComponent}
       </div>
     )
@@ -393,6 +399,10 @@ export default decorate(
     .tag-input__suggestion-dropdown-container {
       width: 100%;
       display: block;
+      z-index: 100000;
+    }
+    .tag-input__suggestion-container {
+      position: relative;
       z-index: 100000;
     }
     .tag-input__suggestion-dropdown {
