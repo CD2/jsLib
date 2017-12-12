@@ -36,10 +36,12 @@ export default class Tabs extends React.Component {
     history: PropTypes.object,
     location: PropTypes.object,
     onChange: PropTypes.func,
+    storeCurrentName: PropTypes.string,
   }
 
   static defaultProps = {
-    current: null
+    current: null,
+    storeCurrentName: null,
   }
 
   componentDidMount() {
@@ -51,19 +53,22 @@ export default class Tabs extends React.Component {
   @observable selected = null
 
   @computed get getSelected() {
-    const { current, children } = this.props
-    const locationCurrent = this.props.location.state && this.props.location.state.tabKey
+    const { current, children, storeCurrentName } = this.props
+    const locationCurrent = this.props.location.state
+      && this.props.location.state[`${storeCurrentName}TabKey`]
 
-    if (!current && locationCurrent) return locationCurrent
+    if (!storeCurrentName && locationCurrent) return locationCurrent
     const selected = current !== null ? current : this.selected
     if (!children[0]) return
     return selected !== null ? selected : children[0].key
   }
 
   @action handleTabHeadClick = (key) => {
-    const { onChange } = this.props
+    const { onChange, storeCurrentName } = this.props
     this.selected = key
-    this.props.history.replace({ state: { tabKey: key }})
+    if (storeCurrentName) {
+      this.props.history.replace({ state: { [`${storeCurrentName}TabKey`]: key }})
+    }
     if (onChange) onChange(key)
   }
 
