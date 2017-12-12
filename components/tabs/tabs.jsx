@@ -57,17 +57,19 @@ export default class Tabs extends React.Component {
     const locationCurrent = this.props.location.state
       && this.props.location.state[`${storeCurrentName}TabKey`]
 
-    if (!storeCurrentName && locationCurrent) return locationCurrent
+    if (!this.selected && !current && locationCurrent) return locationCurrent
     const selected = current !== null ? current : this.selected
     if (!children[0]) return
     return selected !== null ? selected : children[0].key
   }
 
   @action handleTabHeadClick = (key) => {
-    const { onChange, storeCurrentName } = this.props
+    const { onChange, storeCurrentName, location } = this.props
     this.selected = key
     if (storeCurrentName) {
-      this.props.history.replace({ state: { [`${storeCurrentName}TabKey`]: key }})
+      this.props.history.replace({
+        state: { ...location.state, [`${storeCurrentName}TabKey`]: key }
+      })
     }
     if (onChange) onChange(key)
   }
