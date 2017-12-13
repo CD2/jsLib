@@ -156,6 +156,14 @@ export default decorate(
         }
       }
 
+      &.delete {
+        background-color: ${t(`delete`)};
+        color: ${t(`white`)};
+        &:hover {
+          background-color: #cecece;
+        }
+      }
+
       &.pagination {
         background-color: ${t(`primary`)};
         font-size: 0.9em;
