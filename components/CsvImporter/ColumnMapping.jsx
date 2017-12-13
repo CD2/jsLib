@@ -1,15 +1,20 @@
 import React from 'react'
 import Fuzzy from 'fuse.js'
 import PropTypes from 'prop-types'
+import { observer } from 'mobx-react'
+
+import decorate from 'lib/utils/decorate'
+
 import Button from 'lib/components/button'
 
-export default class ColumnMapping extends React.Component {
+export class ColumnMapping extends React.Component {
 
   static propTypes = {
     csv: PropTypes.array,
     databaseColumns: PropTypes.array,
     headersRowIndex: PropTypes.number,
     onSubmit: PropTypes.func,
+    submitting: PropTypes.bool,
   }
 
   state = {
@@ -49,7 +54,7 @@ export default class ColumnMapping extends React.Component {
       const csvKeyIndex = this.getCSVColumns().indexOf(csvKey)
 
       return rows.map((row, index) => (
-        <div key={index}>{row[csvKeyIndex]}</div>
+        <div className="csv-importer__value" key={index}>{row[csvKeyIndex]}</div>
       ))
     }
 
@@ -58,14 +63,16 @@ export default class ColumnMapping extends React.Component {
 
   renderMappingInput = (column, index) => (
     <div key={index}>
-      <label>{column.title}</label>
-      <select
-        name={column.key}
-        value={this.state.values[column.key]}
-        onChange={(e) => this.handleMapping(column.key, e.target.value)}
-      >
-        {this.getCSVColumns().map(key => <option key={key} value={key}>{key}</option>)}
-      </select>
+      <label className="csv-importer__input">
+        {column.title}
+        <select
+          name={column.key}
+          value={this.state.values[column.key]}
+          onChange={(e) => this.handleMapping(column.key, e.target.value)}
+        >
+          {this.getCSVColumns().map(key => <option key={key} value={key}>{key}</option>)}
+        </select>
+      </label>
       {this.renderChosenColumnValues(column)}
     </div>
   )
@@ -79,10 +86,18 @@ export default class ColumnMapping extends React.Component {
       <div>
         {this.props.databaseColumns.map(this.renderMappingInput)}
       </div>
-      <Button onClick={() => this.props.onSubmit(this.state.values)}>
+      <Button
+        onClick={() => this.props.onSubmit(this.state.values)}
+        processing={this.props.submitting}
+      >
         Submit
       </Button>
     </div>
   )
 
 }
+
+export default decorate(
+  observer,
+  ColumnMapping
+)

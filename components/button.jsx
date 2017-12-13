@@ -36,7 +36,7 @@ export class Button extends React.Component {
   }
 
   render() {
-    let { className, to, external, buttonStyle, onClick, children, target } = this.props
+    let { className, to, external, buttonStyle, onClick, children, target, processing } = this.props
 
     invariant(!(external && !to), `prop \`to\` is required if \`external\` is present`)
 
@@ -55,8 +55,10 @@ export class Button extends React.Component {
       }
     }
 
+    const processingProp = processing ? { onClick: () => null } : {}
+
     return (
-      <Comp {...props}>{this.getChildren()}</Comp>
+      <Comp {...{ ...props, ...processingProp }}>{this.getChildren()}</Comp>
     )
   }
 
@@ -196,17 +198,19 @@ export default decorate(
     ${({ processing }) => {
     if (processing){
       return`
-          background: url(${load});
-          opacity: 0.7;
-          background-size: 100%;
-          background-repeat: no-repeat;
+        cursor: none;
+        background: url(${load});
+        opacity: 0.7;
+        background-size: 100%;
+        background-repeat: no-repeat;
+        background-color: #2c2d2d;
+        background-position: 50%;
+        min-height: 2.2rem;
+        min-width: 3rem;
+        pointer-events: none;
+        &:hover{
           background-color: #2c2d2d;
-          background-position: 50%;
-          min-height: 2.2rem;
-          min-width: 3rem;
-          &:hover{
-            background-color: #2c2d2d;
-          }
+        }
       `}
   }}
   `,
