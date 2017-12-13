@@ -88,7 +88,7 @@ export class SiteSearch extends React.Component {
         <Form>
           <Input
             type="search"
-            placeholder={this.props.placeholder || `Search for the skills you want to learn`}
+            placeholder={this.props.placeholder || `Search for anything...`}
             value={this.state.searchValue}
             onChange={this.handleSearchChange}
             onFocus={this.handleFocus}
