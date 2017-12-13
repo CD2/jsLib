@@ -12,6 +12,7 @@ export const pluralize = (count, single, plural) => {
 }
 
 export const simple_format = (text) => {
+  if(!text) return ``  
   return text.split(`\n`).map(p => <p key={p}>{p}</p>)
 }
 
