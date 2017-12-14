@@ -17,6 +17,7 @@ export class JWVideoPlayer extends React.Component {
     onPlay: PropTypes.func,
     onProgress: PropTypes.func,
     title: PropTypes.string,
+    url: PropTypes.string,
     video: PropTypes.string,
   }
 
@@ -36,8 +37,8 @@ export class JWVideoPlayer extends React.Component {
   }
 
   getPlaylist() {
-    const { video, title } = this.props
-    const videoURL = `//content.jwplatform.com/manifests/${video}.m3u8`
+    const { video, title, url } = this.props
+    const videoURL = url || `//content.jwplatform.com/manifests/${video}.m3u8`
     const image = `https://assets-jpcust.jwpsrv.com/thumbs/${video}-720.jpg`
 
     return [{ sources: [{ file: videoURL }], image, title }]
