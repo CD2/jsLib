@@ -57,8 +57,8 @@ class ModelForm extends React.Component {
       fields: props.fields,
       options: {
         ...props.modelOptions,
-        onSuccess: () => {
-          props.modelOptions.onSuccess && props.modelOptions.onSuccess()
+        onSuccess: (values, response) => {
+          props.modelOptions.onSuccess && props.modelOptions.onSuccess(values, response)
           this.stopSubmitting()
         },
         onError: () => {
