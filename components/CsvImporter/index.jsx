@@ -21,18 +21,25 @@ export class CSVImporter extends React.Component {
       title: PropTypes.string,
       key: PropTypes.string,
     })).isRequired,
+    noCompleteMessage: PropTypes.bool,
     onComplete: PropTypes.func.isRequired,
     onFinish: PropTypes.func.isRequired,
+    removeEmptyRows: PropTypes.bool,
     returnAsMappedObjects: PropTypes.bool,
+    returnFile: PropTypes.bool,
   }
 
   static defaultProps = {
+    noCompleteMessage: false,
+    removeEmptyRows: false,
     returnAsMappedObjects: false,
+    returnFile: false,
   }
 
   state = {
     position: null,
     csv: null,
+    file: null,
     headersRowIndex: 0,
     parsingErrors: null,
     mappings: null,
@@ -41,7 +48,7 @@ export class CSVImporter extends React.Component {
   @observable submitting = false
 
   processCSV = (file, headersRow) => {
-    const csv = Papa.parse(file)
+    const csv = Papa.parse(file, { skipEmptyLines: true })
 
     if (csv.errors.length > 0) {
       this.setState({ position: `parsingError`, parsingErrors: csv.errors })
@@ -53,7 +60,7 @@ export class CSVImporter extends React.Component {
   handleFileUpload = (file, headersRow) => {
     const reader = new FileReader()
 
-    this.setState({ position: `loading` })
+    this.setState({ position: `loading`, file })
     reader.onload = (e) => this.processCSV(e.target.result, headersRow)
     reader.readAsText(file)
   }
@@ -76,7 +83,9 @@ export class CSVImporter extends React.Component {
   }
 
   handleComplete = (mappings) => {
-    if (this.props.returnAsMappedObjects) {
+    if (this.props.returnFile) {
+      return this.props.onComplete(this.state.file, mappings)
+    } else if (this.props.returnAsMappedObjects) {
       return this.props.onComplete(this.getMappedObjects(mappings))
     } else {
       return this.props.onComplete(this.state.csv, mappings)
@@ -84,7 +93,7 @@ export class CSVImporter extends React.Component {
   }
 
   handleFinish = () => {
-    this.props.onFinish()
+    this.props.onFinish && this.props.onFinish()
     this.setState({ position: null })
   }
 
@@ -92,10 +101,10 @@ export class CSVImporter extends React.Component {
     this.submitting = true
     this.setState({ position: `loading` })
     this.handleComplete(mappings).then(() => {
-      this.setState({ position: `success` })
+      if (!this.props.noCompleteMessage) this.setState({ position: `success` })
       setTimeout(this.handleFinish, 5000)
     }).catch(() => {
-      this.setState({ position: `failure` })
+      if (!this.props.noCompleteMessage) this.setState({ position: `failure` })
       setTimeout(this.handleFinish, 5000)
     })
 
