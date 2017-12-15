@@ -4,6 +4,7 @@ import ReactJWPlayer from 'react-jw-player'
 import PropTypes from 'prop-types'
 
 import decorate from 'lib/utils/decorate'
+import JWPlayerTranscript from 'lib/utils/jw_player_transcript'
 
 import config from 'libDependencies/jwPlayerConfig'
 
@@ -11,12 +12,15 @@ export class JWVideoPlayer extends React.Component {
 
   static propTypes = {
     autoPlay: PropTypes.bool,
+    chapterListUrl: PropTypes.string,
     className: PropTypes.string,
     muted: PropTypes.bool,
     onComplete: PropTypes.func,
     onPlay: PropTypes.func,
     onProgress: PropTypes.func,
+    showTranscript: PropTypes.bool,
     title: PropTypes.string,
+    transcriptUrl: PropTypes.string,
     url: PropTypes.string,
     video: PropTypes.string,
   }
@@ -28,12 +32,23 @@ export class JWVideoPlayer extends React.Component {
     onComplete: () => null,
     onPlay: () => null,
     onProgress: () => null,
+    showTranscript: false,
   }
 
   constructor(props) {
     super(props)
 
     this.id = `jw_video__${shortid.generate()}`
+  }
+
+  handleReady = () => {
+    const { showTranscript, chapterListUrl, transcriptUrl, video } = this.props
+
+    if (showTranscript) {
+      const transcript = new JWPlayerTranscript()
+
+      transcript.loadTranscript(video, chapterListUrl, transcriptUrl)
+    }
   }
 
   getPlaylist() {
@@ -57,7 +72,8 @@ export class JWVideoPlayer extends React.Component {
         isMuted={muted}
         onPlay={onPlay}
         onTime={onProgress}
-        onComplete={onComplete}
+        onOneHundredPercent={onComplete}
+        onReady={this.handleReady}
       />
     )
   }
