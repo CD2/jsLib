@@ -33,7 +33,7 @@ export class Breadcrumbs extends React.Component {
     if (BreadcrumbStore.breadcrumbs.filter(crumb=>crumb).length === 0) return null
     return (
       <Wrapper
-        width={`100%`} spacing={10} className={this.props.className}
+        width={`100%`} spacing={10} className={`${this.props.className} breadcrumbs`}
         background={this.props.background || this.props.theme.secondary}
       >
         <Grid columns={6}>
@@ -61,7 +61,7 @@ export default decorate(
       border-bottom: 0;
       color: inherit;
     }
-      
+
     img {
       max-width: 18px;
       opacity: 0.5;
