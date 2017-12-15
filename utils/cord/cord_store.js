@@ -2,7 +2,7 @@ import { observable, reaction } from 'mobx'
 import axios from 'axios'
 
 const get = (url, params) => axios.get(url, { params })
-const post = (url, data) => axios.post(url, { data })
+const post = (url, data, options = {}) => axios.post(url, { data }, options)
 
 const defaultHttp = { get, post }
 
@@ -76,9 +76,9 @@ export class CordStore {
 
   http_methods = defaultHttp
 
-  request = (method, path, data) => {
+  request = (method, path, data, options = {}) => {
     const url = `${this.base_url}/${path}`
-    return this.http_methods[method](url, data).then(response => {
+    return this.http_methods[method](url, data, options).then(response => {
       if (response.data) this.processResponse(response.data, data)
       return response.data
     })

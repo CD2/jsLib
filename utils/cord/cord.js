@@ -15,9 +15,9 @@ export class Cord {
 
   setup_store = (store) => this.store = store
 
-  perform(action, data) {
+  perform(action, data, options = {}) {
     const url = this.store.actionsPath(this.path, action)
-    return this.store.post(url, data)
+    return this.store.post(url, data, options)
   }
 
   connectIds = connectIds
