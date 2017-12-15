@@ -60,7 +60,7 @@ export default decorate(
       transform: translateX(-50%) translateY(-50%);
 
       &--s {
-        max-height: 390px;
+        max-height: 450px;
       }
 
     }

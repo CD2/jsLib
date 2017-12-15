@@ -40,7 +40,7 @@ export class RichTextBox extends React.Component {
       toolbar = `formatselect | bold italic strikethrough forecolor backcolor | link anchor |
       alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  |
       removeformat code`
-      height = `400`
+      if (innerWidth > 700) height = `300`
     }
     tinymce.init({
       target: this.target,
