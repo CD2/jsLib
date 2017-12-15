@@ -57,7 +57,7 @@ export class RichTextBox extends React.Component {
       height,
       init_instance_callback: editor => {
         this.editor = editor
-        editor.on(`keyup change`, () => this.handleChange(editor.getContent()))
+        editor.on(`keyup change`, () => this.handleChange(editor))
         if (this.props.value) {
           this.value = this.props.value
           editor.setContent(this.props.value)
@@ -87,7 +87,9 @@ export class RichTextBox extends React.Component {
   @observable value = ``
   @observable setup = false
 
-  handleChange = (value) => {
+  handleChange = (editor) => {
+    const valueIsEmpty = editor.getContent({ format: `text` }).trim().length === 0
+    const value = valueIsEmpty ? `` : editor.getContent()
     const { onChange, name } = this.props
     this.value = value
     if (onChange) onChange({ name, value })
