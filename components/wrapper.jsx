@@ -74,7 +74,6 @@ export class Wrapper extends React.Component {
 
   render() {
     const { backgroundImageUid, backgroundImage, background, floating } = this.props
-
     if (backgroundImageUid || backgroundImage){
       return (
         <Image

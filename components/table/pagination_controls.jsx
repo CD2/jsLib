@@ -46,7 +46,6 @@ export class PaginationControls extends React.Component {
       const { storePageName } = this.props
 
       if (storePageName) {
-        console.log(storePageName)
         this.props.history.replace({
           state: { ...location.state, [`${storePageName}PageNumber`]: page_number }
         })
