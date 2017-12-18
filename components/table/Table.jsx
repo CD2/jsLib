@@ -94,12 +94,12 @@ export default class IndexTable extends React.Component {
     bulkActions: null,
     rowProps: {},
     ids: null,
-    paginationPosition: `bottom`,
+    paginationPosition: `top`,
     storePageName: null,
   }
 
   @observable page=1
-  @observable per_page=20
+  @observable per_page=2
   // bulk state
   @observable bulkAllToggled = false
   @observable bulkSelected = []
