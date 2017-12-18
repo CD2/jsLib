@@ -1,12 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { observer } from 'mobx-react'
-import { observable, action } from 'mobx'
+import { action } from 'mobx'
 
 import { redirect } from 'lib/utils/router'
 
 import Button from 'lib/components/button'
-import Modal from 'lib/components/modal'
+import ModalStore from 'lib/utils/modal_store'
 
 @observer
 export default class DeleteButton extends React.Component {
@@ -25,12 +25,10 @@ export default class DeleteButton extends React.Component {
     reloadParent: null,
   };
 
-  @observable open = false
-
-  @action handleToggleWarning = (e = null) => {
+  @action handleOpenWarning = (e = null) => {
     e && e.preventDefault()
     e && e.stopPropagation()
-    this.open = !this.open
+    ModalStore.addItem(this.renderModal())
   }
 
   handleDelete = (e) => {
@@ -39,34 +37,31 @@ export default class DeleteButton extends React.Component {
     const { cord, id, reloadParent, redirect: redirectPath } = this.props
 
     cord.perform(`destroy`, { ids: [id] }).then(() => {
-      this.handleToggleWarning()
+      ModalStore.removeLast()
       reloadParent && reloadParent()
       if (redirectPath) redirect(redirectPath)
     })
   }
 
   renderModal = () => (
-    <Modal onClose={this.handleToggleWarning}>
-      <div style={{ textAlign: `left` }}>
-        <p>
-          {
-            this.props.message
-              ? this.props.message
-              : `Are you sure you want to delete ${this.props.name}`
-          }
-        </p>
-        <div>
-          <Button buttonStyle="delete" onClick={this.handleDelete}>Delete</Button>
-          <Button buttonStyle="cancel" onClick={this.handleToggleWarning}>Cancel</Button>
-        </div>
+    <div style={{ textAlign: `left` }}>
+      <p>
+        {
+          this.props.message
+            ? this.props.message
+            : `Are you sure you want to delete ${this.props.name}`
+        }
+      </p>
+      <div>
+        <Button buttonStyle="delete" onClick={this.handleDelete}>Delete</Button>
+        <Button buttonStyle="cancel" onClick={() => ModalStore.removeLast()}>Cancel</Button>
       </div>
-    </Modal>
+    </div>
   )
 
   render = () => (
     <div>
-      <Button onClick={this.handleToggleWarning}>Delete</Button>
-      {this.open && this.renderModal()}
+      <Button onClick={this.handleOpenWarning}>Delete</Button>
     </div>
   )
 

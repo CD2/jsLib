@@ -40,7 +40,7 @@ export default decorate(
     left: 0;
     right: 0;
     bottom: 0;
-    z-index: 25000;
+    z-index: 250000;
     .modal {
       ${active_card};
       z-index: 250000;

@@ -94,7 +94,7 @@ export default class IndexTable extends React.Component {
     bulkActions: null,
     rowProps: {},
     ids: null,
-    paginationPosition: `bottom`,
+    paginationPosition: `top`,
     storePageName: null,
   }
 

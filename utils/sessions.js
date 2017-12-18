@@ -9,7 +9,7 @@ const afterSignOut = () => redirect(`/`, { reload: true })
 
 export const signOut = () => {
   clearApiHeaders()
-  del(`/auth/sign_out`).then(() => afterSignOut()).catch(() => afterSignOut())
+  return del(`/auth/sign_out`).then(() => afterSignOut()).catch(() => afterSignOut())
 }
 
 export const signUp = (values) => {
