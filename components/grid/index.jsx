@@ -7,7 +7,7 @@ import { styled } from 'lib/utils/theme'
   display: flex;
   flex-wrap: wrap;
 
-  .gutter {
+  > .gutter {
     display: inline-block;
     min-width: ${props => props.gutterWidth || props.theme.gutterWidth.value}px;
     vertical-align: top;

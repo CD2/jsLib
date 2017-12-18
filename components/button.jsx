@@ -199,6 +199,16 @@ export default decorate(
           color: white;
         }
       }
+      &.field {
+        font-size: 0.9rem;
+        font-weight: 600;
+        padding: 6px 14px 7px;
+        margin-bottom: 12px;
+        background-color: ${t(`primary`)};
+        &:hover {
+          color: white;
+        }
+      }
 
     }
     margin-right: 6px;
