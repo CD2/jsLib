@@ -30,7 +30,7 @@ export class SelectField extends React.Component {
     const { choices, includeBlank } = this.props
     const choiceHtml = []
     if (includeBlank) {
-      const text = typeof includeBlank === `string` ? includeBlank : `--select--`
+      const text = typeof includeBlank === `string` ? includeBlank : `-- Please select --`
       choiceHtml.push(<option key="$BLANK$" value="">{text}</option>)
     }
     choices.forEach(choice => {
