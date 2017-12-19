@@ -81,11 +81,13 @@ export default class MouseOverContainer extends React.Component {
     </div>
   )
 
-  render = () => (
-    <div ref={element => this.container = element}>
-      {this.show ? this.renderMouseAttachment() : null}
-      {this.props.children}
-    </div>
-  )
+  render() {
+    return (
+      <div ref={element => this.container = element}>
+        {this.show ? this.renderMouseAttachment() : null}
+        {this.props.children}
+      </div>
+    )
+  }
 
 }
