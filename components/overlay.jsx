@@ -35,7 +35,11 @@ export class Overlay extends React.Component {
     let className = `${this.props.className} ${this.props.overlayClassName}`
     if (this.props.visible) className += ` visible`
 
-    return (<div className={className} onClick={this.handleClick} />)
+    return (
+      <div className={className} onClick={this.handleClick}>
+        <style>{`body { overflow: hidden; }`}</style>
+      </div>
+    )
   }
 
 }
