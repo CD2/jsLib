@@ -70,6 +70,13 @@ export default class Example extends React.Component {
     if (onChange) onChange({ name, value: asDateString ? day.toDateString() : day })
   }
 
+  getValue = () => {
+    const valMoment = moment(this.props.value)
+    const value = valMoment.isValid() ? valMoment : new moment()
+
+    return value.format(DAY_FORMAT)
+  }
+
   render() {
     const dayPickerProps = {
       todayButton: `Go to Today`,
@@ -97,7 +104,7 @@ export default class Example extends React.Component {
         <DayPickerInput
           ref={ele => this.dayPicker = ele}
           dayPickerProps={dayPickerProps}
-          value={moment(this.props.value).format(DAY_FORMAT)}
+          value={this.getValue()}
           format={DAY_FORMAT}
         />
       </div>
