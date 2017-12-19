@@ -27,9 +27,9 @@ export class FaIcon extends React.Component {
   }
 
   render() {
-    const { onClick } = this.props
+    const { onClick, style } = this.props
     return (
-      <i className={this.className} onClick={onClick} />
+      <i className={this.className} onClick={onClick} style={style} />
     )
   }
 
