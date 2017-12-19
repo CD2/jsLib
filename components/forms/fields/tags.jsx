@@ -331,27 +331,29 @@ export class TagsInput extends React.Component {
     }
   }
 
-  render = () => (
-    <div className={this.props.className}>
-      {TagsStore.current_tag && <Overlay clickThrough onClick={e => this.handleBlur(e, true)} />}
-      <div className="wrapper" onClick={!this.props.disabled && this.handleFocus}>
-        {this.renderPopularSuggestions()}
-        <div
-          className="tag-input"
-          tabIndex="0"
-          onKeyDown={e => {
-            !TagsStore.current_tag && e.preventDefault()
-            this.props.onlyAllowSuggestions && this.handleInput(e)
-            this.handleFocus()
-          }}
-        >
-          {this.renderClearAll()}
-          {this.renderValue()}
+  render() {
+    return (
+      <div className={this.props.className}>
+        {TagsStore.current_tag && <Overlay clickThrough onClick={e => this.handleBlur(e, true)} />}
+        <div className="wrapper" onClick={!this.props.disabled && this.handleFocus}>
+          {this.renderPopularSuggestions()}
+          <div
+            className="tag-input"
+            tabIndex="0"
+            onKeyDown={e => {
+              !TagsStore.current_tag && e.preventDefault()
+              this.props.onlyAllowSuggestions && this.handleInput(e)
+              this.handleFocus()
+            }}
+          >
+            {this.renderClearAll()}
+            {this.renderValue()}
+          </div>
+          {this.renderSuggestions()}
         </div>
-        {this.renderSuggestions()}
       </div>
-    </div>
-  )
+    )
+  }
 
 }
 

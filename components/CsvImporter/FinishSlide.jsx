@@ -11,7 +11,7 @@ export default class FinishSlide extends React.Component {
     failure: false,
   }
 
-  render = () => {
+  render() {
     if (this.props.failure) {
       return (
         <div>

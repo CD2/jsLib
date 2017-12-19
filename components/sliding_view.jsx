@@ -60,21 +60,23 @@ export class SlidingView extends React.Component {
     </div>
   ))
 
-  render = () => (
-    <div className={`${this.props.className} ${this.props.containerClassName}`}>
-      <div className="sliding-view__nav-buttons">
-        {this.renderNavButtons()}
-      </div>
-      <div className="sliding-view__view" ref={element => this.view = element}>
-        <div
-          className="sliding-view__slider"
-          style={this.viewStyle}
-        >
-          {this.renderSlides()}
+  render() {
+    return (
+      <div className={`${this.props.className} ${this.props.containerClassName}`}>
+        <div className="sliding-view__nav-buttons">
+          {this.renderNavButtons()}
+        </div>
+        <div className="sliding-view__view" ref={element => this.view = element}>
+          <div
+            className="sliding-view__slider"
+            style={this.viewStyle}
+          >
+            {this.renderSlides()}
+          </div>
         </div>
       </div>
-    </div>
-  )
+    )
+  }
 
 }
 

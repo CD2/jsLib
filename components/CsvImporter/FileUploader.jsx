@@ -17,35 +17,37 @@ export class FileUploader extends React.Component {
     headersRow: 1,
   }
 
-  render = () => (
-    <div>
-      <h2>CSV Importer</h2>
-      <p>Upload your file below to begin importing.</p>
-      <label htmlFor="csvFileRow" className="csv-importer__input">
-        File
-        <input
-          id="csvFileRow"
-          type="file"
-          name="csvFile"
-          className="csv-importer__input"
-          onChange={e => this.setState({ file: e.target.files[0] })}
-        />
-      </label>
-      <label htmlFor="csvHeadersRow" className="csv-importer__input">
-        Row containing the column headers
-        <input
-          id="csvHeadersRow"
-          value={this.state.headersRow}
-          type="number"
-          name="headersRow"
-          onChange={e => this.setState({ headersRow: e.target.value })}
-        />
-      </label>
-      <Button onClick={() => this.props.onChange(this.state.file, this.state.headersRow)}>
-        Submit
-      </Button>
-    </div>
-  )
+  render() {
+    return (
+      <div>
+        <h2>CSV Importer</h2>
+        <p>Upload your file below to begin importing.</p>
+        <label htmlFor="csvFileRow" className="csv-importer__input">
+          File
+          <input
+            id="csvFileRow"
+            type="file"
+            name="csvFile"
+            className="csv-importer__input"
+            onChange={e => this.setState({ file: e.target.files[0] })}
+          />
+        </label>
+        <label htmlFor="csvHeadersRow" className="csv-importer__input">
+          Row containing the column headers
+          <input
+            id="csvHeadersRow"
+            value={this.state.headersRow}
+            type="number"
+            name="headersRow"
+            onChange={e => this.setState({ headersRow: e.target.value })}
+          />
+        </label>
+        <Button onClick={() => this.props.onChange(this.state.file, this.state.headersRow)}>
+          Submit
+        </Button>
+      </div>
+    )
+  }
 
 }
 

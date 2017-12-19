@@ -14,7 +14,7 @@ export default class OrderForm extends React.Component {
 
   @action handleCloseModal = () => ModalStore.removeLast()
 
-  render = () => {
+  render() {
     if (ModalStore.hasContents) {
       return (
         <Modal onClose={this.handleCloseModal}>

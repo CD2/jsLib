@@ -59,10 +59,12 @@ export default class DeleteButton extends React.Component {
     </div>
   )
 
-  render = () => (
-    <div>
-      <Button onClick={this.handleOpenWarning}>Delete</Button>
-    </div>
-  )
+  render() {
+    return (
+      <div>
+        <Button onClick={this.handleOpenWarning}>Delete</Button>
+      </div>
+    )
+  }
 
 }

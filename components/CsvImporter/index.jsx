@@ -149,11 +149,13 @@ export class CSVImporter extends React.Component {
     }
   }
 
-  render = () => (
-    <div className={this.props.className}>
-      {this.renderContent()}
-    </div>
-  )
+  render() {
+    return (
+      <div className={this.props.className}>
+        {this.renderContent()}
+      </div>
+    )
+  }
 
 }
 
