@@ -1,10 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import decorate from 'lib/utils/decorate'
 import { Link } from 'react-router-dom'
+
 import { redirect } from 'lib/utils/router'
 
-export class Result extends React.Component {
+export default class Result extends React.Component {
 
   static propTypes = {
     models: PropTypes.object.isRequired,
@@ -19,12 +19,12 @@ export class Result extends React.Component {
     window.addEventListener(`keydown`, this.handleKeyDown)
   }
 
-
   componentWillReceiveProps(props) {
     if (props.selected && !this.props.selected) {
       this.props.onScrollTo(this.elem.offsetTop)
     }
   }
+
   componentWillUnmount() {
     window.removeEventListener(`keydown`, this.handleKeyDown)
   }
@@ -46,10 +46,6 @@ export class Result extends React.Component {
     return className
   }
 
-  handleClick(){
-
-  }
-
   render() {
     const { type, models } = this.props
     return (
@@ -57,8 +53,8 @@ export class Result extends React.Component {
         className={this.className()}
         ref={elem => this.elem = elem}
         to={`/${models[type]}/${this.props.result.searchable_id}`}
+        style={{ color: `#444` }}
         onClick={this.props.onClick}
-        style={{color: '#444'}}
       >
         <b>{this.props.type}</b>
         <p>{this.props.result.content}</p>
@@ -67,4 +63,3 @@ export class Result extends React.Component {
   }
 
 }
-export default decorate(Result)

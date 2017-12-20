@@ -10,6 +10,7 @@ export class Wrapper extends React.Component {
   static propTypes = {
     background: PropTypes.string,
     backgroundImage: PropTypes.string,
+    backgroundImageSize: PropTypes.number,
     backgroundImageUid: PropTypes.string,
     borderRadius: PropTypes.bool,
     children: PropTypes.any,
@@ -20,6 +21,7 @@ export class Wrapper extends React.Component {
     margin: PropTypes.number,
     noGutters: PropTypes.bool,
     noSpacing: PropTypes.bool,
+    onClick: PropTypes.func,
     overflow: PropTypes.bool,
     overlay: PropTypes.string,
     spacing: PropTypes.oneOfType([
@@ -98,7 +100,6 @@ export class Wrapper extends React.Component {
     return (
       <div
         className={this.props.className || ``}
-        onClick={this.props.onClick}
         style={{
           backgroundColor: background || `white`,
           position: `relative`,
@@ -107,6 +108,7 @@ export class Wrapper extends React.Component {
           marginBottom: floating ? this.props.margin || theme.gutterHeight.value : `0`,
           overflow: this.props.overflow ? `initial` : `hidden`,
         }}
+        onClick={this.props.onClick}
       >
         { this.renderOverlay() }
         { this.renderContent() }

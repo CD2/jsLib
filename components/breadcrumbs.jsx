@@ -12,6 +12,7 @@ import Wrapper from './wrapper'
 export class Breadcrumbs extends React.Component {
 
   static propTypes = {
+    background: PropTypes.string,
     className: PropTypes.string,
     theme: PropTypes.object
   }

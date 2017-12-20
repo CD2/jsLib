@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 import { TwitterPicker } from 'react-color'
 
-export class ColorField extends React.Component {
+export default class ColorField extends React.Component {
 
   static propTypes = {
     name: PropTypes.string,
@@ -27,4 +27,3 @@ export class ColorField extends React.Component {
   }
 
 }
-export default ColorField

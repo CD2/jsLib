@@ -5,7 +5,7 @@ import { Route } from 'react-router-dom'
 import { withAuth, isAuthed } from './index'
 
 @withAuth
-export class AuthRoute extends React.Component {
+export default class AuthRoute extends React.Component {
 
   static propTypes = {
     auth: PropTypes.object,
@@ -19,4 +19,3 @@ export class AuthRoute extends React.Component {
   }
 
 }
-export default AuthRoute

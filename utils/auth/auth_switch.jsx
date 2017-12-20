@@ -4,7 +4,7 @@ import { Switch } from 'react-router-dom'
 import { withAuth, isAuthed } from './index'
 
 @withAuth
-export class AuthSwitch extends React.Component {
+export default class AuthSwitch extends React.Component {
 
   static propTypes = {
     auth: PropTypes.object,
@@ -25,4 +25,3 @@ export class AuthSwitch extends React.Component {
   }
 
 }
-export default AuthSwitch

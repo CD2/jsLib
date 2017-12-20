@@ -1,8 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { observer } from 'mobx-react'
+import { observable, action } from 'mobx'
 
 //import MultiSelect from 'javascript_lib/components/collection_select/multi_select';
 
+@observer
 export default class CollectionSelect extends React.Component {
 
   static propTypes = {
@@ -13,10 +16,10 @@ export default class CollectionSelect extends React.Component {
     name: PropTypes.string,
     onChange: PropTypes.func,
     onEnter: PropTypes.func,
+    options: PropTypes.array,
     scope: PropTypes.string,
     title: PropTypes.string,
     value: PropTypes.any.isRequired,
-    options: PropTypes.array,
   }
 
   static defaultProps = {
@@ -25,23 +28,22 @@ export default class CollectionSelect extends React.Component {
     defaultValue: null,
   }
 
-  state = {
-    value: this.props.defaultValue || (this.props.multiple ? [] : ``),
-  }
+  @observable value = this.props.defaultValue || (this.props.multiple ? [] : ``)
 
-  handleChange = (newValue) => {
+  @action handleChange = (newValue) => {
     let value = newValue
 
     if(this.props.multiple) {
-      const index = this.state.value.findIndex(element => element === value)
+      const index = this.value.findIndex(element => element === value)
 
       if(index === -1) {
-        value = [...this.state.value, value]
+        value = [...this.value, value]
       } else {
-        value = this.state.value.filter(element => element !== value)
+        value = this.value.filter(element => element !== value)
       }
     }
-    this.setState({ value })
+
+    this.value = value
     this.props.onChange({ name: this.props.name, value })
   }
 
@@ -82,7 +84,7 @@ export default class CollectionSelect extends React.Component {
     return (
       <select
         multiple={this.props.multiple}
-        value={this.state.value}
+        value={this.value}
         onChange={e => !this.props.multiple ? this.handleChange(e.target.value) : null}
       >
         {this.renderOptions()}

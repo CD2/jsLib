@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { withAuth, isAuthed } from './index'
 
 @withAuth
-export class HasPermission extends React.Component {
+export default class HasPermission extends React.Component {
 
   static propTypes = {
     auth: PropTypes.object,
@@ -30,4 +30,3 @@ export class HasPermission extends React.Component {
   }
 
 }
-export default HasPermission

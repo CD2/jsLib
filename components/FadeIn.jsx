@@ -1,8 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { observer } from 'mobx-react'
-import { observable, action, computed } from 'mobx'
-import { Link } from 'react-router-dom'
+import { observable, computed, action } from 'mobx'
 import VisibilitySensor from 'react-visibility-sensor'
 
 import { styled, t } from 'lib/utils/theme'
@@ -34,6 +33,8 @@ import { styled, t } from 'lib/utils/theme'
 export default class FadeIn extends React.Component {
 
   static propTypes = {
+    children: PropTypes.node,
+    className: PropTypes.string,
     left: PropTypes.bool,
     right: PropTypes.bool
   }
@@ -45,14 +46,18 @@ export default class FadeIn extends React.Component {
     return this.visible ? `visibility visibility--true` : str
   }
 
-  onChange = (isVisible) => {
-    this.visible = isVisible
-  }
+  @action handleChange = (isVisible) => this.visible = isVisible
 
   render() {
     const { children, className } = this.props
     return (
-      <VisibilitySensor onChange={this.onChange} active={!this.visible} partialVisibility delayedCall intervalDelay={500}>
+      <VisibilitySensor
+        active={!this.visible}
+        intervalDelay={500}
+        partialVisibility
+        delayedCall
+        onChange={this.handleChange}
+      >
         <div>
           <div className={`${className} ${this.className}`}>
             {children}

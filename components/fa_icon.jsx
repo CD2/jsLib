@@ -14,6 +14,7 @@ export class FaIcon extends React.Component {
     icon: PropTypes.string.isRequired,
     onClick: PropTypes.func,
     size: PropTypes.number,
+    style: PropTypes.object,
   }
 
   get prefix() {
@@ -29,7 +30,7 @@ export class FaIcon extends React.Component {
   render() {
     const { onClick, style } = this.props
     return (
-      <i className={this.className} onClick={onClick} style={style} />
+      <i className={this.className} style={style} onClick={onClick} />
     )
   }
 
@@ -37,15 +38,16 @@ export class FaIcon extends React.Component {
 export default decorate(
   styled`
     ${({ color, theme, size }) => {
-    const col = color || theme.darkBackground
-    const sze = size || 1
-    return (
-      `
-        color: ${col};
-        font-size: ${sze}em;
+      const col = color || theme.darkBackground
+      const sze = size || 1
+      return (
         `
-    )
-  }}
+          color: ${col};
+          font-size: ${sze}em;
+          `
+      )
+    }
+  }
   ${({ hoverColor }) => {
     if (hoverColor) {
       return (

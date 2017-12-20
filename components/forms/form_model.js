@@ -100,7 +100,10 @@ export default class FormModel {
 
   perform(payloadValues = null) {
     if (!this.hasChanges() && !payloadValues) return
-    const { redirectTo, cord, flash, onSuccess, onError, perform, formatPayload, scroll } = this.options
+    const {
+      redirectTo, cord, flash, onSuccess,
+      perform, formatPayload, scroll 
+    } = this.options
     let params = null
     const values = payloadValues || this.changes
 

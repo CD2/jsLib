@@ -7,7 +7,6 @@ import { styled } from 'lib/utils/theme'
     margin-top: 4px;
   }
 `
-
 export default class Form extends React.Component {
 
   static propTypes = {

@@ -6,7 +6,7 @@ const validators_types = {
   password: require(`./validators/password`).default,
 }
 
-function validateForm(values, validations) {
+export default function validateForm(values, validations) {
   const errors = {}
   const addError = (field, msg) => errors[field] = (errors[field] || []).concat([msg])
 
@@ -23,6 +23,3 @@ function validateForm(values, validations) {
   })
   return errors
 }
-
-
-export default validateForm

@@ -1,5 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { observer } from 'mobx-react'
+import { observable, action } from 'mobx'
+
+
 import { styled, t } from 'lib/utils/theme'
 import { List, ListItem } from 'lib/components/list/index'
 import { popover } from 'lib/utils/common_styles'
@@ -16,10 +20,6 @@ export class ResultsArea extends React.Component {
     results: PropTypes.array,
   }
 
-  state = {
-    selectedIndex: 0,
-  }
-
   componentDidMount() {
     window.addEventListener(`keydown`, this.handleKeyDown)
   }
@@ -27,6 +27,8 @@ export class ResultsArea extends React.Component {
   componentWillUnmount() {
     window.removeEventListener(`keydown`, this.handleKeyDown)
   }
+
+  @observable selectedIndex = 0
 
   handleScrollTo = (pos) => {
     if (!this.elem) return
@@ -46,19 +48,17 @@ export class ResultsArea extends React.Component {
     }
   }
 
-  handleArrowDown() {
-    if (this.state.selectedIndex < this.props.results.length - 1) {
-      this.setState(prevState => {
-        return { selectedIndex: prevState.selectedIndex + 1 }
-      }, this.scrollToSelected)
+  @action handleArrowDown() {
+    if (this.selectedIndex < this.props.results.length - 1) {
+      this.selectedIndex = this.selectedIndex + 1
+      this.scrollToSelected()
     }
   }
 
-  handleArrowUp() {
-    if (this.state.selectedIndex > 0) {
-      this.setState(prevState => {
-        return { selectedIndex: prevState.selectedIndex - 1 }
-      }, this.scrollToSelected)
+  @action handleArrowUp() {
+    if (this.selectedIndex > 0) {
+      this.selectedIndex = this.selectedIndex - 1
+      this.scrollToSelected()
     }
   }
 
@@ -68,16 +68,16 @@ export class ResultsArea extends React.Component {
   }
 
   renderResult = (result, i) => {
-    const { selectedIndex } = this.state
+    const { selectedIndex } = this
     return (
       <ListItem key={this.getResultKey(result)}>
         <Result
           type={result.searchable_type}
           result={result}
           selected={selectedIndex===i}
+          models={this.props.models}
           onScrollTo={this.handleScrollTo}
           onClick={this.props.onClick}
-          models={this.props.models}
         />
       </ListItem>
     )
@@ -141,7 +141,7 @@ export default decorate(
         }
       }
     }
-
   `,
-  ResultsArea
+  observer,
+  ResultsArea,
 )

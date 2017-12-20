@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom'
 import { withAuth, isAuthed } from './index'
 
 @withAuth
-export class AuthNavLink extends React.Component {
+export default class AuthNavLink extends React.Component {
 
   static propTypes = {
     auth: PropTypes.object,
@@ -22,4 +22,3 @@ export class AuthNavLink extends React.Component {
   }
 
 }
-export default AuthNavLink

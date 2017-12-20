@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { withAuth, isAuthed } from './index'
 
 @withAuth
-export class AuthLink extends React.Component {
+export default class AuthLink extends React.Component {
 
   static propTypes = {
     auth: PropTypes.object,
@@ -19,4 +19,3 @@ export class AuthLink extends React.Component {
   }
 
 }
-export default AuthLink

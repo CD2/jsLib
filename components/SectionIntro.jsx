@@ -53,10 +53,11 @@ export default decorate(
     text-align: ${p(`align`, `left`)};
     .modal & { padding-top: 0; }
     ${({ children, noPad, theme }) => {
-    if (children && !noPad){
-      return `padding-bottom: ${theme.gutterHeight.value / 16}em;`
+      if (children && !noPad){
+        return `padding-bottom: ${theme.gutterHeight.value / 16}em;`
+      }
     }
-  }}
+  }
     .intro-text {
   ${({ light, theme }) => {
     const color = light ? theme.background : theme.lightText
@@ -67,7 +68,7 @@ export default decorate(
   ${({ light, theme }) => {
     if (light){
       return `
-      a { color: white; }  
+      a { color: white; }
       `}
   }}
     }

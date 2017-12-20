@@ -47,7 +47,8 @@ export class Th extends React.Component {
       >
         {this.props.filterable && <FaIcon icon="filter" onClick={this.handleFilterClick} />}
         {this.props.children}
-        {this.props.sortable && this.props.query && this.props.query.renderSortIcon(this.props.sortable)}
+        {this.props.sortable && this.props.query
+          && this.props.query.renderSortIcon(this.props.sortable)}
         {this.showFilters && (
           <Filter
             name={this.props.filterable}
