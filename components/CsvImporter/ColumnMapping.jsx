@@ -2,6 +2,7 @@ import React from 'react'
 import Fuzzy from 'fuse.js'
 import PropTypes from 'prop-types'
 import { observer } from 'mobx-react'
+import { observable, action, toJS } from 'mobx'
 
 import decorate from 'lib/utils/decorate'
 
@@ -17,11 +18,7 @@ export class ColumnMapping extends React.Component {
     submitting: PropTypes.bool,
   }
 
-  state = {
-    values: {},
-  }
-
-  componentDidMount() {
+  @action componentDidMount() {
     const csvColumns = this.getCSVColumns()
     const fuse = new Fuzzy(
       csvColumns.map(column => ({ value: column })),
@@ -33,20 +30,20 @@ export class ColumnMapping extends React.Component {
       return values
     }, {})
 
-    this.setState({ values: searchedValues })
+    this.values = searchedValues
   }
 
-  getCSVColumns = () => {
-    return this.props.csv[this.props.headersRowIndex]
-  }
+  @observable values = {}
 
-  handleMapping = (databaseKey, csvKey) => {
-    this.setState(state => ({ values: { ...state.values, [databaseKey]: csvKey }}))
+  getCSVColumns = () => this.props.csv[this.props.headersRowIndex]
+
+  @action handleMapping = (databaseKey, csvKey) => {
+    this.values = { ...toJS(this.values), [databaseKey]: csvKey }
   }
 
   renderChosenColumnValues = (column) => {
     const { csv } = this.props
-    const { values } = this.state
+    const { values } = this
     const csvKey = values[column.key]
 
     if (csvKey) {
@@ -67,7 +64,7 @@ export class ColumnMapping extends React.Component {
         {column.title}
         <select
           name={column.key}
-          value={this.state.values[column.key]}
+          value={this.values[column.key]}
           onChange={(e) => this.handleMapping(column.key, e.target.value)}
         >
           {this.getCSVColumns().map(key => <option key={key} value={key}>{key}</option>)}
@@ -88,7 +85,7 @@ export class ColumnMapping extends React.Component {
           {this.props.databaseColumns.map(this.renderMappingInput)}
         </div>
         <Button
-          onClick={() => this.props.onSubmit(this.state.values)}
+          onClick={() => this.props.onSubmit(toJS(this.values))}
           processing={this.props.submitting}
         >
           Submit

@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Papa from 'papaparse'
 import { observer } from 'mobx-react'
-import { observable } from 'mobx'
+import { observable, action, toJS } from 'mobx'
 
 import decorate from 'lib/utils/decorate'
 import { styled } from 'lib/utils/theme'
@@ -36,43 +36,44 @@ export class CSVImporter extends React.Component {
     returnFile: false,
   }
 
-  state = {
-    position: null,
-    csv: null,
-    file: null,
-    headersRowIndex: 0,
-    parsingErrors: null,
-    mappings: null,
-  }
-
+  @observable position: null
+  @observable csv: null
+  @observable file: null
+  @observable headersRowIndex: 0
+  @observable parsingErrors: null
+  @observable mappings: null
   @observable submitting = false
 
-  processCSV = (file, headersRow) => {
+  @action processCSV = (file, headersRow) => {
     const csv = Papa.parse(file, { skipEmptyLines: true })
 
     if (csv.errors.length > 0) {
-      this.setState({ position: `parsingError`, parsingErrors: csv.errors })
+      this.position = `parsingError`
+      this.parsingErrors = csv.errors
     } else {
-      this.setState({ headersRowIndex: headersRow - 1, csv: csv.data, position: `column_mapping` })
+      this.headersRowIndex = headersRow - 1
+      this.csv = csv.data
+      this.position = `column_mapping`
     }
   }
 
-  handleFileUpload = (file, headersRow) => {
+  @action handleFileUpload = (file, headersRow) => {
     const reader = new FileReader()
 
-    this.setState({ position: `loading`, file })
+    this.position = `loading`
+    this.file = file
     reader.onload = (e) => this.processCSV(e.target.result, headersRow)
     reader.readAsText(file)
   }
 
   getMappedObjects = mappings => {
-    const headersRow = this.state.csv.find((row, index) => index === this.state.headersRowIndex)
+    const headersRow = this.csv.find((row, index) => index === this.headersRowIndex)
     const mappingPositions = Object.entries(mappings).reduce((positions, [key, csvKey]) => {
       positions[key] = headersRow.findIndex(csvColumn => csvColumn === csvKey)
 
       return positions
     }, {})
-    const csvRows = this.state.csv.filter((row, index) => index !== this.state.headersRowIndex)
+    const csvRows = this.csv.filter((row, index) => index !== this.headersRowIndex)
 
     return csvRows.map(row => {
       return Object.entries(mappingPositions).reduce((newObject, [key, position]) => {
@@ -84,30 +85,29 @@ export class CSVImporter extends React.Component {
 
   handleComplete = (mappings) => {
     if (this.props.returnFile) {
-      return this.props.onComplete(this.state.file, mappings)
+      return this.props.onComplete(toJS(this.file), mappings)
     } else if (this.props.returnAsMappedObjects) {
       return this.props.onComplete(this.getMappedObjects(mappings))
-    } else {
-      return this.props.onComplete(this.state.csv, mappings)
     }
+
+    return this.props.onComplete(toJS(this.csv), mappings)
   }
 
-  handleFinish = () => {
+  @action handleFinish = () => {
     this.props.onFinish && this.props.onFinish()
-    this.setState({ position: null })
+    this.position = null
   }
 
-  handleSubmit = mappings => {
+  @action handleSubmit = mappings => {
     this.submitting = true
-    this.setState({ position: `loading` })
+    this.position = `loading`
     this.handleComplete(mappings).then(() => {
-      if (!this.props.noCompleteMessage) this.setState({ position: `success` })
+      if (!this.props.noCompleteMessage) this.position = `success`
       setTimeout(this.handleFinish, 5000)
     }).catch(() => {
-      if (!this.props.noCompleteMessage) this.setState({ position: `failure` })
+      if (!this.props.noCompleteMessage) this.position = `failure`
       setTimeout(this.handleFinish, 5000)
     })
-
   }
 
   renderLoading = () => {
@@ -124,7 +124,7 @@ export class CSVImporter extends React.Component {
   }
 
   renderContent = () => {
-    const { position, csv, headersRowIndex, parsingErrors } = this.state
+    const { position, csv, headersRowIndex, parsingErrors } = this
 
     switch(position) {
     case `column_mapping`:
@@ -141,7 +141,7 @@ export class CSVImporter extends React.Component {
       return <FailureSlide errors={parsingErrors} />
     case `failure`:
     case `success`:
-      return <FinishSlide failure={this.state.position === `failure`} />
+      return <FinishSlide failure={this.position === `failure`} />
     case `loading`:
       return this.renderLoading()
     default:

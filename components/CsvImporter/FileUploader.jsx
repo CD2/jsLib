@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { observer } from 'mobx-react'
+import { observable, action, toJS } from 'mobx'
 
 import decorate from 'lib/utils/decorate'
 
@@ -12,10 +13,11 @@ export class FileUploader extends React.Component {
     onChange: PropTypes.func,
   }
 
-  state = {
-    file: null,
-    headersRow: 1,
-  }
+  @observable file = null
+  @observable headersRow = 1
+
+  @action handleSetFile = e => this.file = e.target.files[0]
+  @action handleSetHeadersRow = e => this.headersRow = e.target.value
 
   render() {
     return (
@@ -29,20 +31,20 @@ export class FileUploader extends React.Component {
             type="file"
             name="csvFile"
             className="csv-importer__input"
-            onChange={e => this.setState({ file: e.target.files[0] })}
+            onChange={this.handleSetFile}
           />
         </label>
         <label htmlFor="csvHeadersRow" className="csv-importer__input">
           Row containing the column headers
           <input
             id="csvHeadersRow"
-            value={this.state.headersRow}
+            value={this.headersRow}
             type="number"
             name="headersRow"
-            onChange={e => this.setState({ headersRow: e.target.value })}
+            onChange={this.handleSetHeadersRow}
           />
         </label>
-        <Button onClick={() => this.props.onChange(this.state.file, this.state.headersRow)}>
+        <Button onClick={() => this.props.onChange(this.file, this.headersRow)}>
           Submit
         </Button>
       </div>
