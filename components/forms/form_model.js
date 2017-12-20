@@ -84,8 +84,18 @@ export default class FormModel {
 
   submit() {
     if (!this.valid()) return
-    if (this.options.onSubmit) return this.options.onSubmit(toJS(this.changes))
+    if (this.options.onSubmit) {
+      return this.options.onSubmit(toJS(this.changes).catch(this.handleServerError))
+    }
     if (this.options.perform) return this.perform()
+  }
+
+  handleServerError = (request) => {
+    const { onError } = this.options
+    const errors = request.response.data.error_for ? request.response.data.error_for.message : {}
+
+    this.errors.replace(errors)
+    onError && onError(errors)
   }
 
   perform(payloadValues = null) {
@@ -107,18 +117,7 @@ export default class FormModel {
       if (scroll) window.scrollTo(0, 0)
       if (flash) flashStore.add(flash)
       if (redirectTo) redirect(redirectTo(toJS(values), response))
-    }).catch(error => {
-      if (onError) return onError(error)
-      console.error(error)
-      flashStore.add(
-        error.
-          response.
-          data.
-          exception.
-          replace(`#<ActiveRecord::RecordInvalid: Validation failed: `, ``).
-          replace(`>`, ``)
-      )
-    })
+    }).catch(this.handleServerError)
   }
 
   reset(newValues) {
