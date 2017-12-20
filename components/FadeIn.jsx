@@ -47,7 +47,6 @@ export default class FadeIn extends React.Component {
 
   onChange = (isVisible) => {
     this.visible = isVisible
-    console.log(this.visible)
   }
 
   render() {
