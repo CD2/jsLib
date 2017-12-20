@@ -1,6 +1,11 @@
-import { observable, action, computed, toJS } from 'mobx'
+import { observable, action, computed, toJS, reaction } from 'mobx'
 
-class TagsStore {
+export default class TagsStore {
+
+  constructor(component, props) {
+    this.component = component
+    this.props = props
+  }
 
   @observable tags = []
   @observable current_tag = null
@@ -8,6 +13,23 @@ class TagsStore {
   @observable popularSuggestions = []
   @observable filterText = ``
   @observable dropdownHighlight = 0
+  @observable mouseOverPopover = false
+
+  NEW_INPUT = `new/text/input`
+
+  onMount = (props) => {
+    this.setVals(props, `tags`, `value`)
+    this.setVals(props, `suggestions`)
+    this.setVals(props, `popularSuggestions`)
+    props.onChange({ name: props.name, value: this.getTagsFormat(props) })
+
+    reaction(
+      () => this.tags.map(tag=>tag),
+      () => {
+        props.onChange({ name: props.name, value: this.getTagsFormat(props) })
+      }
+    )
+  }
 
   @computed get allSuggestions() {
     return Array.from(new Set(toJS(this.suggestions), toJS(this.popularSuggestions)))
@@ -80,6 +102,123 @@ class TagsStore {
     }
   }
 
-}
+  @action setMouseOver = (isMousedOver = true) => this.mouseOverPopover = isMousedOver
 
-export default new TagsStore()
+  @action handleInputBlur = (e, force = false) => {
+    e && e.preventDefault()
+    if (!this.mouseOverPopover || force) {
+      this.current_tag && this.handleInput()
+      this.current_tag = null
+      this.filterText = ``
+    }
+  }
+
+  @action handleInputFocus = () => {
+    if(!this.current_tag) this.current_tag = this.NEW_INPUT
+  }
+
+  handleChange = (value, e) => {
+    const filteredForRepeats = value.reduce((filtered, tag) => {
+      const capitalisedTag = tag.toUpperCase()
+
+      if (!filtered.find(found => capitalisedTag === found.toUpperCase())) {
+        filtered.push(capitalisedTag)
+      }
+
+      return filtered
+    }, [])
+
+    this.tags.replace(filteredForRepeats)
+    this.filterText = ``
+    if (this.component.textInput) this.component.textInput.value = ``
+    e && this.handleInputBlur(e)
+  }
+
+  @action handleInput = (e = null) => {
+    if (this.props.dropdown && e) {
+      if (e.key === `ArrowUp` && this.dropdownHighlight > 0) this.dropdownHighlight -= 1
+      if (e.key === `ArrowDown` && this.dropdownHighlight < this.filteredSuggestions.length) {
+        this.dropdownHighlight += 1
+        //this.popover.scrollTop = e.target.offsetTop
+      }
+      if (e.key === `Enter` && this.filteredSuggestions[this.dropdownHighlight]) {
+        return this.handleChange([
+          ...this.tags,
+          this.filteredSuggestions[this.dropdownHighlight]
+        ], e)
+      }
+    }
+
+    if (!this.component.textInput) return
+    const textValue = this.component.textInput && this.component.textInput.value
+
+    if(textValue !== `` && (!e || e.key === `Enter` || e.key === `Tab` || e.key === `,`)) { // enter
+      e && e.preventDefault()
+      if (this.current_tag === this.NEW_INPUT) {
+        let newValue = null
+
+        if(this.props.onlyAllowSuggestions) {
+          const allSuggestions = this.allSuggestions
+          newValue = allSuggestions.find(sug => sug.toUpperCase() === textValue.toUpperCase())
+        } else {
+          newValue = textValue
+        }
+
+        if (newValue) this.handleChange([...this.tags, newValue], e)
+      } else {
+        const valueCopy = this.tags.slice()
+        let newValue = null
+
+        if(this.props.onlyAllowSuggestions) {
+          newValue = this.allSuggestions.find(sug => sug.toUpperCase() === textValue.toUpperCase())
+        } else {
+          newValue = textValue
+        }
+
+        if (newValue) valueCopy[this.currentTagIndex] = newValue
+
+        this.handleChange(valueCopy, e)
+      }
+
+      this.current_tag = null
+    } else if(e && textValue === `` && e.key === `Backspace`) { //backspace
+      this.handleRemoveTag(e)
+    } else {
+      this.props.updateSuggestions && this.props.updateSuggestions(textValue)
+    }
+
+    this.filterText = e && e.key === `Backspace`
+      ? textValue.toUpperCase().substring(0, textValue.length - 1)
+      : textValue.toUpperCase()
+  }
+
+  @action handleRemoveTag = (e = null, selectedTag = null) => {
+    if (selectedTag !== null) {
+      this.handleChange(this.tags.filter(tag => tag !== selectedTag), e)
+    } else if (this.current_tag && this.current_tag !== this.NEW_INPUT) {
+      const tagBeforeCurrent = this.tags.get(this.currentTagIndex - 1)
+      const newTags = this.tags.filter(tag => tag !== this.current_tag)
+      this.handleChange(newTags, e)
+
+      if (tagBeforeCurrent) {
+        return this.current_tag = tagBeforeCurrent
+      }
+    } else {
+      if (this.tags.length > 0) return this.current_tag = this.tags.get(this.tags.length - 1)
+    }
+
+    this.current_tag = null
+  }
+
+  handleAddTag = tag => this.handleChange([...this.tags.slice(), tag])
+
+  @action handleTagClick = (e, tag) => {
+    e.stopPropagation()
+    if (this.props.onlyAllowSuggestions) {
+      this.handleRemoveTag(e, tag)
+    } else {
+      this.current_tag = tag
+    }
+  }
+
+}
