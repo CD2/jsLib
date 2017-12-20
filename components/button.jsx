@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 
 import { styled, t } from 'lib/utils/theme'
 import decorate from 'lib/utils/decorate'
-import load from 'images/load.gif'
+import load from 'images/load'
 
 export class Button extends React.Component {
 

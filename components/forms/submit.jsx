@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { styled, t } from 'lib/utils/theme'
-import load from 'images/load.gif'
+import load from 'images/load'
 
 @styled`
     position: relative;
