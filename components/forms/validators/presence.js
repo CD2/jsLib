@@ -1,7 +1,7 @@
 import BaseValidator from './base'
 import { toJS } from 'mobx'
 
-export class PresenceValidator extends BaseValidator {
+export default class PresenceValidator extends BaseValidator {
 
   static message = `is required`
 
@@ -19,11 +19,12 @@ export class PresenceValidator extends BaseValidator {
       return (this.options.allow_blank ? value : value.filter(x=>x)).length !== 0
     }
     if (typeof value === `boolean`) return true
-    if (value && typeof value === `object` && value.toString() === `[object File]`) return value.name
+    if (value && typeof value === `object` && value.toString() === `[object File]`) {
+      return value.name
+    }
     if (value && typeof value === `object`) return Object.keys(value).length !== 0
     return !!value
   }
 
 
 }
-export default PresenceValidator

@@ -5,7 +5,7 @@ import { observer } from 'mobx-react'
 import Image from "lib/components/image"
 
 @observer
-export class ImageField extends React.Component {
+export default class ImageField extends React.Component {
 
   static propTypes = {
     accepts: PropTypes.array,
@@ -59,7 +59,9 @@ export class ImageField extends React.Component {
 
   renderPreview() {
     const { value } = this.props
-    if (value && this.preview_src && !this.preview_src.uid) return <img alt="" src={this.preview_src} height={240} />
+    if (value && this.preview_src && !this.preview_src.uid) {
+      return <img alt="" src={this.preview_src} height={240} />
+    }
     if (this.props.model && this.props.model.get(`image_uid`)) {
       return <Image size={`150x150`} uid={this.props.model.get(`image_uid`)} />
     }
@@ -94,4 +96,3 @@ export class ImageField extends React.Component {
   }
 
 }
-export default ImageField

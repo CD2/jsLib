@@ -1,6 +1,8 @@
 /* eslint-disable react/prop-types */
 import React from 'react'
 import PropTypes from 'prop-types'
+import { observer } from 'mobx-react'
+import { observable, action } from 'mobx'
 import moment from 'moment'
 import { DateUtils } from 'react-day-picker'
 import DayPickerInput from 'react-day-picker/DayPickerInput'
@@ -9,7 +11,7 @@ import 'react-day-picker/lib/style.css'
 const currentYear = new Date().getFullYear()
 const fromMonth = new Date(currentYear, -1200)
 const toMonth = new Date(currentYear + 10, 11)
-const defaultTime = moment(new Date()).subtract(25, `years`)
+// const defaultTime = moment(new Date()).subtract(25, `years`)
 const DAY_FORMAT = `DD/MM/YYYY`
 
 // Component will receive date, locale and localeUtils props
@@ -42,6 +44,7 @@ function YearMonthForm({ date, localeUtils, onChange }) {
   )
 }
 
+@observer
 export default class Example extends React.Component {
 
   static propTypes = {
@@ -55,14 +58,13 @@ export default class Example extends React.Component {
     value: PropTypes.string,
   }
 
-  state = {
-    asDateString: false,
-    day: this.props.value ? new Date(this.props.value) : new Date(),
-    month: this.props.value ? new Date(this.props.value) : new Date(),
-  };
+  @observable asDateString = false
+  @observable day = this.props.value ? new Date(this.props.value) : new Date()
+  @observable month = this.props.value ? new Date(this.props.value) : new Date()
 
-  handleYearMonthChange = month => {
-    this.setState({ month, day: month })
+  @action handleYearMonthChange = month => {
+    this.month = month
+    this.day = month
   };
 
   handleChange = (day) => {
@@ -91,10 +93,10 @@ export default class Example extends React.Component {
       onDayClick: this.handleChange,
       disabled: this.props.disabled,
       enableOutsideDays: true,
-      month: this.state.month,
+      month: this.month,
       modifiers: {
         selected: date => {
-          return DateUtils.isSameDay(this.state.day, date)
+          return DateUtils.isSameDay(this.day, date)
         }
       },
     }

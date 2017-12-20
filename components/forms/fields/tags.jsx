@@ -200,7 +200,8 @@ export class TagsInput extends React.Component {
   render() {
     return (
       <div className={this.props.className}>
-        {this.store.current_tag && <Overlay clickThrough onClick={e => this.store.handleInputBlur(e, true)} />}
+        {this.store.current_tag 
+          && <Overlay clickThrough onClick={e => this.store.handleInputBlur(e, true)} />}
         <div className="wrapper" onClick={!this.props.disabled && this.store.handleInputFocus}>
           {this.renderPopularSuggestions()}
           <div

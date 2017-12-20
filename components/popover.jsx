@@ -14,9 +14,9 @@ export class Popover extends React.Component {
     containerClassName: PropTypes.string,
     onMouseEnter: PropTypes.func,
     onMouseLeave: PropTypes.func,
+    onToggle: PropTypes.func,
     open: PropTypes.bool,
     popoverClassName: PropTypes.string,
-    toggle: PropTypes.func,
   }
 
   static defaultProps = {
@@ -27,7 +27,7 @@ export class Popover extends React.Component {
     onMouseEnter: null,
     onMouseLeave: null,
     closeOnOutsideClick: false,
-    toggle: null,
+    onToggle: null,
     popoverClassName: null,
   }
 
@@ -49,7 +49,7 @@ export class Popover extends React.Component {
       <Overlay
         overlayClassName={this.props.open ? `popover__overlay--open` : `popover__overlay`}
         visible={this.props.open}
-        onClick={this.props.toggle}
+        onClick={this.props.onToggle}
       />
     )
   }

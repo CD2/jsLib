@@ -79,14 +79,15 @@ export class ColumnMapping extends React.Component {
       <div>
         <h2>Column Mapping</h2>
         <p>
-          Please check each of the columns from your csv are correctly assigned to a database column.
+          Please check each of the columns from your
+          csv are correctly assigned to a database column.
         </p>
         <div>
           {this.props.databaseColumns.map(this.renderMappingInput)}
         </div>
         <Button
-          onClick={() => this.props.onSubmit(toJS(this.values))}
           processing={this.props.submitting}
+          onClick={() => this.props.onSubmit(toJS(this.values))}
         >
           Submit
         </Button>

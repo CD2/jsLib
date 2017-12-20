@@ -1,5 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { observer } from 'mobx-react'
+import { observable, action } from 'mobx'
 
 import { styled, t } from "lib/utils/theme"
 import decorate from 'lib/utils/decorate'
@@ -27,19 +29,17 @@ export class Accordian extends React.PureComponent {
     noAnimation: false,
   }
 
-  state = {
-    open: !!this.props.open,
-  }
-
-  componentWillReceiveProps = (nextProps) => {
-    if(nextProps.open !== this.props.open && nextProps.open !== this.state.open) {
-      this.setState({ open: nextProps.open })
+  @action componentWillReceiveProps = (nextProps) => {
+    if(nextProps.open !== this.props.open && nextProps.open !== this.open) {
+      this.open = nextProps.open
     }
   }
 
-  handleToggle = () => {
+  @observable open = !!this.props.open
+
+  @action handleToggle = () => {
     if(this.props.open === null) {
-      this.setState({ open: !this.state.open })
+      this.open = !this.open
     } else if(this.props.toggle) {
       this.props.toggle()
     }
@@ -81,18 +81,18 @@ export class Accordian extends React.PureComponent {
       return {}
     }
 
-    return this.state.open ?
+    return this.open ?
       { minHeight: `${this.props.rows.length * this.props.rowHeight  }px` } :
       { minHeight: `0px` }
   }
 
   getClassName = () => {
     if (this.props.noAnimation) {
-      return this.state.open ? `accordian__content-noAnimation accordian__content-noAnimation--open`
+      return this.open ? `accordian__content-noAnimation accordian__content-noAnimation--open`
         : `accordian__content-noAnimation`
     }
 
-    return this.state.open ? `accordian__content accordian__content--open` : `accordian__content`
+    return this.open ? `accordian__content accordian__content--open` : `accordian__content`
   }
 
   render() {
@@ -155,5 +155,6 @@ export default decorate(
     }
   }
   `,
-  Accordian
+  observer,
+  Accordian,
 )
