@@ -180,7 +180,7 @@ export class TagsInput extends React.Component {
       return this.renderTag(tag)
     })
 
-    if (this.store.current_tag === this.store.NEW_INPUT && !this.props.onlyAllowSuggestions) {
+    if (this.store.current_tag === this.store.NEW_INPUT) {
       result.push(this.renderInput())
     }
 
@@ -208,7 +208,6 @@ export class TagsInput extends React.Component {
             tabIndex="0"
             onKeyDown={e => {
               !this.store.current_tag && e.preventDefault()
-              this.props.onlyAllowSuggestions && this.store.handleInput(e)
               this.store.handleInputFocus()
             }}
           >
