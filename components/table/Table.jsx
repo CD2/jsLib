@@ -22,15 +22,15 @@ import ModalStore from 'lib/utils/modal_store'
   }
   tbody tr {
     ${({ noLinks }) => {
-      if (!noLinks) {
-        return`
-              cursor: pointer;
-              &:hover {
-                background: #f3f7fb;
-              }
-        `
-      }
-    }
+  if (!noLinks) {
+    return`
+          cursor: pointer;
+          &:hover {
+            background: #f3f7fb;
+          }
+    `
+  }
+}
   }
   }
   tr {

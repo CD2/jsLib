@@ -23,19 +23,18 @@ import load from 'images/load'
       background-color: ${t(`primaryLight`)};
     }
     ${({ submitting }) => {
-      if (submitting){
-        return`
-            background: url(${load});
-            opacity: 0.7;
-            background-size: 100%;
-            background-repeat: no-repeat;
-            background-color: #2c2d2d;
-            background-position: 50%;
-            &:hover{
-              background-color: #2c2d2d;
-            }
-        `}
-    }
+  if (submitting){
+    return`
+        background: url(${load});
+        opacity: 0.7;
+        background-size: 100%;
+        background-repeat: no-repeat;
+        background-color: #2c2d2d;
+        background-position: 50%;
+        &:hover{
+          background-color: #2c2d2d;
+        }
+    `}}
   }
 
 `
