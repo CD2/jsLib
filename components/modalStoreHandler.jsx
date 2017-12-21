@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { observer } from 'mobx-react'
-import { action, observable } from 'mobx'
+import { action } from 'mobx'
 import Modal from 'lib/components/modal'
 import ModalStore from 'lib/utils/modal_store'
 import Button from 'lib/components/button'
