@@ -49,7 +49,7 @@ export class RichTextBox extends React.Component {
       menubar: false,
       elementpath: false,
       browser_spellcheck: true,
-
+      readonly: this.props.disabled ? 1 : 0,
       plugins: [
         `lists link table anchor code`
       ],
