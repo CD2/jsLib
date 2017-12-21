@@ -49,7 +49,7 @@ export default class Submit extends React.Component {
   }
 
   static defaultProps = {
-    submitting: false
+    submitting: false,
   }
 
   render() {

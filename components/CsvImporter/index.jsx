@@ -23,7 +23,7 @@ export class CSVImporter extends React.Component {
     })).isRequired,
     noCompleteMessage: PropTypes.bool,
     onComplete: PropTypes.func.isRequired,
-    onFinish: PropTypes.func.isRequired,
+    onFinish: PropTypes.func,
     removeEmptyRows: PropTypes.bool,
     returnAsMappedObjects: PropTypes.bool,
     returnFile: PropTypes.bool,

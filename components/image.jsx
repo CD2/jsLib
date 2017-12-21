@@ -21,7 +21,7 @@ export class Image extends React.Component {
     onClick: PropTypes.func,
     size: PropTypes.string,
     style: PropTypes.object,
-    uid: PropTypes.string,
+    uid: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     url: PropTypes.string,
     width: PropTypes.number,
   }

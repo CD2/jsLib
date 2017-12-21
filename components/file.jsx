@@ -13,7 +13,7 @@ export class File extends React.Component {
     className: PropTypes.string,
     defaultSrc: PropTypes.string,
     onClick: PropTypes.func,
-    uid: PropTypes.string,
+    uid: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   }
 
   static defaultProps = {

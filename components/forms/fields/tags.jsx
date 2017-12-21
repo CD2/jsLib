@@ -27,14 +27,14 @@ export class TagsInput extends React.Component {
     onlyAllowSuggestions: PropTypes.bool,
     popularSuggestions: PropTypes.oneOfType([
       PropTypes.arrayOf(PropTypes.shape({
-        id: PropTypes.number,
+        id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
         name: PropTypes.string,
       })),
       PropTypes.arrayOf(PropTypes.string),
     ]),
     suggestions: PropTypes.oneOfType([
       PropTypes.arrayOf(PropTypes.shape({
-        id: PropTypes.number,
+        id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
         name: PropTypes.string,
       })),
       PropTypes.arrayOf(PropTypes.string),
@@ -42,7 +42,7 @@ export class TagsInput extends React.Component {
     updateSuggestions: PropTypes.func,
     value: PropTypes.oneOfType([
       PropTypes.arrayOf(PropTypes.shape({
-        id: PropTypes.number,
+        id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
         name: PropTypes.string,
       })),
       PropTypes.arrayOf(PropTypes.string),
@@ -200,7 +200,7 @@ export class TagsInput extends React.Component {
   render() {
     return (
       <div className={this.props.className}>
-        {this.store.current_tag 
+        {this.store.current_tag
           && <Overlay clickThrough onClick={e => this.store.handleInputBlur(e, true)} />}
         <div className="wrapper" onClick={!this.props.disabled && this.store.handleInputFocus}>
           {this.renderPopularSuggestions()}

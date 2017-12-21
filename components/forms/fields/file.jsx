@@ -17,7 +17,7 @@ export class FileField extends React.Component {
     onFocus: PropTypes.func,
     onRawChange: PropTypes.func,
     onlySpreadsheets: PropTypes.bool,
-    uid: PropTypes.string,
+    uid: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     value: PropTypes.object,
   }
 

@@ -209,7 +209,7 @@ export default class IndexTable extends React.Component {
   renderBulkHeader = () => {
     const { headings } = this.props
     const bulkHeading = (
-      <Th>
+      <Th key="bulk">
         <Input
           name="headerCheck"
           type="checkbox"

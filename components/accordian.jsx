@@ -6,7 +6,7 @@ import { observable, action } from 'mobx'
 import { styled, t } from "lib/utils/theme"
 import decorate from 'lib/utils/decorate'
 
-export class Accordian extends React.PureComponent {
+export class Accordian extends React.Component {
 
   static propTypes = {
     className: PropTypes.string,
