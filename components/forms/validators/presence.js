@@ -8,10 +8,11 @@ export default class PresenceValidator extends BaseValidator {
   defaultOptions() {
     return {
       allow_blank: true,
+      altName: null,
     }
   }
 
-  validate(rawValue) {
+  isPresent(rawValue) {
     const value = toJS(rawValue)
     //TODO: make this work with objects and arrays
     if (typeof value === `string`) return (this.options.allow_blank ? value : value.trim()) !== ``
@@ -24,6 +25,14 @@ export default class PresenceValidator extends BaseValidator {
     }
     if (value && typeof value === `object`) return Object.keys(value).length !== 0
     return !!value
+  }
+
+  validate(rawValue, values) {
+    if (this.options.altName && values.has(this.options.altName)) {
+      return this.isPresent(values.get(this.options.altName))
+    }
+
+    return this.isPresent(rawValue)
   }
 
 
