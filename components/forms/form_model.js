@@ -85,7 +85,7 @@ export default class FormModel {
   submit() {
     if (!this.valid()) return
     if (this.options.onSubmit) {
-      return this.options.onSubmit(toJS(this.changes).catch(this.handleServerError))
+      return this.options.onSubmit(toJS(this.changes)).catch(this.handleServerError)
     }
     if (this.options.perform) return this.perform()
   }
@@ -102,7 +102,7 @@ export default class FormModel {
     if (!this.hasChanges() && !payloadValues) return
     const {
       redirectTo, cord, flash, onSuccess,
-      perform, formatPayload, scroll 
+      perform, formatPayload, scroll
     } = this.options
     let params = null
     const values = payloadValues || this.changes
