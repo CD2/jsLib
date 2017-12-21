@@ -1,10 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { observer } from 'mobx-react'
-import { action } from 'mobx'
+import { action, observable } from 'mobx'
 import Modal from 'lib/components/modal'
 import ModalStore from 'lib/utils/modal_store'
-
+import Button from 'lib/components/button'
 @observer
 export default class OrderForm extends React.Component {
 
@@ -12,13 +12,26 @@ export default class OrderForm extends React.Component {
     update: PropTypes.bool,
   }
 
-  @action handleCloseModal = () => ModalStore.removeLast()
+  componentDidMount(){
+  }
 
+  @action handleCloseModal = () => ModalStore.removeLast()
+  renderCloseButton = () => {
+    return (
+      <Button
+        id="modal_close"
+        aria-label="close"
+        onClick={this.handleCloseModal}
+      >
+      X
+      </Button>
+    )
+  }
   render() {
     if (ModalStore.hasContents) {
       return (
         <Modal onClose={this.handleCloseModal}>
-          <div onClick={this.handleCloseModal}>X</div>
+          {this.renderCloseButton()}
           {ModalStore.getLast()}
         </Modal>
       )
