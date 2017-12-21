@@ -18,7 +18,7 @@ export class Checkbox extends React.Component {
 
   static propTypes = {
     className: PropTypes.string,
-    labelText: PropTypes.string,
+    labelText: PropTypes.node,
     model: PropTypes.object,
     name: PropTypes.string,
     onChange: PropTypes.func,
