@@ -96,8 +96,8 @@ export default class FormModel {
       const errors = request.response.data.error_for ? request.response.data.error_for.message : {}
       this.errors.replace(errors)
       onError && onError(errors)
-    }else{
-      console.log(request)
+    } else {
+      window.console.log(request)
     }
   }
 
