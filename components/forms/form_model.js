@@ -1,5 +1,5 @@
 import { redirect } from 'lib/utils/router'
-import flashStore from 'stores/flash'
+import flashStore from 'lib/stores/Flash'
 import { observable, action, computed, toJS } from 'mobx'
 import { validateForm } from 'lib/components/forms'
 

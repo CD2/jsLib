@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import Grid from 'lib/components/grid'
 import { styled, t } from 'lib/utils/theme'
-import BreadcrumbStore from 'stores/breadcrumbs'
+import BreadcrumbStore from 'lib/stores/Breadcrumbs'
 import { observer } from 'mobx-react'
 import decorate from 'lib/utils/decorate'
 
