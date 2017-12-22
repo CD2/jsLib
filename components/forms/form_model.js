@@ -90,12 +90,15 @@ export default class FormModel {
     if (this.options.perform) return this.perform()
   }
 
-  handleServerError = (request) => {
+  handleServerError = (request=null) => {
     const { onError } = this.options
-    const errors = request.response.data.error_for ? request.response.data.error_for.message : {}
-
-    this.errors.replace(errors)
-    onError && onError(errors)
+    if (request && request.response){
+      const errors = request.response.data.error_for ? request.response.data.error_for.message : {}
+      this.errors.replace(errors)
+      onError && onError(errors)
+    }else{
+      console.log(request)
+    }
   }
 
   perform(payloadValues = null) {

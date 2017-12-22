@@ -3,6 +3,7 @@ import { observable } from 'mobx'
 
 export default observable({
   flashes: [],
+  previousFlashes: [],
   add(message, { level=`notice`, timeout=5000, disableTimeout=false }={}) {
     const id = Date.now()
 
