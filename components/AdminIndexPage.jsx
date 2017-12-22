@@ -116,6 +116,7 @@ export class AdminIndexPage extends React.Component {
 
 export default decorate(
   styled`
+    .admin-title { margin-bottom: 36px; }
     .btn { margin-bottom: 10px }
     .actions {
       a, .btn {
