@@ -30,7 +30,7 @@ export class Accordian extends React.Component {
   }
 
   @action componentWillReceiveProps = (nextProps) => {
-    if(nextProps.open !== this.props.open && nextProps.open !== this.open) {
+    if (nextProps.open !== this.props.open && nextProps.open !== this.open) {
       this.open = nextProps.open
     }
   }
@@ -38,15 +38,15 @@ export class Accordian extends React.Component {
   @observable open = !!this.props.open
 
   @action handleToggle = () => {
-    if(this.props.open === null) {
+    if (this.props.open === null) {
       this.open = !this.open
-    } else if(this.props.toggle) {
+    } else if (this.props.toggle) {
       this.props.toggle()
     }
   }
 
   renderRow = (row, i) => {
-    return(
+    return (
       <div
         className="accordian__row"
         key={`accordianRow${i}`}
@@ -62,7 +62,7 @@ export class Accordian extends React.Component {
   }
 
   renderHeader = () => {
-    return(
+    return (
       <div
         className={
           this.props.showHeaderDivider
@@ -96,7 +96,7 @@ export class Accordian extends React.Component {
   }
 
   render() {
-    return(
+    return (
       <div className={this.props.className ? `${this.props.className } accordian` : `accordian`}>
         {this.props.headerContent ? this.renderHeader() : null}
         <div

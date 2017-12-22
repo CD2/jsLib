@@ -6,10 +6,8 @@ import { observer } from 'mobx-react'
 import { tag } from 'lib/utils/common_styles'
 import decorate from 'lib/utils/decorate'
 import { styled, t } from 'lib/utils/theme'
-
 import Overlay from 'lib/components/overlay'
 import FaIcon from 'lib/components/fa_icon'
-
 import Popover from 'lib/components/popover'
 import TagsStore from 'lib/utils/tags_store'
 
@@ -188,7 +186,7 @@ export class TagsInput extends React.Component {
   }
 
   renderClearAll = () => {
-    if(this.store.tags.length > 0 && !this.props.hideClear) {
+    if (this.store.tags.length > 0 && !this.props.hideClear) {
       return (
         <div className="tag-input__clear-all" onClick={e => this.store.handleChange([], e)}>
           Clear

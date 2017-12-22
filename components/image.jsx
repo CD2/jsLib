@@ -51,7 +51,9 @@ export class Image extends React.Component {
     invariant(!(background && alt), `background images don't accept alt tags`)
 
     let url = this.url
-    if (!uid && !this.props.url) { url = defaultSrc }
+    if (!uid && !this.props.url) {
+      url = defaultSrc
+    }
 
     if (embed) {
       return (

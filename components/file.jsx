@@ -32,7 +32,9 @@ export class File extends React.Component {
     const { defaultSrc, uid, children } = this.props
 
     let url = this.url
-    if (!uid) { url = defaultSrc }
+    if (!uid) {
+      url = defaultSrc
+    }
 
     return (
       <Button

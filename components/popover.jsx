@@ -34,10 +34,10 @@ export class Popover extends React.Component {
   getClassName() {
     let className = `popover__popover`
 
-    if(this.props.popoverClassName) {
+    if (this.props.popoverClassName) {
       className += ` ${this.props.popoverClassName}`
     }
-    if(this.props.open) {
+    if (this.props.open) {
       className += ` popover__popover--open`
     }
 
@@ -45,7 +45,7 @@ export class Popover extends React.Component {
   }
 
   renderOverlay() {
-    return(
+    return (
       <Overlay
         overlayClassName={this.props.open ? `popover__overlay--open` : `popover__overlay`}
         visible={this.props.open}
@@ -55,7 +55,7 @@ export class Popover extends React.Component {
   }
 
   render() {
-    return(
+    return (
       <span className={`${this.props.className} ${this.props.containerClassName}`}>
         <div
           className={this.getClassName()}
