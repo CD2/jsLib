@@ -114,7 +114,7 @@ export default class TagsStore {
   }
 
   @action handleInputFocus = () => {
-    if(!this.current_tag) this.current_tag = this.NEW_INPUT
+    if (!this.current_tag) this.current_tag = this.NEW_INPUT
   }
 
   handleChange = (value, e) => {
@@ -152,12 +152,12 @@ export default class TagsStore {
     if (!this.component.textInput) return
     const textValue = this.component.textInput && this.component.textInput.value
 
-    if(textValue !== `` && (!e || e.key === `Enter` || e.key === `Tab` || e.key === `,`)) { // enter
+    if (textValue !== `` && (!e || e.key === `Enter` || e.key === `Tab` || e.key === `,`)) { // enter
       e && e.preventDefault()
       if (this.current_tag === this.NEW_INPUT) {
         let newValue = null
 
-        if(this.props.onlyAllowSuggestions) {
+        if (this.props.onlyAllowSuggestions) {
           const allSuggestions = this.allSuggestions
           newValue = allSuggestions.find(sug => sug.toUpperCase() === textValue.toUpperCase())
         } else {
@@ -169,7 +169,7 @@ export default class TagsStore {
         const valueCopy = this.tags.slice()
         let newValue = null
 
-        if(this.props.onlyAllowSuggestions) {
+        if (this.props.onlyAllowSuggestions) {
           newValue = this.allSuggestions.find(sug => sug.toUpperCase() === textValue.toUpperCase())
         } else {
           newValue = textValue
@@ -181,7 +181,7 @@ export default class TagsStore {
       }
 
       this.current_tag = null
-    } else if(e && textValue === `` && e.key === `Backspace`) { //backspace
+    } else if (e && textValue === `` && e.key === `Backspace`) { //backspace
       this.handleRemoveTag(e)
     } else {
       this.props.updateSuggestions && this.props.updateSuggestions(textValue)

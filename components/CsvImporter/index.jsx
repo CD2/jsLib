@@ -126,7 +126,7 @@ export class CSVImporter extends React.Component {
   renderContent = () => {
     const { position, csv, headersRowIndex, parsingErrors } = this
 
-    switch(position) {
+    switch (position) {
     case `column_mapping`:
       return (
         <ColumnMapping

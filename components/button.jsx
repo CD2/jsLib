@@ -157,7 +157,7 @@ export default decorate(
       }
 
       &.delete {
-        background-color: ${t(`delete`)};
+        background-color: ${t(`error`)};
         color: ${t(`white`)};
         &:hover {
           background-color: #cecece;
@@ -214,8 +214,8 @@ export default decorate(
     margin-right: 6px;
 
     ${({ processing }) => {
-      if (processing){
-        return`
+    if (processing){
+      return`
           cursor: none;
           background: url(${load});
           opacity: 0.7;
@@ -229,9 +229,9 @@ export default decorate(
           &:hover{
             background-color: #2c2d2d;
           }
-        `}
-    }
+      `}
   }
+}
   `,
   Button
 )

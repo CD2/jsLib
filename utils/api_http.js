@@ -14,6 +14,7 @@ export const getApiHeaders = () => {
 }
 
 export const setApiHeaders = (headers) => {
+  console.log(`asd`, headers)
   if (headers.hasOwnProperty(`access-token`)) {
     api_auth_keys.forEach(key => localStorage.setItem(`${key_prefix}${key}`, headers[key]))
   }

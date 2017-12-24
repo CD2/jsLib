@@ -107,6 +107,7 @@ export class Wrapper extends React.Component {
           borderRadius: floating || this.props.borderRadius ? `6px` : `0`,
           marginBottom: floating ? this.props.margin || theme.gutterHeight.value : `0`,
           overflow: this.props.overflow ? `initial` : `hidden`,
+          height: this.props.fullHeight ? `100%` : `auto`
         }}
         onClick={this.props.onClick}
       >

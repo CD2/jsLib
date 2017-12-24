@@ -33,10 +33,10 @@ export default class CollectionSelect extends React.Component {
   @action handleChange = (newValue) => {
     let value = newValue
 
-    if(this.props.multiple) {
+    if (this.props.multiple) {
       const index = this.value.findIndex(element => element === value)
 
-      if(index === -1) {
+      if (index === -1) {
         value = [...this.value, value]
       } else {
         value = this.value.filter(element => element !== value)
@@ -74,8 +74,8 @@ export default class CollectionSelect extends React.Component {
 
   render(){
     const { props } = this
-    if(!this.props.multiple)
-    {props.options.splice(0,0,
+    if (!this.props.multiple)
+    {props.options.splice(0, 0,
       <option
         key={`collectionnSelectEmpty`}
       >-----</option>)

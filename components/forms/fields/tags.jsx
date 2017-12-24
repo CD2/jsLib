@@ -188,7 +188,7 @@ export class TagsInput extends React.Component {
   }
 
   renderClearAll = () => {
-    if(this.store.tags.length > 0 && !this.props.hideClear) {
+    if (this.store.tags.length > 0 && !this.props.hideClear) {
       return (
         <div className="tag-input__clear-all" onClick={e => this.store.handleChange([], e)}>
           Clear

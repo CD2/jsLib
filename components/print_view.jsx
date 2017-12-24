@@ -22,8 +22,8 @@ export class PrintView extends React.Component {
   render() {
     const { hideClassName } = this.props
 
-    if(PrintStore.hasContents) {
-      return(
+    if (PrintStore.hasContents) {
+      return (
         <div className="print-view">
           { hideClassName ? <style>{`${hideClassName} {display: none !important;}`}</style> : null}
           {PrintStore.contents}

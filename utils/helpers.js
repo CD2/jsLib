@@ -12,7 +12,7 @@ export const pluralize = (count, single, plural) => {
 }
 
 export const simple_format = (text) => {
-  if(!text) return ``  
+  if (!text) return ``  
   return text.split(`\n`).map(p => <p key={p}>{p}</p>)
 }
 
@@ -25,7 +25,7 @@ export const truncate = (text, { omission=`...`, length: truncate_at=20, separat
 }
 
 export const titleCase = (text) => {
-  if(!text) return ``
+  if (!text) return ``
   return text.
     replace(/([^A-Z])([A-Z])/g, `$1 $2`).
     replace(/[_-]+/g, ` `).

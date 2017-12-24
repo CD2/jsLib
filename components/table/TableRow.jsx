@@ -23,7 +23,7 @@ export default class PupilTableRow extends React.Component {
   }
 
   handleRowClick = () => {
-    if(this.props.onRedirect){
+    if (this.props.onRedirect){
       redirect(this.props.onRedirect(this.props.resource))
     }
   }
@@ -42,7 +42,7 @@ export default class PupilTableRow extends React.Component {
 
   fieldType = (column, i) => {
     const { resource } = this.props
-    if(column.fields && column.fields.includes(`image`)){
+    if (column.fields && column.fields.includes(`image`)){
       return (
         <td className="thumb-column">
           <Image
@@ -55,7 +55,7 @@ export default class PupilTableRow extends React.Component {
         </td>
       )
     }
-    if(column.fields && column.fields.includes(`select`)){
+    if (column.fields && column.fields.includes(`select`)){
       const { id } = resource
       return (
         <td key={i} onClick={e => e.stopPropagation()}>
@@ -68,14 +68,14 @@ export default class PupilTableRow extends React.Component {
         </td>
       )
     }
-    if(column.fields){
+    if (column.fields){
       return (
         <td key={i}>
           {this.fieldMap(column)}
         </td>
       )
     }
-    if(column.contents){
+    if (column.contents){
       return this.renderContents(column, i)
     }
   }

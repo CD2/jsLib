@@ -26,4 +26,5 @@ export class Cord {
   connectFields = connectFields
 
 }
+
 export default Cord
