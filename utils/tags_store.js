@@ -181,7 +181,7 @@ export default class TagsStore {
       }
 
       this.current_tag = null
-    } else if (e && textValue === `` && e.key === `Backspace`) { //backspace
+    } else if (e && textValue === `` && e.key === `Backspace`) {
       this.handleRemoveTag(e)
     } else {
       this.props.updateSuggestions && this.props.updateSuggestions(textValue)

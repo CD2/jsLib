@@ -7,10 +7,10 @@ export class Overlay extends React.Component {
 
   static propTypes = {
     className: PropTypes.string,
-    clickThrough: PropTypes.bool.isRequired,
-    onClick: PropTypes.func.isRequired,
+    clickThrough: PropTypes.bool,
+    onClick: PropTypes.func,
     overlayClassName: PropTypes.string,
-    visible: PropTypes.bool.isRequired,
+    visible: PropTypes.bool,
   }
 
   static defaultProps = {

@@ -1,5 +1,5 @@
 import { redirect } from 'lib/utils/router'
-import flashStore from 'stores/flash'
+import flashStore from 'lib/stores/Flash'
 import { observable, action, computed, toJS } from 'mobx'
 import { validateForm } from 'lib/components/forms'
 
@@ -85,24 +85,27 @@ export default class FormModel {
   submit() {
     if (!this.valid()) return
     if (this.options.onSubmit) {
-      return this.options.onSubmit(toJS(this.changes).catch(this.handleServerError))
+      return this.options.onSubmit(toJS(this.changes)).catch(this.handleServerError)
     }
     if (this.options.perform) return this.perform()
   }
 
-  handleServerError = (request) => {
+  handleServerError = (request=null) => {
     const { onError } = this.options
-    const errors = request.response.data.error_for ? request.response.data.error_for.message : {}
-
-    this.errors.replace(errors)
-    onError && onError(errors)
+    if (request && request.response){
+      const errors = request.response.data.error_for ? request.response.data.error_for.message : {}
+      this.errors.replace(errors)
+      onError && onError(errors)
+    } else {
+      window.console.log(request)
+    }
   }
 
   perform(payloadValues = null) {
     if (!this.hasChanges() && !payloadValues) return
     const {
       redirectTo, cord, flash, onSuccess,
-      perform, formatPayload, scroll 
+      perform, formatPayload, scroll
     } = this.options
     let params = null
     const values = payloadValues || this.changes

@@ -24,6 +24,7 @@ export class RichTextBox extends React.Component {
 
   static propTypes = {
     className: PropTypes.string,
+    disabled: PropTypes.bool,
     full_editor: PropTypes.bool,
     name: PropTypes.string,
     onChange: PropTypes.func,
@@ -31,7 +32,8 @@ export class RichTextBox extends React.Component {
   };
 
   static defaultProps = {
-    full_editor: true
+    disabled: false,
+    full_editor: true,
   }
   componentDidMount() {
     let toolbar = `bold italic removeformat | bullist numlist | table | link`
@@ -49,7 +51,7 @@ export class RichTextBox extends React.Component {
       menubar: false,
       elementpath: false,
       browser_spellcheck: true,
-
+      readonly: this.props.disabled ? 1 : 0,
       plugins: [
         `lists link table anchor code`
       ],

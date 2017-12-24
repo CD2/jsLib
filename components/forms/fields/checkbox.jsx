@@ -18,7 +18,7 @@ export class Checkbox extends React.Component {
 
   static propTypes = {
     className: PropTypes.string,
-    labelText: PropTypes.string,
+    labelText: PropTypes.node,
     model: PropTypes.object,
     name: PropTypes.string,
     onChange: PropTypes.func,
@@ -34,7 +34,9 @@ export class Checkbox extends React.Component {
     if (props.value !== this.props.value) this.checked = this.props.value
   }
 
-  @observable checked = this.props.model ? this.props.model.get(this.props.name) : this.props.value
+  @observable checked = !!(this.props.model
+    ? this.props.model.get(this.props.name)
+    : this.props.value)
 
   @action handleChange = (e) => {
     const { onRawChange, onChange } = this.props
@@ -51,6 +53,7 @@ export class Checkbox extends React.Component {
     delete props.labelText
     delete props.model
     delete props.theme
+    delete props.value
     return (
       <label className={className}>
         <input

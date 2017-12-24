@@ -21,7 +21,7 @@ export class Image extends React.Component {
     onClick: PropTypes.func,
     size: PropTypes.string,
     style: PropTypes.object,
-    uid: PropTypes.string,
+    uid: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     url: PropTypes.string,
     width: PropTypes.number,
   }
@@ -51,7 +51,9 @@ export class Image extends React.Component {
     invariant(!(background && alt), `background images don't accept alt tags`)
 
     let url = this.url
-    if (!uid && !this.props.url) { url = defaultSrc }
+    if (!uid && !this.props.url) {
+      url = defaultSrc
+    }
 
     if (embed) {
       return (

@@ -1,3 +1,4 @@
+/* eslint-disable import/extensions */
 import React from 'react'
 import Fuzzy from 'fuse.js'
 import PropTypes from 'prop-types'

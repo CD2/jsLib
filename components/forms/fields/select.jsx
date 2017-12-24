@@ -5,7 +5,7 @@ export class SelectField extends React.Component {
 
   static propTypes = {
     choices: PropTypes.arrayOf(PropTypes.object),
-    default_value: PropTypes.string,
+    default_value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     disabled: PropTypes.bool,
     includeBlank: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
     name: PropTypes.string,
@@ -58,7 +58,7 @@ export class SelectField extends React.Component {
       <select
         name={name}
         className="select"
-        value={value}
+        value={value || ``}
         disabled={disabled}
         onChange={this.handleChange}
       >

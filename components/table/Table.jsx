@@ -24,10 +24,10 @@ import ModalStore from 'lib/utils/modal_store'
     ${({ noLinks }) => {
   if (!noLinks) {
     return`
-              cursor: pointer;
-              &:hover {
-                background: #f3f7fb;
-              }
+          cursor: pointer;
+          &:hover {
+            background: #f3f7fb;
+          }
     `
   }
 }
@@ -209,7 +209,7 @@ export default class IndexTable extends React.Component {
   renderBulkHeader = () => {
     const { headings } = this.props
     const bulkHeading = (
-      <Th>
+      <Th key="bulk">
         <Input
           name="headerCheck"
           type="checkbox"

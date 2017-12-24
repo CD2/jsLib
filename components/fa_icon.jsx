@@ -42,9 +42,9 @@ export default decorate(
     const sze = size || 1
     return (
       `
-          color: ${col};
-          font-size: ${sze}em;
-          `
+        color: ${col};
+        font-size: ${sze}em;
+        `
     )
   }
 }

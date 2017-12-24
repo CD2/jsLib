@@ -16,9 +16,9 @@ export default function validateForm(values, validations) {
       const validator_class = validators_types[validator_name]
       if (!validator_class) throw new Error(`unknown validator ${validator_name}`)
       if (options === false) return
-      if (options === true) options = {}
+      if (options) options = typeof options === `boolean` ? {} : options
       const validator = new validator_class(options)
-      if (!validator.validate(value)) addError(fieldname, validator.message())
+      if (!validator.validate(value, values)) addError(fieldname, validator.message())
     })
   })
   return errors

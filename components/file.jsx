@@ -13,7 +13,7 @@ export class File extends React.Component {
     className: PropTypes.string,
     defaultSrc: PropTypes.string,
     onClick: PropTypes.func,
-    uid: PropTypes.string,
+    uid: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   }
 
   static defaultProps = {
@@ -32,7 +32,9 @@ export class File extends React.Component {
     const { defaultSrc, uid, children } = this.props
 
     let url = this.url
-    if (!uid) { url = defaultSrc }
+    if (!uid) {
+      url = defaultSrc
+    }
 
     return (
       <Button

@@ -142,7 +142,7 @@ export class CordStore {
     const scopeIds = hasScope ? this.getIds(cord, { scope }) : null
     const firstRecordOfScopeId = scopeIds && scopeIds.length > 0
       ? scopeIds.get(0)
-      : null // TODO other record could have more attributes loaded
+      : null 
     const hasAttributes = firstRecordOfScopeId
       && this.isRecordLoaded(cord, firstRecordOfScopeId, attributes)
 

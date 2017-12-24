@@ -49,9 +49,10 @@ const google_url = `https://maps.googleapis.com/maps/api/geocode/json?`
 function _googleAddress(address) {
   const url = `${google_url}${encodeURI(address)}&key=${encodeURI(api_key)}`
   return get(url).then(response => {
-    if (response.data.status == `ZERO_RESULTS`){
+    if (response.data.status === `ZERO_RESULTS`){
       return []
-    } return response.data.results[0].address_components
+    }
+    return response.data.results[0].address_components
   })
 }
 const googleAddress = memoize(_googleAddress)

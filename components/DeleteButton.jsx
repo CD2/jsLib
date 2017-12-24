@@ -13,7 +13,7 @@ export default class DeleteButton extends React.Component {
 
   static propTypes = {
     cord: PropTypes.object.isRequired,
-    id: PropTypes.number.isRequired,
+    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
     message: PropTypes.string,
     name: PropTypes.string,
     redirect: PropTypes.string,

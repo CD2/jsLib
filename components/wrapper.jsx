@@ -10,8 +10,8 @@ export class Wrapper extends React.Component {
   static propTypes = {
     background: PropTypes.string,
     backgroundImage: PropTypes.string,
-    backgroundImageSize: PropTypes.number,
-    backgroundImageUid: PropTypes.string,
+    backgroundImageSize: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    backgroundImageUid: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     borderRadius: PropTypes.bool,
     children: PropTypes.any,
     className: PropTypes.string,

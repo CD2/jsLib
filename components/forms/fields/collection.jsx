@@ -3,8 +3,6 @@ import PropTypes from 'prop-types'
 import { observer } from 'mobx-react'
 import { observable, action } from 'mobx'
 
-//import MultiSelect from 'javascript_lib/components/collection_select/multi_select';
-
 @observer
 export default class CollectionSelect extends React.Component {
 

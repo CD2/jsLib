@@ -19,6 +19,7 @@ import { styled } from 'lib/utils/theme'
       return `padding-bottom: ${theme.spacing[spacing] || spacing}px`
     }
   }
+}
   }
   }
 `

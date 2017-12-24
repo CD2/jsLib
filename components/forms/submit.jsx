@@ -25,17 +25,16 @@ import load from 'images/load'
     ${({ submitting }) => {
   if (submitting){
     return`
-            background: url(${load});
-            opacity: 0.7;
-            background-size: 100%;
-            background-repeat: no-repeat;
-            background-color: #2c2d2d;
-            background-position: 50%;
-            &:hover{
-              background-color: #2c2d2d;
-            }
-    `}
-}
+        background: url(${load});
+        opacity: 0.7;
+        background-size: 100%;
+        background-repeat: no-repeat;
+        background-color: #2c2d2d;
+        background-position: 50%;
+        &:hover{
+          background-color: #2c2d2d;
+        }
+    `}}
   }
 
 `
@@ -49,7 +48,7 @@ export default class Submit extends React.Component {
   }
 
   static defaultProps = {
-    submitting: false
+    submitting: false,
   }
 
   render() {

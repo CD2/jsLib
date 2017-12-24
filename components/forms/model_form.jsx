@@ -80,7 +80,6 @@ class ModelForm extends React.Component {
   @action handleSubmit  = () => {
     this.formSubmitting = true
     const { onSubmit } = this.props
-
     if (onSubmit) return onSubmit(this.model)
 
     return this.model.submit()
