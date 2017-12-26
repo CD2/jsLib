@@ -53,13 +53,13 @@ export default decorate(
     top: 0;
     width: 100%;
     z-index: 24999;
-  ${({ belowAppBar }) => {
-    if (belowAppBar) {
-      return `z-index: 4999;`
-    }
-  }}
+    ${({ belowAppBar }) => {
+      if (belowAppBar) {
+        return `z-index: 4999;`
+      }
+    }}
     &.visible {
-      background: ${t(`darkBackground`)};
+      background: #000;
       cursor: pointer;
       opacity: .7;
     }
