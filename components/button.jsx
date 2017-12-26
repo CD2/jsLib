@@ -68,17 +68,18 @@ export default decorate(
     &.btn {
       position: relative;
       display: inline-block;
-      padding: 10px 20px 12px;
+      padding: ${t(`buttonPadding`)};
       border: none;
       outline: none;
-      font-size: 1rem;
+      font-size: ${t(`fontSizes.button`)};
       line-height: 1.25;
       text-decoration: none;
       cursor: pointer;
       vertical-align: top;
       color: white;
-      border-radius: 5px;
+      border-radius: ${t(`borderRadii.button`)};
       text-align: center;
+      font-weight: ${t('weights.button')};
 
       &.common {
         background-color: ${t(`primary`)};
@@ -120,6 +121,7 @@ export default decorate(
         background-color: #fff;
         color: ${t(`primary`)};
         border: 2px solid ${t(`primary`)};
+        padding: 8px 18px 10px;
         &:hover {
           color: ${t(`primary`)};
         }
@@ -208,6 +210,16 @@ export default decorate(
         &:hover {
           color: white;
         }
+      }
+      &.gradient-positive {
+        background: linear-gradient(to bottom,  #39b449 0%,#299a0b 100%);
+        border: 1px solid ${t('positive')};
+
+      }
+      &.gradient-neutral {
+        background: linear-gradient(to bottom,  #dff3f6 0%,#eff3f6 100%);
+        color: ${t('lightText')};
+        border: 1px solid ${t('border')};
       }
 
     }

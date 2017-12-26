@@ -62,7 +62,7 @@ import ModalStore from 'lib/utils/modal_store'
     white-space: nowrap;
   }
   .table__container {
-    border-radius: ${t(`tableRadius`)};
+    border-radius: ${t(`borderRadii.table`)};
     overflow: hidden;
     box-shadow: ${t(`shadow0`)};
   }
