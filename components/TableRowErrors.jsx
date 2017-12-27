@@ -12,15 +12,21 @@ export default class TableRowErrors extends React.Component {
   static propTypes = {
     alternateAction: PropTypes.func,
     children: PropTypes.any,
+    columns: PropTypes.number.isRequired,
     resource: PropTypes.object.isRequired,
+    thumbnailColumn: PropTypes.bool,
   }
 
-  renderErrorRow(){
-    console.log(`error`)
+  static defaultProps = {
+    thumbnailColumn: false,
+    columns: 1
+  }
+
+  renderErrorRow(columns, thumbnailColumn){
     return(
       <tr>
-        <td className="thumb-column"><FaIcon icon='error-outline' color={theme.error} size={1.25} /></td>
-        <td colSpan="3">
+        {thumbnailColumn && <td className="thumb-column"><FaIcon icon='error-outline' color={theme.error} size={1.25} /></td>}
+        <td colSpan={columns}>
           <span>Error loading {this.props.resource.class.name}</span>
         </td>
         <td />
@@ -28,25 +34,25 @@ export default class TableRowErrors extends React.Component {
     )
   }
 
-  renderLoadingRow(){
-    console.log(`loading`)
+  renderLoadingRow(columns, thumbnailColumn){
+    let rows = []
+    for (let i = 0; i < columns; i++){
+      rows.push(<td><span className={i === 0 ? `placeholder large` : `placeholder small`} /></td>)
+    }
     return(
       <tr>
-        <td className="thumb-column"><Image defaultSrc={placeholder} /></td>
-        <td><span className='placeholder large' /></td>
-        <td><span className='placeholder small' /></td>
-        <td><span className='placeholder small' /></td>
-        <td><span className='placeholder small' /></td>
+        {thumbnailColumn && <td className="thumb-column"><Image defaultSrc={placeholder} /></td>}
+        {rows}
       </tr>
     )
   }
 
   render(){
-    const { resource, children, alternateAction } = this.props
-    alternateAction && alternateAction()
-    if (resource && resource.errored) return this.renderErrorRow()
-    if (resource && resource.loading) return this.renderLoadingRow()
-    if (resource && !resource.loaded) return this.renderLoadingRow()
+    const { resource, children, alternateAction, columns, thumbnailColumn } = this.props
+    if (alternateAction) return alternateAction()
+    if (resource && resource.errored) return this.renderErrorRow(columns, thumbnailColumn)
+    if (resource && resource.loading) return this.renderLoadingRow(columns, thumbnailColumn)
+    if (resource && !resource.loaded) return this.renderLoadingRow(columns, thumbnailColumn)
     return children
   }
 }
