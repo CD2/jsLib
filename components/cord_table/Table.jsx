@@ -5,6 +5,7 @@ import PaginationControls from './pagination_controls'
 import { observable, computed, action, toJS } from 'mobx'
 import { observer, Provider } from 'mobx-react'
 import { styled, t } from 'lib/utils/theme'
+import IndexFilters from './IndexFilters'
 
 import Th from './Th'
 import Input from 'lib/components/forms/input'
@@ -224,12 +225,14 @@ export default class IndexTable extends React.Component {
   }
 
   render() {
-    const { paginationPosition, bulkActions, headings } = this.props
+    const { paginationPosition, bulkActions, headings, query } = this.props
     return (
       <div className={this.props.className}>
         <div className='table-actions'>
           {this.props.bulkActions && this.bulkSelected.length ? this.renderBulkActions() : null}
+          {query && <IndexFilters query={query} />}{/* SHANE IT IS HERE - cheers bud */}
         </div>
+
         {paginationPosition !== `bottom` && this.pagination_controls}
         <div className="table__container">
           <table>
