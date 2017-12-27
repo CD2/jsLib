@@ -10,6 +10,7 @@ import { observer } from 'mobx-react'
 export default class TableRowErrors extends React.Component {
 
   static propTypes = {
+    alternateAction: PropTypes.func,
     children: PropTypes.any,
     resource: PropTypes.object.isRequired,
   }
@@ -41,7 +42,8 @@ export default class TableRowErrors extends React.Component {
   }
 
   render(){
-    const { resource, children } = this.props
+    const { resource, children, alternateAction } = this.props
+    alternateAction && alternateAction()
     if (resource && resource.errored) return this.renderErrorRow()
     if (resource && resource.loading) return this.renderLoadingRow()
     if (resource && !resource.loaded) return this.renderLoadingRow()
