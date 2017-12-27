@@ -35,9 +35,6 @@ export class VoteInput extends React.Component {
   @observable users_vote = 0
   vote(path) {
     const { id, cord } = this.props
-    cord.perform(path, { ids: id }).then(() => {
-      this.props.reload()
-    })
   }
   @computed get votes() { return this.props.votes - this.props.users_vote }
   @computed get total_votes() { return this.votes + this.users_vote }

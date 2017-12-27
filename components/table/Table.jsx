@@ -13,13 +13,6 @@ import ModalStore from 'lib/utils/modal_store'
 
 @styled`
   font-size: 0.9em;
-  thead tr {
-    background: ${t(`darkBackground`)};
-    color: white;
-    &:hover {
-      background: ${t(`darkBackground`)};
-    }
-  }
   tbody tr {
     ${({ noLinks }) => {
   if (!noLinks) {
@@ -42,6 +35,8 @@ import ModalStore from 'lib/utils/modal_store'
   th{
     padding: ${t(`gutterWidth`, w=>w/2)}px;
     white-space: nowrap;
+    text-align: left;
+    border-bottom: 2px solid ${t('border')};
   }
   .background-image {
     border-radius: 5px;
@@ -67,6 +62,19 @@ import ModalStore from 'lib/utils/modal_store'
     box-shadow: ${t(`shadow0`)};
   }
   .thumb-column { width: 70px; }
+  .placeholder {
+    border-radius: 7px;
+    height: 14px;
+    background: #efefef;
+    width: 75%;
+    display: inline-block;
+    &.small {
+      width: 50%;
+    }
+    &.large {
+      width: 100%;
+    }
+  }
 `
 @observer
 export default class IndexTable extends React.Component {
@@ -131,12 +139,6 @@ export default class IndexTable extends React.Component {
     if (onSubmit) return onSubmit(this.bulkSelected)
     const payload = formatPayload ? formatPayload(toJS(this.bulkSelected)) : toJS(this.bulkSelected)
 
-    cord.perform(actionType, payload).then(response => {
-      onSuccess && onSuccess(response)
-      modalConfirmationText && ModalStore.removeLast()
-      this.bulkSelected.replace([])
-      this.bulkAllToggled = false
-    })
   }
 
   handleBulkAction = action => {

@@ -217,9 +217,23 @@ export default decorate(
 
       }
       &.gradient-neutral {
-        background: linear-gradient(to bottom,  #dff3f6 0%,#eff3f6 100%);
+        background: linear-gradient(to bottom,  #f6fcfd 0%,#eff3f6 100%);
         color: ${t('lightText')};
         border: 1px solid ${t('border')};
+        &:hover {
+          filter: brightness(1.02);
+        }
+      }
+      &.menu {
+        border-radius: 0;
+        color: ${t('text')};
+        display: block;
+        text-align: left;
+        font-weight: normal;
+        margin-right: 0;
+        &:hover { 
+          background: #cccccc;
+        }
       }
 
     }

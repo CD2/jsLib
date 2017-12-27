@@ -10,6 +10,7 @@ import Th from './Th'
 import Input from 'lib/components/forms/input'
 import Button from 'lib/components/button'
 import ModalStore from 'lib/utils/modal_store'
+import Popover from "../popover";
 
 @styled`
   font-size: 0.9em;
@@ -67,6 +68,10 @@ import ModalStore from 'lib/utils/modal_store'
     box-shadow: ${t(`shadow0`)};
   }
   .thumb-column { width: 70px; }
+  
+  .table-actions {
+    padding-bottom: 10px;
+  }
 `
 @observer
 export default class IndexTable extends React.Component {
@@ -92,15 +97,16 @@ export default class IndexTable extends React.Component {
     bulkActions: null,
     rowProps: {},
     ids: null,
-    paginationPosition: `top`,
     storePageName: null,
   }
 
   @observable page=1
-  @observable per_page=20
+  @observable per_page=5
   // bulk state
   @observable bulkAllToggled = false
   @observable bulkSelected = []
+
+  @observable batchActionPanelOpen = false
 
   @action handleToggleAllBulk = () => {
     this.bulkAllToggled = !this.bulkAllToggled
@@ -114,6 +120,9 @@ export default class IndexTable extends React.Component {
       this.bulkSelected.push(id)
     }
   }
+
+  @action handleBatchPanelOpen = () => this.batchActionPanelOpen = true
+  @action handleBatchPanelClose = () => this.batchActionPanelOpen = false
 
   handleBulkActionSubmit = action => {
     action.onSubmit(this.bulkSelected.toJS())
@@ -161,11 +170,21 @@ export default class IndexTable extends React.Component {
 
   renderBulkActions = () => {
     return (
-      <div>{this.props.bulkActions.map((action, i) => (
-        <Button key={i} onClick={this.handleBatchAction.bind(this, action)}>
-          {action.text}
-        </Button>
-      ))}</div>
+      <div>
+        <Button buttonStyle='gradient-neutral' onClick={this.handleBatchPanelOpen}>Bulk actions</Button>
+        <Popover
+          open={this.batchActionPanelOpen}
+          closeOnOutsideClick
+          onToggle={this.handleBatchPanelClose}
+          className='bulk-action-menu'
+        >
+          <div>{this.props.bulkActions.map((action, i) => (
+            <Button key={i} onClick={this.handleBatchAction.bind(this, action)} buttonStyle='menu'>
+              {action.text}
+            </Button>
+          ))}</div>
+        </Popover>
+      </div>
     )
   }
 
@@ -208,7 +227,9 @@ export default class IndexTable extends React.Component {
     const { paginationPosition, bulkActions, headings } = this.props
     return (
       <div className={this.props.className}>
-        {this.props.bulkActions ? this.renderBulkActions() : null}
+        <div className='table-actions'>
+          {this.props.bulkActions && this.bulkSelected.length ? this.renderBulkActions() : null}
+        </div>
         {paginationPosition !== `bottom` && this.pagination_controls}
         <div className="table__container">
           <table>
