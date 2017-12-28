@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import PaginationControls from './pagination_controls'
 
 import { observable, computed, action, toJS } from 'mobx'
-import { observer, Provider } from 'mobx-react'
+import { observer } from 'mobx-react'
 import { styled, t } from 'lib/utils/theme'
 import IndexFilters from './IndexFilters'
 
@@ -12,8 +12,7 @@ import Input from 'lib/components/forms/input'
 import Button from 'lib/components/button'
 import ModalStore from 'lib/utils/modal_store'
 import Popover from "../popover"
-import Grid from "../grid/index";
-import GridItem from "../grid/item";
+import Grid from "../grid/index"
 
 @styled`
   font-size: 0.9em;
@@ -64,7 +63,7 @@ import GridItem from "../grid/item";
     border-radius: ${t(`borderRadii.table`)};
     overflow: hidden;
     box-shadow: ${t(`shadow0`)};
-    border: 1px solid ${t('border')}
+    border: 1px solid ${t(`border`)}
   }
   .thumb-column { width: 70px; }
   .placeholder {
@@ -209,7 +208,7 @@ export default class IndexTable extends React.Component {
 
     if (this.props.bulkActions) {
       bulkColumn = (
-        <td onClick={e => e.stopPropagation()} className='checkbox-column'>
+        <td onClick={e => e.stopPropagation()} className="checkbox-column">
           <Input
             name="headerCheck"
             type="checkbox"
@@ -229,7 +228,7 @@ export default class IndexTable extends React.Component {
   renderBulkHeader = () => {
     const { headings } = this.props
     const bulkHeading = (
-      <Th key="bulk"  className='checkbox-column'>
+      <Th key="bulk"  className="checkbox-column">
         <Input
           name="headerCheck"
           type="checkbox"
@@ -256,12 +255,16 @@ export default class IndexTable extends React.Component {
         </Grid>
         {paginationPosition !== `bottom` && this.pagination_controls}
         <div className="table__container">
-          <table>
-            {bulkActions ? [this.renderBulkHeader(), ...headings] : headings}
-            <tbody>
-              {this.paginated_ids.map(this.renderRow)}
-            </tbody>
-          </table>
+          {
+            this.props.noResultsPanel && this.props.ids.length === 0 ?
+              this.props.noResultsPanel :
+              <table>
+                {bulkActions ? [this.renderBulkHeader(), ...headings] : headings}
+                <tbody>
+                {this.paginated_ids.map(this.renderRow)}
+                </tbody>
+              </table>
+          }
         </div>
         { paginationPosition !== `top` && this.pagination_controls}
       </div>
