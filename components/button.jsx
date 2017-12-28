@@ -149,6 +149,13 @@ export default decorate(
           background-color: #cecece;
         }
       }
+      
+      &.minor-active {
+        background-color: ${t('primary')};
+        color: ${t(`white`)};
+        font-size: 0.9rem;
+        padding: 6px 14px 7px;
+      }
 
       &.cancel {
         background-color: ${t(`background`)};
