@@ -1,21 +1,21 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import Overlay from 'lib/components/overlay'
-import { styled, t } from 'lib/utils/theme'
-import decorate from 'lib/utils/decorate'
-import windowStore from 'stores/window'
-import FaIcon from "./fa_icon";
+import React from "react"
+import PropTypes from "prop-types"
+import Overlay from "lib/components/overlay"
+import { styled, t } from "lib/utils/theme"
+import decorate from "lib/utils/decorate"
+import windowStore from "stores/window"
+import FaIcon from "./fa_icon"
 
 export class Modal extends React.Component {
-
   static propTypes = {
     children: PropTypes.node.isRequired,
     className: PropTypes.string,
     onClose: PropTypes.func,
+    showClose: PropTypes.bool,
   }
 
   handleClose = () => {
-    const { onClose=()=>{} } = this.props
+    const { onClose = () => {} } = this.props
     onClose()
   }
 
@@ -24,17 +24,17 @@ export class Modal extends React.Component {
     return (
       <div className={`${className}`}>
         <div className={`modal ${windowStore.isSmall ? `modal--s` : ``}`}>
-          {
-            showClose &&
-            <div className='close-modal' onClick={this.handleClose}><FaIcon icon={'cross'} size={1.2}/></div>
-          }
+          {showClose && (
+            <div className="close-modal" onClick={this.handleClose}>
+              <FaIcon icon={`cross`} size={1.2} />
+            </div>
+          )}
           {children}
         </div>
         <Overlay visible onClick={this.handleClose} />
       </div>
     )
   }
-
 }
 
 export default decorate(
@@ -54,27 +54,24 @@ export default decorate(
     }
     .modal {
     position: relative;
-    border-radius: ${t('borderRadii.modal')};
+    border-radius: ${t(`borderRadii.modal`)};
       z-index: 250000;
       ${({ padding, theme, noPad }) => {
-        if(padding) return `padding: ${padding}px;`
-        if(!noPad) return `padding: ${theme.gutterWidth.value}px;`
-      }
-    }
+        if (padding) return `padding: ${padding}px;`
+        if (!noPad) return `padding: ${theme.gutterWidth.value}px;`
+      }}
 
       width: 90%;
       max-width: 800px;
       ${({ background }) => {
-        if(background) return `background-color: ${background};`
+        if (background) return `background-color: ${background};`
         return `background-color: white;`
-      }
-    }
+      }}
         ${({ narrow }) => {
-    if (narrow) {
-      return `max-width: 500px;`
-    }
-  }
-}
+          if (narrow) {
+            return `max-width: 500px;`
+          }
+        }}
       max-height: 600px;
       overflow: auto;
       position: absolute;
@@ -88,5 +85,5 @@ export default decorate(
 
     }
   `,
-  Modal
+  Modal,
 )

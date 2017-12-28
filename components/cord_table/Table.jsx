@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import PaginationControls from './pagination_controls'
 
 import { observable, computed, action, toJS } from 'mobx'
-import { observer, Provider } from 'mobx-react'
+import { observer } from 'mobx-react'
 import { styled, t } from 'lib/utils/theme'
 import IndexFilters from './IndexFilters'
 
@@ -11,27 +11,22 @@ import Th from './Th'
 import Input from 'lib/components/forms/input'
 import Button from 'lib/components/button'
 import ModalStore from 'lib/utils/modal_store'
+import Popover from "../popover"
+import Grid from "../grid/index"
 
 @styled`
   font-size: 0.9em;
-  thead tr {
-    background: ${t(`darkBackground`)};
-    color: white;
-    &:hover {
-      background: ${t(`darkBackground`)};
-    }
-  }
   tbody tr {
     ${({ noLinks }) => {
-  if (!noLinks) {
-    return`
+      if (!noLinks) {
+        return`
           cursor: pointer;
           &:hover {
             background: #f3f7fb;
           }
     `
-  }
-}
+      }
+    }
   }
   }
   tr {
@@ -41,8 +36,10 @@ import ModalStore from 'lib/utils/modal_store'
     }
   }
   th{
-    padding: ${t(`gutterWidth`, w=>w/2)}px;
+    padding: 20px 12px;
     white-space: nowrap;
+    text-align: left;
+    border-bottom: 1px solid ${t(`border`)};
   }
   .background-image {
     border-radius: 5px;
@@ -66,8 +63,30 @@ import ModalStore from 'lib/utils/modal_store'
     border-radius: ${t(`borderRadii.table`)};
     overflow: hidden;
     box-shadow: ${t(`shadow0`)};
+    border: 1px solid ${t(`border`)}
   }
   .thumb-column { width: 70px; }
+  .placeholder {
+    border-radius: 7px;
+    height: 14px;
+    background: #efefef;
+    width: 75%;
+    display: inline-block;
+    &.small {
+      width: 50%;
+    }
+    &.large {
+      width: 100%;
+    }
+  }
+  .table-actions {
+    padding-bottom: 10px;
+  }
+   .checkbox-column {
+    padding: 11px 0 0px 12px;
+    width: 10px;
+    input { margin-right: 0; }
+   }
 `
 @observer
 export default class IndexTable extends React.Component {
@@ -86,6 +105,7 @@ export default class IndexTable extends React.Component {
     query: PropTypes.object,
     row: PropTypes.func,
     rowProps: PropTypes.object,
+    searchBar: PropTypes.bool,
     storePageName: PropTypes.string,
   }
 
@@ -93,15 +113,17 @@ export default class IndexTable extends React.Component {
     bulkActions: null,
     rowProps: {},
     ids: null,
-    paginationPosition: `top`,
     storePageName: null,
+    searchBar: true,
   }
 
   @observable page=1
-  @observable per_page=20
+  @observable per_page=5
   // bulk state
   @observable bulkAllToggled = false
   @observable bulkSelected = []
+
+  @observable batchActionPanelOpen = false
 
   @action handleToggleAllBulk = () => {
     this.bulkAllToggled = !this.bulkAllToggled
@@ -115,6 +137,9 @@ export default class IndexTable extends React.Component {
       this.bulkSelected.push(id)
     }
   }
+
+  @action handleBatchPanelOpen = () => this.batchActionPanelOpen = true
+  @action handleBatchPanelClose = () => this.batchActionPanelOpen = false
 
   handleBulkActionSubmit = action => {
     action.onSubmit(this.bulkSelected.toJS())
@@ -162,11 +187,21 @@ export default class IndexTable extends React.Component {
 
   renderBulkActions = () => {
     return (
-      <div>{this.props.bulkActions.map((action, i) => (
-        <Button key={i} onClick={this.handleBatchAction.bind(this, action)}>
-          {action.text}
-        </Button>
-      ))}</div>
+      <div>
+        <Button buttonStyle="gradient-neutral" onClick={this.handleBatchPanelOpen}>Bulk actions</Button>
+        <Popover
+          open={this.batchActionPanelOpen}
+          closeOnOutsideClick
+          onToggle={this.handleBatchPanelClose}
+          className="bulk-action-menu"
+        >
+          <div>{this.props.bulkActions.map((action, i) => (
+            <Button key={i} onClick={this.handleBatchAction.bind(this, action)} buttonStyle="menu">
+              {action.text}
+            </Button>
+          ))}</div>
+        </Popover>
+      </div>
     )
   }
 
@@ -175,7 +210,7 @@ export default class IndexTable extends React.Component {
 
     if (this.props.bulkActions) {
       bulkColumn = (
-        <td onClick={e => e.stopPropagation()}>
+        <td onClick={e => e.stopPropagation()} className="checkbox-column">
           <Input
             name="headerCheck"
             type="checkbox"
@@ -186,13 +221,16 @@ export default class IndexTable extends React.Component {
       )
     }
 
-    return <this.props.row key={id} id={id} {...this.props.rowProps} bulkColumn={bulkColumn} />
+    return (<this.props.row
+      key={id} id={id} {...this.props.rowProps}
+      bulkColumn={bulkColumn}
+            />)
   }
 
   renderBulkHeader = () => {
     const { headings } = this.props
     const bulkHeading = (
-      <Th key="bulk">
+      <Th key="bulk"  className="checkbox-column">
         <Input
           name="headerCheck"
           type="checkbox"
@@ -206,19 +244,29 @@ export default class IndexTable extends React.Component {
   }
 
   render() {
-    const { paginationPosition, bulkActions, headings, query } = this.props
+    const { paginationPosition, bulkActions, headings, query, searchBar } = this.props
     return (
       <div className={this.props.className}>
-        {query && <IndexFilters query={query} />}{/* SHANE IT IS HERE */}
-        {this.props.bulkActions ? this.renderBulkActions() : null}
+        <Grid columns={2} className="table-actions">
+          <Grid.Item>
+            {this.props.bulkActions && this.bulkSelected.length ? this.renderBulkActions() : null}
+          </Grid.Item>
+          <Grid.Item>
+            {searchBar && query && <IndexFilters query={query} />}{/* SHANE IT IS HERE - cheers bud */}
+          </Grid.Item>
+        </Grid>
         {paginationPosition !== `bottom` && this.pagination_controls}
         <div className="table__container">
-          <table>
-            {bulkActions ? [this.renderBulkHeader(), ...headings] : headings}
-            <tbody>
-              {this.paginated_ids.map(this.renderRow)}
-            </tbody>
-          </table>
+          {
+            this.props.noResultsPanel && this.props.ids.length === 0 ?
+              this.props.noResultsPanel :
+              <table>
+                {bulkActions ? [this.renderBulkHeader(), ...headings] : headings}
+                <tbody>
+                {this.paginated_ids.map(this.renderRow)}
+                </tbody>
+              </table>
+          }
         </div>
         { paginationPosition !== `top` && this.pagination_controls}
       </div>

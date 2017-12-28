@@ -27,9 +27,6 @@ export class IndexFilters extends React.Component {
 
   handleChange = (e) => {
     this.props.query.search = e.value
-  }
-
-  handleSubmit = () => {
     this.props.query.execute()
   }
 
@@ -38,11 +35,11 @@ export class IndexFilters extends React.Component {
       <Form className={this.props.className} onSubmit={this.handleSubmit}>
         <Input
           name="search"
-          placeholder="Filter..."
+          placeholder="Type to filter..."
           value={this.props.query.search}
           onChange={this.handleChange}
+          autocomplete="off"
         />
-        <Submit className="filter-button" value="Search" />
       </Form>
     )
   }

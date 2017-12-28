@@ -5,7 +5,7 @@ import Filter from './Filter'
 import FaIcon from 'lib/components/fa_icon'
 
 import { observable, action, computed } from 'mobx'
-import { observer, inject } from 'mobx-react'
+import { observer } from 'mobx-react'
 import { styled } from 'lib/utils/theme'
 
 import decorate from 'lib/utils/decorate'
@@ -61,7 +61,6 @@ export class Th extends React.Component {
 }
 export default decorate(
   styled`
-    i { color: white; }
     cursor: pointer;
     &.sortable {
       cursor: pointer;

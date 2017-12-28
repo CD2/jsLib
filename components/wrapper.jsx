@@ -1,21 +1,27 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import theme from 'styles/theme'
-import { observer } from 'mobx-react'
-import decorate from 'lib/utils/decorate'
+import React from "react"
+import PropTypes from "prop-types"
+import theme from "styles/theme"
+import { observer } from "mobx-react"
+import decorate from "lib/utils/decorate"
 import Image from "./image"
 
 export class Wrapper extends React.Component {
-
   static propTypes = {
     background: PropTypes.string,
     backgroundImage: PropTypes.string,
-    backgroundImageSize: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    backgroundImageUid: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    backgroundImageSize: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.number,
+    ]),
+    backgroundImageUid: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.number,
+    ]),
     borderRadius: PropTypes.bool,
     children: PropTypes.any,
     className: PropTypes.string,
     floating: PropTypes.bool,
+    fullHeight: PropTypes.bool,
     gutter: PropTypes.number,
     innerBackground: PropTypes.string,
     margin: PropTypes.number,
@@ -24,19 +30,13 @@ export class Wrapper extends React.Component {
     onClick: PropTypes.func,
     overflow: PropTypes.bool,
     overlay: PropTypes.string,
-    spacing: PropTypes.oneOfType([
-      PropTypes.number,
-      PropTypes.string
-    ]),
+    spacing: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     theme: PropTypes.object,
     wide: PropTypes.bool,
-    width: PropTypes.oneOfType([
-      PropTypes.number,
-      PropTypes.string
-    ]),
+    width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   }
 
-  renderContent(){
+  renderContent() {
     const { children, noGutters, spacing, noSpacing } = this.props
     const width = this.props.width || theme.siteWidth
     const gutters = noGutters ? 0 : this.props.gutter || theme.gutterWidth
@@ -50,14 +50,10 @@ export class Wrapper extends React.Component {
       maxWidth: typeof width === `string` ? width : `${width}px`,
     }
 
-    return (
-      <div style={contentStyle}>
-        {children}
-      </div>
-    )
+    return <div style={contentStyle}>{children}</div>
   }
 
-  renderOverlay(){
+  renderOverlay() {
     const { overlay } = this.props
 
     const overlayStyle = {
@@ -68,15 +64,20 @@ export class Wrapper extends React.Component {
       top: `0`,
       backgroundAttachment: `fixed`,
       opacity: `0.93`,
-      backgroundColor: overlay || `black`
+      backgroundColor: overlay || `black`,
     }
 
     if (overlay) return <div style={overlayStyle} />
   }
 
   render() {
-    const { backgroundImageUid, backgroundImage, background, floating } = this.props
-    if (backgroundImageUid || backgroundImage){
+    const {
+      backgroundImageUid,
+      backgroundImage,
+      background,
+      floating,
+    } = this.props
+    if (backgroundImageUid || backgroundImage) {
       return (
         <Image
           className={this.props.className || ``}
@@ -88,13 +89,17 @@ export class Wrapper extends React.Component {
             borderRadius: floating ? `6px` : `0`,
             marginBottom: floating ? theme.gutterHeight.value : `0`,
             overflow: this.props.overflow ? `initial` : `hidden`,
-            height: this.props.fullHeight ? `100%` : `auto`
+            height: this.props.fullHeight ? `100%` : `auto`,
           }}
-          size={this.props.backgroundImageSize ? this.props.backgroundImageSize : null}
+          size={
+            this.props.backgroundImageSize
+              ? this.props.backgroundImageSize
+              : null
+          }
           background
         >
-          { this.renderOverlay() }
-          { this.renderContent() }
+          {this.renderOverlay()}
+          {this.renderContent()}
         </Image>
       )
     }
@@ -106,20 +111,18 @@ export class Wrapper extends React.Component {
           position: `relative`,
           boxShadow: floating ? theme.shadow0 : `none`,
           borderRadius: floating || this.props.borderRadius ? `6px` : `0`,
-          marginBottom: floating ? this.props.margin || theme.gutterHeight.value : `0`,
+          marginBottom: floating
+            ? this.props.margin || theme.gutterHeight.value
+            : `0`,
           overflow: this.props.overflow ? `initial` : `hidden`,
-          height: this.props.fullHeight ? `100%` : `auto`
+          height: this.props.fullHeight ? `100%` : `auto`,
         }}
         onClick={this.props.onClick}
       >
-        { this.renderOverlay() }
-        { this.renderContent() }
+        {this.renderOverlay()}
+        {this.renderContent()}
       </div>
     )
   }
-
 }
-export default decorate(
-  observer,
-  Wrapper
-)
+export default decorate(observer, Wrapper)

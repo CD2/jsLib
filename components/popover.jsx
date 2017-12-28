@@ -44,19 +44,10 @@ export class Popover extends React.Component {
     return className
   }
 
-  renderOverlay() {
-    return (
-      <Overlay
-        overlayClassName={this.props.open ? `popover__overlay--open` : `popover__overlay`}
-        visible={this.props.open}
-        onClick={this.props.onToggle}
-      />
-    )
-  }
-
   render() {
+    if(!this.props.open) return null
     return (
-      <span className={`${this.props.className} ${this.props.containerClassName}`}>
+      <div className={`${this.props.className} ${this.props.containerClassName}`}>
         <div
           className={this.getClassName()}
           onMouseEnter={this.props.onMouseEnter}
@@ -64,8 +55,8 @@ export class Popover extends React.Component {
         >
           {this.props.children}
         </div>
-        {this.props.closeOnOutsideClick ? this.renderOverlay() : null}
-      </span>
+        {this.props.closeOnOutsideClick ? <Overlay onClick={this.props.onToggle} /> : null}
+      </div>
     )
   }
 
@@ -74,7 +65,6 @@ export class Popover extends React.Component {
 export default decorate(
   styled`
   position: relative;
-
   .popover__popover {
     position: absolute;
     display: none;
@@ -82,31 +72,17 @@ export default decorate(
     z-index: 11000;
     background-color: white;
     width: auto;
-    bottom: 100%;
     left: 0px;
     border-radius: 3px;
     color: rgba(0, 0, 0, 0.7);
     font-weight: 400;
     font-size: 0.9rem;
     box-shadow: 0 5px 8px rgba(0,0,0,.16);
-
+    z-index: 100000;
     &--open {
       display: block;
       pointer-events: auto;
       opacity: 1;
-    }
-  }
-
-  .popover__overlay {
-    display: none;
-
-    &--open {
-      position: relative;
-      display: block;
-      right: 0;
-      left: 0;
-      top: 0;
-      bottom: 0;
     }
   }
   `,

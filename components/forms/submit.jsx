@@ -23,8 +23,8 @@ import load from 'images/load'
       background-color: ${t(`primaryLight`)};
     }
     ${({ submitting }) => {
-  if (submitting){
-    return`
+      if (submitting){
+        return`
         background: url(${load});
         opacity: 0.7;
         background-size: 100%;
