@@ -105,6 +105,7 @@ export default class IndexTable extends React.Component {
     query: PropTypes.object,
     row: PropTypes.func,
     rowProps: PropTypes.object,
+    searchBar: PropTypes.bool,
     storePageName: PropTypes.string,
   }
 
@@ -113,6 +114,7 @@ export default class IndexTable extends React.Component {
     rowProps: {},
     ids: null,
     storePageName: null,
+    searchBar: true,
   }
 
   @observable page=1
@@ -242,7 +244,7 @@ export default class IndexTable extends React.Component {
   }
 
   render() {
-    const { paginationPosition, bulkActions, headings, query } = this.props
+    const { paginationPosition, bulkActions, headings, query, searchBar } = this.props
     return (
       <div className={this.props.className}>
         <Grid columns={2} className="table-actions">
@@ -250,7 +252,7 @@ export default class IndexTable extends React.Component {
             {this.props.bulkActions && this.bulkSelected.length ? this.renderBulkActions() : null}
           </Grid.Item>
           <Grid.Item>
-            {query && <IndexFilters query={query} />}{/* SHANE IT IS HERE - cheers bud */}
+            {searchBar && query && <IndexFilters query={query} />}{/* SHANE IT IS HERE - cheers bud */}
           </Grid.Item>
         </Grid>
         {paginationPosition !== `bottom` && this.pagination_controls}
