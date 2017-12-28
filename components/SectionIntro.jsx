@@ -53,10 +53,10 @@ export default decorate(
     text-align: ${p(`align`, `left`)};
     .modal & { padding-top: 0; }
     ${({ children, noPad, theme }) => {
-    if (children && !noPad){
-      return `padding-bottom: ${theme.gutterHeight.value / 16}em;`
+      if (children && !noPad){
+        return `padding-bottom: ${theme.gutterHeight.value / 16}em;`
+      }
     }
-  }
 }
     .intro-text {
   ${({ light, theme }) => {

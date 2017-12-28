@@ -79,7 +79,7 @@ export default decorate(
       color: white;
       border-radius: ${t(`borderRadii.button`)};
       text-align: center;
-      font-weight: ${t('weights.button')};
+      font-weight: ${t(`weights.button`)};
 
       &.common {
         background-color: ${t(`primary`)};
@@ -213,20 +213,20 @@ export default decorate(
       }
       &.gradient-positive {
         background: linear-gradient(to bottom,  #39b449 0%,#299a0b 100%);
-        border: 1px solid ${t('positive')};
+        border: 1px solid ${t(`positive`)};
 
       }
       &.gradient-neutral {
         background: linear-gradient(to bottom,  #f6fcfd 0%,#eff3f6 100%);
-        color: ${t('lightText')};
-        border: 1px solid ${t('border')};
+        color: ${t(`lightText`)};
+        border: 1px solid ${t(`border`)};
         &:hover {
           filter: brightness(1.02);
         }
       }
       &.menu {
         border-radius: 0;
-        color: ${t('text')};
+        color: ${t(`text`)};
         display: block;
         text-align: left;
         font-weight: normal;
@@ -240,8 +240,8 @@ export default decorate(
     margin-right: 6px;
 
     ${({ processing }) => {
-    if (processing){
-      return`
+      if (processing){
+        return`
         cursor: none;
         background: url(${load});
         opacity: 0.7;
@@ -256,7 +256,7 @@ export default decorate(
           background-color: #2c2d2d;
         }
       `}
-  }
+    }
 }
   `,
   Button

@@ -55,7 +55,7 @@ export class Popover extends React.Component {
         >
           {this.props.children}
         </div>
-        {this.props.closeOnOutsideClick ? <Overlay onClick={this.props.onToggle}/> : null}
+        {this.props.closeOnOutsideClick ? <Overlay onClick={this.props.onToggle} /> : null}
       </div>
     )
   }

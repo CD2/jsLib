@@ -4,7 +4,7 @@ import Overlay from 'lib/components/overlay'
 import { styled, t } from 'lib/utils/theme'
 import decorate from 'lib/utils/decorate'
 import windowStore from 'stores/window'
-import FaIcon from "./fa_icon";
+import FaIcon from "./fa_icon"
 
 export class Modal extends React.Component {
 
@@ -26,7 +26,7 @@ export class Modal extends React.Component {
         <div className={`modal ${windowStore.isSmall ? `modal--s` : ``}`}>
           {
             showClose &&
-            <div className='close-modal' onClick={this.handleClose}><FaIcon icon={'cross'} size={1.2}/></div>
+            <div className="close-modal" onClick={this.handleClose}><FaIcon icon={`cross`} size={1.2} /></div>
           }
           {children}
         </div>
@@ -54,7 +54,7 @@ export default decorate(
     }
     .modal {
     position: relative;
-    border-radius: ${t('borderRadii.modal')};
+    border-radius: ${t(`borderRadii.modal`)};
       z-index: 250000;
       ${({ padding, theme, noPad }) => {
         if(padding) return `padding: ${padding}px;`
@@ -70,10 +70,10 @@ export default decorate(
       }
     }
         ${({ narrow }) => {
-    if (narrow) {
-      return `max-width: 500px;`
-    }
-  }
+          if (narrow) {
+            return `max-width: 500px;`
+          }
+        }
 }
       max-height: 600px;
       overflow: auto;

@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import placeholder from 'images/placeholder.png'
 import Image from 'lib/components/image'
-import FaIcon from "lib/components/fa_icon";
+import FaIcon from "lib/components/fa_icon"
 import theme from 'styles/theme'
 import { observer } from 'mobx-react'
 
@@ -25,7 +25,7 @@ export default class TableRowErrors extends React.Component {
   renderErrorRow(columns, thumbnailColumn){
     return(
       <tr>
-        {thumbnailColumn && <td className="thumb-column"><FaIcon icon='error-outline' color={theme.error} size={1.25} /></td>}
+        {thumbnailColumn && <td className="thumb-column"><FaIcon icon="error-outline" color={theme.error} size={1.25} /></td>}
         <td colSpan={columns}>
           <span>Error loading {this.props.resource.class.name}</span>
         </td>
@@ -55,4 +55,5 @@ export default class TableRowErrors extends React.Component {
     if (resource && !resource.loaded) return this.renderLoadingRow(columns, thumbnailColumn)
     return children
   }
+
 }

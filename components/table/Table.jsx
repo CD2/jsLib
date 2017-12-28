@@ -15,15 +15,15 @@ import ModalStore from 'lib/utils/modal_store'
   font-size: 0.9em;
   tbody tr {
     ${({ noLinks }) => {
-  if (!noLinks) {
-    return`
+      if (!noLinks) {
+        return`
           cursor: pointer;
           &:hover {
             background: #f3f7fb;
           }
     `
-  }
-}
+      }
+    }
   }
   }
   tr {
@@ -36,7 +36,7 @@ import ModalStore from 'lib/utils/modal_store'
     padding: ${t(`gutterWidth`, w=>w/2)}px;
     white-space: nowrap;
     text-align: left;
-    border-bottom: 2px solid ${t('border')};
+    border-bottom: 2px solid ${t(`border`)};
   }
   .background-image {
     border-radius: 5px;
@@ -138,7 +138,6 @@ export default class IndexTable extends React.Component {
 
     if (onSubmit) return onSubmit(this.bulkSelected)
     const payload = formatPayload ? formatPayload(toJS(this.bulkSelected)) : toJS(this.bulkSelected)
-
   }
 
   handleBulkAction = action => {

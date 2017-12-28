@@ -61,7 +61,6 @@ export class Th extends React.Component {
 }
 export default decorate(
   styled`
-    i { color: white; }
     cursor: pointer;
     &.sortable {
       cursor: pointer;

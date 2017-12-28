@@ -38,15 +38,15 @@ export class FaIcon extends React.Component {
 export default decorate(
   styled`
     ${({ color, theme, size }) => {
-    const col = color || theme.darkBackground
-    const sze = size || 1
-    return (
+      const col = color || theme.darkBackground
+      const sze = size || 1
+      return (
       `
         color: ${col};
         font-size: ${sze}em;
         `
-    )
-  }
+      )
+    }
 }
   ${({ hoverColor }) => {
     if (hoverColor) {
