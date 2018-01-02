@@ -1,11 +1,11 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { withRouter } from 'react-router-dom'
-import { observer } from 'mobx-react'
-import { computed } from 'mobx'
+import React from "react"
+import PropTypes from "prop-types"
+import { withRouter } from "react-router-dom"
+import { observer } from "mobx-react"
+import { computed } from "mobx"
 
-import { styled } from 'lib/utils/theme'
-import Button from 'lib/components/button'
+import { styled } from "lib/utils/theme"
+import Button from "lib/components/button"
 
 @styled`
 
@@ -22,7 +22,6 @@ import Button from 'lib/components/button'
 @withRouter
 @observer
 export class PaginationControls extends React.Component {
-
   static propTypes = {
     className: PropTypes.string,
     history: PropTypes.object,
@@ -41,29 +40,29 @@ export class PaginationControls extends React.Component {
   }
 
   changePage(page_number) {
-    if (page_number > 0 && page_number <= this.totalPages())
-    {
+    if (page_number > 0 && page_number <= this.totalPages()) {
       const { storePageName, location } = this.props
       if (storePageName) {
         this.props.history.replace({
-          state: { ...location.state, [`${storePageName}PageNumber`]: page_number }
+          state: { ...location.state, [`${storePageName}PageNumber`]: page_number },
         })
       }
       this.props.onPageChange(page_number)
     }
   }
 
-  @computed get page() {
+  @computed
+  get page() {
     const { storePageName, page } = this.props
-    const locationPage = this.props.location.state
-      && this.props.location.state[`${storePageName}PageNumber`]
+    const locationPage =
+      this.props.location.state && this.props.location.state[`${storePageName}PageNumber`]
 
     return locationPage || page
   }
 
   totalPages() {
     const { total_items, per_page } = this.props
-    return Math.ceil(total_items/per_page)
+    return Math.ceil(total_items / per_page)
   }
 
   firstPage() {
@@ -82,6 +81,7 @@ export class PaginationControls extends React.Component {
       <Button
         buttonStyle="pagination"
         className={className}
+        key={-1}
         onClick={() => this.changePage(this.page - 1)}
       >
         Left
@@ -96,6 +96,7 @@ export class PaginationControls extends React.Component {
       <Button
         buttonStyle="pagination"
         className={className}
+        key={-2}
         onClick={() => this.changePage(this.page + 1)}
       >
         Right
@@ -109,20 +110,24 @@ export class PaginationControls extends React.Component {
     const visibility = 2
     const count = this.totalPages()
 
-    const elipsis = (<div className="pagination__button">...</div>)
-    const number = (n) => (
+    const ellipsis = (
+      <div key="ellipsis" className="pagination__button">
+        ...
+      </div>
+    )
+    const number = n => (
       <Button
         key={n}
         buttonStyle="pagination"
-        className={`pagination__button ${current === n ? `current_page` : `` }`}
+        className={`pagination__button ${current === n ? `current_page` : ``}`}
         onClick={() => this.changePage(n)}
       >
         {n}
       </Button>
     )
 
-    if (count < 5 + visibility*2) {
-      for (let i = 1; i<=count; i++) {
+    if (count < 5 + visibility * 2) {
+      for (let i = 1; i <= count; i++) {
         page_numbers.push(number(i))
       }
       return page_numbers
@@ -130,10 +135,12 @@ export class PaginationControls extends React.Component {
 
     page_numbers.push(number(1))
     const min = Math.max(current - visibility, 2)
-    if (min > 2) page_numbers.push(elipsis)
-    const max = Math.min(Math.max(3+visibility*2, min + visibility*2), count-1)
-    for (let i=Math.min(min, count-2-2*visibility); i<=max; i++) page_numbers.push(number(i))
-    if (max < count - 1) page_numbers.push(elipsis)
+    if (min > 2) page_numbers.push(ellipsis)
+    const max = Math.min(Math.max(3 + visibility * 2, min + visibility * 2), count - 1)
+    for (let i = Math.min(min, count - 2 - 2 * visibility); i <= max; i++) {
+      page_numbers.push(number(i))
+    }
+    if (max < count - 1) page_numbers.push(ellipsis)
     page_numbers.push(number(count))
 
     return page_numbers
@@ -149,9 +156,7 @@ export class PaginationControls extends React.Component {
       </div>
     )
   }
-
 }
-
 
 // 1  2  3  4  5  6  7  - 70  on < 5
 // 1  -  3  4  5  6  7  - 70  on 5

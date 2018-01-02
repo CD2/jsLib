@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import { Form, Input, Submit } from 'lib/components/forms'
+import { Form, Input } from 'lib/components/forms'
 
 import { observer } from 'mobx-react'
 import { styled } from 'lib/utils/theme'
@@ -37,8 +37,8 @@ export class IndexFilters extends React.Component {
           name="search"
           placeholder="Type to filter..."
           value={this.props.query.search}
+          autoComplete="off"
           onChange={this.handleChange}
-          autocomplete="off"
         />
       </Form>
     )

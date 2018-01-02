@@ -16,7 +16,9 @@ export class Th extends React.Component {
     className: PropTypes.string,
     filterable: PropTypes.string,
     name: PropTypes.string,
+    onSortChange: PropTypes.func,
     query: PropTypes.object,
+    sortDir: PropTypes.string,
     sortable: PropTypes.string,
     table: PropTypes.object,
   }

@@ -48,12 +48,13 @@ export default class TableRowErrors extends React.Component {
   }
 
   render(){
-    const { resource, children, alternateAction, columns, thumbnailColumn } = this.props
+    const { resource, render, alternateAction, columns, thumbnailColumn } = this.props
     if (alternateAction) return alternateAction()
     if (resource && resource.errored) return this.renderErrorRow(columns, thumbnailColumn)
     if (resource && resource.loading) return this.renderLoadingRow(columns, thumbnailColumn)
+    if (!resource) return this.renderLoadingRow(columns, thumbnailColumn)
     if (resource && !resource.loaded) return this.renderLoadingRow(columns, thumbnailColumn)
-    return children
+    return render()
   }
 
 }

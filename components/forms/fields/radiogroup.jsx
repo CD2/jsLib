@@ -33,7 +33,7 @@ export class SelectField extends React.Component {
     const { choices, value, className, name } = this.props
     return (
       <radiogroup {...this.props} className={className} onChange={undefined}>
-        {choices.map((choice, index) => (
+        {choices.map((choice) => (
           <label key={choice.value}>
             <input
               key={`${choice.text}_${choice.value}`}
