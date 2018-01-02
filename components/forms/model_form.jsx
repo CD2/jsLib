@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { observer } from 'mobx-react'
 import { observable, action } from 'mobx'
 
-import { titleize } from 'help-my-strings'
+// import { titleize } from 'help-my-strings'
 
 import Model from './form_model'
 import Form from './form'
@@ -93,7 +93,7 @@ class ModelForm extends React.Component {
         disabled={this.props.disableAll}
         key={index}
         model={this.model}
-        label={field.label || titleize(field.name)}
+        label={field.label || field.name}
         {...field}
       />
     )
