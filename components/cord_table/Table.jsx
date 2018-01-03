@@ -243,6 +243,7 @@ export default decorate(
   }
   td {
     padding: ${t(`gutterWidth`, w => w / 4)}px ${t(`gutterWidth`, w => w / 2)}px;
+    height: 48px;
     &.primary { font-weight: 600 }
   }
   .nowrap {
