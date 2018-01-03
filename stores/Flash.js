@@ -4,7 +4,7 @@ import { observable } from 'mobx'
 export default observable({
   flashes: [],
   previousFlashes: [],
-  add(message, { level=`notice`, timeout=5000, disableTimeout=false }={}) {
+  add(message, { level=`notice`, timeout=599000, disableTimeout=false }={}) {
     const id = Date.now()
 
     if (this.flashes.length >= 3) this.flashes.shift()

@@ -65,7 +65,7 @@ export default decorate(
       color: ${color};
     `
   }}
-  ${({ light, theme }) => {
+  ${({ light }) => {
     if (light){
       return `
       a { color: white; }
