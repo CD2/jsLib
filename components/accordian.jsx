@@ -82,7 +82,7 @@ export class Accordian extends React.Component {
     }
 
     return this.open ?
-      { minHeight: `${this.props.rows.length * this.props.rowHeight  }px` } :
+      { minHeight: `${this.props.rows.length * this.props.rowHeight  }px`, height: `auto` } :
       { minHeight: `0px` }
   }
 
@@ -130,8 +130,6 @@ export default decorate(
   }
 
   .accordian__content {
-    display: flex;
-    overflow: hidden;
     transition: all 0.2s ease;
     height: 0;
     opacity: 0;
