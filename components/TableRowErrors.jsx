@@ -13,6 +13,7 @@ export default class TableRowErrors extends React.Component {
     alternateAction: PropTypes.func,
     children: PropTypes.any,
     columns: PropTypes.number.isRequired,
+    render: PropTypes.func.isRequired,
     resource: PropTypes.object.isRequired,
     thumbnailColumn: PropTypes.bool,
   }
