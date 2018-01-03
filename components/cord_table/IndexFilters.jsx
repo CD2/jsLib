@@ -38,7 +38,7 @@ export class IndexFilters extends React.Component {
           placeholder="Type to filter..."
           value={this.props.query.search}
           onChange={this.handleChange}
-          autocomplete="off"
+          autoComplete="off"
         />
       </Form>
     )
