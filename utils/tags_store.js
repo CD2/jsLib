@@ -105,6 +105,8 @@ export default class TagsStore {
   @action setMouseOver = (isMousedOver = true) => this.mouseOverPopover = isMousedOver
 
   @action handleInputBlur = (e, force = false) => {
+    console.log('sadness')
+    return this.current_tag = null
     e && e.preventDefault()
     if (!this.mouseOverPopover || force) {
       this.current_tag && this.handleInput()
