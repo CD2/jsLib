@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { styled } from 'lib/utils/theme'
 import decorate from 'lib/utils/decorate'
-
+import { observer } from 'mobx-react'
 import Overlay from 'lib/components/overlay'
 
 export class Popover extends React.Component {
@@ -55,7 +55,7 @@ export class Popover extends React.Component {
         >
           {this.props.children}
         </div>
-        {this.props.closeOnOutsideClick ? <Overlay onClick={this.props.onToggle} /> : null}
+        {this.props.closeOnOutsideClick ? <Overlay clickThrough onClick={this.props.onToggle} /> : null}
       </div>
     )
   }
@@ -86,5 +86,6 @@ export default decorate(
     }
   }
   `,
+  observer,
   Popover
 )
