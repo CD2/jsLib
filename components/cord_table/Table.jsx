@@ -255,7 +255,15 @@ export default decorate(
     box-shadow: ${t(`shadow0`)};
     border: 1px solid ${t(`border`)}
   }
-  .thumb-column { width: 70px; }
+  .thumb-column { 
+    width: 70px;
+    height: 70px;
+    padding: 6px; 
+    img { 
+      border: 2px solid #e5e5e5;
+      border-radius: 4px; 
+    }
+  }
   .placeholder {
     border-radius: 7px;
     height: 14px;
