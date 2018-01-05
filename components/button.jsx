@@ -249,9 +249,11 @@ export default decorate(
     margin-right: 6px;
 
     ${({ wide }) => {
-      return`
-        width: 100%;
-      `
+      if (wide){
+        return`
+          width: 100%;
+        `
+      }
     }}
 
     ${({ processing }) => {
