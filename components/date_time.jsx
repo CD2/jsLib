@@ -16,6 +16,7 @@ export class DateTime extends React.Component {
   predefinedFormats = {
     short_date: `DD MMM YYYY`,
     long_date: `Do MMMM YYYY`,
+    with_time: `H:mm - DD MMM YYYY`,
   }
 
   render() {

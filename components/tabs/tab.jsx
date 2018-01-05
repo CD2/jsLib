@@ -1,8 +1,9 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React from "react"
+import PropTypes from "prop-types"
+import Image from "../image"
+import Grid from "../grid";
 
 export default class Tab extends React.Component {
-
   static propTypes = {
     children: PropTypes.node,
     heading: PropTypes.string.isRequired,
@@ -22,19 +23,21 @@ export default class Tab extends React.Component {
   }
 
   renderHead = () => {
-    const { heading, selected, tabKey } = this.props
+    const { heading, selected, tabKey, icon } = this.props
     const className = selected === tabKey ? `selected` : ``
-    return <div className={className} onClick={this.handleTabHeadClick}>{heading}</div>
+    return (
+      <div className={className} onClick={this.handleTabHeadClick}>
+        <Grid>
+          {icon && <Grid.Item><Image width={30} height={20} background contain defaultSrc={icon} /></Grid.Item>}
+          <Grid.Item>{heading}</Grid.Item>
+        </Grid>
+      </div>
+    )
   }
 
   render() {
     const { renderHead, children } = this.props
     if (renderHead) return this.renderHead()
-    return (
-      <div>
-        {children}
-      </div>
-    )
+    return <div>{children}</div>
   }
-
 }
