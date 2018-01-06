@@ -7,7 +7,6 @@ export const title = (title) => {
   return (<title>{`${title}`}</title>)
 }
 
-export const number_as_currency = (number, currency='£') => {
-  let num = number || 0
-  return `${currency}${parseFloat(num).toFixed(2)}`
+export const numberToCurrency = (number=0, currency='£') => {
+  return `${currency}${parseFloat(number).toFixed(2)}`
 }
