@@ -18,12 +18,14 @@ export class Button extends React.Component {
     processing: PropTypes.bool,
     target: PropTypes.string,
     to: PropTypes.string,
+    wide: PropTypes.bool,
   }
 
   static defaultProps = {
     buttonStyle: `common`,
     external: false,
     processing: false,
+    wide: false,
   }
 
   getChildren = () => {
@@ -245,6 +247,14 @@ export default decorate(
 
     }
     margin-right: 6px;
+
+    ${({ wide }) => {
+      if (wide){
+        return`
+          width: 100%;
+        `
+      }
+    }}
 
     ${({ processing }) => {
       if (processing){

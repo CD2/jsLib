@@ -6,3 +6,7 @@ export const title = (title) => {
   title += Constants.SITE.NAME ? ` | ${Constants.SITE.NAME}` : ``
   return (<title>{`${title}`}</title>)
 }
+
+export const numberToCurrency = (number=0, currency='£') => {
+  return `${currency}${parseFloat(number).toFixed(2)}`
+}

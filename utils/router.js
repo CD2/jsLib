@@ -19,7 +19,7 @@ export const renderComponent = (Component, default_props={}) => {
     const { params } = loc.match
     Object.entries(params).forEach(([key, value]) => {
       const int_param = parseInt(value, 10)
-      params[key] = typeof value === `number` && isNaN(value)? value : int_param
+      params[key] = isNaN(value)? value : int_param
     })
     return React.createElement(Component,  { ...default_props, ...params })
   }

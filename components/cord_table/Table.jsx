@@ -294,6 +294,21 @@ export default decorate(
    a {
     font-weight: 700;
    }
+   .table-tag {
+     display: inline-block;
+     padding: 4px 6px;
+     border-radius: 3px; 
+     font-size: 13px;
+     background: ${t('background')};
+     &__in_progress {
+        background: ${t('colors.blue')};;
+        color: white;
+     }
+     &__complete {
+        background: ${t('colors.green')};;
+        color: white;
+     }
+   }
 `,
   observer,
   Table,
