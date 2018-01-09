@@ -85,6 +85,9 @@ export default class FormModel {
   submit() {
     if (!this.valid()) return
     if (this.options.onSubmit) {
+      if (this.options.doesntCatch){
+        return this.options.onSubmit(toJS(this.changes))
+      }
       return this.options.onSubmit(toJS(this.changes)).catch(this.handleServerError)
     }
     if (this.options.perform) return this.perform()
