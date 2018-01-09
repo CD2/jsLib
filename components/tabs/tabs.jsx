@@ -139,7 +139,7 @@ export default class Tabs extends React.Component {
       )
     }
     return (
-      <div className={this.props.className}>
+      <div className={`tabs ${this.props.className}`}>
         {this.renderTabHeads()}
         {this.renderSelectedTab()}
       </div>
