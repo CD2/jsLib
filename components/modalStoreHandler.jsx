@@ -9,29 +9,23 @@ import Button from 'lib/components/button'
 export default class OrderForm extends React.Component {
 
   static propTypes = {
+    showClose: PropTypes.bool,
     update: PropTypes.bool,
+  }
+
+  static defaultProps = {
+    showClose: true,
   }
 
   componentDidMount(){
   }
 
   @action handleCloseModal = () => ModalStore.removeLast()
-  renderCloseButton = () => {
-    return (
-      <Button
-        id="modal_close"
-        aria-label="close"
-        onClick={this.handleCloseModal}
-      >
-      X
-      </Button>
-    )
-  }
+
   render() {
     if (ModalStore.hasContents) {
       return (
-        <Modal onClose={this.handleCloseModal}>
-          {this.renderCloseButton()}
+        <Modal onClose={this.handleCloseModal} showClose={this.props.showClose}>
           {ModalStore.getLast()}
         </Modal>
       )
