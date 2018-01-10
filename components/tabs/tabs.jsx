@@ -25,11 +25,10 @@ import Wrapper from "../wrapper"
           `
       } else {
         return `
-            .tab-content {
-    padding: 25px 0 0;
-  }}
-    border-top: 1px solid #ddd;
-  }
+          .tab-content {
+                    padding: 25px 0 0;
+          }
+
           .tab-heads {
             display: flex;    
             > div {
@@ -43,11 +42,14 @@ import Wrapper from "../wrapper"
               }
             }       
           }
-          `
+        `
       }
     }}
     }
   }
+  ${({ noBorder }) => {
+    if (!noBorder) return `border-top: 1px solid #ddd;`
+  }}
 `
 @withRouter
 @observer
@@ -58,12 +60,14 @@ export default class Tabs extends React.Component {
     current: PropTypes.string,
     history: PropTypes.object,
     location: PropTypes.object,
+    noBorder: PropTypes.bool,
     onChange: PropTypes.func,
     storeCurrentName: PropTypes.string,
   }
 
   static defaultProps = {
     current: null,
+    noBorder: false,
     storeCurrentName: null,
   }
 
