@@ -30,7 +30,7 @@ export default class Result extends React.Component {
   }
 
   goToUrl = () => {
-    const url = `/${this.getPathFromResultType()}/${this.props.result.searchable_id}`
+    const url = `/${this.props.models[this.props.type]}/${this.props.result.searchable_id}`
     redirect(url)
   }
 

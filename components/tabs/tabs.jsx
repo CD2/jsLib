@@ -8,46 +8,63 @@ import Grid from "../grid"
 import Wrapper from "../wrapper"
 
 @styled`
-    ${({ vertical, theme }) => {
-      if (vertical) {
-        return `
-          .tab-heads {
-            > div {
-              background: white;
-              padding: 20px;
-              cursor: pointer;
-              &.selected {
-                color: white;
-                background-color: ${theme.primary};
-              }
+  ${({ vertical, theme }) => {
+    if (vertical) {
+      return `
+        .tab-heads {
+          > div {
+            background: white;
+            padding: 20px;
+            cursor: pointer;
+            &.selected {
+              color: white;
+              background-color: ${theme.primary};
             }
           }
-          `
-      } else {
-        return `
-            .tab-content {
-    padding: 25px 0 0;
-  }}
-    border-top: 1px solid #ddd;
-  }
-          .tab-heads {
-            display: flex;    
-            > div {
-              padding: ${theme.gutterWidth.value / 2}px;
-              cursor: pointer;
-              opacity: 0.7;
-              &.selected {
-                opacity: 1;
-                border-bottom: 3px solid ${theme.primary};
-                margin-bottom: -3px;
-              }
-            }       
-          }
-          `
-      }
-    }}
+        }
+        `
+    } else {
+      return `
+        .tab-content {
+                  padding: 25px 0 0;
+        }
+
+        .tab-heads {
+          display: flex;    
+          > div {
+            padding: ${theme.gutterWidth.value / 2}px;
+            cursor: pointer;
+            opacity: 0.7;
+            &.selected {
+              opacity: 1;
+              border-bottom: 3px solid ${theme.primary};
+              margin-bottom: -3px;
+            }
+          }   
+        }
+      `
     }
+  }}
   }
+  }
+  ${({ noBorder }) => {
+    if (!noBorder) return `border-top: 1px solid #ddd;`
+  }}
+  ${({ thick, theme }) => {
+    if (thick) return `
+      .tab-heads {
+        > div {
+          border-bottom: 5px solid ${theme.border};
+
+          &.selected {
+            font-weight: bold;
+            border-bottom: 5px solid ${theme.primary};
+            margin-bottom: 0;
+          }
+        }
+      }
+    `
+  }}
 `
 @withRouter
 @observer
@@ -58,13 +75,17 @@ export default class Tabs extends React.Component {
     current: PropTypes.string,
     history: PropTypes.object,
     location: PropTypes.object,
+    noBorder: PropTypes.bool,
     onChange: PropTypes.func,
     storeCurrentName: PropTypes.string,
+    thick: PropTypes.bool,
   }
 
   static defaultProps = {
     current: null,
+    noBorder: false,
     storeCurrentName: null,
+    thick: false,
   }
 
   componentDidMount() {
@@ -139,7 +160,7 @@ export default class Tabs extends React.Component {
       )
     }
     return (
-      <div className={this.props.className}>
+      <div className={`tabs ${this.props.className}`}>
         {this.renderTabHeads()}
         {this.renderSelectedTab()}
       </div>

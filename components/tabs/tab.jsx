@@ -22,15 +22,27 @@ export default class Tab extends React.Component {
     onTabHeadClick(tabKey)
   }
 
+  renderGrid(iconPresent) {
+    const { heading, icon } = this.props
+    if(iconPresent) return(
+      <Grid>
+        <Grid.Item><Image width={30} height={20} background contain defaultSrc={icon} /></Grid.Item>
+        <Grid.Item>{heading}</Grid.Item>
+      </Grid>
+    )
+    return(
+      <Grid>
+        <Grid.Item>{heading}</Grid.Item>
+      </Grid>
+    )
+  }
+
   renderHead = () => {
-    const { heading, selected, tabKey, icon } = this.props
+    const { selected, tabKey, icon } = this.props
     const className = selected === tabKey ? `selected` : ``
     return (
-      <div className={className} onClick={this.handleTabHeadClick}>
-        <Grid>
-          {icon && <Grid.Item><Image width={30} height={20} background contain defaultSrc={icon} /></Grid.Item>}
-          <Grid.Item>{heading}</Grid.Item>
-        </Grid>
+      <div className={className} onClick={this.handleTabHeadClick}> 
+        {this.renderGrid(!!icon)}
       </div>
     )
   }

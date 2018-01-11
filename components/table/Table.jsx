@@ -47,11 +47,6 @@ import ModalStore from "lib/utils/modal_store"
   th:last-child, td:last-child {
     text-align: right;
   }
-  tr:first-child, tr:last-child {
-    td {
-      padding: ${t(`gutterWidth`, w => w / 2)}px;
-    }
-  }
   .nowrap {
     white-space: nowrap;
   }
