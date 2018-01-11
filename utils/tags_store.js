@@ -94,8 +94,9 @@ export default class TagsStore {
 
   @action setVals = (props, name, fromNameRaw = null) => {
     const { format } = props
-    let fromName = fromNameRaw || name
 
+    let fromName = fromNameRaw || name
+    console.log('format', fromName)
     if (format === `name`) this[name].replace(props[fromName])
     if (format === `object` || format === `id`) {
       this[name].replace(props[fromName].map(tag => tag.name))
@@ -121,10 +122,9 @@ export default class TagsStore {
 
   handleChange = (value, e) => {
     const filteredForRepeats = value.reduce((filtered, tag) => {
-      const capitalisedTag = tag.toUpperCase()
 
-      if (!filtered.find(found => capitalisedTag === found.toUpperCase())) {
-        filtered.push(capitalisedTag)
+      if (!filtered.find(found => tag === found)) {
+        filtered.push(tag)
       }
 
       return filtered
