@@ -14,7 +14,7 @@ import { observer } from 'mobx-react'
 import { observable } from 'mobx'
 
 @styled`
-  border-radius: ${t(`panelRadius`)};
+  border-radius: ${t(`borderRadii.panel`)};
   overflow: hidden;
   border: 1px solid ${t(`border`)};
   background: white;

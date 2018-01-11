@@ -2,7 +2,7 @@ import { css } from 'styled-components'
 import { t } from './theme'
 
 export const dark_panel = (props) => css`
-  border-radius: ${t(`panelRadius`)(props)};
+  border-radius: ${t(`borderRadii.panel`)(props)};
   overflow: hidden;
   border: 1px solid ${t(`border`)(props)};
   background: ${t(`darkBackground`)};
@@ -12,7 +12,7 @@ export const dark_panel = (props) => css`
 `
 
 export const popover = (props) => css`
-  border-radius: ${t(`panelRadius`)(props)};
+  border-radius: ${t(`borderRadii.panel`)(props)};
   border: 1px solid ${t(`border`)(props)};
   background: white;
   box-shadow: ${t(`shadow5`)(props)};
