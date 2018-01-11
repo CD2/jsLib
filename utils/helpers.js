@@ -10,3 +10,7 @@ export const title = (title) => {
 export const numberToCurrency = (number=0, currency='£') => {
   return `${currency}${parseFloat(number).toFixed(2)}`
 }
+
+export const monetizeDisplay = (monetizeObject) => {
+  return numberToCurrency(monetizeObject.fractional / 100, monetizeObject.currency.symbol)
+}

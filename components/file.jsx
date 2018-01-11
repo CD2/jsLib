@@ -55,6 +55,7 @@ export default decorate(
   styled`
     color: white;
     font-weight: 600;
+    white-space: nowrap;
     i {
       margin-right: 6px;
       color: white;

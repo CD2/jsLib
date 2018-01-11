@@ -233,7 +233,7 @@ export default decorate(
     }
   }
   th{
-    padding: 20px 12px;
+    padding: 20px ${t(`gutterWidth`, w => w / 2)}px;
     white-space: nowrap;
     text-align: left;
     border-bottom: 1px solid ${t(`border`)};
@@ -246,7 +246,7 @@ export default decorate(
     height: 48px;
     &.primary { font-weight: 600 }
   }
-  .nowrap {
+  .nowrap, .no-wrap {
     white-space: nowrap;
   }
   .table__container {
@@ -263,6 +263,13 @@ export default decorate(
       border: 2px solid #e5e5e5;
       border-radius: 4px; 
     }
+  }
+  .narrow-column {
+    width: 1px;
+    text-align: center;
+  }
+  .minor-column {
+    color: rgba(0,0,0,0.2);
   }
   .placeholder {
     border-radius: 7px;
@@ -300,14 +307,18 @@ export default decorate(
      border-radius: 3px; 
      font-size: 13px;
      background: ${t('background')};
+     white-space: nowrap;
      &__in_progress {
         background: ${t('colors.blue')};;
         color: white;
      }
-     &__complete {
+     &__complete, &__active {
         background: ${t('colors.green')};;
         color: white;
      }
+   }
+   .right-align {
+    text-align: right;
    }
 `,
   observer,

@@ -8,7 +8,9 @@ exports[`<Wrapper /> snapshot 1`] = `
       "backgroundColor": "white",
       "borderRadius": "0",
       "boxShadow": "none",
+      "height": "auto",
       "marginBottom": "0",
+      "overflow": "hidden",
       "position": "relative",
     }
   }
@@ -17,8 +19,8 @@ exports[`<Wrapper /> snapshot 1`] = `
     style={
       Object {
         "margin": "0 auto",
-        "maxWidth": "1000px",
-        "padding": "50px 50px",
+        "maxWidth": "1250px",
+        "padding": "16px 50px",
         "position": "relative",
         "width": "100%",
       }
@@ -35,8 +37,14 @@ exports[`<Wrapper /> snapshot 2`] = `
 <withTheme(StyledComponent)
   background={true}
   className=""
+  size={null}
   style={
     Object {
+      "borderRadius": "0",
+      "boxShadow": "none",
+      "height": "auto",
+      "marginBottom": "0",
+      "overflow": "hidden",
       "position": "relative",
     }
   }
@@ -46,8 +54,8 @@ exports[`<Wrapper /> snapshot 2`] = `
     style={
       Object {
         "margin": "0 auto",
-        "maxWidth": "1000px",
-        "padding": "50px 50px",
+        "maxWidth": "1250px",
+        "padding": "16px 50px",
         "position": "relative",
         "width": "100%",
       }
@@ -64,7 +72,9 @@ exports[`<Wrapper /> snapshot 3`] = `
       "backgroundColor": "white",
       "borderRadius": "0",
       "boxShadow": "none",
+      "height": "auto",
       "marginBottom": "0",
+      "overflow": "hidden",
       "position": "relative",
     }
   }
@@ -87,8 +97,8 @@ exports[`<Wrapper /> snapshot 3`] = `
     style={
       Object {
         "margin": "0 auto",
-        "maxWidth": "1000px",
-        "padding": "50px 50px",
+        "maxWidth": "1250px",
+        "padding": "16px 50px",
         "position": "relative",
         "width": "100%",
       }

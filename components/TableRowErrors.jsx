@@ -4,10 +4,10 @@ import placeholder from 'images/placeholder.png'
 import Image from 'lib/components/image'
 import FaIcon from "lib/components/fa_icon"
 import theme from 'styles/theme'
+import decorate from "lib/utils/decorate"
 import { observer } from 'mobx-react'
 
-@observer 
-export default class TableRowErrors extends React.Component {
+export class TableRowErrors extends React.Component {
 
   static propTypes = {
     alternateAction: PropTypes.func,
@@ -59,3 +59,5 @@ export default class TableRowErrors extends React.Component {
   }
 
 }
+
+export default decorate(observer, TableRowErrors)

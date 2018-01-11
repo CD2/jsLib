@@ -2,7 +2,11 @@
 
 exports[`<Overlay /> snapshot 1`] = `
 <div
-  className=""
+  className=" "
   onClick={[Function]}
-/>
+>
+  <style>
+    body { overflow: hidden; }
+  </style>
+</div>
 `;
