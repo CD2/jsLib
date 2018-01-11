@@ -308,6 +308,7 @@ export default decorate(
      font-size: 13px;
      background: ${t('background')};
      white-space: nowrap;
+     + .table-tag { margin-left: 3px; }
      &__in_progress {
         background: ${t('colors.blue')};;
         color: white;
