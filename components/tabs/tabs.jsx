@@ -54,12 +54,12 @@ import Wrapper from "../wrapper"
     if (thick) return `
       .tab-heads {
         > div {
-          border-bottom: 5px solid ${theme.border};
+          border-bottom: 5px solid ${theme.border} !important;
 
           &.selected {
-            font-weight: bold;
-            border-bottom: 5px solid ${theme.primary};
-            margin-bottom: 0;
+            font-weight: bold !important;
+            border-bottom: 5px solid ${theme.primary} !important;
+            margin-bottom: 0 !important;
           }
         }
       }
