@@ -14,6 +14,13 @@ export class SocialButtons extends React.Component {
 
   static propTypes = {
     className: PropTypes.string,
+    round: PropTypes.bool,
+    size: PropTypes.number,
+  }
+
+  static defaultProps = {
+    round: true,
+    size: 32,
   }
 
   render() {
@@ -22,23 +29,28 @@ export class SocialButtons extends React.Component {
       TwitterShareButton,
       GooglePlusShareButton,
       LinkedinShareButton,
-      EmailShareButton
+      EmailShareButton,
+      TumblrShareButton
     } = ShareButtons
     const FacebookIcon = generateShareIcon(`facebook`)
     const TwitterIcon = generateShareIcon(`twitter`)
     const GooglePlusIcon = generateShareIcon(`google`)
     const LinkedinIcon = generateShareIcon(`linkedin`)
     const EmailIcon = generateShareIcon(`email`)
+    const TumblrIcon = generateShareIcon(`tumblr`)
 
     const url = window.location.href
 
+    const { className, round, size } = this.props
+
     return (
-      <div className={this.props.className}>
-        <FacebookShareButton url={url}><FacebookIcon size={32} round /></FacebookShareButton>
-        <TwitterShareButton url={url}><TwitterIcon size={32} round /></TwitterShareButton>
-        <GooglePlusShareButton url={url}><GooglePlusIcon size={32} round /></GooglePlusShareButton>
-        <LinkedinShareButton url={url}><LinkedinIcon size={32} round /></LinkedinShareButton>
-        <EmailShareButton url={url}><EmailIcon size={32} round /></EmailShareButton>
+      <div className={className}>
+        <FacebookShareButton url={url}><FacebookIcon size={size} round={round} /></FacebookShareButton>
+        <TwitterShareButton url={url}><TwitterIcon size={size} round={round} /></TwitterShareButton>
+        <GooglePlusShareButton url={url}><GooglePlusIcon size={size} round={round} /></GooglePlusShareButton>
+        <LinkedinShareButton url={url}><LinkedinIcon size={size} round={round} /></LinkedinShareButton>
+        <TumblrShareButton url={url}><TumblrIcon size={size} round={round} /></TumblrShareButton>
+        <EmailShareButton body={url} url={url}><EmailIcon size={size} round={round} /></EmailShareButton>
       </div>
     )
   }
@@ -47,6 +59,10 @@ export class SocialButtons extends React.Component {
 export default decorate(
   styled`
     display: flex;
+
+    .SocialMediaShareButton + .SocialMediaShareButton {
+      margin-left: 4px;
+    }
   `,
   SocialButtons
 )
