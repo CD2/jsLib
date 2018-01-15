@@ -72,7 +72,7 @@ export default decorate(
             return `max-width: 500px;`
           }
         }}
-      max-height: 600px;
+      max-height: 90%;
       overflow: auto;
       position: absolute;
       left: 50%;
