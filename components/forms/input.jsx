@@ -83,7 +83,10 @@ margin-bottom: 10px;
     font-size: 0.8em;
     display: block;
     text-align: right;
-    position: absolute;
+
+  }
+  .validation-errors {
+      position: absolute;
     bottom: 6px;
     right: 6px;
   }
@@ -140,9 +143,14 @@ export default class Input extends React.Component {
     const { errors } = this.props
     if (errors) {
       return (
-        errors.map(
-          (err, index) => <span key={`inputError${index}`} className="validation-error">{err}</span>
-        )
+        <div className="validation-errors">
+          {
+            errors.map(
+              (err, index) => <span key={`inputError${index}`}
+                                    className="validation-error">{err}</span>
+            )
+          }
+        </div>
       )
     }
   }
