@@ -137,7 +137,7 @@ export default class Input extends React.Component {
   }
 
   render() {
-    const { className, label, type, description } = this.props
+    const { className, label, type, description, errors } = this.props
     const props = { ...this.props }
     delete props.errors
     delete props.theme
@@ -145,7 +145,7 @@ export default class Input extends React.Component {
     if (type === `hidden`) return <this.field {...props} className="field" />
     if (label) {
       return (
-        <div className={`${className} form-input`}>
+        <div className={`${className} form-input${errors ? ' errors' : ''}`}>
           {this.renderErrors()}
           <label>
             {label}
