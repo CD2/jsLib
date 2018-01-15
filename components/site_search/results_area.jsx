@@ -51,14 +51,14 @@ export class ResultsArea extends React.Component {
   @action handleArrowDown() {
     if (this.selectedIndex < this.props.results.length - 1) {
       this.selectedIndex = this.selectedIndex + 1
-      this.scrollToSelected()
+      // this.scrollToSelected()
     }
   }
 
   @action handleArrowUp() {
     if (this.selectedIndex > 0) {
       this.selectedIndex = this.selectedIndex - 1
-      this.scrollToSelected()
+      // this.scrollToSelected()
     }
   }
 
