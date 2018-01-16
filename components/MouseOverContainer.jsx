@@ -11,6 +11,7 @@ export default class MouseOverContainer extends React.Component {
     className: PropTypes.string,
     mouseAttachment: PropTypes.node,
     noBoundaries: PropTypes.bool,
+    style: PropTypes.object,
   }
 
   static defaultProps = {
@@ -83,7 +84,7 @@ export default class MouseOverContainer extends React.Component {
 
   render() {
     return (
-      <div ref={element => this.container = element}>
+      <div ref={element => this.container = element} style={this.props.style}>
         {this.show ? this.renderMouseAttachment() : null}
         {this.props.children}
       </div>
