@@ -32,6 +32,7 @@ export class PaginationControls extends React.Component {
     page_button_limit: PropTypes.number,
     per_page: PropTypes.number.isRequired,
     storePageName: PropTypes.string,
+    style: PropTypes.object,
     total_items: PropTypes.number.isRequired,
   }
 
@@ -142,7 +143,7 @@ export class PaginationControls extends React.Component {
   render() {
     if (this.props.total_items < this.props.per_page) return null
     return (
-      <div className={this.props.className}>
+      <div className={this.props.className} style={this.props.style}>
         {this.renderLeft()}
         {this.renderPageNumbers()}
         {this.renderRight()}

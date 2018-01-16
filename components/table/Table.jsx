@@ -101,6 +101,7 @@ export default class IndexTable extends React.Component {
     headings: PropTypes.node,
     ids: PropTypes.array,
     paginationPosition: PropTypes.string,
+    paginationStyle: PropTypes.object,
     query: PropTypes.object,
     row: PropTypes.func,
     rowProps: PropTypes.object,
@@ -182,6 +183,7 @@ export default class IndexTable extends React.Component {
         per_page={this.per_page}
         total_items={this.total_items}
         onPageChange={this.handlePageChange}
+        style={this.props.paginationStyle}
       />
     )
   }
