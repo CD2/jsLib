@@ -1,21 +1,21 @@
-import { redirect } from 'lib/utils/router'
-import flashStore from 'lib/stores/Flash'
-import { observable, action, computed, toJS } from 'mobx'
-import { validateForm } from 'lib/components/forms'
+import { redirect } from "lib/utils/router"
+import flashStore from "lib/stores/Flash"
+import { observable, action, computed, toJS } from "mobx"
+import { validateForm } from "lib/components/forms"
 
 export default class FormModel {
-
   @observable values = observable.shallowMap()
   @observable changes = observable.shallowMap()
   @observable errors = observable.shallowMap()
 
-  @computed get completeValues() {
+  @computed
+  get completeValues() {
     const full = observable.shallowMap(toJS(this.values))
     full.merge(this.changes)
     return full
   }
 
-  constructor({ fields, options }={}) {
+  constructor({ fields, options } = {}) {
     const values = fields.reduce((newValues, field) => {
       let newValue = null
 
@@ -66,11 +66,13 @@ export default class FormModel {
     return Object.keys(toJS(this.changes)).length > 0
   }
 
-  @action set(key, value) {
+  @action
+  set(key, value) {
     this.changes.set(key, value)
   }
 
-  @action valid() {
+  @action
+  valid() {
     if (!this.validations) return true
     const { onError } = this.options
     const errors = validateForm(this.completeValues, this.validations)
@@ -84,21 +86,31 @@ export default class FormModel {
 
   submit() {
     if (!this.valid()) return
+    console.warn("asdasdasd")
     if (this.options.onSubmit) {
-      if (this.options.doesntCatch){
+      if (this.options.doesntCatch) {
         return this.options.onSubmit(toJS(this.changes))
       }
-      return this.options.onSubmit(toJS(this.changes)).catch(this.handleServerError)
+      console.log("nodoesntCatch")
+      return (
+        this.options.onSubmit(toJS(this.changes)).catch(this.handleServerError)
+      )
     }
+    console.log("asdasd")
     if (this.options.perform) return this.perform()
   }
 
-  handleServerError = (request=null) => {
+  handleServerError = (request = null) => {
+    console.log('save')
     const { onError } = this.options
-    if (request && request.response){
-      const errors = request.response.data.error_for ? request.response.data.error_for.message : {}
+    if (request && request.response) {
+      const data = request.response.data
+      const errors = data.error_for ? data.error_for.message : {}
+      const errorFlash = data.exception ? data.exception.replace("#<ActiveRecord::RecordInvalid: Validation failed: ", '').replace(">", "") : ''
       this.errors.replace(errors)
       onError && onError(errors)
+      errorFlash && flashStore.add(errorFlash, {level: `error`})
+      window.scrollTo(0, 0)
     } else {
       window.console.log(request)
     }
@@ -106,10 +118,7 @@ export default class FormModel {
 
   perform(payloadValues = null) {
     if (!this.hasChanges() && !payloadValues) return
-    const {
-      redirectTo, cord, flash, onSuccess,
-      perform, formatPayload, scroll
-    } = this.options
+    const { redirectTo, cord, flash, onSuccess, perform, formatPayload, scroll } = this.options
     let params = null
     const values = payloadValues || this.changes
 
@@ -121,17 +130,19 @@ export default class FormModel {
 
     const payload = formatPayload ? formatPayload(toJS(values)) : params
 
-    cord.perform(perform, payload).then(response => {
-      onSuccess && onSuccess(values, response)
-      if (scroll) window.scrollTo(0, 0)
-      if (flash) flashStore.add(flash)
-      if (redirectTo) redirect(redirectTo(toJS(values), response))
-    }).catch(this.handleServerError)
+    cord
+      .perform(perform, payload)
+      .then(response => {
+        onSuccess && onSuccess(values, response)
+        if (scroll) window.scrollTo(0, 0)
+        if (flash) flashStore.add(flash)
+        if (redirectTo) redirect(redirectTo(toJS(values), response))
+      })
+      .catch(this.handleServerError)
   }
 
   reset(newValues) {
     this.changes.clear()
     if (newValues) this.values.replace(newValues)
   }
-
 }
