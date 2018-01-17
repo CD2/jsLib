@@ -18,8 +18,12 @@ export class SectionIntro extends React.Component {
     wrapperIntro: PropTypes.bool,
   }
 
+  static defaultProp = {
+    style: {}
+  }
+
   render() {
-    const { className, children, title, heading, wrapperIntro } = this.props
+    const { className, children, title, heading, wrapperIntro, style } = this.props
 
     const wrapperIntroStyle = {
       borderBottom: `1px solid ${theme.border}`,
@@ -28,7 +32,7 @@ export class SectionIntro extends React.Component {
     }
 
     return (
-      <div className={className} style={wrapperIntro ? wrapperIntroStyle : {}}>
+      <div className={className} style={wrapperIntro ? wrapperIntroStyle : style}>
         {heading === 2 ?
           <h2 className="page-intro__heading">{title}</h2> :
           heading === 3 ?
