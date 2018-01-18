@@ -14,6 +14,7 @@ export class JWVideoPlayer extends React.Component {
     autoPlay: PropTypes.bool,
     chapterListUrl: PropTypes.string,
     className: PropTypes.string,
+    customProps: PropTypes.object,
     muted: PropTypes.bool,
     onComplete: PropTypes.func,
     onPlay: PropTypes.func,
@@ -60,11 +61,12 @@ export class JWVideoPlayer extends React.Component {
   }
 
   render() {
-    const { autoPlay, muted, onPlay, onProgress, onComplete, className } = this.props
+    const { autoPlay, muted, onPlay, onProgress, onComplete, className, customProps } = this.props
 
     return (
       <ReactJWPlayer
         className={`jw_player ${className}`}
+        customProps={customProps}
         playerId={this.id}
         playerScript={config.script}
         playlist={this.getPlaylist()}
