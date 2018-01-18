@@ -5,10 +5,12 @@ export const signIn = (params) => {
   return post(`/auth/sign_in`, params).then(response => response.data)
 }
 
-const afterSignOut = () => redirect(`/`, { reload: true })
+const afterSignOut = () => {
+  clearApiHeaders()
+  redirect(`/`, { reload: true })
+}
 
 export const signOut = () => {
-  clearApiHeaders()
   return del(`/auth/sign_out`).then(() => afterSignOut()).catch(() => afterSignOut())
 }
 

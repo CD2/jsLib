@@ -23,6 +23,7 @@ const FIELD_TYPES = {
 }
 
 @styled`
+position: relative;
 margin-bottom: 10px;
   input[type=email],
   input[type=text],
@@ -82,7 +83,12 @@ margin-bottom: 10px;
     font-size: 0.8em;
     display: block;
     text-align: right;
-    font-weight: 600;
+
+  }
+  .validation-errors {
+      position: absolute;
+    bottom: 6px;
+    right: 6px;
   }
   .description {
     margin: 0;
@@ -95,7 +101,19 @@ margin-bottom: 10px;
     font-weight: 600;
   }
 
-
+  &.errors { 
+    label { color: ${t('error')}; }
+      input[type=email],
+  input[type=text],
+  input[type=search],
+  input[type=password],
+  input[type=number],
+  .DayPickerInput input,
+  textarea,
+  .select{
+    border: 1px solid ${t('error')} 
+  }
+  }
 
 
 `
@@ -125,9 +143,14 @@ export default class Input extends React.Component {
     const { errors } = this.props
     if (errors) {
       return (
-        errors.map(
-          (err, index) => <span key={`inputError${index}`} className="validation-error">{err}</span>
-        )
+        <div className="validation-errors">
+          {
+            errors.map(
+              (err, index) => <span key={`inputError${index}`}
+                                    className="validation-error">{err}</span>
+            )
+          }
+        </div>
       )
     }
   }
@@ -138,6 +161,7 @@ export default class Input extends React.Component {
 
   render() {
     const { className, label, type, description, errors } = this.props
+    const hasErrors = !!errors
     const props = { ...this.props }
     delete props.errors
     delete props.theme
@@ -145,7 +169,7 @@ export default class Input extends React.Component {
     if (type === `hidden`) return <this.field {...props} className="field" />
     if (label) {
       return (
-        <div className={`${className} form-input${errors ? ' errors' : ''}`}>
+        <div className={`${className} form-input${hasErrors ? ' errors' : ''}`}>
           {this.renderErrors()}
           <label>
             {label}

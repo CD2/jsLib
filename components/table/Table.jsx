@@ -36,12 +36,24 @@ import ModalStore from "lib/utils/modal_store"
     white-space: nowrap;
     text-align: left;
     border-bottom: 2px solid ${t(`border`)};
+
+    ${({ darkHead }) => {
+      if (darkHead) {
+        return `
+          background-color: rgb(27, 27, 31);
+          color: white;
+          border: 0;
+        `
+      }
+    }}
   }
+
   .background-image {
     border-radius: 5px;
   }
   td {
     padding: ${t(`gutterWidth`, w => w / 4)}px ${t(`gutterWidth`, w => w / 2)}px;
+    height: 37.5px;
     &.primary { font-weight: 600 }
   }
   th:last-child, td:last-child {
@@ -85,9 +97,11 @@ export default class IndexTable extends React.Component {
       }),
     ),
     className: PropTypes.string,
+    darkHead: PropTypes.bool,
     headings: PropTypes.node,
     ids: PropTypes.array,
     paginationPosition: PropTypes.string,
+    paginationStyle: PropTypes.object,
     query: PropTypes.object,
     row: PropTypes.func,
     rowProps: PropTypes.object,
@@ -169,6 +183,7 @@ export default class IndexTable extends React.Component {
         per_page={this.per_page}
         total_items={this.total_items}
         onPageChange={this.handlePageChange}
+        style={this.props.paginationStyle}
       />
     )
   }

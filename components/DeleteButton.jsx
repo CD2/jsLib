@@ -12,6 +12,7 @@ import ModalStore from 'lib/utils/modal_store'
 export default class DeleteButton extends React.Component {
 
   static propTypes = {
+    content: PropTypes.any,
     cord: PropTypes.object.isRequired,
     id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
     message: PropTypes.string,
@@ -62,7 +63,9 @@ export default class DeleteButton extends React.Component {
   render() {
     return (
       <div>
-        <Button onClick={this.handleOpenWarning}>Delete</Button>
+        <Button onClick={this.handleOpenWarning}>
+          { this.props.content ? this.props.content : `Delete` }
+        </Button>
       </div>
     )
   }
