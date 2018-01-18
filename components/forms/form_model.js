@@ -91,12 +91,10 @@ export default class FormModel {
       if (this.options.doesntCatch) {
         return this.options.onSubmit(toJS(this.changes))
       }
-      console.log("nodoesntCatch")
       return (
         this.options.onSubmit(toJS(this.changes)).catch(this.handleServerError)
       )
     }
-    console.log("asdasd")
     if (this.options.perform) return this.perform()
   }
 
