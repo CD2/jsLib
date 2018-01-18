@@ -89,7 +89,7 @@ export class SiteSearch extends React.Component {
             onChange={this.handleSearchChange}
             onFocus={this.handleFocus}
           />
-          {open && <Overlay belowAppBar onClick={this.handleBlur} />}
+          {open && <Overlay belowAppBar onClick={this.handleBlur} clickThrough />}
           {open && this.anyResults() &&
           <ResultsArea
             results={results}
