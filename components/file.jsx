@@ -5,6 +5,7 @@ import { styled } from 'lib/utils/theme'
 import decorate from 'lib/utils/decorate'
 import Button from "./button"
 import FaIcon from "./fa_icon"
+import { Link } from 'react-router-dom'
 
 export class File extends React.Component {
 
@@ -12,6 +13,8 @@ export class File extends React.Component {
     children: PropTypes.any,
     className: PropTypes.string,
     defaultSrc: PropTypes.string,
+    linkOnly: PropTypes.bool,
+    linkTarget: PropTypes.string,
     onClick: PropTypes.func,
     uid: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     wide: PropTypes.bool,
@@ -31,13 +34,17 @@ export class File extends React.Component {
   }
 
   render() {
-    const { defaultSrc, uid, children } = this.props
+    const { defaultSrc, uid, children, linkOnly, linkTarget } = this.props
 
     let url = this.url
     if (!uid) {
       url = defaultSrc
     }
-
+    if (linkOnly) {
+      return (
+        <a href={url} target={linkTarget ? linkTarget : `_blank`}>{ children }</a>
+      )
+    }
     return (
       <Button
         to={url}
