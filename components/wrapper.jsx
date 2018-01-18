@@ -26,6 +26,7 @@ export class Wrapper extends React.Component {
     innerBackground: PropTypes.string,
     margin: PropTypes.number,
     noGutters: PropTypes.bool,
+    noRelative: PropTypes.bool,
     noSpacing: PropTypes.bool,
     onClick: PropTypes.func,
     overflow: PropTypes.bool,
@@ -37,14 +38,14 @@ export class Wrapper extends React.Component {
   }
 
   renderContent() {
-    const { children, noGutters, spacing, noSpacing } = this.props
+    const { children, noGutters, spacing, noSpacing, noRelative } = this.props
     const width = this.props.width || theme.siteWidth
     const gutters = noGutters ? 0 : this.props.gutter || theme.gutterWidth
     const spacingHeight = noSpacing ? 0 : spacing ? spacing : theme.gutterHeight
 
     const contentStyle = {
       width: `100%`,
-      position: `relative`,
+      position: noRelative ? `static` : `relative`,
       margin: `0 auto`,
       padding: `${spacingHeight}px ${gutters}px`,
       maxWidth: typeof width === `string` ? width : `${width}px`,
@@ -76,6 +77,7 @@ export class Wrapper extends React.Component {
       backgroundImage,
       background,
       floating,
+      noRelative,
     } = this.props
     if (backgroundImageUid || backgroundImage) {
       return (
@@ -108,7 +110,7 @@ export class Wrapper extends React.Component {
         className={this.props.className || ``}
         style={{
           backgroundColor: background || `white`,
-          position: `relative`,
+          position: noRelative ? `static` : `relative`,
           boxShadow: floating ? theme.shadow0 : `none`,
           borderRadius: floating || this.props.borderRadius ? `6px` : `0`,
           marginBottom: floating
