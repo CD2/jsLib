@@ -110,6 +110,7 @@ export default decorate(
     margin-top: -10px;
     font-size: 0.9em;
     z-index: 5000;
+    max-width: 100%;
 
     .search-dropdown {
       position: relative;

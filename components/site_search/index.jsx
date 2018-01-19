@@ -84,7 +84,7 @@ export class SiteSearch extends React.Component {
   render() {
     const { open, results, query, searchValue } = this
     return (
-      <div className="app-bar__search">
+      <div className="app-bar__search" style={{ position: `relative` }}>
         <Form>
           <Input
             type="search"
@@ -93,7 +93,7 @@ export class SiteSearch extends React.Component {
             onChange={this.handleSearchChange}
             onFocus={this.handleFocus}
           />
-          {open && <Overlay belowAppBar onClick={this.handleBlur} clickThrough />}
+          {open && <Overlay belowAppBar clickThrough onClick={this.handleBlur} />}
           {open &&
             this.anyResults() && (
               <ResultsArea
