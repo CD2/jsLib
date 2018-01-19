@@ -119,20 +119,26 @@ export default decorate(
       &__result {
         padding: 8px;
         width: 100%;
-        white-space: nowrap;
         text-overflow: ellipsis;
         overflow: hidden;
         display: block;
         color: ${t(`text`)};
-        p { margin: 0 }
+
+        p { 
+          margin: 0 
+        }
+
         b {
           color: ${t(`lightText`)};
           font-size: 0.8em;
         }
 
-        &:hover,
-        &--selected {
+        &:hover, &--selected {
           background-color: ${t(`border`)};
+        }
+        
+        @media (min-width: 400px) {
+          white-space: nowrap;
         }
       }
     }
