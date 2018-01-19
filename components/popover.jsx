@@ -1,12 +1,11 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { styled } from 'lib/utils/theme'
-import decorate from 'lib/utils/decorate'
-import { observer } from 'mobx-react'
-import Overlay from 'lib/components/overlay'
+import React from "react"
+import PropTypes from "prop-types"
+import { styled } from "lib/utils/theme"
+import decorate from "lib/utils/decorate"
+import { observer } from "mobx-react"
+import Overlay from "lib/components/overlay"
 
 export class Popover extends React.Component {
-
   static propTypes = {
     children: PropTypes.node,
     className: PropTypes.string,
@@ -45,7 +44,7 @@ export class Popover extends React.Component {
   }
 
   render() {
-    if(!this.props.open) return null
+    if (!this.props.open) return null
     return (
       <div className={`${this.props.className} ${this.props.containerClassName}`}>
         <div
@@ -55,11 +54,12 @@ export class Popover extends React.Component {
         >
           {this.props.children}
         </div>
-        {this.props.closeOnOutsideClick ? <Overlay clickThrough onClick={this.props.onToggle} /> : null}
+        {this.props.closeOnOutsideClick ? (
+          <Overlay clickThrough onClick={this.props.onToggle} />
+        ) : null}
       </div>
     )
   }
-
 }
 
 export default decorate(
@@ -87,5 +87,5 @@ export default decorate(
   }
   `,
   observer,
-  Popover
+  Popover,
 )

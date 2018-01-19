@@ -1,7 +1,7 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { styled, t } from 'lib/utils/theme'
-import load from 'images/load'
+import React from "react"
+import PropTypes from "prop-types"
+import { styled, t } from "lib/utils/theme"
+import load from "images/load"
 
 @styled`
     position: relative;
@@ -23,8 +23,8 @@ import load from 'images/load'
       background-color: ${t(`primaryLight`)};
     }
     ${({ submitting }) => {
-      if (submitting){
-        return`
+      if (submitting) {
+        return `
         background: url(${load});
         opacity: 0.7;
         background-size: 100%;
@@ -34,13 +34,12 @@ import load from 'images/load'
         &:hover{
           background-color: #2c2d2d;
         }
-    `}}
-  }
+    `
+      }
+    }}
 
 `
-
 export default class Submit extends React.Component {
-
   static propTypes = {
     className: PropTypes.string,
     submitting: PropTypes.bool,
@@ -52,7 +51,7 @@ export default class Submit extends React.Component {
   }
 
   render() {
-    const { className=``, value, submitting } = this.props
+    const { className = ``, value, submitting } = this.props
     let val = value
     if (submitting) {
       val = ``
@@ -60,9 +59,6 @@ export default class Submit extends React.Component {
       val = val || `Submit`
     }
 
-    return (
-      <input className={`btn ${className}`} type="submit" value={val} />
-    )
+    return <input className={`btn ${className}`} type="submit" value={val} />
   }
-
 }

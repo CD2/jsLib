@@ -1,15 +1,14 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React from "react"
+import PropTypes from "prop-types"
 
-import { computed, action } from 'mobx'
-import { observer } from 'mobx-react'
+import { computed, action } from "mobx"
+import { observer } from "mobx-react"
 
-import tagStore from 'lib/stores/Tags'
+import tagStore from "lib/stores/Tags"
 
-import { styled, t } from 'lib/utils/theme'
-import decorate from 'lib/utils/decorate'
+import { styled, t } from "lib/utils/theme"
+import decorate from "lib/utils/decorate"
 export class Tag extends React.Component {
-
   static propTypes = {
     alt_style: PropTypes.bool,
     className: PropTypes.string,
@@ -22,16 +21,18 @@ export class Tag extends React.Component {
     disabled: false,
   }
 
-  @action handleClick = () => {
+  @action
+  handleClick = () => {
     if (this.props.disabled) return null
     const { onClick, tag } = this.props
-    this.selected ?
-      tagStore.remove(tag) :
-      tagStore.add(tag)
+    this.selected ? tagStore.remove(tag) : tagStore.add(tag)
     if (onClick) onClick()
   }
 
-  @computed get selected() { return tagStore.isSelected(this.props.tag) }
+  @computed
+  get selected() {
+    return tagStore.isSelected(this.props.tag)
+  }
 
   get className() {
     let className = `tag ${this.props.className}`
@@ -46,7 +47,6 @@ export class Tag extends React.Component {
       </span>
     )
   }
-
 }
 export default decorate(
   styled`
@@ -73,5 +73,5 @@ export default decorate(
     }
   `,
   observer,
-  Tag
+  Tag,
 )

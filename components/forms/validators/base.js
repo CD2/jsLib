@@ -1,8 +1,7 @@
 export class BaseValidator {
-
   static message
 
-  constructor({ message, ...options }={}) {
+  constructor({ message, ...options } = {}) {
     this.error_message = message
     this.options = { ...this.defaultOptions(), ...options }
   }
@@ -14,6 +13,5 @@ export class BaseValidator {
   message() {
     return this.error_message || this.constructor.message || `is invalid`
   }
-
 }
 export default BaseValidator

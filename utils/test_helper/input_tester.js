@@ -1,5 +1,4 @@
 export class InputTester {
-
   constructor(wrapper, selector, callback) {
     this.wrapper = wrapper
 
@@ -10,7 +9,7 @@ export class InputTester {
   }
 
   _findInput(selector) {
-    const input = this.wrapper.find(`input`).filterWhere(n=>n.prop(selector[0]) === selector[1])
+    const input = this.wrapper.find(`input`).filterWhere(n => n.prop(selector[0]) === selector[1])
     return input
   }
 
@@ -20,7 +19,7 @@ export class InputTester {
   }
 
   expect_value(value) {
-    it (`has value: ${value}`, () => expect(this.input.props().value).toBe(value))
+    it(`has value: ${value}`, () => expect(this.input.props().value).toBe(value))
     return this
   }
 
@@ -29,6 +28,5 @@ export class InputTester {
     this.expect_value(value)
     return this
   }
-
 }
 export default InputTester

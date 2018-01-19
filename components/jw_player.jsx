@@ -1,15 +1,14 @@
-import React from 'react'
-import shortid from 'shortid'
-import ReactJWPlayer from 'react-jw-player'
-import PropTypes from 'prop-types'
+import React from "react"
+import shortid from "shortid"
+import ReactJWPlayer from "react-jw-player"
+import PropTypes from "prop-types"
 
-import decorate from 'lib/utils/decorate'
-import JWPlayerTranscript from 'lib/utils/jw_player_transcript'
+import decorate from "lib/utils/decorate"
+import JWPlayerTranscript from "lib/utils/jw_player_transcript"
 
-import config from 'libDependencies/jwPlayerConfig'
+import config from "libDependencies/jwPlayerConfig"
 
 export class JWVideoPlayer extends React.Component {
-
   static propTypes = {
     autoPlay: PropTypes.bool,
     chapterListUrl: PropTypes.string,
@@ -79,8 +78,5 @@ export class JWVideoPlayer extends React.Component {
       />
     )
   }
-
 }
-export default decorate(
-  JWVideoPlayer,
-)
+export default decorate(JWVideoPlayer)

@@ -1,19 +1,19 @@
-import { observable, action, computed, toJS } from 'mobx'
-import { validateForm } from 'lib/components/forms'
+import { observable, action, computed, toJS } from "mobx"
+import { validateForm } from "lib/components/forms"
 
 export default class Model {
-
   @observable values = observable.shallowMap()
   @observable changes = observable.shallowMap()
   @observable errors = observable.shallowMap()
 
-  @computed get completeValues() {
+  @computed
+  get completeValues() {
     const full = observable.shallowMap(toJS(this.values))
     full.merge(this.changes)
     return full
   }
 
-  constructor({ values={}, onSave, validations, ...options }={}) {
+  constructor({ values = {}, onSave, validations, ...options } = {}) {
     this.values.replace(values)
     if (onSave !== undefined) this.onSave = onSave
     if (validations) this.validations = validations
@@ -36,15 +36,18 @@ export default class Model {
     return toJS(this.changes)
   }
 
-  @computed get hasChanges() {
+  @computed
+  get hasChanges() {
     return Object.keys(toJS(this.changes)).length > 0
   }
 
-  @action set(key, value) {
+  @action
+  set(key, value) {
     this.changes.set(key, value)
   }
 
-  @action valid() {
+  @action
+  valid() {
     if (!this.validations) return true
     const errors = validateForm(this.completeValues, this.validations)
 
@@ -62,7 +65,7 @@ export default class Model {
     return this.onCreate(toJS(this.changes))
   }
 
-  perform(action, formatValues=null) {
+  perform(action, formatValues = null) {
     if (!this.valid()) return
     return this.onPerform(action, toJS(this.changes), formatValues)
   }
@@ -75,5 +78,4 @@ export default class Model {
   onSave(values) {
     throw new Error(`Must provide an onSave method to the model`)
   }
-
 }

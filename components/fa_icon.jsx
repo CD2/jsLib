@@ -1,11 +1,10 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { styled } from 'lib/utils/theme/index'
-import decorate from 'lib/utils/decorate'
+import React from "react"
+import PropTypes from "prop-types"
+import { styled } from "lib/utils/theme/index"
+import decorate from "lib/utils/decorate"
 
 export class FaIcon extends React.Component {
-
-  static prefix= `fa`
+  static prefix = `fa`
 
   static propTypes = {
     className: PropTypes.string,
@@ -29,36 +28,28 @@ export class FaIcon extends React.Component {
 
   render() {
     const { onClick, style } = this.props
-    return (
-      <i className={this.className} style={style} onClick={onClick} />
-    )
+    return <i className={this.className} style={style} onClick={onClick} />
   }
-
 }
 export default decorate(
   styled`
     ${({ color, theme, size }) => {
       const col = color || theme.darkBackground
       const sze = size || 1
-      return (
-      `
+      return `
         color: ${col};
         font-size: ${sze}em;
         `
-      )
-    }
-}
+    }}
   ${({ hoverColor }) => {
     if (hoverColor) {
-      return (
-        `
+      return `
           &:hover{
             color: ${hoverColor};
           }
           `
-      )
     }
   }}
   `,
-  FaIcon
+  FaIcon,
 )

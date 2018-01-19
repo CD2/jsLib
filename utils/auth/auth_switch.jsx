@@ -1,11 +1,10 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { Switch } from 'react-router-dom'
-import { withAuth, isAuthed } from './index'
+import React from "react"
+import PropTypes from "prop-types"
+import { Switch } from "react-router-dom"
+import { withAuth, isAuthed } from "./index"
 
 @withAuth
 export default class AuthSwitch extends React.Component {
-
   static propTypes = {
     auth: PropTypes.object,
     children: PropTypes.node,
@@ -17,11 +16,6 @@ export default class AuthSwitch extends React.Component {
         ? null
         : elem
     })
-    return (
-      <Switch>
-        {routes}
-      </Switch>
-    )
+    return <Switch>{routes}</Switch>
   }
-
 }

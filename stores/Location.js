@@ -1,16 +1,15 @@
-import { observable, reaction, action, autorun } from 'mobx'
-import { getUrlSearch } from 'lib/utils/http'
-import qs from 'qs'
-
+import { observable, reaction, action, autorun } from "mobx"
+import { getUrlSearch } from "lib/utils/http"
+import qs from "qs"
 
 export default class LocationStore {
-
   @observable pathname = ``
   @observable hash = ``
   @observable search = ``
   @observable _params = {}
 
-  @action update = () => {
+  @action
+  update = () => {
     const { hash, pathname, search } = this.history.location
     if (this.hash !== hash) this.hash = hash
     if (this.pathname !== pathname) this.pathname = pathname
@@ -28,31 +27,34 @@ export default class LocationStore {
     this.update()
     history.listen(this.update)
 
-    reaction(() => this.pathname,
-      (pathname) => {
+    reaction(
+      () => this.pathname,
+      pathname => {
         if (this.history.location.pathname !== pathname) {
           let { hash, search } = this
           this.history.push({ hash, search, pathname })
         }
-      }
+      },
     )
 
-    reaction(() => this.hash,
-      (hash) => {
+    reaction(
+      () => this.hash,
+      hash => {
         if (this.history.location.hash !== hash) {
           let { pathname, search } = this
           this.history.push({ pathname, search, hash })
         }
-      }
+      },
     )
 
-    reaction(() => this.search,
-      (search) => {
+    reaction(
+      () => this.search,
+      search => {
         if (this.history.location.search !== search) {
           const { hash, pathname } = this
           this.history.push({ hash, pathname, search })
         }
-      }
+      },
     )
   }
 
@@ -74,15 +76,18 @@ export default class LocationStore {
     this._params = params
   }
 
-  get params() { return this._params }
+  get params() {
+    return this._params
+  }
   set params(value) {
     this.search = qs.stringify(value)
   }
 
   pathExpressionToRegex(expression) {
-    return expression.replace(/:(\w+)/g, (match, p1) => {
-      return `([^/]+)`
-    }).replace(/\//g, `\\/`)
+    return expression
+      .replace(/:(\w+)/g, (match, p1) => {
+        return `([^/]+)`
+      })
+      .replace(/\//g, `\\/`)
   }
-
 }

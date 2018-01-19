@@ -1,5 +1,4 @@
-import moment from 'moment'
-
+import moment from "moment"
 
 export function dateFormat(dateString) {
   if (!dateString) return null
@@ -29,5 +28,5 @@ export function timeAgoInWords(dateString) {
   return new moment(dateString).fromNow()
 }
 export function secondsToTime(seconds) {
-  return moment.utc(seconds*1000).format(`mm\\m ss\\s`)
+  return moment.utc(seconds * 1000).format(`mm\\m ss\\s`)
 }

@@ -1,22 +1,25 @@
-import { observable, action, computed, toJS } from 'mobx'
+import { observable, action, computed, toJS } from "mobx"
 
 class PrintStore {
+  @observable printViewContents = null
 
-  @observable printViewContents = null;
-
-  @action set(contents) {
+  @action
+  set(contents) {
     this.printViewContents = contents
   }
 
-  @computed get contents() {
+  @computed
+  get contents() {
     return toJS(this.printViewContents)
   }
 
-  @computed get hasContents() {
+  @computed
+  get hasContents() {
     return !!this.printViewContents
   }
 
-  @action clear() {
+  @action
+  clear() {
     this.printViewContents = null
   }
 
@@ -24,7 +27,6 @@ class PrintStore {
     window.print()
     this.clear()
   }
-
 }
 
 export default new PrintStore()

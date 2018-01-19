@@ -1,20 +1,19 @@
 /* eslint-disable react/jsx-filename-extension */
-import React from 'react'
-import { inject, observer } from 'mobx-react'
-import PropTypes from 'prop-types'
-import LoadingSpinner from 'lib/components/loading_spinner'
-import defaultConnectIdsFactories from './ids_factories'
-import match from './match'
+import React from "react"
+import { inject, observer } from "mobx-react"
+import PropTypes from "prop-types"
+import LoadingSpinner from "lib/components/loading_spinner"
+import defaultConnectIdsFactories from "./ids_factories"
+import match from "./match"
 
 export default function(connectIds) {
-  return (Component) => {
+  return Component => {
     const getIdsRequest = match(connectIds, defaultConnectIdsFactories, `connectIds`)
     const cord = this
 
     @inject(`cordStore`)
     @observer
     class ConnectedIds extends React.Component {
-
       static propTypes = {
         cordStore: PropTypes.object,
       }
@@ -44,11 +43,8 @@ export default function(connectIds) {
 
         const props = { ...this.props, ...ids }
         delete props.cordStore
-        return (
-          <Component {...props} />
-        )
+        return <Component {...props} />
       }
-
     }
     return ConnectedIds
   }

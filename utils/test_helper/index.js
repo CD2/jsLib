@@ -1,5 +1,5 @@
-import ComponentTest from './component_test'
-import SceneTest from './scene_test'
+import ComponentTest from "./component_test"
+import SceneTest from "./scene_test"
 
 jest.mock(`tinymce`)
 jest.mock(`axios`)

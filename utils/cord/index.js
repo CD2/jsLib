@@ -1,7 +1,6 @@
-export { default as CordStore } from './cord_store'
-export { default as Cord } from './cord'
-export { default as Provider } from './provider'
-
+export { default as CordStore } from "./cord_store"
+export { default as Cord } from "./cord"
+export { default as Provider } from "./provider"
 
 /*
 

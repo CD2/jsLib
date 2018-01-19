@@ -1,13 +1,12 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { observer } from 'mobx-react'
+import React from "react"
+import PropTypes from "prop-types"
+import { observer } from "mobx-react"
 
-import decorate from 'lib/utils/decorate'
-import PrintStore from 'lib/utils/print'
-import { styled } from 'lib/utils/theme'
+import decorate from "lib/utils/decorate"
+import PrintStore from "lib/utils/print"
+import { styled } from "lib/utils/theme"
 
 export class PrintView extends React.Component {
-
   static propTypes = {
     className: PropTypes.string,
     hideClassName: PropTypes.string,
@@ -25,7 +24,7 @@ export class PrintView extends React.Component {
     if (PrintStore.hasContents) {
       return (
         <div className="print-view">
-          { hideClassName ? <style>{`${hideClassName} {display: none !important;}`}</style> : null}
+          {hideClassName ? <style>{`${hideClassName} {display: none !important;}`}</style> : null}
           {PrintStore.contents}
         </div>
       )
@@ -33,7 +32,6 @@ export class PrintView extends React.Component {
 
     return null
   }
-
 }
 
 export default decorate(
@@ -43,5 +41,5 @@ export default decorate(
     z-index: 1000000;
   `,
   observer,
-  PrintView
+  PrintView,
 )

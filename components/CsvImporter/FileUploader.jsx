@@ -1,14 +1,13 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { observer } from 'mobx-react'
-import { observable, action } from 'mobx'
+import React from "react"
+import PropTypes from "prop-types"
+import { observer } from "mobx-react"
+import { observable, action } from "mobx"
 
-import decorate from 'lib/utils/decorate'
+import decorate from "lib/utils/decorate"
 
-import Button from 'lib/components/button'
+import Button from "lib/components/button"
 
 export class FileUploader extends React.Component {
-
   static propTypes = {
     onChange: PropTypes.func,
   }
@@ -16,8 +15,8 @@ export class FileUploader extends React.Component {
   @observable file = null
   @observable headersRow = 1
 
-  @action handleSetFile = e => this.file = e.target.files[0]
-  @action handleSetHeadersRow = e => this.headersRow = e.target.value
+  @action handleSetFile = e => (this.file = e.target.files[0])
+  @action handleSetHeadersRow = e => (this.headersRow = e.target.value)
 
   render() {
     return (
@@ -44,16 +43,10 @@ export class FileUploader extends React.Component {
             onChange={this.handleSetHeadersRow}
           />
         </label>
-        <Button onClick={() => this.props.onChange(this.file, this.headersRow)}>
-          Submit
-        </Button>
+        <Button onClick={() => this.props.onChange(this.file, this.headersRow)}>Submit</Button>
       </div>
     )
   }
-
 }
 
-export default decorate(
-  observer,
-  FileUploader
-)
+export default decorate(observer, FileUploader)

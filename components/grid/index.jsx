@@ -1,7 +1,7 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import Item from './item'
-import { styled } from 'lib/utils/theme'
+import React from "react"
+import PropTypes from "prop-types"
+import Item from "./item"
+import { styled } from "lib/utils/theme"
 
 @styled`
   display: flex;
@@ -22,7 +22,6 @@ import { styled } from 'lib/utils/theme'
   }
 `
 class Grid extends React.Component {
-
   static propTypes = {
     children: PropTypes.any,
     className: PropTypes.string,
@@ -45,23 +44,22 @@ class Grid extends React.Component {
     let gutterWidth = this.props.gutterWidth || this.props.theme.gutterWidth.value
     if (noGutters) gutterWidth = 0
 
-    const getWidth = (span=1) => {
-      const colSpans = `${span/columns*100  }%`
-      const gutterOffsets = `${span * ((columns-1)/columns*gutterWidth)  }px`
-      const gutterOverlaps = `${(span-1)*gutterWidth  }px`
+    const getWidth = (span = 1) => {
+      const colSpans = `${span / columns * 100}%`
+      const gutterOffsets = `${span * ((columns - 1) / columns * gutterWidth)}px`
+      const gutterOverlaps = `${(span - 1) * gutterWidth}px`
       return `calc( ${colSpans} - ${gutterOffsets} + ${gutterOverlaps} )`
     }
 
     let takenColumns = 0
-    const items = React.Children.map(children, (child, i)=>{
+    const items = React.Children.map(children, (child, i) => {
       if (!child) return
 
-      const colSpan = child.props.colSpan ?
-        child.props.colSpan===`fill` ?
-          columns - takenColumns <= 0 ?
-            columns :
-            columns-takenColumns :
-          child.props.colSpan: 1
+      const colSpan = child.props.colSpan
+        ? child.props.colSpan === `fill`
+          ? columns - takenColumns <= 0 ? columns : columns - takenColumns
+          : child.props.colSpan
+        : 1
 
       const childWithWidth = React.cloneElement(child, { ...child.props, width: getWidth(colSpan) })
       let neededGutter = gutter
@@ -76,13 +74,8 @@ class Grid extends React.Component {
       return [neededGutter, childWithWidth]
     })
 
-    return (
-      <div className={className}>
-        {items}
-      </div>
-    )
+    return <div className={className}>{items}</div>
   }
-
 }
 
 Grid.Item = Item

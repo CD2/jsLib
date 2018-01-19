@@ -1,8 +1,7 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React from "react"
+import PropTypes from "prop-types"
 
 export default class THead extends React.Component {
-
   static propTypes = {
     children: PropTypes.node,
   }
@@ -11,11 +10,8 @@ export default class THead extends React.Component {
     const { children } = this.props
     return (
       <thead>
-        <tr>
-          {children}
-        </tr>
+        <tr>{children}</tr>
       </thead>
     )
   }
-
 }

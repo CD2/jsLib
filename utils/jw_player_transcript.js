@@ -1,5 +1,5 @@
-import { get } from 'lib/utils/api_http'
-import { link } from 'autolinker'
+import { get } from "lib/utils/api_http"
+import { link } from "autolinker"
 
 let global_chapters = []
 let global_captions = []
@@ -20,7 +20,6 @@ export const transcriptComponentIds = {
 }
 
 export default class TranscriptService {
-
   constructor() {
     this._jwplayer = window.jwplayer
   }
@@ -45,7 +44,6 @@ export default class TranscriptService {
       this._setupEventListeners()
     }
   }
-
 
   changeTranscript(video) {
     this._clearTranscriptGlobals()
@@ -79,13 +77,14 @@ export default class TranscriptService {
     }
     if (!global_chapterUrl) return
     get(global_chapterUrl).then(({ data: chapters }) => {
-      if (chapters){
+      if (chapters) {
         const t = chapters.split(`\n\n`)
         t.shift()
-        for (let i=0; i<t.length; i++) {
+        for (let i = 0; i < t.length; i++) {
           const c = this.parse(t[i])
           global_chapters.push(c)
-        }}
+        }
+      }
       this._setupCaptions()
     })
   }
@@ -95,14 +94,17 @@ export default class TranscriptService {
     const i = a[1].indexOf(` --> `)
     let t = a[2]
     if (a[3]) {
-      t += ` ${  a[3]}`
+      t += ` ${a[3]}`
     }
-    t = t.replace(/&/g, `&amp;`).replace(/</g, `&lt;`).replace(/>/g, `&gt;`)
+    t = t
+      .replace(/&/g, `&amp;`)
+      .replace(/</g, `&lt;`)
+      .replace(/>/g, `&gt;`)
     return {
       begin: this.seconds(a[1].substr(0, i)),
-      btext: a[1].substr(3, i-7),
-      end: this.seconds(a[1].substr(i+5)),
-      text: t
+      btext: a[1].substr(3, i - 7),
+      end: this.seconds(a[1].substr(i + 5)),
+      text: t,
     }
   }
 
@@ -111,7 +113,7 @@ export default class TranscriptService {
     if (a) {
       let r = Number(a[a.length - 1]) + Number(a[a.length - 2]) * 60
       if (a.length > 2) {
-        r+= Number(a[a.length-3]) * 3600
+        r += Number(a[a.length - 3]) * 3600
       }
       return r
     }
@@ -119,7 +121,7 @@ export default class TranscriptService {
     return 0
   }
 
-  _setupCaptions(){
+  _setupCaptions() {
     if (!global_captionUrl || !global_transcript) return
     get(global_captionUrl).then(({ data: captions }) => {
       window.captions = captions
@@ -128,7 +130,7 @@ export default class TranscriptService {
       t.shift()
       let h = `<p>`
       let s = 0
-      for (let i=0; i<t.length; i++) {
+      for (let i = 0; i < t.length; i++) {
         const c = this.parse(t[i])
         if (s < global_chapters.length && c.begin > global_chapters[s].begin) {
           h += `</p><h4>${global_chapters[s].text}</h4><p>`
@@ -137,19 +139,18 @@ export default class TranscriptService {
         h += `<span id='caption${i}'>${link(c.text)}</span>`
         global_captions.push(c)
       }
-      global_transcript.innerHTML = `${h  }</p>`
+      global_transcript.innerHTML = `${h}</p>`
     })
   }
 
-
   _setupEventListeners() {
     // Highlight current caption and chapter
-    this._jwplayer().on(`time`, (e) => {
+    this._jwplayer().on(`time`, e => {
       const p = e.position
-      for (let j=0; j<global_captions.length; j++) {
+      for (let j = 0; j < global_captions.length; j++) {
         if (global_captions[j].begin < p && global_captions[j].end > p) {
           if (j !== global_caption) {
-            const c = window.document.getElementById(`caption${  j}`)
+            const c = window.document.getElementById(`caption${j}`)
             if (global_caption > -1) {
               window.document.getElementById(`caption${global_caption}`).className = ``
             }
@@ -183,5 +184,4 @@ export default class TranscriptService {
       window.jwplayer().seek(global_captions[i].begin)
     }
   }
-
 }

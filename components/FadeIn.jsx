@@ -1,10 +1,10 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { observer } from 'mobx-react'
-import { observable, computed, action } from 'mobx'
-import VisibilitySensor from 'react-visibility-sensor'
+import React from "react"
+import PropTypes from "prop-types"
+import { observer } from "mobx-react"
+import { observable, computed, action } from "mobx"
+import VisibilitySensor from "react-visibility-sensor"
 
-import { styled, t } from 'lib/utils/theme'
+import { styled, t } from "lib/utils/theme"
 
 @styled`
   &.visibility {
@@ -31,22 +31,22 @@ import { styled, t } from 'lib/utils/theme'
 `
 @observer
 export default class FadeIn extends React.Component {
-
   static propTypes = {
     children: PropTypes.node,
     className: PropTypes.string,
     left: PropTypes.bool,
-    right: PropTypes.bool
+    right: PropTypes.bool,
   }
 
   @observable visible = false
-  @computed get className() {
+  @computed
+  get className() {
     const { left, right } = this.props
     const str = `visibility visibility--false${right ? `-right` : ``}${left ? `-left` : ``}`
     return this.visible ? `visibility visibility--true` : str
   }
 
-  @action handleChange = (isVisible) => this.visible = isVisible
+  @action handleChange = isVisible => (this.visible = isVisible)
 
   render() {
     const { children, className } = this.props
@@ -59,12 +59,9 @@ export default class FadeIn extends React.Component {
         onChange={this.handleChange}
       >
         <div>
-          <div className={`${className} ${this.className}`}>
-            {children}
-          </div>
+          <div className={`${className} ${this.className}`}>{children}</div>
         </div>
       </VisibilitySensor>
     )
   }
-
 }

@@ -1,12 +1,12 @@
 /* eslint-disable react/prop-types */
-import React from 'react'
-import PropTypes from 'prop-types'
-import { observer } from 'mobx-react'
-import { observable, action } from 'mobx'
-import moment from 'moment'
-import { DateUtils } from 'react-day-picker'
-import DayPickerInput from 'react-day-picker/DayPickerInput'
-import 'react-day-picker/lib/style.css'
+import React from "react"
+import PropTypes from "prop-types"
+import { observer } from "mobx-react"
+import { observable, action } from "mobx"
+import moment from "moment"
+import { DateUtils } from "react-day-picker"
+import DayPickerInput from "react-day-picker/DayPickerInput"
+import "react-day-picker/lib/style.css"
 
 const currentYear = new Date().getFullYear()
 const fromMonth = new Date(currentYear, -1200)
@@ -31,14 +31,18 @@ function YearMonthForm({ date, localeUtils, onChange }) {
   return (
     <form className="DayPicker-Caption">
       <select name="month" value={date.getMonth()} onChange={handleChange}>
-        {months.map((month, i) => <option key={i} value={i}>{month}</option>)}
+        {months.map((month, i) => (
+          <option key={i} value={i}>
+            {month}
+          </option>
+        ))}
       </select>
-      <select name="year"  value={date.getFullYear()} onChange={handleChange}>
-        {years.map((year, i) =>
-          (<option key={i} value={year}>
+      <select name="year" value={date.getFullYear()} onChange={handleChange}>
+        {years.map((year, i) => (
+          <option key={i} value={year}>
             {year}
-          </option>)
-        )}
+          </option>
+        ))}
       </select>
     </form>
   )
@@ -46,7 +50,6 @@ function YearMonthForm({ date, localeUtils, onChange }) {
 
 @observer
 export default class Example extends React.Component {
-
   static propTypes = {
     asDateString: PropTypes.bool,
     date: PropTypes.number,
@@ -62,12 +65,13 @@ export default class Example extends React.Component {
   @observable day = this.props.value ? new Date(this.props.value) : new Date()
   @observable month = this.props.value ? new Date(this.props.value) : new Date()
 
-  @action handleYearMonthChange = month => {
+  @action
+  handleYearMonthChange = month => {
     this.month = month
     this.day = month
-  };
+  }
 
-  handleChange = (day) => {
+  handleChange = day => {
     const { onChange, name, asDateString } = this.props
     if (onChange) onChange({ name, value: asDateString ? day.toDateString() : day })
   }
@@ -82,11 +86,9 @@ export default class Example extends React.Component {
   render() {
     const dayPickerProps = {
       todayButton: `Go to Today`,
-      captionElement:
-  <YearMonthForm
-    disabled={this.props.disabled}
-    onChange={this.handleYearMonthChange}
-  />,
+      captionElement: (
+        <YearMonthForm disabled={this.props.disabled} onChange={this.handleYearMonthChange} />
+      ),
       fromMonth,
       toMonth,
       onChange: this.handleChange,
@@ -97,14 +99,14 @@ export default class Example extends React.Component {
       modifiers: {
         selected: date => {
           return DateUtils.isSameDay(this.day, date)
-        }
+        },
       },
     }
 
     return (
       <div className="YearNavigation">
         <DayPickerInput
-          ref={ele => this.dayPicker = ele}
+          ref={ele => (this.dayPicker = ele)}
           dayPickerProps={dayPickerProps}
           value={this.getValue()}
           format={DAY_FORMAT}
@@ -112,5 +114,4 @@ export default class Example extends React.Component {
       </div>
     )
   }
-
 }

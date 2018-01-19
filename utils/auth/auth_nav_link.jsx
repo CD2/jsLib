@@ -1,11 +1,10 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { NavLink } from 'react-router-dom'
-import { withAuth, isAuthed } from './index'
+import React from "react"
+import PropTypes from "prop-types"
+import { NavLink } from "react-router-dom"
+import { withAuth, isAuthed } from "./index"
 
 @withAuth
 export default class AuthNavLink extends React.Component {
-
   static propTypes = {
     auth: PropTypes.object,
     permission: PropTypes.string,
@@ -16,9 +15,6 @@ export default class AuthNavLink extends React.Component {
     const aProps = { ...this.props }
     delete aProps.auth
     delete aProps.permission
-    return isAuthed(auth, permission)
-      ? (<NavLink {...aProps} />)
-      : null
+    return isAuthed(auth, permission) ? <NavLink {...aProps} /> : null
   }
-
 }

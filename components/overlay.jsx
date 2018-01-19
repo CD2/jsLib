@@ -1,10 +1,9 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { styled } from 'lib/utils/theme'
-import decorate from 'lib/utils/decorate'
+import React from "react"
+import PropTypes from "prop-types"
+import { styled } from "lib/utils/theme"
+import decorate from "lib/utils/decorate"
 
 export class Overlay extends React.Component {
-
   static propTypes = {
     className: PropTypes.string,
     clickThrough: PropTypes.bool,
@@ -20,7 +19,7 @@ export class Overlay extends React.Component {
     overlayClassName: ``,
   }
 
-  handleClick = (e) => {
+  handleClick = e => {
     const { clickThrough, onClick } = this.props
     if (onClick) onClick(e)
     if (clickThrough) {
@@ -41,7 +40,6 @@ export class Overlay extends React.Component {
       </div>
     )
   }
-
 }
 export default decorate(
   styled`
@@ -64,5 +62,5 @@ export default decorate(
       opacity: .7;
     }
   `,
-  Overlay
+  Overlay,
 )

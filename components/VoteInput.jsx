@@ -1,13 +1,12 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { styled, t } from 'lib/utils/theme'
-import FaIcon from 'lib/components/fa_icon'
-import decorate from 'lib/utils/decorate'
-import { observer } from 'mobx-react'
-import { observable, computed } from 'mobx'
+import React from "react"
+import PropTypes from "prop-types"
+import { styled, t } from "lib/utils/theme"
+import FaIcon from "lib/components/fa_icon"
+import decorate from "lib/utils/decorate"
+import { observer } from "mobx-react"
+import { observable, computed } from "mobx"
 
 export class VoteInput extends React.Component {
-
   static propTypes = {
     className: PropTypes.string,
     cord: PropTypes.object,
@@ -39,8 +38,14 @@ export class VoteInput extends React.Component {
       this.props.reload()
     })
   }
-  @computed get votes() { return this.props.votes - this.props.users_vote }
-  @computed get total_votes() { return this.votes + this.users_vote }
+  @computed
+  get votes() {
+    return this.props.votes - this.props.users_vote
+  }
+  @computed
+  get total_votes() {
+    return this.votes + this.users_vote
+  }
 
   handleVote = () => {
     if (this.users_vote === 1) {
@@ -52,8 +57,8 @@ export class VoteInput extends React.Component {
     }
   }
 
-
-  @computed get className() {
+  @computed
+  get className() {
     let className = `vote-input`
     if (this.users_vote !== 0) className += ` voted-for`
     if (this.props.className) className += ` ${this.props.className}`
@@ -63,7 +68,6 @@ export class VoteInput extends React.Component {
   render() {
     return (
       <div className={this.className}>
-
         <a
           title="Vote Up"
           className="vote-up voted-for"
@@ -72,7 +76,7 @@ export class VoteInput extends React.Component {
           <FaIcon
             icon="hat-heart"
             color={this.users_vote === 1 ? `orange` : this.props.light ? `white` : `black`}
-            hoverColor={this.props.disabled ? this.users_vote === 1 ? `orange` : `#777` : `#777`}
+            hoverColor={this.props.disabled ? (this.users_vote === 1 ? `orange` : `#777`) : `#777`}
             size={2}
           />
         </a>
@@ -80,7 +84,6 @@ export class VoteInput extends React.Component {
       </div>
     )
   }
-
 }
 export default decorate(
   styled`
@@ -98,5 +101,5 @@ export default decorate(
   }}
   `,
   observer,
-  VoteInput
+  VoteInput,
 )

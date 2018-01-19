@@ -1,10 +1,10 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React from "react"
+import PropTypes from "prop-types"
 
-import { Form, Input, Submit } from 'lib/components/forms'
+import { Form, Input, Submit } from "lib/components/forms"
 
-import { observer } from 'mobx-react'
-import { styled } from 'lib/utils/theme'
+import { observer } from "mobx-react"
+import { styled } from "lib/utils/theme"
 
 @styled`
   position: relative;
@@ -19,13 +19,12 @@ import { styled } from 'lib/utils/theme'
 `
 @observer
 export class IndexFilters extends React.Component {
-
   static propTypes = {
     className: PropTypes.string,
     query: PropTypes.object,
   }
 
-  handleChange = (e) => {
+  handleChange = e => {
     this.props.query.setSearchValue(e.name, e.value)
   }
 
@@ -46,6 +45,5 @@ export class IndexFilters extends React.Component {
       </Form>
     )
   }
-
 }
 export default IndexFilters

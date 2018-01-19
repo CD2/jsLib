@@ -1,10 +1,9 @@
-import { observable } from 'mobx'
-
+import { observable } from "mobx"
 
 export default observable({
   flashes: [],
   previousFlashes: [],
-  add(message, { level=`notice`, timeout=599000, disableTimeout=false }={}) {
+  add(message, { level = `notice`, timeout = 15000, disableTimeout = false } = {}) {
     const id = Date.now()
 
     if (this.flashes.length >= 3) this.flashes.shift()
@@ -29,5 +28,5 @@ export default observable({
     })
     this.previousFlashes.replace(newFlashes)
     this.flashes.replace(newFlashes)
-  }
+  },
 })

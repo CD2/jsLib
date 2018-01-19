@@ -1,11 +1,10 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { observer } from 'mobx-react'
-import { observable, action, computed } from 'mobx'
+import React from "react"
+import PropTypes from "prop-types"
+import { observer } from "mobx-react"
+import { observable, action, computed } from "mobx"
 
 @observer
 export default class MouseOverContainer extends React.Component {
-
   static propTypes = {
     children: PropTypes.node,
     className: PropTypes.string,
@@ -31,11 +30,12 @@ export default class MouseOverContainer extends React.Component {
   @observable x = null
   @observable y = null
 
-  @computed get show() {
+  @computed
+  get show() {
     return this.x || this.y
   }
 
-  getOffset(element, keyName, parentName=`parentNode`, offset = 0) {
+  getOffset(element, keyName, parentName = `parentNode`, offset = 0) {
     const newOffset = element[keyName] ? element[keyName] + offset : offset
 
     if (element[parentName]) {
@@ -45,7 +45,8 @@ export default class MouseOverContainer extends React.Component {
     return newOffset
   }
 
-  @action setPosition = e => {
+  @action
+  setPosition = e => {
     let x = e.pageX - this.getOffset(e.target, `scrollLeft`)
     let y = e.pageY - this.getOffset(e.target, `scrollTop`)
 
@@ -71,12 +72,13 @@ export default class MouseOverContainer extends React.Component {
   }
 
   renderMouseAttachment = () => (
-    <div style={{
-      position: `fixed`,
-      left: `${this.x}px`,
-      top: `${this.y}px`,
-      zIndex: 20000
-    }}
+    <div
+      style={{
+        position: `fixed`,
+        left: `${this.x}px`,
+        top: `${this.y}px`,
+        zIndex: 20000,
+      }}
     >
       {this.props.mouseAttachment}
     </div>
@@ -84,11 +86,10 @@ export default class MouseOverContainer extends React.Component {
 
   render() {
     return (
-      <div ref={element => this.container = element} style={this.props.style}>
+      <div ref={element => (this.container = element)} style={this.props.style}>
         {this.show ? this.renderMouseAttachment() : null}
         {this.props.children}
       </div>
     )
   }
-
 }

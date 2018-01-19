@@ -86,28 +86,30 @@ export default class FormModel {
 
   submit() {
     if (!this.valid()) return
-    console.warn("asdasdasd")
+    console.warn(`asdasdasd`)
     if (this.options.onSubmit) {
       if (this.options.doesntCatch) {
         return this.options.onSubmit(toJS(this.changes))
       }
-      return (
-        this.options.onSubmit(toJS(this.changes)).catch(this.handleServerError)
-      )
+      return this.options.onSubmit(toJS(this.changes)).catch(this.handleServerError)
     }
     if (this.options.perform) return this.perform()
   }
 
   handleServerError = (request = null) => {
-    console.log('save')
+    console.log(`save`)
     const { onError } = this.options
     if (request && request.response) {
       const data = request.response.data
       const errors = data.error_for ? data.error_for.message : {}
-      const errorFlash = data.exception ? data.exception.replace("#<ActiveRecord::RecordInvalid: Validation failed: ", '').replace(">", "") : ''
+      const errorFlash = data.exception
+        ? data.exception
+            .replace(`#<ActiveRecord::RecordInvalid: Validation failed: `, ``)
+            .replace(`>`, ``)
+        : ``
       this.errors.replace(errors)
       onError && onError(errors)
-      errorFlash && flashStore.add(errorFlash, {level: `error`})
+      errorFlash && flashStore.add(errorFlash, { level: `error` })
       window.scrollTo(0, 0)
     } else {
       window.console.log(request)

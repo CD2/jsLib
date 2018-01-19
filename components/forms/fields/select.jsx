@@ -1,8 +1,7 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React from "react"
+import PropTypes from "prop-types"
 
 export class SelectField extends React.Component {
-
   static propTypes = {
     choices: PropTypes.arrayOf(PropTypes.object),
     default_value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
@@ -20,7 +19,7 @@ export class SelectField extends React.Component {
     value: ``,
   }
 
-  handleChange = (e) => {
+  handleChange = e => {
     const { onRawChange, onChange } = this.props
     if (onRawChange) onRawChange(e)
     if (onChange) onChange({ name: e.target.name, value: e.target.value })
@@ -31,7 +30,11 @@ export class SelectField extends React.Component {
     const choiceHtml = []
     if (includeBlank) {
       const text = typeof includeBlank === `string` ? includeBlank : `-- Please select --`
-      choiceHtml.push(<option key="$BLANK$" value="">{text}</option>)
+      choiceHtml.push(
+        <option key="$BLANK$" value="">
+          {text}
+        </option>,
+      )
     }
     choices.forEach(choice => {
       let text
@@ -43,10 +46,18 @@ export class SelectField extends React.Component {
         text = choice.text
         value = choice.value
       }
-      if (this.props.default_value === value){
-        choiceHtml.push(<option key={value} value={value} selected="selected">{text}</option>)
+      if (this.props.default_value === value) {
+        choiceHtml.push(
+          <option key={value} value={value} selected="selected">
+            {text}
+          </option>,
+        )
       } else {
-        choiceHtml.push(<option key={value} value={value}>{text}</option>)
+        choiceHtml.push(
+          <option key={value} value={value}>
+            {text}
+          </option>,
+        )
       }
     })
     return choiceHtml
@@ -66,6 +77,5 @@ export class SelectField extends React.Component {
       </select>
     )
   }
-
 }
 export default SelectField

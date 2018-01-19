@@ -1,13 +1,11 @@
 /* eslint-disable react/jsx-filename-extension */
-import React from 'react'
-import { Tabs } from '../tabs'
-import { shallow } from 'enzyme'
-import toJson from 'enzyme-to-json'
+import React from "react"
+import { Tabs } from "../tabs"
+import { shallow } from "enzyme"
+import toJson from "enzyme-to-json"
 
 describe(`<Tabs />`, () => {
-  const view = shallow((
-    <Tabs />
-  ))
+  const view = shallow(<Tabs />)
 
-  it(`snapshot`, ()=>expect(toJson(view)).toMatchSnapshot())
+  it(`snapshot`, () => expect(toJson(view)).toMatchSnapshot())
 })

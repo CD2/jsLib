@@ -1,17 +1,16 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React from "react"
+import PropTypes from "prop-types"
 
-import { styled, t } from 'lib/utils/theme'
-import decorate from 'lib/utils/decorate'
+import { styled, t } from "lib/utils/theme"
+import decorate from "lib/utils/decorate"
 export class LoadingSpinner extends React.Component {
-
   static propTypes = {
     className: PropTypes.string,
-  };
+  }
 
   static defaultProps = {
     className: null,
-  };
+  }
 
   render() {
     return (
@@ -20,10 +19,8 @@ export class LoadingSpinner extends React.Component {
       </div>
     )
   }
-
 }
 export default decorate(
-
   styled`
     display: flex;
     width: 100%;
@@ -82,5 +79,5 @@ export default decorate(
       }
     }
   `,
-  LoadingSpinner
+  LoadingSpinner,
 )

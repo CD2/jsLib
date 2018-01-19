@@ -1,22 +1,20 @@
-import React from 'react'
+import React from "react"
 
-import { mount } from 'enzyme'
+import { mount } from "enzyme"
 
+import { Router } from "react-router-dom"
+import { createMemoryHistory } from "history"
+import IntegrationTest from "./integration_test"
 
-import { Router } from 'react-router-dom'
-import { createMemoryHistory } from 'history'
-import IntegrationTest from './integration_test'
-
-import ComponentTest from './component_test'
+import ComponentTest from "./component_test"
 
 export class SceneTest extends ComponentTest {
-
   has_routes(routes) {
     describe(`routes`, () => {
       Object.entries(routes).forEach(([route, component]) => {
         it(`should show ${component.name} when route is ${route}`, () => {
           this._getHistory().push(route)
-          expect(this._getWrapper().find(component.name).length>0).toBe(true)
+          expect(this._getWrapper().find(component.name).length > 0).toBe(true)
         })
       })
     })
@@ -29,8 +27,8 @@ export class SceneTest extends ComponentTest {
   routes_404(Component) {
     describe(`a 404`, () => {
       it(`should show ${Component.name} when route is not known`, () => {
-        this._getHistory().push(`${Math.random()  }`)
-        expect(this._getWrapper().find(Component.name).length>0).toBe(true)
+        this._getHistory().push(`${Math.random()}`)
+        expect(this._getWrapper().find(Component.name).length > 0).toBe(true)
       })
     })
   }
@@ -40,25 +38,23 @@ export class SceneTest extends ComponentTest {
     intTest.goto(url)
     callback.call(undefined, intTest)
   }
-
 }
 
-
-export function scene_routing(Scene, { base_url, routes }={}) {
+export function scene_routing(Scene, { base_url, routes } = {}) {
   describe(`${Scene.name} routes`, () => {
     beforeEach(() => {
       this.history = createMemoryHistory()
       this.wrapper = mount(
         <Router history={this.history}>
           <Scene />
-        </Router>
+        </Router>,
       )
     })
 
     Object.entries(routes).forEach(([route, component]) => {
       it(`should show ${component.name} when route is ${route}`, () => {
         this.history.push(base_url + route)
-        expect(this.wrapper.find(component.name).length>0).toBe(true)
+        expect(this.wrapper.find(component.name).length > 0).toBe(true)
       })
     })
   })

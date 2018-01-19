@@ -1,14 +1,13 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { buildUrl } from 'lib/utils/api_http'
-import { styled } from 'lib/utils/theme'
-import decorate from 'lib/utils/decorate'
+import React from "react"
+import PropTypes from "prop-types"
+import { buildUrl } from "lib/utils/api_http"
+import { styled } from "lib/utils/theme"
+import decorate from "lib/utils/decorate"
 import Button from "./button"
 import FaIcon from "./fa_icon"
-import { Link } from 'react-router-dom'
+import { Link } from "react-router-dom"
 
 export class File extends React.Component {
-
   static propTypes = {
     children: PropTypes.any,
     className: PropTypes.string,
@@ -42,7 +41,9 @@ export class File extends React.Component {
     }
     if (linkOnly) {
       return (
-        <a href={url} target={linkTarget ? linkTarget : `_blank`}>{ children }</a>
+        <a href={url} target={linkTarget ? linkTarget : `_blank`}>
+          {children}
+        </a>
       )
     }
     return (
@@ -55,11 +56,10 @@ export class File extends React.Component {
         wide={this.props.wide}
       >
         <FaIcon icon="download" size={1.3} />
-        { children }
+        {children}
       </Button>
     )
   }
-
 }
 export default decorate(
   styled`
@@ -71,5 +71,5 @@ export default decorate(
       color: white;
     }
   `,
-  File
+  File,
 )

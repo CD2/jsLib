@@ -1,6 +1,6 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { styled } from 'lib/utils/theme'
+import React from "react"
+import PropTypes from "prop-types"
+import { styled } from "lib/utils/theme"
 
 @styled`
   label > input {
@@ -8,7 +8,6 @@ import { styled } from 'lib/utils/theme'
   }
 `
 export default class Form extends React.Component {
-
   static propTypes = {
     children: PropTypes.node,
     className: PropTypes.string,
@@ -21,7 +20,7 @@ export default class Form extends React.Component {
     preventDefault: true,
   }
 
-  handleSubmit = (e) => {
+  handleSubmit = e => {
     const { onSubmit, preventDefault } = this.props
     if (preventDefault) e.preventDefault()
     if (onSubmit) onSubmit(e)
@@ -30,11 +29,7 @@ export default class Form extends React.Component {
   renderErrors() {
     const { errors } = this.props
     if (!errors) return
-    return (
-      <ul>
-        {errors.map(msg => <li key={msg}>{msg}</li>)}
-      </ul>
-    )
+    return <ul>{errors.map(msg => <li key={msg}>{msg}</li>)}</ul>
   }
 
   render() {
@@ -46,5 +41,4 @@ export default class Form extends React.Component {
       </form>
     )
   }
-
 }

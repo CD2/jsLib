@@ -1,11 +1,10 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import decorate from 'lib/utils/decorate'
-import { styled, t, p } from 'lib/utils/theme'
-import theme from 'styles/theme'
+import React from "react"
+import PropTypes from "prop-types"
+import decorate from "lib/utils/decorate"
+import { styled, t, p } from "lib/utils/theme"
+import theme from "styles/theme"
 
 export class SectionIntro extends React.Component {
-
   static propTypes = {
     align: PropTypes.string,
     children: PropTypes.node,
@@ -19,7 +18,7 @@ export class SectionIntro extends React.Component {
   }
 
   static defaultProp = {
-    style: {}
+    style: {},
   }
 
   render() {
@@ -27,29 +26,25 @@ export class SectionIntro extends React.Component {
 
     const wrapperIntroStyle = {
       borderBottom: `1px solid ${theme.border}`,
-      paddingBottom: `${theme.gutterHeight.value/2}px`,
-      marginBottom: `${theme.gutterHeight.value/2}px`,
+      paddingBottom: `${theme.gutterHeight.value / 2}px`,
+      marginBottom: `${theme.gutterHeight.value / 2}px`,
     }
 
     return (
       <div className={className} style={wrapperIntro ? wrapperIntroStyle : style}>
-        {heading === 2 ?
-          <h2 className="page-intro__heading">{title}</h2> :
-          heading === 3 ?
-            <h3 className="page-intro__heading">{title}</h3> :
-            heading === 4 ?
-              <h4 className="page-intro__heading">{title}</h4> :
-              <h1 className="page-intro__heading">{title}</h1>}
-        {
-          children &&
-          <div className="intro-text">
-            {children}
-          </div>
-        }
+        {heading === 2 ? (
+          <h2 className="page-intro__heading">{title}</h2>
+        ) : heading === 3 ? (
+          <h3 className="page-intro__heading">{title}</h3>
+        ) : heading === 4 ? (
+          <h4 className="page-intro__heading">{title}</h4>
+        ) : (
+          <h1 className="page-intro__heading">{title}</h1>
+        )}
+        {children && <div className="intro-text">{children}</div>}
       </div>
     )
   }
-
 }
 
 export default decorate(
@@ -57,11 +52,10 @@ export default decorate(
     text-align: ${p(`align`, `left`)};
     .modal & { padding-top: 0; }
     ${({ children, noPad, theme }) => {
-      if (children && !noPad){
+      if (children && !noPad) {
         return `padding-bottom: ${theme.gutterHeight.value / 16}em;`
       }
-    }
-}
+    }}
     .intro-text {
   ${({ light, theme }) => {
     const color = light ? theme.background : theme.lightText
@@ -70,10 +64,11 @@ export default decorate(
     `
   }}
   ${({ light }) => {
-    if (light){
+    if (light) {
       return `
       a { color: white; }
-      `}
+      `
+    }
   }}
     }
     .page-intro__heading {
@@ -102,7 +97,7 @@ export default decorate(
       }
     }
     input {
-      margin-top: ${t(`spacing.medium`, t=>t/16)}em;
+      margin-top: ${t(`spacing.medium`, t => t / 16)}em;
     }
     + {
       p, h1, h2, h3, h4 {
@@ -113,5 +108,5 @@ export default decorate(
       margin-top: 16px;
     }
   `,
-  SectionIntro
+  SectionIntro,
 )

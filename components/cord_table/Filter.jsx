@@ -1,15 +1,15 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { Input } from 'lib/components/forms'
-import { styled, t } from 'lib/utils/theme'
-import { observer, inject } from 'mobx-react'
+import React from "react"
+import PropTypes from "prop-types"
+import { Input } from "lib/components/forms"
+import { styled, t } from "lib/utils/theme"
+import { observer, inject } from "mobx-react"
 
 @styled`
   position: relative;
   cursor: pointer;
   > div {
     position: absolute;
-    padding: ${t(`gutterWidth`, w=>w/2)}px;
+    padding: ${t(`gutterWidth`, w => w / 2)}px;
   }
   .input-filter:last-child {
     margin-bottom: 0;
@@ -18,7 +18,6 @@ import { observer, inject } from 'mobx-react'
 @inject(`query`)
 @observer
 export class TableFilter extends React.Component {
-
   static propTypes = {
     className: PropTypes.string,
     filter: PropTypes.shape({
@@ -31,7 +30,7 @@ export class TableFilter extends React.Component {
     selected: PropTypes.array,
   }
 
-  handleChange = (option) => {
+  handleChange = option => {
     this.props.query.handleFilterChange(this.props.name, option)
   }
 
@@ -59,7 +58,7 @@ export class TableFilter extends React.Component {
     )
   }
 
-  handleRadioChange = (option) => {
+  handleRadioChange = option => {
     this.props.query.setFilter(this.props.name, [option])
   }
 
@@ -85,10 +84,9 @@ export class TableFilter extends React.Component {
 
   render() {
     const { type } = this.props.filter
-    if (type===`checkboxes`) return this.renderCheckboxFilter()
+    if (type === `checkboxes`) return this.renderCheckboxFilter()
     // if (type==='radios') return this.renderRadiosFilter()
-    return (<div>unknown filter type</div>)
+    return <div>unknown filter type</div>
   }
-
 }
 export default TableFilter

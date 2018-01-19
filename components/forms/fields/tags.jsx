@@ -1,20 +1,19 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { action, reaction } from 'mobx'
-import { observer } from 'mobx-react'
+import React from "react"
+import PropTypes from "prop-types"
+import { action, reaction } from "mobx"
+import { observer } from "mobx-react"
 
-import { tag } from 'lib/utils/common_styles'
-import decorate from 'lib/utils/decorate'
-import { styled, t } from 'lib/utils/theme'
+import { tag } from "lib/utils/common_styles"
+import decorate from "lib/utils/decorate"
+import { styled, t } from "lib/utils/theme"
 
-import Overlay from 'lib/components/overlay'
-import FaIcon from 'lib/components/fa_icon'
+import Overlay from "lib/components/overlay"
+import FaIcon from "lib/components/fa_icon"
 
-import Popover from 'lib/components/popover'
-import TagsStore from 'lib/utils/tags_store'
+import Popover from "lib/components/popover"
+import TagsStore from "lib/utils/tags_store"
 
 export class TagsInput extends React.Component {
-
   static propTypes = {
     className: PropTypes.string,
     disabled: PropTypes.bool,
@@ -26,25 +25,31 @@ export class TagsInput extends React.Component {
     onChange: PropTypes.func,
     onlyAllowSuggestions: PropTypes.bool,
     popularSuggestions: PropTypes.oneOfType([
-      PropTypes.arrayOf(PropTypes.shape({
-        id: PropTypes.number,
-        name: PropTypes.string,
-      })),
+      PropTypes.arrayOf(
+        PropTypes.shape({
+          id: PropTypes.number,
+          name: PropTypes.string,
+        }),
+      ),
       PropTypes.arrayOf(PropTypes.string),
     ]),
     suggestions: PropTypes.oneOfType([
-      PropTypes.arrayOf(PropTypes.shape({
-        id: PropTypes.number,
-        name: PropTypes.string,
-      })),
+      PropTypes.arrayOf(
+        PropTypes.shape({
+          id: PropTypes.number,
+          name: PropTypes.string,
+        }),
+      ),
       PropTypes.arrayOf(PropTypes.string),
     ]),
     updateSuggestions: PropTypes.func,
     value: PropTypes.oneOfType([
-      PropTypes.arrayOf(PropTypes.shape({
-        id: PropTypes.number,
-        name: PropTypes.string,
-      })),
+      PropTypes.arrayOf(
+        PropTypes.shape({
+          id: PropTypes.number,
+          name: PropTypes.string,
+        }),
+      ),
       PropTypes.arrayOf(PropTypes.string),
       PropTypes.arrayOf(PropTypes.number),
     ]),
@@ -65,11 +70,12 @@ export class TagsInput extends React.Component {
     this.store.onMount(this.props)
     reaction(
       () => this.props.suggestions.map(sug => sug),
-      () => this.store.setVals(this.props, `suggestions`)
+      () => this.store.setVals(this.props, `suggestions`),
     )
   }
 
-  @action componentDidUpdate(props) {
+  @action
+  componentDidUpdate(props) {
     if (this.textInput) this.textInput.focus()
     if (this.textInput && this.store.current_tag) {
       this.textInput.selectionStart = this.store.current_tag.length
@@ -80,16 +86,16 @@ export class TagsInput extends React.Component {
 
   store = new TagsStore(this, this.props)
 
-  renderInput = (tag=``) => (
+  renderInput = (tag = ``) => (
     <input
-      ref={elem => this.textInput = elem}
+      ref={elem => (this.textInput = elem)}
       key={tag}
       defaultValue={tag}
       onKeyDown={this.store.handleInput}
     />
   )
 
-  renderTag = (tag) => (
+  renderTag = tag => (
     <span
       className="tag-input__tag"
       key={tag}
@@ -104,15 +110,16 @@ export class TagsInput extends React.Component {
     </span>
   )
 
-  renderPopularSuggestions = () => this.store.filteredPopularSuggestions.map(suggestion => (
-    <span
-      key={suggestion}
-      className="suggestion-tag tag-input__tag"
-      onClick={this.store.handleAddTag.bind(this, suggestion)}
-    >
-      + {suggestion}
-    </span>
-  ))
+  renderPopularSuggestions = () =>
+    this.store.filteredPopularSuggestions.map(suggestion => (
+      <span
+        key={suggestion}
+        className="suggestion-tag tag-input__tag"
+        onClick={this.store.handleAddTag.bind(this, suggestion)}
+      >
+        + {suggestion}
+      </span>
+    ))
 
   renderNoSuggestionsMessage = () => (
     <span className="tag-input__dropdown-suggestion">No suggestions found</span>
@@ -120,16 +127,17 @@ export class TagsInput extends React.Component {
 
   renderSuggestions() {
     if (
-      !this.store.current_tag
-      || this.store.filteredSuggestions.length === 0 && !this.props.onlyAllowSuggestions
-    ) return
+      !this.store.current_tag ||
+      (this.store.filteredSuggestions.length === 0 && !this.props.onlyAllowSuggestions)
+    )
+      {return}
     let style = `tag-input__suggestion tag-input__tag`
 
     let suggestionsComponent = this.store.filteredSuggestions.map((suggestion, index) => {
       if (this.props.dropdown) {
-        style = `tag-input__dropdown-suggestion ${this.store.dropdownHighlight === index
-          ? `tag-input__dropdown-suggestion--highlight`
-          : ``}`
+        style = `tag-input__dropdown-suggestion ${
+          this.store.dropdownHighlight === index ? `tag-input__dropdown-suggestion--highlight` : ``
+        }`
       }
 
       return (
@@ -187,7 +195,7 @@ export class TagsInput extends React.Component {
   }
 
   renderClearAll = () => {
-    if(this.store.tags.length > 0 && !this.props.hideClear) {
+    if (this.store.tags.length > 0 && !this.props.hideClear) {
       return (
         <div className="tag-input__clear-all" onClick={e => this.store.handleChange([], e)}>
           Clear
@@ -199,8 +207,9 @@ export class TagsInput extends React.Component {
   render() {
     return (
       <div className={this.props.className}>
-        {this.store.current_tag
-        && <Overlay clickThrough onClick={e => this.store.handleInputBlur(e, true)} />}
+        {this.store.current_tag && (
+          <Overlay clickThrough onClick={e => this.store.handleInputBlur(e, true)} />
+        )}
         <div className="wrapper" onClick={!this.props.disabled && this.store.handleInputFocus}>
           {this.renderPopularSuggestions()}
           <div
@@ -219,7 +228,6 @@ export class TagsInput extends React.Component {
       </div>
     )
   }
-
 }
 
 export default decorate(

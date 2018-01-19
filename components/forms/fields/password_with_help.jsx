@@ -1,8 +1,8 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { styled, t } from 'lib/utils/theme'
-import { observer } from 'mobx-react'
-import { observable } from 'mobx'
+import React from "react"
+import PropTypes from "prop-types"
+import { styled, t } from "lib/utils/theme"
+import { observer } from "mobx-react"
+import { observable } from "mobx"
 import Wrapper from "lib/components/wrapper"
 @styled`
   position: relative;
@@ -30,15 +30,11 @@ import Wrapper from "lib/components/wrapper"
 `
 @observer
 export class PasswordWithHelpField extends React.Component {
-
   static propTypes = {
     className: PropTypes.string,
     description: PropTypes.string,
     initialValue: PropTypes.string,
-    label: PropTypes.oneOfType([
-      PropTypes.node,
-      PropTypes.bool,
-    ]),
+    label: PropTypes.oneOfType([PropTypes.node, PropTypes.bool]),
     name: PropTypes.string.isRequired,
     onChange: PropTypes.func,
     placeholder: PropTypes.string,
@@ -67,17 +63,17 @@ export class PasswordWithHelpField extends React.Component {
   }
 
   updateForm() {
-    const name=`password`
+    const name = `password`
     const value = this.valid() ? this.value : ``
     this.props.onChange({ name, value })
   }
 
-  handleChange = (e) => {
-    this.value =  e.target.value
+  handleChange = e => {
+    this.value = e.target.value
     this.updateForm()
   }
 
-  handleConfirmationChange = (e) => {
+  handleConfirmationChange = e => {
     this.confirmation_value = e.target.value
     this.updateForm()
   }
@@ -125,7 +121,10 @@ export class PasswordWithHelpField extends React.Component {
     const display_name = `Password`
     return this.getErrors().map((error, i) => {
       return (
-        <div key={i} className="field__error-message"> {display_name} {error}</div>
+        <div key={i} className="field__error-message">
+          {` `}
+          {display_name} {error}
+        </div>
       )
     })
   }
@@ -133,7 +132,9 @@ export class PasswordWithHelpField extends React.Component {
   getConfirmationErrorMessages() {
     return this.getConfirmationErrors().map((error, i) => {
       return (
-        <div key={i} className="field__error-message">Password Confirmation {error}</div>
+        <div key={i} className="field__error-message">
+          Password Confirmation {error}
+        </div>
       )
     })
   }
@@ -158,15 +159,17 @@ export class PasswordWithHelpField extends React.Component {
       className += `error`
     }
     return (
-      <li key={text} className={className}>{text}</li>
+      <li key={text} className={className}>
+        {text}
+      </li>
     )
   }
 
   helpers = {
-    'At least 8 characters long': value => value.length>=8,
-    'Contains a lowercase letter': value => /[a-z]/.test(value),
-    'Contains an uppercase letter': value => /[A-Z]/.test(value),
-    'Contains a number': value => /[0-9]/.test(value),
+    "At least 8 characters long": value => value.length >= 8,
+    "Contains a lowercase letter": value => /[a-z]/.test(value),
+    "Contains an uppercase letter": value => /[A-Z]/.test(value),
+    "Contains a number": value => /[0-9]/.test(value),
   }
 
   renderHelpers() {
@@ -215,6 +218,5 @@ export class PasswordWithHelpField extends React.Component {
       </div>
     )
   }
-
 }
 export default PasswordWithHelpField

@@ -1,11 +1,10 @@
 /* eslint-disable react/no-set-state */
-import React from 'react'
-import PropTypes from 'prop-types'
+import React from "react"
+import PropTypes from "prop-types"
 
-import { get } from 'lib/utils/api_http'
+import { get } from "lib/utils/api_http"
 
 export default class AuthProvider extends React.Component {
-
   static propTypes = {
     children: PropTypes.node,
     defaultAuth: PropTypes.any,
@@ -52,7 +51,7 @@ export default class AuthProvider extends React.Component {
     if (data) return JSON.parse(data)
   }
 
-  buildContext(data={}) {
+  buildContext(data = {}) {
     return {
       ...data,
       reAuth: this.verify.bind(this),
@@ -66,8 +65,7 @@ export default class AuthProvider extends React.Component {
     })
   }
 
-  render(){
+  render() {
     return React.Children.only(this.props.children)
   }
-
 }

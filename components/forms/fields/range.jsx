@@ -1,11 +1,10 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React from "react"
+import PropTypes from "prop-types"
 import { styled, t } from "lib/utils/theme"
 import Wrapper from "lib/components/wrapper"
-import decorate from 'lib/utils/decorate'
+import decorate from "lib/utils/decorate"
 
 export class Range extends React.Component {
-
   static propTypes = {
     className: PropTypes.string,
     initialValue: PropTypes.string,
@@ -19,7 +18,7 @@ export class Range extends React.Component {
     type: PropTypes.string,
   }
 
-  handleChange = (e) => {
+  handleChange = e => {
     const { onRawChange, onChange } = this.props
     if (onRawChange) onRawChange(e)
     if (onChange) onChange({ name: e.target.name, value: e.target.value })
@@ -38,19 +37,13 @@ export class Range extends React.Component {
           <p className="value">{props.value === `null` ? `Choose value` : props.value}</p>
           <div className={`slider`}>
             <b>0</b>
-            <input
-              {...props}
-              min={0}
-              max={10}
-              onChange={this.handleChange}
-            />
+            <input {...props} min={0} max={10} onChange={this.handleChange} />
             <b>10</b>
           </div>
         </Wrapper>
       </div>
     )
   }
-
 }
 export default decorate(
   styled`
@@ -159,5 +152,5 @@ input[type=range]:focus::-ms-fill-upper {
   background: #10C7C7;
 }
   `,
-  Range
+  Range,
 )

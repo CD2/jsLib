@@ -1,40 +1,35 @@
 /* eslint-disable react/jsx-filename-extension */
-import React from 'react'
-import { inject, observer } from 'mobx-react'
-import PropTypes from 'prop-types'
-import match from './match'
-import { attributesFactories } from './record_factories'
-import LoadingSpinner from 'lib/components/loading_spinner'
+import React from "react"
+import { inject, observer } from "mobx-react"
+import PropTypes from "prop-types"
+import match from "./match"
+import { attributesFactories } from "./record_factories"
+import LoadingSpinner from "lib/components/loading_spinner"
 
 export default function connectFields({
-  scope=`all`,
-  fields=[],
-  as=this.defaultAs,
-  reloadAs=`reload`,
-  formatter=null,
-}={}) {
+  scope = `all`,
+  fields = [],
+  as = this.defaultAs,
+  reloadAs = `reload`,
+  formatter = null,
+} = {}) {
   const cord = this
   const getFields = match(fields, attributesFactories, `connectRecordFields`)
 
-  return (Component) => {
+  return Component => {
     @inject(`cordStore`)
     @observer
     class ConnectedIds extends React.Component {
-
       static propTypes = {
         cordStore: PropTypes.object,
       }
 
       componentDidMount = () => this.fetch()
       reload = () => this.fetch({ reload: true })
-      getFormattedProps = props => formatter ? { ...props, ...formatter(props) } : props
+      getFormattedProps = props => (formatter ? { ...props, ...formatter(props) } : props)
 
       fetch = (options = {}) => {
-        return this.props.cordStore.fetchFields(
-          cord,
-          getFields(this.props),
-          { ...options, scope }
-        )
+        return this.props.cordStore.fetchFields(cord, getFields(this.props), { ...options, scope })
       }
 
       render() {
@@ -51,11 +46,8 @@ export default function connectFields({
         props[reloadAs] = this.reload
         props = this.getFormattedProps(props)
 
-        return (
-          <Component {...props} />
-        )
+        return <Component {...props} />
       }
-
     }
     return ConnectedIds
   }

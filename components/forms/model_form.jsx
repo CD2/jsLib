@@ -1,18 +1,17 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { observer } from 'mobx-react'
-import { observable, action } from 'mobx'
+import React from "react"
+import PropTypes from "prop-types"
+import { observer } from "mobx-react"
+import { observable, action } from "mobx"
 
-import { titleize } from 'help-my-strings'
+import { titleize } from "help-my-strings"
 
-import Model from './form_model'
-import Form from './form'
-import Submit from './submit'
-import Input from './model_input'
-import decorate from 'lib/utils/decorate'
+import Model from "./form_model"
+import Form from "./form"
+import Submit from "./submit"
+import Input from "./model_input"
+import decorate from "lib/utils/decorate"
 
 class ModelForm extends React.Component {
-
   static propTypes = {
     disableAll: PropTypes.bool,
     fields: PropTypes.array,
@@ -77,7 +76,8 @@ class ModelForm extends React.Component {
 
   @observable formSubmitting = false
 
-  @action handleSubmit  = () => {
+  @action
+  handleSubmit = () => {
     this.formSubmitting = true
     const { onSubmit } = this.props
     if (onSubmit) return onSubmit(this.model)
@@ -85,7 +85,7 @@ class ModelForm extends React.Component {
     return this.model.submit()
   }
 
-  @action stopSubmitting = () => this.formSubmitting = false
+  @action stopSubmitting = () => (this.formSubmitting = false)
 
   renderField = (field, index) => {
     const inputComponent = (
@@ -120,28 +120,22 @@ class ModelForm extends React.Component {
   renderSubmit = () => {
     if (!this.props.submit) return
 
-    return React.cloneElement(
-      this.props.submit,
-      { ...this.props.submit.props, submitting: this.formSubmitting }
-    )
+    return React.cloneElement(this.props.submit, {
+      ...this.props.submit.props,
+      submitting: this.formSubmitting,
+    })
   }
 
   render() {
     return (
       <Form onSubmit={this.handleSubmit}>
-        {
-          this.props.renderContents
-            ? this.props.renderContents(this.renderFields(), this.model)
-            : this.renderFields()
-        }
+        {this.props.renderContents
+          ? this.props.renderContents(this.renderFields(), this.model)
+          : this.renderFields()}
         {this.renderSubmit()}
       </Form>
     )
   }
-
 }
 
-export default decorate(
-  observer,
-  ModelForm
-)
+export default decorate(observer, ModelForm)

@@ -1,8 +1,7 @@
-import BaseValidator from './base'
-import { toJS } from 'mobx'
+import BaseValidator from "./base"
+import { toJS } from "mobx"
 
 export default class PresenceValidator extends BaseValidator {
-
   static message = `is required`
 
   defaultOptions() {
@@ -17,7 +16,7 @@ export default class PresenceValidator extends BaseValidator {
     //TODO: make this work with objects and arrays
     if (typeof value === `string`) return (this.options.allow_blank ? value : value.trim()) !== ``
     if (Array.isArray(value)) {
-      return (this.options.allow_blank ? value : value.filter(x=>x)).length !== 0
+      return (this.options.allow_blank ? value : value.filter(x => x)).length !== 0
     }
     if (typeof value === `boolean`) return true
     if (value && typeof value === `object` && value.toString() === `[object File]`) {
@@ -34,6 +33,4 @@ export default class PresenceValidator extends BaseValidator {
 
     return this.isPresent(rawValue)
   }
-
-
 }
