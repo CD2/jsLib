@@ -213,7 +213,7 @@ export class Table extends React.Component {
 export default decorate(
   styled`
   font-size: 0.95em;
-  color: ${t('lightText')};
+  color: ${t(`lightText`)};
   tbody tr {
     ${({ noLinks }) => {
       if (!noLinks) {
@@ -306,15 +306,15 @@ export default decorate(
      padding: 4px 6px;
      border-radius: 3px; 
      font-size: 13px;
-     background: ${t('background')};
+     background: ${t(`background`)};
      white-space: nowrap;
      + .table-tag { margin-left: 3px; }
      &__in_progress {
-        background: ${t('colors.blue')};;
+        background: ${t(`colors.blue`)};;
         color: white;
      }
      &__complete, &__active {
-        background: ${t('colors.green')};;
+        background: ${t(`colors.green`)};;
         color: white;
      }
    }

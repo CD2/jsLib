@@ -1,26 +1,27 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import Papa from 'papaparse'
-import { observer } from 'mobx-react'
-import { observable, action, toJS } from 'mobx'
+import React from "react"
+import PropTypes from "prop-types"
+import Papa from "papaparse"
+import { observer } from "mobx-react"
+import { observable, action, toJS } from "mobx"
 
-import decorate from 'lib/utils/decorate'
-import { styled } from 'lib/utils/theme'
+import decorate from "lib/utils/decorate"
+import { styled } from "lib/utils/theme"
 
-import LoadingSpinner from 'lib/components/loading_spinner'
-import FileUploader from './FileUploader'
-import FailureSlide from './FailureSlide'
-import FinishSlide from './FinishSlide'
-import ColumnMapping from './ColumnMapping'
+import LoadingSpinner from "lib/components/loading_spinner"
+import FileUploader from "./FileUploader"
+import FailureSlide from "./FailureSlide"
+import FinishSlide from "./FinishSlide"
+import ColumnMapping from "./ColumnMapping"
 
 export class CSVImporter extends React.Component {
-
   static propTypes = {
     className: PropTypes.string,
-    columns: PropTypes.arrayOf(PropTypes.shape({
-      title: PropTypes.string,
-      key: PropTypes.string,
-    })).isRequired,
+    columns: PropTypes.arrayOf(
+      PropTypes.shape({
+        title: PropTypes.string,
+        key: PropTypes.string,
+      }),
+    ).isRequired,
     noCompleteMessage: PropTypes.bool,
     onComplete: PropTypes.func.isRequired,
     onFinish: PropTypes.func,
@@ -44,7 +45,8 @@ export class CSVImporter extends React.Component {
   @observable mappings: null
   @observable submitting = false
 
-  @action processCSV = (file, headersRow) => {
+  @action
+  processCSV = (file, headersRow) => {
     const csv = Papa.parse(file, { skipEmptyLines: true })
 
     if (csv.errors.length > 0) {
@@ -57,12 +59,13 @@ export class CSVImporter extends React.Component {
     }
   }
 
-  @action handleFileUpload = (file, headersRow) => {
+  @action
+  handleFileUpload = (file, headersRow) => {
     const reader = new FileReader()
 
     this.position = `loading`
     this.file = file
-    reader.onload = (e) => this.processCSV(e.target.result, headersRow)
+    reader.onload = e => this.processCSV(e.target.result, headersRow)
     reader.readAsText(file)
   }
 
@@ -83,7 +86,7 @@ export class CSVImporter extends React.Component {
     })
   }
 
-  handleComplete = (mappings) => {
+  handleComplete = mappings => {
     if (this.props.returnFile) {
       return this.props.onComplete(toJS(this.file), mappings)
     } else if (this.props.returnAsMappedObjects) {
@@ -93,21 +96,25 @@ export class CSVImporter extends React.Component {
     return this.props.onComplete(toJS(this.csv), mappings)
   }
 
-  @action handleFinish = () => {
+  @action
+  handleFinish = () => {
     this.props.onFinish && this.props.onFinish()
     this.position = null
   }
 
-  @action handleSubmit = mappings => {
+  @action
+  handleSubmit = mappings => {
     this.submitting = true
     this.position = `loading`
-    this.handleComplete(mappings).then(() => {
-      if (!this.props.noCompleteMessage) this.position = `success`
-      setTimeout(this.handleFinish, 5000)
-    }).catch(() => {
-      if (!this.props.noCompleteMessage) this.position = `failure`
-      setTimeout(this.handleFinish, 5000)
-    })
+    this.handleComplete(mappings)
+      .then(() => {
+        if (!this.props.noCompleteMessage) this.position = `success`
+        setTimeout(this.handleFinish, 5000)
+      })
+      .catch(() => {
+        if (!this.props.noCompleteMessage) this.position = `failure`
+        setTimeout(this.handleFinish, 5000)
+      })
   }
 
   renderLoading = () => {
@@ -129,13 +136,13 @@ export class CSVImporter extends React.Component {
     switch (position) {
     case `column_mapping`:
       return (
-        <ColumnMapping
-          databaseColumns={this.props.columns}
-          headersRowIndex={headersRowIndex}
-          csv={csv}
-          submitting={this.submitting}
-          onSubmit={this.handleSubmit}
-        />
+          <ColumnMapping
+            databaseColumns={this.props.columns}
+            headersRowIndex={headersRowIndex}
+            csv={csv}
+            submitting={this.submitting}
+            onSubmit={this.handleSubmit}
+          />
       )
     case `parsingError`:
       return <FailureSlide errors={parsingErrors} />
@@ -150,13 +157,8 @@ export class CSVImporter extends React.Component {
   }
 
   render() {
-    return (
-      <div className={this.props.className}>
-        {this.renderContent()}
-      </div>
-    )
+    return <div className={this.props.className}>{this.renderContent()}</div>
   }
-
 }
 
 export default decorate(
@@ -175,5 +177,5 @@ export default decorate(
   }
   `,
   observer,
-  CSVImporter
+  CSVImporter,
 )

@@ -1,20 +1,19 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import PropTypes from 'prop-types'
-import Grid from 'lib/components/grid'
-import { styled, t } from 'lib/utils/theme'
-import BreadcrumbStore from 'lib/stores/Breadcrumbs'
-import { observer } from 'mobx-react'
-import decorate from 'lib/utils/decorate'
+import React from "react"
+import { Link } from "react-router-dom"
+import PropTypes from "prop-types"
+import Grid from "lib/components/grid"
+import { styled, t } from "lib/utils/theme"
+import BreadcrumbStore from "lib/stores/Breadcrumbs"
+import { observer } from "mobx-react"
+import decorate from "lib/utils/decorate"
 
-import Wrapper from './wrapper'
+import Wrapper from "./wrapper"
 
 export class Breadcrumbs extends React.Component {
-
   static propTypes = {
     background: PropTypes.string,
     className: PropTypes.string,
-    theme: PropTypes.object
+    theme: PropTypes.object,
   }
 
   static defaultProps = {
@@ -25,16 +24,20 @@ export class Breadcrumbs extends React.Component {
     return (
       <span key={href}>
         <span>{` > `}</span>
-        <Link className="breadcrumb__link" to={href}>{name}</Link>
+        <Link className="breadcrumb__link" to={href}>
+          {name}
+        </Link>
       </span>
     )
   }
 
   render() {
-    if (BreadcrumbStore.breadcrumbs.filter(crumb=>crumb).length === 0) return null
+    if (BreadcrumbStore.breadcrumbs.filter(crumb => crumb).length === 0) return null
     return (
       <Wrapper
-        width={`100%`} spacing={10} className={`${this.props.className} breadcrumbs`}
+        width={`100%`}
+        spacing={10}
+        className={`${this.props.className} breadcrumbs`}
         background={this.props.background || this.props.theme.secondary}
       >
         <Grid columns={6}>
@@ -44,18 +47,20 @@ export class Breadcrumbs extends React.Component {
                 Home
               </Link>
             </span>
-            {BreadcrumbStore.breadcrumbs.filter(crumb=>crumb).map(this.renderBreadcrumb)}
+            {BreadcrumbStore.breadcrumbs.filter(crumb => crumb).map(this.renderBreadcrumb)}
           </Grid.Item>
         </Grid>
       </Wrapper>
     )
   }
-
 }
 export default decorate(
   styled`
     color: ${BreadcrumbStore.color};
     font-size: 14px;
+    @media (max-width: 1000px) {
+        font-size: 12px;
+      }
     max-width: ${t(`siteWidth`)}px;
     margin: 0 auto;
     .breadcrumb__link {
@@ -71,5 +76,5 @@ export default decorate(
     }
   `,
   observer,
-  Breadcrumbs
+  Breadcrumbs,
 )

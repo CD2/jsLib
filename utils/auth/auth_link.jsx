@@ -1,11 +1,10 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { Link } from 'react-router-dom'
-import { withAuth, isAuthed } from './index'
+import React from "react"
+import PropTypes from "prop-types"
+import { Link } from "react-router-dom"
+import { withAuth, isAuthed } from "./index"
 
 @withAuth
 export default class AuthLink extends React.Component {
-
   static propTypes = {
     auth: PropTypes.object,
     permission: PropTypes.string,
@@ -13,9 +12,6 @@ export default class AuthLink extends React.Component {
 
   render() {
     const { auth, permission } = this.props
-    return isAuthed(auth, permission)
-      ? (<Link {...this.props} permission={undefined} />)
-      : null
+    return isAuthed(auth, permission) ? <Link {...this.props} permission={undefined} /> : null
   }
-
 }

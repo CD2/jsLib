@@ -1,7 +1,7 @@
 import React from "react"
 import PropTypes from "prop-types"
 import Image from "../image"
-import Grid from "../grid";
+import Grid from "../grid"
 
 export default class Tab extends React.Component {
   static propTypes = {
@@ -24,13 +24,16 @@ export default class Tab extends React.Component {
 
   renderGrid(iconPresent) {
     const { heading, icon } = this.props
-    if(iconPresent) return(
-      <Grid>
-        <Grid.Item><Image width={30} height={20} background contain defaultSrc={icon} /></Grid.Item>
-        <Grid.Item>{heading}</Grid.Item>
-      </Grid>
-    )
-    return(
+    if (iconPresent)
+      {return (
+        <Grid>
+          <Grid.Item>
+            <Image width={30} height={20} background contain defaultSrc={icon} />
+          </Grid.Item>
+          <Grid.Item>{heading}</Grid.Item>
+        </Grid>
+      )}
+    return (
       <Grid>
         <Grid.Item>{heading}</Grid.Item>
       </Grid>
@@ -41,7 +44,7 @@ export default class Tab extends React.Component {
     const { selected, tabKey, icon } = this.props
     const className = selected === tabKey ? `selected` : ``
     return (
-      <div className={className} onClick={this.handleTabHeadClick}> 
+      <div className={className} onClick={this.handleTabHeadClick}>
         {this.renderGrid(!!icon)}
       </div>
     )

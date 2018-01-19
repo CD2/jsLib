@@ -1,4 +1,4 @@
-import { observable, reaction } from 'mobx'
+import { observable, reaction } from "mobx"
 
 //when a pending request is added
 // start a timer
@@ -16,7 +16,7 @@ reaction(
   () => {
     if (batch_request_timer !== null) return
     batch_request_timer = setTimeout(perform_batch_request, 1000)
-  }
+  },
 )
 
 const perform_batch_request = () => {
@@ -30,7 +30,7 @@ const perform_batch_request = () => {
 }
 
 //new batch_request
-export default (data) => {
+export default data => {
   return new Promise((resolve, reject) => {
     const request = observable.map({ data })
     request.observe((...args) => {

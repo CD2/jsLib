@@ -1,8 +1,7 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React from "react"
+import PropTypes from "prop-types"
 
 export default class FinishSlide extends React.Component {
-
   static propTypes = {
     failure: PropTypes.bool,
   }
@@ -27,5 +26,4 @@ export default class FinishSlide extends React.Component {
       </div>
     )
   }
-
 }

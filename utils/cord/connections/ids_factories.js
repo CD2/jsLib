@@ -11,10 +11,8 @@
     prop_name: 'scope_name',
   })
 */
-const whenConnectIdsIsObject = (connectIds) => {
-  return typeof connectIds === `object`
-    ? () => connectIds
-    : undefined
+const whenConnectIdsIsObject = connectIds => {
+  return typeof connectIds === `object` ? () => connectIds : undefined
 }
 
 /*
@@ -24,30 +22,26 @@ const whenConnectIdsIsObject = (connectIds) => {
     }
   })
 */
-const whenConnectIdsIsFunction = (connectIds) =>
-  typeof connectIds === `function`
-    ? (props) => connectIds.call(null, props)
-    : undefined
+const whenConnectIdsIsFunction = connectIds =>
+  typeof connectIds === `function` ? props => connectIds.call(null, props) : undefined
 
-
-const whenConnectIdsIsString = (connectIds) =>
+const whenConnectIdsIsString = connectIds =>
   typeof connectIds === `string`
-    ? (props) => ({ [`${connectIds}_ids`]: { scope: connectIds }})
+    ? props => ({ [`${connectIds}_ids`]: { scope: connectIds }})
     : undefined
 
 // @connectIds(['scope1', 'scope2', 'scope3'])
-const whenConnectIdsIsArray = (connectIds) =>
+const whenConnectIdsIsArray = connectIds =>
   Array.isArray(connectIds)
-    ? (props) => connectIds.reduce((collected, scope) => {
-      collected[`${scope}_ids`] = { scope }
-      return collected
-    }, {})
+    ? props =>
+        connectIds.reduce((collected, scope) => {
+          collected[`${scope}_ids`] = { scope }
+          return collected
+        }, {})
     : undefined
 
-const whenConnectIdsIsUndefined = (connectIds) =>
-  connectIds === undefined
-    ? () => ({ all_ids: { scope: `all` }})
-    : undefined
+const whenConnectIdsIsUndefined = connectIds =>
+  connectIds === undefined ? () => ({ all_ids: { scope: `all` }}) : undefined
 
 export default [
   whenConnectIdsIsFunction,

@@ -1,23 +1,22 @@
 /* eslint-disable react/jsx-filename-extension */
-import React from 'react'
-import { Router } from 'react-router-dom'
-import { createMemoryHistory } from 'history'
-import theme from 'styles/theme'
-import { Provider as ThemeProvider } from 'lib/utils/theme'
-import { shallow } from 'enzyme'
-import toJson from 'enzyme-to-json'
-import FunctionTester from './function_tester'
-import ElementTester from './element_tester'
-import InputTester from './input_tester'
-import { Provider as CordProvider } from 'lib/utils/cord'
-import cord_store from 'lib/utils/cord_store'
+import React from "react"
+import { Router } from "react-router-dom"
+import { createMemoryHistory } from "history"
+import theme from "styles/theme"
+import { Provider as ThemeProvider } from "lib/utils/theme"
+import { shallow } from "enzyme"
+import toJson from "enzyme-to-json"
+import FunctionTester from "./function_tester"
+import ElementTester from "./element_tester"
+import InputTester from "./input_tester"
+import { Provider as CordProvider } from "lib/utils/cord"
+import cord_store from "lib/utils/cord_store"
 
 export class ComponentTest {
-
   constructor(Component, props, callback) {
     this.Component = Component
     this.props = props
-    describe(`Component <${Component.name} />`, ()=>{
+    describe(`Component <${Component.name} />`, () => {
       this.snapshot()
       callback.call(null, this)
     })
@@ -37,21 +36,23 @@ export class ComponentTest {
               <this.Component {...this.props} />
             </ThemeProvider>
           </Router>
-        </CordProvider>
-      ).find(this.Component).first().dive()
+        </CordProvider>,
+      )
+        .find(this.Component)
+        .first()
+        .dive()
     }
     return this._wrapper
   }
 
-  _getInstance(){
-    if (this._instance === undefined){
+  _getInstance() {
+    if (this._instance === undefined) {
       this._instance = new this.Component(this.props)
 
-      this._instance.setState = (args) => {
+      this._instance.setState = args => {
         const state = this._instance.state
-        this._instance.state = typeof args === `function`
-          ? { ...state, ...args(state) }
-          : { ...state, ...args }
+        this._instance.state =
+          typeof args === `function` ? { ...state, ...args(state) } : { ...state, ...args }
       }
     }
     return this._instance
@@ -61,9 +62,9 @@ export class ComponentTest {
     it(`renders correctly`, () => expect(toJson(this._getWrapper())).toMatchSnapshot())
   }
 
-  has_link({ href, text }={}) {
-    if (href===undefined) throw new Error(`href is required`)
-    describe(`has a link`, ()=>{
+  has_link({ href, text } = {}) {
+    if (href === undefined) throw new Error(`href is required`)
+    describe(`has a link`, () => {
       let selector = `a`
       if (href) selector += `[href="${href}"]`
       const link = this._getWrapper().find(selector)
@@ -84,20 +85,19 @@ export class ComponentTest {
   }
 
   accepts_prop(name) {
-    if (this.Component.PropTypes){
+    if (this.Component.PropTypes) {
       console.warn(`Warning: (P)ropTypes being used on:`, this.Component.name)
     } else {
       const propTypes = this.Component.propTypes || {}
-      it (`accepts ${name} as a prop`, () => expect(propTypes).toHaveProperty(name))
+      it(`accepts ${name} as a prop`, () => expect(propTypes).toHaveProperty(name))
     }
   }
-
 
   pending(text) {
     xit(text)
   }
 
-  has_input(selector, callback=()=>{}) {
+  has_input(selector, callback = () => {}) {
     new InputTester(this._getWrapper().find(`Input`), selector, callback)
   }
 
@@ -105,29 +105,25 @@ export class ComponentTest {
     return new ComponentTest(this.Component, { ...this.props, ...props }, callback)
   }
 
-  call_function(function_name, ...args){
+  call_function(function_name, ...args) {
     return new FunctionTester(this._getInstance(), function_name, args)
   }
 
-  set_state(...args){
+  set_state(...args) {
     this._getInstance().setState(...args)
   }
 
-  mock_getToken(){
+  mock_getToken() {
     this._getInstance().getToken
   }
 
-  expect_state(args){
+  expect_state(args) {
     const state = this._getInstance().state
-    it (`has state ${JSON.stringify(args)}`, () => {
-      expect(state).toEqual(expect.objectContaining(
-        args
-      ))
+    it(`has state ${JSON.stringify(args)}`, () => {
+      expect(state).toEqual(expect.objectContaining(args))
     })
   }
-
 }
-
 
 //
 // describe(`.className`, () => {

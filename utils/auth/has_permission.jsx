@@ -1,10 +1,9 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { withAuth, isAuthed } from './index'
+import React from "react"
+import PropTypes from "prop-types"
+import { withAuth, isAuthed } from "./index"
 
 @withAuth
 export default class HasPermission extends React.Component {
-
   static propTypes = {
     auth: PropTypes.object,
     children: PropTypes.node,
@@ -19,14 +18,9 @@ export default class HasPermission extends React.Component {
     delete aProps.permission
 
     if (notAllowed) {
-      return isAuthed(auth, notAllowed)
-        ? null
-        : React.Children.only(children)
+      return isAuthed(auth, notAllowed) ? null : React.Children.only(children)
     }
 
-    return isAuthed(auth, permission)
-      ? React.Children.only(children)
-      : null
+    return isAuthed(auth, permission) ? React.Children.only(children) : null
   }
-
 }

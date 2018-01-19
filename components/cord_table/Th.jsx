@@ -1,16 +1,15 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React from "react"
+import PropTypes from "prop-types"
 
-import Filter from './Filter'
-import FaIcon from 'lib/components/fa_icon'
+import Filter from "./Filter"
+import FaIcon from "lib/components/fa_icon"
 
-import { observable, action, computed } from 'mobx'
-import { observer } from 'mobx-react'
-import { styled } from 'lib/utils/theme'
+import { observable, action, computed } from "mobx"
+import { observer } from "mobx-react"
+import { styled } from "lib/utils/theme"
 
-import decorate from 'lib/utils/decorate'
+import decorate from "lib/utils/decorate"
 export class Th extends React.Component {
-
   static propTypes = {
     children: PropTypes.node,
     className: PropTypes.string,
@@ -23,7 +22,8 @@ export class Th extends React.Component {
     table: PropTypes.object,
   }
 
-  @computed get sortIcon() {
+  @computed
+  get sortIcon() {
     if (this.props.sortDir) {
       const icon = this.props.sortDir === `asc` ? `chevron-up` : `chevron-down`
       return <FaIcon icon={icon} />
@@ -32,8 +32,14 @@ export class Th extends React.Component {
   }
 
   @observable filtersOpen = false
-  @action handleFilterClick = () => { this.filtersOpen = !this.filtersOpen }
-  @computed get showFilters() { return this.props.filterable && this.filtersOpen }
+  @action
+  handleFilterClick = () => {
+    this.filtersOpen = !this.filtersOpen
+  }
+  @computed
+  get showFilters() {
+    return this.props.filterable && this.filtersOpen
+  }
 
   handleClick = () => {
     const { onSortChange } = this.props
@@ -59,7 +65,6 @@ export class Th extends React.Component {
       </th>
     )
   }
-
 }
 export default decorate(
   styled`
@@ -69,5 +74,5 @@ export default decorate(
     }
   `,
   observer,
-  Th
+  Th,
 )

@@ -1,14 +1,13 @@
-import React from 'react'
-import debounce from 'lodash/debounce'
-import PropTypes from 'prop-types'
-import { observer } from 'mobx-react'
-import { observable, action, computed } from 'mobx'
+import React from "react"
+import debounce from "lodash/debounce"
+import PropTypes from "prop-types"
+import { observer } from "mobx-react"
+import { observable, action, computed } from "mobx"
 
-import decorate from 'lib/utils/decorate'
-import { styled, t } from 'lib/utils/theme'
+import decorate from "lib/utils/decorate"
+import { styled, t } from "lib/utils/theme"
 
 export class SlidingView extends React.Component {
-
   static propTypes = {
     className: PropTypes.string,
     containerClassName: PropTypes.string,
@@ -24,60 +23,56 @@ export class SlidingView extends React.Component {
     window.addEventListener(`resize`, debounce(this.updateViewWidth))
   }
 
-  @action updateViewWidth = () => {
+  @action
+  updateViewWidth = () => {
     this.clientWidth = this.view.clientWidth
   }
 
   @observable position = 0
   @observable clientWidth = 0
 
-  @action handleNavClick = index => this.position = index
+  @action handleNavClick = index => (this.position = index)
 
-  @computed get viewStyle() {
+  @computed
+  get viewStyle() {
     return {
       width: `${this.props.views.length * 100}%`,
-      left: `-${this.position * (this.view ? this.clientWidth : 0)}px`
+      left: `-${this.position * (this.view ? this.clientWidth : 0)}px`,
     }
   }
 
-  renderNavButtons = () => this.props.views.map((view, index) => (
-    <div
-      key={index}
-      className={
-        `sliding-view__nav-button ${index === this.position
-          ? `sliding-view__nav-button--selected`
-          : ``}`
-      }
-      onClick={() => this.handleNavClick(index)}
-    >
-      {view.name}
-    </div>
-  ))
+  renderNavButtons = () =>
+    this.props.views.map((view, index) => (
+      <div
+        key={index}
+        className={`sliding-view__nav-button ${
+          index === this.position ? `sliding-view__nav-button--selected` : ``
+        }`}
+        onClick={() => this.handleNavClick(index)}
+      >
+        {view.name}
+      </div>
+    ))
 
-  renderSlides = () => this.props.views.map((view, index) => (
-    <div key={index} className="sliding-view__slide">
-      {view.content}
-    </div>
-  ))
+  renderSlides = () =>
+    this.props.views.map((view, index) => (
+      <div key={index} className="sliding-view__slide">
+        {view.content}
+      </div>
+    ))
 
   render() {
     return (
       <div className={`${this.props.className} ${this.props.containerClassName}`}>
-        <div className="sliding-view__nav-buttons">
-          {this.renderNavButtons()}
-        </div>
-        <div className="sliding-view__view" ref={element => this.view = element}>
-          <div
-            className="sliding-view__slider"
-            style={this.viewStyle}
-          >
+        <div className="sliding-view__nav-buttons">{this.renderNavButtons()}</div>
+        <div className="sliding-view__view" ref={element => (this.view = element)}>
+          <div className="sliding-view__slider" style={this.viewStyle}>
             {this.renderSlides()}
           </div>
         </div>
       </div>
     )
   }
-
 }
 
 export default decorate(
@@ -135,5 +130,5 @@ export default decorate(
     }
   `,
   observer,
-  SlidingView
+  SlidingView,
 )

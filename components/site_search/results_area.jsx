@@ -1,17 +1,15 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { observer } from 'mobx-react'
-import { observable, action } from 'mobx'
+import React from "react"
+import PropTypes from "prop-types"
+import { observer } from "mobx-react"
+import { observable, action } from "mobx"
 
-
-import { styled, t } from 'lib/utils/theme'
-import { List, ListItem } from 'lib/components/list/index'
-import { popover } from 'lib/utils/common_styles'
-import decorate from 'lib/utils/decorate'
-import Result from './Result'
+import { styled, t } from "lib/utils/theme"
+import { List, ListItem } from "lib/components/list/index"
+import { popover } from "lib/utils/common_styles"
+import decorate from "lib/utils/decorate"
+import Result from "./Result"
 
 export class ResultsArea extends React.Component {
-
   static propTypes = {
     className: PropTypes.string,
     models: PropTypes.object.isRequired,
@@ -30,12 +28,12 @@ export class ResultsArea extends React.Component {
 
   @observable selectedIndex = 0
 
-  handleScrollTo = (pos) => {
+  handleScrollTo = pos => {
     if (!this.elem) return
     this.elem.scrollTop = pos - 200
   }
 
-  handleKeyDown = (e) => {
+  handleKeyDown = e => {
     switch (e.key) {
     case `ArrowDown`:
       this.handleArrowDown()
@@ -48,13 +46,15 @@ export class ResultsArea extends React.Component {
     }
   }
 
-  @action handleArrowDown() {
+  @action
+  handleArrowDown() {
     if (this.selectedIndex < this.props.results.length - 1) {
       this.selectedIndex = this.selectedIndex + 1
     }
   }
 
-  @action handleArrowUp() {
+  @action
+  handleArrowUp() {
     if (this.selectedIndex > 0) {
       this.selectedIndex = this.selectedIndex - 1
     }
@@ -72,7 +72,7 @@ export class ResultsArea extends React.Component {
         <Result
           type={result.searchable_type}
           result={result}
-          selected={selectedIndex===i}
+          selected={selectedIndex === i}
           models={this.props.models}
           onScrollTo={this.handleScrollTo}
           onClick={this.props.onClick}
@@ -84,14 +84,12 @@ export class ResultsArea extends React.Component {
   renderEmptyResults() {
     return (
       <div className="search-dropdown__container">
-        <div className="search-dropdown search-dropdown--no-results">
-        Sorry, no results found
-        </div>
+        <div className="search-dropdown search-dropdown--no-results">Sorry, no results found</div>
       </div>
     )
   }
 
-  setRef = (elem) => this.elem = elem
+  setRef = elem => (this.elem = elem)
 
   render() {
     const { results, className } = this.props
@@ -104,10 +102,8 @@ export class ResultsArea extends React.Component {
       </div>
     )
   }
-
 }
 export default decorate(
-
   styled`
     ${popover}
     width: 500px;

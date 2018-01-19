@@ -1,17 +1,17 @@
-import { observable, action, computed } from 'mobx'
+import { observable, action, computed } from "mobx"
 
-import { history } from 'lib/utils/router'
+import { history } from "lib/utils/router"
 
 class RouteChangesStore {
-
   constructor() {
-    history.listen((location) => this.update(location))
+    history.listen(location => this.update(location))
   }
 
   @observable previousPathname = null
   @observable routeChanges = null
 
-  @action update(location) {
+  @action
+  update(location) {
     if (location.pathname !== this.previousPathname) {
       this.previousPathname = location.pathname
       this.routeChanges += 1
@@ -19,10 +19,10 @@ class RouteChangesStore {
     }
   }
 
-  @computed get changeCounter() {
+  @computed
+  get changeCounter() {
     return this.routeChanges
   }
-
 }
 
 export default new RouteChangesStore()

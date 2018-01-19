@@ -1,11 +1,10 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { Link } from 'react-router-dom'
+import React from "react"
+import PropTypes from "prop-types"
+import { Link } from "react-router-dom"
 
-import { redirect } from 'lib/utils/router'
+import { redirect } from "lib/utils/router"
 
 export default class Result extends React.Component {
-
   static propTypes = {
     models: PropTypes.object.isRequired,
     onClick: PropTypes.func,
@@ -34,7 +33,7 @@ export default class Result extends React.Component {
     redirect(url)
   }
 
-  handleKeyDown = (e) => {
+  handleKeyDown = e => {
     if (this.props.selected && e.key === `Enter`) {
       this.goToUrl()
     }
@@ -51,7 +50,7 @@ export default class Result extends React.Component {
     return (
       <Link
         className={this.className()}
-        ref={elem => this.elem = elem}
+        ref={elem => (this.elem = elem)}
         to={`/${models[type]}/${this.props.result.searchable_id}`}
         style={{ color: `#444` }}
         onClick={this.props.onClick}
@@ -61,5 +60,4 @@ export default class Result extends React.Component {
       </Link>
     )
   }
-
 }

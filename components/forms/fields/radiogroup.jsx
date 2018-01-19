@@ -1,6 +1,6 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { styled } from 'lib/utils/theme'
+import React from "react"
+import PropTypes from "prop-types"
+import { styled } from "lib/utils/theme"
 
 @styled`
   display: block;
@@ -13,7 +13,6 @@ import { styled } from 'lib/utils/theme'
   }
 `
 export class SelectField extends React.Component {
-
   static propTypes = {
     choices: PropTypes.arrayOf(PropTypes.string),
     className: PropTypes.string,
@@ -23,7 +22,7 @@ export class SelectField extends React.Component {
     value: PropTypes.object,
   }
 
-  handleChange = (e) => {
+  handleChange = e => {
     const { onRawChange, onChange } = this.props
     if (onRawChange) onRawChange(e)
     if (onChange) onChange({ name: e.target.name, value: e.target.value })
@@ -33,7 +32,7 @@ export class SelectField extends React.Component {
     const { choices, value, className, name } = this.props
     return (
       <radiogroup {...this.props} className={className} onChange={undefined}>
-        {choices.map((choice) => (
+        {choices.map(choice => (
           <label key={choice.value}>
             <input
               key={`${choice.text}_${choice.value}`}
@@ -49,6 +48,5 @@ export class SelectField extends React.Component {
       </radiogroup>
     )
   }
-
 }
 export default SelectField

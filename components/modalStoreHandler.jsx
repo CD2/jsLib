@@ -1,13 +1,12 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { observer } from 'mobx-react'
-import { action } from 'mobx'
-import Modal from 'lib/components/modal'
-import ModalStore from 'lib/utils/modal_store'
-import Button from 'lib/components/button'
+import React from "react"
+import PropTypes from "prop-types"
+import { observer } from "mobx-react"
+import { action } from "mobx"
+import Modal from "lib/components/modal"
+import ModalStore from "lib/utils/modal_store"
+import Button from "lib/components/button"
 @observer
 export default class OrderForm extends React.Component {
-
   static propTypes = {
     showClose: PropTypes.bool,
     update: PropTypes.bool,
@@ -17,8 +16,7 @@ export default class OrderForm extends React.Component {
     showClose: true,
   }
 
-  componentDidMount(){
-  }
+  componentDidMount() {}
 
   @action handleCloseModal = () => ModalStore.removeLast()
 
@@ -33,5 +31,4 @@ export default class OrderForm extends React.Component {
 
     return null
   }
-
 }

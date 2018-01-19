@@ -1,6 +1,6 @@
-import React from 'react'
-import { styled, p } from 'lib/utils/theme'
-import PropTypes from 'prop-types'
+import React from "react"
+import { styled, p } from "lib/utils/theme"
+import PropTypes from "prop-types"
 
 @styled`
   width: ${p(`width`, `100%`)};
@@ -12,13 +12,11 @@ import PropTypes from 'prop-types'
   }
 `
 export class GridItem extends React.Component {
-
   static propTypes = {
     children: PropTypes.any,
     className: PropTypes.string,
     onClick: PropTypes.func,
   }
-
 
   render() {
     const { className, children, onClick } = this.props
@@ -28,6 +26,5 @@ export class GridItem extends React.Component {
       </div>
     )
   }
-
 }
 export default GridItem

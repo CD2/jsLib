@@ -1,9 +1,9 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import GoogleAnalytics from 'react-ga'
-import { reaction } from 'mobx'
+import React, { Component } from "react"
+import PropTypes from "prop-types"
+import GoogleAnalytics from "react-ga"
+import { reaction } from "mobx"
 
-import RouteChangesStore from 'lib/stores/RouteChanges'
+import RouteChangesStore from "lib/stores/RouteChanges"
 
 GoogleAnalytics.initialize(`UA-102356921-1`)
 
@@ -13,7 +13,6 @@ function trackPage(page) {
 
 export default (WrappedComponent, options = {}) => {
   return class WithTracker extends Component {
-
     static propTypes = {
       location: PropTypes.object,
     }
@@ -29,6 +28,5 @@ export default (WrappedComponent, options = {}) => {
     render() {
       return <WrappedComponent {...this.props} />
     }
-
   }
 }

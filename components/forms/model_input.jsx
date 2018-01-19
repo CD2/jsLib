@@ -1,18 +1,17 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { Input } from 'lib/components/forms'
-import { observer } from 'mobx-react'
+import React from "react"
+import PropTypes from "prop-types"
+import { Input } from "lib/components/forms"
+import { observer } from "mobx-react"
 
 @observer
 export class ModelInput extends React.Component {
-
   static propTypes = {
     model: PropTypes.object,
     name: PropTypes.string,
     onChange: PropTypes.func,
   }
 
-  handleChange = (e) => this.props.model.set(e.name, e.value)
+  handleChange = e => this.props.model.set(e.name, e.value)
 
   render() {
     const { model, name } = this.props
@@ -25,7 +24,6 @@ export class ModelInput extends React.Component {
       />
     )
   }
-
 }
 
 export default ModelInput

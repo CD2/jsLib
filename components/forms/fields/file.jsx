@@ -1,12 +1,10 @@
-
-import React from 'react'
-import PropTypes from 'prop-types'
-import { observable, action } from 'mobx'
-import { observer } from 'mobx-react'
+import React from "react"
+import PropTypes from "prop-types"
+import { observable, action } from "mobx"
+import { observer } from "mobx-react"
 import FileDownload from "lib/components/file"
 @observer
 export class FileField extends React.Component {
-
   static propTypes = {
     accepts: PropTypes.array,
     file_name: PropTypes.string,
@@ -26,13 +24,12 @@ export class FileField extends React.Component {
     onlySpreadsheets: false,
   }
 
-
   componentWillReceiveProps(props) {
     if (props.value === null && this.props.value) this.fileInput.value = ``
     if (!props.value) return
     if (props.value instanceof File) {
       let reader = new FileReader()
-      reader.onload = action((e) => this.preview_src = e.target.result)
+      reader.onload = action(e => (this.preview_src = e.target.result))
       reader.readAsDataURL(props.value)
     } else {
       this.preview_src = props.value
@@ -41,7 +38,7 @@ export class FileField extends React.Component {
 
   @observable preview_src = ``
 
-  handleChange = (e) => {
+  handleChange = e => {
     const { onRawChange, onChange } = this.props
     if (onRawChange) onRawChange(e)
     if (onChange) {
@@ -67,7 +64,7 @@ export class FileField extends React.Component {
     return (
       <div>
         <input
-          ref={element => this.fileInput = element}
+          ref={element => (this.fileInput = element)}
           type="file"
           name={name}
           multiple={multiple}
@@ -75,12 +72,13 @@ export class FileField extends React.Component {
           onChange={this.handleChange}
           onFocus={onFocus}
         />
-        {this.props.uid ? <FileDownload uid={this.props.uid}>
-          {this.props.file_name ? this.props.file_name : `Download`}
-        </FileDownload> : null}
+        {this.props.uid ? (
+          <FileDownload uid={this.props.uid}>
+            {this.props.file_name ? this.props.file_name : `Download`}
+          </FileDownload>
+        ) : null}
       </div>
     )
   }
-
 }
 export default FileField

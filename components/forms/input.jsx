@@ -1,8 +1,8 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import dropdown from 'images/dropdown'
-import { styled, t } from 'lib/utils/theme'
-import loader from './loader'
+import React from "react"
+import PropTypes from "prop-types"
+import dropdown from "images/dropdown"
+import { styled, t } from "lib/utils/theme"
+import loader from "./loader"
 
 const FIELD_TYPES = {
   text: require(`./fields/text`).default,
@@ -61,8 +61,7 @@ margin-bottom: 10px;
             padding: 6px;
     `
       }
-    }
-  }
+    }}
   }
   .DayPickerInput-OverlayWrapper {
     z-index: 40000;
@@ -102,7 +101,7 @@ margin-bottom: 10px;
   }
 
   &.errors { 
-    label { color: ${t('error')}; }
+    label { color: ${t(`error`)}; }
       input[type=email],
   input[type=text],
   input[type=search],
@@ -111,14 +110,13 @@ margin-bottom: 10px;
   .DayPickerInput input,
   textarea,
   .select{
-    border: 1px solid ${t('error')} 
+    border: 1px solid ${t(`error`)} 
   }
   }
 
 
 `
 export default class Input extends React.Component {
-
   static propTypes = {
     className: PropTypes.string,
     description: PropTypes.string,
@@ -134,7 +132,7 @@ export default class Input extends React.Component {
   }
 
   componentWillMount() {
-    const field =  FIELD_TYPES[this.props.type] || FIELD_TYPES.text
+    const field = FIELD_TYPES[this.props.type] || FIELD_TYPES.text
 
     this.field = this.props.loader ? loader(field, this.props.loader) : field
   }
@@ -144,12 +142,11 @@ export default class Input extends React.Component {
     if (errors) {
       return (
         <div className="validation-errors">
-          {
-            errors.map(
-              (err, index) => <span key={`inputError${index}`}
-                                    className="validation-error">{err}</span>
-            )
-          }
+          {errors.map((err, index) => (
+            <span key={`inputError${index}`} className="validation-error">
+              {err}
+            </span>
+          ))}
         </div>
       )
     }
@@ -169,7 +166,7 @@ export default class Input extends React.Component {
     if (type === `hidden`) return <this.field {...props} className="field" />
     if (label) {
       return (
-        <div className={`${className} form-input${hasErrors ? ' errors' : ''}`}>
+        <div className={`${className} form-input${hasErrors ? ` errors` : ``}`}>
           {this.renderErrors()}
           <label>
             {label}
@@ -187,5 +184,4 @@ export default class Input extends React.Component {
       </div>
     )
   }
-
 }

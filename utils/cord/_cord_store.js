@@ -1,5 +1,5 @@
-import { observable, action } from 'mobx'
-import axios from 'axios'
+import { observable, action } from "mobx"
+import axios from "axios"
 
 const get = (url, params) => axios.get(url, { params })
 const post = (url, data) => axios.post(url, { data })
@@ -7,8 +7,7 @@ const post = (url, data) => axios.post(url, { data })
 const defaultHttp = { get, post }
 
 export class CordStore {
-
-  constructor({ base_url, http_methods, reducer_key=`cord` }={}) {
+  constructor({ base_url, http_methods, reducer_key = `cord` } = {}) {
     this.base_url = base_url
     this.reducer_key = reducer_key
     this.http_methods = { ...this.http_methods, ...http_methods }
@@ -60,21 +59,22 @@ export class CordStore {
     data: {},
   }
 
-  @observable data = observable.map({
+  @observable
+  data = observable.map({
     articles: {
       ids: {},
       records: {
         1: {
           data: {
             id: 1,
-            body: `this si the body`
+            body: `this si the body`,
           },
           fetching: false,
           fetched: true,
           fetch_error: false,
-        }
-      }
-    }
+        },
+      },
+    },
   })
 
   getTableData(table_name) {
@@ -92,25 +92,26 @@ export class CordStore {
     return records[id]
   }
 
-
-  @action fetchRecord(cord, id, { attributes=[], reload=false }={}) {
+  @action
+  fetchRecord(cord, id, { attributes = [], reload = false } = {}) {
     this.getRecord(cord, id).fetching = true
     const path = this.recordsPath(cord.path_name)
-    this.get(path, { ids: id, attributes }).then(action(`FetchRecordFulfilled`,
-      response => {
-        this.getRecord(cord, id).fetching = false
-        this.getRecord(cord, id).fetched = true
-        this.getRecord(cord, id).fetch_error = false
-      })
-    ).catch(action(`FetchRecordRejected`,
-      error => {
-        console.error(error, error)
-        this.getRecord(cord, id).fetching = false
-        this.getRecord(cord, id).fetch_error = true
-      })
-    )
+    this.get(path, { ids: id, attributes })
+      .then(
+        action(`FetchRecordFulfilled`, response => {
+          this.getRecord(cord, id).fetching = false
+          this.getRecord(cord, id).fetched = true
+          this.getRecord(cord, id).fetch_error = false
+        }),
+      )
+      .catch(
+        action(`FetchRecordRejected`, error => {
+          console.error(error, error)
+          this.getRecord(cord, id).fetching = false
+          this.getRecord(cord, id).fetch_error = true
+        }),
+      )
   }
-
 
   //
   // getDataKey(data) {
@@ -165,7 +166,7 @@ export class CordStore {
   //   return false
   // }
   //
-  processResponse = (data) => {
+  processResponse = data => {
     Object.entries(data).forEach(([table_name, responseData]) => {
       const table_data = this.getTableData(table_name)
 
@@ -181,7 +182,7 @@ export class CordStore {
         responseData.records.map(record => {
           const record_data = table_data.records[record.id]
           const new_record = { ...record_data, ...record }
-          return table_data.records[record.id].data = new_record
+          return (table_data.records[record.id].data = new_record)
         })
       }
     })
@@ -198,7 +199,5 @@ export class CordStore {
   //   })
   //   return state
   // }
-
-
 }
 export default CordStore

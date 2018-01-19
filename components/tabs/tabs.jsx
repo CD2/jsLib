@@ -23,8 +23,8 @@ import Wrapper from "../wrapper"
           }
         }
         `
-    } else {
-      return `
+    } 
+    return `
         .tab-content {
                   padding: 25px 0 0;
         }
@@ -43,7 +43,7 @@ import Wrapper from "../wrapper"
           }   
         }
       `
-    }
+    
   }}
   }
   }
@@ -51,7 +51,8 @@ import Wrapper from "../wrapper"
     if (!noBorder) return `border-top: 1px solid #ddd;`
   }}
   ${({ thick, theme }) => {
-    if (thick) return `
+    if (thick)
+      {return `
       .tab-heads {
         > div {
           border-bottom: 5px solid ${theme.border} !important;
@@ -63,7 +64,7 @@ import Wrapper from "../wrapper"
           }
         }
       }
-    `
+    `}
   }}
 `
 @withRouter

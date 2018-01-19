@@ -8,7 +8,7 @@ const validators_types = {
 
 export default function validateForm(values, validations) {
   const errors = {}
-  const addError = (field, msg) => errors[field] = (errors[field] || []).concat([msg])
+  const addError = (field, msg) => (errors[field] = (errors[field] || []).concat([msg]))
 
   Object.entries(validations).map(([fieldname, validators]) => {
     const value = values.has(fieldname) ? values.get(fieldname) : ``

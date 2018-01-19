@@ -1,8 +1,8 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { styled } from 'lib/utils/theme'
-import { observer } from 'mobx-react'
-import { observable, action } from 'mobx'
+import React from "react"
+import PropTypes from "prop-types"
+import { styled } from "lib/utils/theme"
+import { observer } from "mobx-react"
+import { observable, action } from "mobx"
 
 @styled`
   display: block;
@@ -15,7 +15,6 @@ import { observable, action } from 'mobx'
 `
 @observer
 export class Checkbox extends React.Component {
-
   static propTypes = {
     className: PropTypes.string,
     labelText: PropTypes.node,
@@ -30,15 +29,16 @@ export class Checkbox extends React.Component {
     value: false,
   }
 
-  @action componentDidUpdate(props) {
+  @action
+  componentDidUpdate(props) {
     if (props.value !== this.props.value) this.checked = this.props.value
   }
 
-  @observable checked = !!(this.props.model
-    ? this.props.model.get(this.props.name)
-    : this.props.value)
+  @observable
+  checked = !!(this.props.model ? this.props.model.get(this.props.name) : this.props.value)
 
-  @action handleChange = (e) => {
+  @action
+  handleChange = e => {
     const { onRawChange, onChange } = this.props
     if (onRawChange) onRawChange(e)
     if (onChange) {
@@ -56,16 +56,10 @@ export class Checkbox extends React.Component {
     delete props.value
     return (
       <label className={className}>
-        <input
-          {...props}
-          className="input"
-          checked={this.checked}
-          onChange={this.handleChange}
-        />
+        <input {...props} className="input" checked={this.checked} onChange={this.handleChange} />
         <span>{labelText}</span>
       </label>
     )
   }
-
 }
 export default Checkbox

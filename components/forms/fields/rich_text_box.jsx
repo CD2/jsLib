@@ -1,17 +1,17 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React from "react"
+import PropTypes from "prop-types"
 
-import tinymce from 'tinymce'
-import 'tinymce/themes/modern'
-import 'tinymce/plugins/lists'
-import 'tinymce/plugins/link'
-import 'tinymce/plugins/table'
-import 'tinymce/plugins/anchor'
-import 'tinymce/plugins/code'
-import { styled, t } from 'lib/utils/theme'
+import tinymce from "tinymce"
+import "tinymce/themes/modern"
+import "tinymce/plugins/lists"
+import "tinymce/plugins/link"
+import "tinymce/plugins/table"
+import "tinymce/plugins/anchor"
+import "tinymce/plugins/code"
+import { styled, t } from "lib/utils/theme"
 
-import { observer } from 'mobx-react'
-import { observable } from 'mobx'
+import { observer } from "mobx-react"
+import { observable } from "mobx"
 
 @styled`
   border-radius: ${t(`borderRadii.panel`)};
@@ -21,7 +21,6 @@ import { observable } from 'mobx'
 `
 @observer
 export class RichTextBox extends React.Component {
-
   static propTypes = {
     className: PropTypes.string,
     disabled: PropTypes.bool,
@@ -29,7 +28,7 @@ export class RichTextBox extends React.Component {
     name: PropTypes.string,
     onChange: PropTypes.func,
     value: PropTypes.string,
-  };
+  }
 
   static defaultProps = {
     disabled: false,
@@ -52,9 +51,7 @@ export class RichTextBox extends React.Component {
       elementpath: false,
       browser_spellcheck: true,
       readonly: this.props.disabled ? 1 : 0,
-      plugins: [
-        `lists link table anchor code`
-      ],
+      plugins: [`lists link table anchor code`],
       toolbar,
       height,
       init_instance_callback: editor => {
@@ -89,7 +86,7 @@ export class RichTextBox extends React.Component {
   @observable value = ``
   @observable setup = false
 
-  handleChange = (editor) => {
+  handleChange = editor => {
     const valueIsEmpty = editor.getContent({ format: `text` }).trim().length === 0
     const value = valueIsEmpty ? `` : editor.getContent()
     const { onChange, name } = this.props
@@ -100,13 +97,9 @@ export class RichTextBox extends React.Component {
   render() {
     return (
       <div className={this.props.className}>
-        <textarea
-          id={this.props.name}
-          ref={(elem) => this.target = elem}
-        />
+        <textarea id={this.props.name} ref={elem => (this.target = elem)} />
       </div>
     )
   }
-
 }
 export default RichTextBox

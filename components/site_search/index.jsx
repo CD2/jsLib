@@ -1,21 +1,20 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { withRouter } from 'react-router-dom'
-import { observer } from 'mobx-react'
-import { observable, action } from 'mobx'
+import React from "react"
+import PropTypes from "prop-types"
+import { withRouter } from "react-router-dom"
+import { observer } from "mobx-react"
+import { observable, action } from "mobx"
 
-import { get } from 'lib/utils/api_http'
-import Overlay from 'lib/components/overlay'
-import decorate from 'lib/utils/decorate'
-import { Form, Input } from 'lib/components/forms'
-import ResultsArea from './results_area'
+import { get } from "lib/utils/api_http"
+import Overlay from "lib/components/overlay"
+import decorate from "lib/utils/decorate"
+import { Form, Input } from "lib/components/forms"
+import ResultsArea from "./results_area"
 
 const search = (query, models) => {
   return get(`/search`, { query, models }).then(response => response.data)
 }
 
 export class SiteSearch extends React.Component {
-
   static propTypes = {
     location: PropTypes.shape({
       pathname: PropTypes.string,
@@ -25,7 +24,7 @@ export class SiteSearch extends React.Component {
   }
 
   static defaultProps = {
-    models: {}
+    models: {},
   }
 
   componentWillReceiveProps(props) {
@@ -39,7 +38,8 @@ export class SiteSearch extends React.Component {
   @observable results = []
   @observable open = false
 
-  @action fetchResults(query) {
+  @action
+  fetchResults(query) {
     if (query) {
       search(query, Object.keys(this.props.models)).then(results => {
         this.results.replace(results)
@@ -51,7 +51,8 @@ export class SiteSearch extends React.Component {
     }
   }
 
-  @action clearResults() {
+  @action
+  clearResults() {
     this.searchValue = ``
     this.query = ``
     this.results = []
@@ -60,19 +61,22 @@ export class SiteSearch extends React.Component {
 
   anyResults = () => this.results && this.results.length > 0
 
-  @action handleSearchChange = (e) => {
+  @action
+  handleSearchChange = e => {
     this.searchValue = e.value
     this.fetchResults(e.value)
   }
 
-  @action handleFocus = (e) => {
+  @action
+  handleFocus = e => {
     e.target.select()
     this.open = true
   }
 
-  @action handleBlur = () => this.open = false
+  @action handleBlur = () => (this.open = false)
 
-  @action handleClick = () => {
+  @action
+  handleClick = () => {
     this.open = false
     this.searchValue = ``
   }
@@ -90,22 +94,18 @@ export class SiteSearch extends React.Component {
             onFocus={this.handleFocus}
           />
           {open && <Overlay belowAppBar onClick={this.handleBlur} clickThrough />}
-          {open && this.anyResults() &&
-          <ResultsArea
-            results={results}
-            query={query}
-            models={this.props.models}
-            onClick={this.handleClick}
-          />
-          }
+          {open &&
+            this.anyResults() && (
+              <ResultsArea
+                results={results}
+                query={query}
+                models={this.props.models}
+                onClick={this.handleClick}
+              />
+            )}
         </Form>
       </div>
     )
   }
-
 }
-export default decorate(
-  withRouter,
-  observer,
-  SiteSearch
-)
+export default decorate(withRouter, observer, SiteSearch)

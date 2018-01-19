@@ -1,37 +1,41 @@
-import { observable, action, computed, toJS } from 'mobx'
+import { observable, action, computed, toJS } from "mobx"
 
 class BannerStore {
+  @observable bannerContents = []
 
-  @observable bannerContents = [];
-
-  @action set(contents) {
+  @action
+  set(contents) {
     this.bannerContents = contents
   }
 
-  @action addItem(content) {
+  @action
+  addItem(content) {
     this.bannerContents.push(content)
   }
 
-  @computed get contents() {
+  @computed
+  get contents() {
     return toJS(this.bannerContents)
   }
 
-  @computed get hasContents() {
+  @computed
+  get hasContents() {
     return this.bannerContents.length > 0
   }
 
-  @action removeLast() {
+  @action
+  removeLast() {
     this.bannerContents.pop()
   }
 
   getLast() {
-    return toJS(this.bannerContents.get(this.bannerContents.length-1))
+    return toJS(this.bannerContents.get(this.bannerContents.length - 1))
   }
 
-  @action clear() {
+  @action
+  clear() {
     this.bannerContents = []
   }
-
 }
 
 export default new BannerStore()

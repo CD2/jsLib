@@ -1,37 +1,41 @@
-import { observable, action, computed, toJS } from 'mobx'
+import { observable, action, computed, toJS } from "mobx"
 
 class ModalStore {
+  @observable modalContents = []
 
-  @observable modalContents = [];
-
-  @action set(contents) {
+  @action
+  set(contents) {
     this.modalContents = contents
   }
 
-  @action addItem(content) {
+  @action
+  addItem(content) {
     this.modalContents.push(content)
   }
 
-  @computed get contents() {
+  @computed
+  get contents() {
     return toJS(this.modalContents)
   }
 
-  @computed get hasContents() {
+  @computed
+  get hasContents() {
     return this.modalContents.length > 0
   }
 
-  @action removeLast() {
+  @action
+  removeLast() {
     this.modalContents.pop()
   }
 
   getLast() {
-    return toJS(this.modalContents.get(this.modalContents.length-1))
+    return toJS(this.modalContents.get(this.modalContents.length - 1))
   }
 
-  @action clear() {
+  @action
+  clear() {
     this.modalContents = []
   }
-
 }
 
 export default new ModalStore()

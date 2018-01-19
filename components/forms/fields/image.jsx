@@ -1,12 +1,11 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { observable, action } from 'mobx'
-import { observer } from 'mobx-react'
+import React from "react"
+import PropTypes from "prop-types"
+import { observable, action } from "mobx"
+import { observer } from "mobx-react"
 import Image from "lib/components/image"
 
 @observer
 export default class ImageField extends React.Component {
-
   static propTypes = {
     accepts: PropTypes.array,
     model: PropTypes.object,
@@ -26,13 +25,12 @@ export default class ImageField extends React.Component {
     onlySpreadsheets: false,
   }
 
-
   componentWillReceiveProps(props) {
     if (props.value === null && this.props.value) this.fileInput.value = ``
     if (!props.value) return
     if (props.value instanceof File) {
       let reader = new FileReader()
-      reader.onload = action((e) => this.preview_src = e.target.result)
+      reader.onload = action(e => (this.preview_src = e.target.result))
       reader.readAsDataURL(props.value)
     } else {
       this.preview_src = props.value
@@ -41,7 +39,7 @@ export default class ImageField extends React.Component {
 
   @observable preview_src = ``
 
-  handleChange = (e) => {
+  handleChange = e => {
     const { onRawChange, onChange } = this.props
     if (onRawChange) onRawChange(e)
     if (onChange) {
@@ -79,11 +77,9 @@ export default class ImageField extends React.Component {
     }
     return (
       <div>
-        <div>
-          {this.renderPreview()}
-        </div>
+        <div>{this.renderPreview()}</div>
         <input
-          ref={element => this.fileInput = element}
+          ref={element => (this.fileInput = element)}
           type="file"
           name={name}
           multiple={multiple}
@@ -94,5 +90,4 @@ export default class ImageField extends React.Component {
       </div>
     )
   }
-
 }

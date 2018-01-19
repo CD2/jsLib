@@ -1,9 +1,8 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import moment from 'moment'
+import React from "react"
+import PropTypes from "prop-types"
+import moment from "moment"
 
 export class DateTime extends React.Component {
-
   static propTypes = {
     date: PropTypes.any,
     format: PropTypes.string,
@@ -23,11 +22,8 @@ export class DateTime extends React.Component {
     let { format } = this.props
     format = this.predefinedFormats[format] || format
     const datestring = moment(this.props.date).format(format)
-    return (
-      <span>{datestring}</span>
-    )
+    return <span>{datestring}</span>
   }
-
 }
 
 // YEAR, MONTH, DAY

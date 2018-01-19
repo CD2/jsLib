@@ -1,27 +1,26 @@
 /* eslint-disable react/jsx-filename-extension */
-import React from 'react'
-import { inject, observer } from 'mobx-react'
-import PropTypes from 'prop-types'
-import match from './match'
-import { idFactories, attributesFactories } from './record_factories'
+import React from "react"
+import { inject, observer } from "mobx-react"
+import PropTypes from "prop-types"
+import match from "./match"
+import { idFactories, attributesFactories } from "./record_factories"
 
 export default function({
-  condition=null,
-  id=this.defaultPropName,
-  as=this.defaultAs,
-  attributes=[],
-  reloadAs=`reload`,
-  formatter=null,
-}={}) {
+  condition = null,
+  id = this.defaultPropName,
+  as = this.defaultAs,
+  attributes = [],
+  reloadAs = `reload`,
+  formatter = null,
+} = {}) {
   const cord = this
   const getId = match(id, idFactories, `connectRecordIds`)
   const getAttributes = match(attributes, attributesFactories, `connectRecordAttributes`)
 
-  return (Component) => {
+  return Component => {
     @inject(`cordStore`)
     @observer
     class ConnectedIds extends React.Component {
-
       static propTypes = {
         cordStore: PropTypes.object,
       }
@@ -39,9 +38,9 @@ export default function({
       }
 
       reload = () => this.fetch(this.props, { reload: true })
-      getFormattedProps = props => formatter ? { ...props, ...formatter(props) } : props
+      getFormattedProps = props => (formatter ? { ...props, ...formatter(props) } : props)
 
-      fetch = (props=this.props, { reload=false }={}) => {
+      fetch = (props = this.props, { reload = false } = {}) => {
         const id = getId(props)
         const attributes = getAttributes(props)
         if (Array.isArray(id)) {
@@ -61,7 +60,7 @@ export default function({
           let records = []
           id.forEach(id => {
             if (!loaded || !this.props.cordStore.isRecordLoaded(cord, id, attributes)) {
-              return loaded = false
+              return (loaded = false)
             }
             records.push(this.props.cordStore.getRecord(cord, id))
           })
@@ -72,9 +71,7 @@ export default function({
           props[reloadAs] = this.reload
           props = this.getFormattedProps(props)
 
-          return (
-            <Component {...props} />
-          )
+          return <Component {...props} />
         }
         if (!this.props.cordStore.isRecordLoaded(cord, id, attributes)) {
           if (Component.renderLoading) return Component.renderLoading()
@@ -88,11 +85,8 @@ export default function({
         props[reloadAs] = this.reload
         props = this.getFormattedProps(props)
 
-        return (
-          <Component {...props} />
-        )
+        return <Component {...props} />
       }
-
     }
     return ConnectedIds
   }

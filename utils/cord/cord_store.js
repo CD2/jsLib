@@ -1,5 +1,5 @@
-import { observable, reaction } from 'mobx'
-import axios from 'axios'
+import { observable, reaction } from "mobx"
+import axios from "axios"
 
 const get = (url, params) => axios.get(url, { params })
 const post = (url, data, options = {}) => axios.post(url, { data }, options)
@@ -7,8 +7,7 @@ const post = (url, data, options = {}) => axios.post(url, { data }, options)
 const defaultHttp = { get, post }
 
 export class CordStore {
-
-  constructor({ base_url, http_methods, reducer_key=`cord` }={}) {
+  constructor({ base_url, http_methods, reducer_key = `cord` } = {}) {
     this.base_url = base_url
     this.reducer_key = reducer_key
     this.http_methods = { ...this.http_methods, ...http_methods }
@@ -16,7 +15,6 @@ export class CordStore {
     this.setup_batching_listener()
     window.store = this.data
   }
-
 
   //when a pending request is added
   // start a timer
@@ -36,7 +34,7 @@ export class CordStore {
         if (this.batch_request_store.length === 0) return
         if (this.batch_request_timer !== null) return
         this.batch_request_timer = setTimeout(this.perform_batch_request, 10)
-      }
+      },
     )
   }
 
@@ -50,18 +48,16 @@ export class CordStore {
     })
   }
 
-
-  new_record_batch = (request) => {
+  new_record_batch = request => {
     this.batch_request_store.push(request)
   }
-
 
   /*
    [
     { path, ids, attributes }
    ]
  */
-  merge_requests = (requests) => {
+  merge_requests = requests => {
     return requests.reduce((grouped, request) => {
       const { path } = request
       grouped[path] = grouped[path] || { ids: [], attributes: [], scope: [] }
@@ -74,7 +70,6 @@ export class CordStore {
       return grouped
     }, {})
   }
-
 
   http_methods = defaultHttp
 
@@ -137,14 +132,12 @@ export class CordStore {
     }
   }
 
-  fetchFields(cord, attributes=[], { reload=false, scope=`all` }={}) {
+  fetchFields(cord, attributes = [], { reload = false, scope = `all` } = {}) {
     const hasScope = this.idsLoaded(cord, { scope })
     const scopeIds = hasScope ? this.getIds(cord, { scope }) : null
-    const firstRecordOfScopeId = scopeIds && scopeIds.length > 0
-      ? scopeIds.get(0)
-      : null 
-    const hasAttributes = firstRecordOfScopeId
-      && this.isRecordLoaded(cord, firstRecordOfScopeId, attributes)
+    const firstRecordOfScopeId = scopeIds && scopeIds.length > 0 ? scopeIds.get(0) : null
+    const hasAttributes =
+      firstRecordOfScopeId && this.isRecordLoaded(cord, firstRecordOfScopeId, attributes)
 
     if (reload || (!hasScope || !hasAttributes)) {
       const path = this.fieldsPath(cord.path)
@@ -167,7 +160,7 @@ export class CordStore {
     return this.getTableData(cord.table_name).ids.has(data.scope)
   }
 
-  fetchRecord(cord, id, attributes=[], { reload=false }={}) {
+  fetchRecord(cord, id, attributes = [], { reload = false } = {}) {
     if (reload || !this.isRecordLoaded(cord, id, attributes)) {
       const path = this.recordsPath(cord.path)
       id = Array.isArray(id) ? id : [id]
@@ -179,7 +172,7 @@ export class CordStore {
     return this.getTableData(cord.table_name).records.get(id)
   }
 
-  isRecordLoaded(cord, id, attributes=[]) {
+  isRecordLoaded(cord, id, attributes = []) {
     const { records } = this.getTableData(cord.table_name)
 
     if (!records.has(id)) return false
@@ -244,7 +237,5 @@ export class CordStore {
   //   })
   //   return state
   // }
-
-
 }
 export default CordStore

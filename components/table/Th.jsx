@@ -1,16 +1,15 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React from "react"
+import PropTypes from "prop-types"
 
-import Filter from './Filter'
-import FaIcon from 'lib/components/fa_icon'
+import Filter from "./Filter"
+import FaIcon from "lib/components/fa_icon"
 
-import { observable, action, computed } from 'mobx'
-import { observer, inject } from 'mobx-react'
-import { styled } from 'lib/utils/theme'
+import { observable, action, computed } from "mobx"
+import { observer, inject } from "mobx-react"
+import { styled } from "lib/utils/theme"
 
-import decorate from 'lib/utils/decorate'
+import decorate from "lib/utils/decorate"
 export class Th extends React.Component {
-
   static propTypes = {
     children: PropTypes.node,
     className: PropTypes.string,
@@ -21,7 +20,8 @@ export class Th extends React.Component {
     table: PropTypes.object,
   }
 
-  @computed get sortIcon() {
+  @computed
+  get sortIcon() {
     const { column } = this.props.table.sort
     if (column === this.props.name) {
       const icon = this.sort.dir === `ASC` ? `chevron-up` : `chevron-down`
@@ -31,8 +31,14 @@ export class Th extends React.Component {
   }
 
   @observable filtersOpen = false
-  @action handleFilterClick = () => { this.filtersOpen = !this.filtersOpen }
-  @computed get showFilters() { return this.props.filterable && this.filtersOpen }
+  @action
+  handleFilterClick = () => {
+    this.filtersOpen = !this.filtersOpen
+  }
+  @computed
+  get showFilters() {
+    return this.props.filterable && this.filtersOpen
+  }
 
   handleClick = () => {
     const { query, sortable } = this.props
@@ -47,8 +53,9 @@ export class Th extends React.Component {
       >
         {this.props.filterable && <FaIcon icon="filter" onClick={this.handleFilterClick} />}
         {this.props.children}
-        {this.props.sortable && this.props.query
-          && this.props.query.renderSortIcon(this.props.sortable)}
+        {this.props.sortable &&
+          this.props.query &&
+          this.props.query.renderSortIcon(this.props.sortable)}
         {this.showFilters && (
           <Filter
             name={this.props.filterable}
@@ -59,7 +66,6 @@ export class Th extends React.Component {
       </th>
     )
   }
-
 }
 export default decorate(
   styled`
@@ -71,5 +77,5 @@ export default decorate(
   `,
   inject(`query`),
   observer,
-  Th
+  Th,
 )

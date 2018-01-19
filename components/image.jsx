@@ -1,12 +1,11 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { buildUrl } from 'lib/utils/api_http'
-import invariant from 'invariant'
-import { styled } from 'lib/utils/theme'
-import decorate from 'lib/utils/decorate'
+import React from "react"
+import PropTypes from "prop-types"
+import { buildUrl } from "lib/utils/api_http"
+import invariant from "invariant"
+import { styled } from "lib/utils/theme"
+import decorate from "lib/utils/decorate"
 
 export class Image extends React.Component {
-
   static propTypes = {
     alt: PropTypes.string,
     background: PropTypes.bool,
@@ -38,9 +37,9 @@ export class Image extends React.Component {
     const { uid, url, width, height, crop, size } = this.props
     if (url) return url
     const params = { uid, size }
-    if (height && !size) params.size = `${Math.round(height*1.5*2)}x${height*2}`
-    if (width && !size) params.size = `${width*2}x${Math.round(width/1.5*2)}`
-    if (width && height && !size) params.size = `${width*2}x${height*2}`
+    if (height && !size) params.size = `${Math.round(height * 1.5 * 2)}x${height * 2}`
+    if (width && !size) params.size = `${width * 2}x${Math.round(width / 1.5 * 2)}`
+    if (width && height && !size) params.size = `${width * 2}x${height * 2}`
     if (crop) params.crop = true
     return buildUrl([`/image`], params)
   }
@@ -71,9 +70,7 @@ export class Image extends React.Component {
     if (background) {
       return (
         <div
-          style={
-            Object.assign({ backgroundImage: `url(${url})` }, this.props.style)
-          }
+          style={Object.assign({ backgroundImage: `url(${url})` }, this.props.style)}
           children={children}
           className={`background-image ${this.props.className}`}
           onClick={this.props.onClick}
@@ -93,7 +90,6 @@ export class Image extends React.Component {
       />
     )
   }
-
 }
 export default decorate(
   styled`
@@ -107,8 +103,7 @@ export default decorate(
         return `background-size: contain;
       `
       }
-    }
-}
+    }}
       max-width: 100%;
     max-height: 100%;
 
@@ -117,14 +112,12 @@ export default decorate(
         return `border-radius: 50%;
       `
       }
-    }
-}
+    }}
     ${({ height }) => {
       if (height) {
         return `height: ${height}px;`
       }
-    }
-}
+    }}
   ${({ width }) => {
     if (width) {
       return `width: ${width}px;`
@@ -132,5 +125,5 @@ export default decorate(
   }}
 
   `,
-  Image
+  Image,
 )

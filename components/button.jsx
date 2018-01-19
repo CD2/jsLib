@@ -1,14 +1,13 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import invariant from 'invariant'
-import { Link } from 'react-router-dom'
+import React from "react"
+import PropTypes from "prop-types"
+import invariant from "invariant"
+import { Link } from "react-router-dom"
 
-import { styled, t } from 'lib/utils/theme'
-import decorate from 'lib/utils/decorate'
-import load from 'images/load.gif'
+import { styled, t } from "lib/utils/theme"
+import decorate from "lib/utils/decorate"
+import load from "images/load.gif"
 
 export class Button extends React.Component {
-
   static propTypes = {
     buttonStyle: PropTypes.string,
     children: PropTypes.node,
@@ -59,11 +58,8 @@ export class Button extends React.Component {
 
     const processingProp = processing ? { onClick: () => null } : {}
 
-    return (
-      <Comp {...{ ...props, ...processingProp }}>{this.getChildren()}</Comp>
-    )
+    return <Comp {...{ ...props, ...processingProp }}>{this.getChildren()}</Comp>
   }
-
 }
 export default decorate(
   styled`
@@ -249,16 +245,16 @@ export default decorate(
     margin-right: 6px;
 
     ${({ wide }) => {
-      if (wide){
-        return`
+      if (wide) {
+        return `
           width: 100%;
         `
       }
     }}
 
     ${({ processing }) => {
-      if (processing){
-        return`
+      if (processing) {
+        return `
         cursor: none;
         background: url(${load});
         opacity: 0.7;
@@ -272,9 +268,9 @@ export default decorate(
         &:hover{
           background-color: #2c2d2d;
         }
-      `}
-    }
-}
+      `
+      }
+    }}
   `,
-  Button
+  Button,
 )

@@ -1,18 +1,17 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React from "react"
+import PropTypes from "prop-types"
 
-import { styled, t } from 'lib/utils/theme'
-import decorate from 'lib/utils/decorate'
+import { styled, t } from "lib/utils/theme"
+import decorate from "lib/utils/decorate"
 
 export class LoadingBars extends React.Component {
-
   static propTypes = {
     className: PropTypes.string,
-  };
+  }
 
   static defaultProps = {
     className: null,
-  };
+  }
 
   render() {
     return (
@@ -27,7 +26,6 @@ export class LoadingBars extends React.Component {
       </div>
     )
   }
-
 }
 export default decorate(
   styled`
@@ -81,5 +79,5 @@ export default decorate(
               transform: scaleY(1); } }
 
   `,
-  LoadingBars
+  LoadingBars,
 )

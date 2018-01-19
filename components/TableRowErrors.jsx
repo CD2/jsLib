@@ -1,14 +1,13 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import placeholder from 'images/placeholder.png'
-import Image from 'lib/components/image'
+import React from "react"
+import PropTypes from "prop-types"
+import placeholder from "images/placeholder.png"
+import Image from "lib/components/image"
 import FaIcon from "lib/components/fa_icon"
-import theme from 'styles/theme'
+import theme from "styles/theme"
 import decorate from "lib/utils/decorate"
-import { observer } from 'mobx-react'
+import { observer } from "mobx-react"
 
 export class TableRowErrors extends React.Component {
-
   static propTypes = {
     alternateAction: PropTypes.func,
     children: PropTypes.any,
@@ -20,13 +19,17 @@ export class TableRowErrors extends React.Component {
 
   static defaultProps = {
     thumbnailColumn: false,
-    columns: 1
+    columns: 1,
   }
 
-  renderErrorRow(columns, thumbnailColumn){
-    return(
+  renderErrorRow(columns, thumbnailColumn) {
+    return (
       <tr>
-        {thumbnailColumn && <td className="thumb-column"><FaIcon icon="error-outline" color={theme.error} size={1.25} /></td>}
+        {thumbnailColumn && (
+          <td className="thumb-column">
+            <FaIcon icon="error-outline" color={theme.error} size={1.25} />
+          </td>
+        )}
         <td colSpan={columns}>
           <span>Error loading {this.props.resource.class.name}</span>
         </td>
@@ -35,20 +38,28 @@ export class TableRowErrors extends React.Component {
     )
   }
 
-  renderLoadingRow(columns, thumbnailColumn){
+  renderLoadingRow(columns, thumbnailColumn) {
     let rows = []
-    for (let i = 0; i < columns; i++){
-      rows.push(<td><span className={i === 0 ? `placeholder large` : `placeholder small`} /></td>)
+    for (let i = 0; i < columns; i++) {
+      rows.push(
+        <td>
+          <span className={i === 0 ? `placeholder large` : `placeholder small`} />
+        </td>,
+      )
     }
-    return(
+    return (
       <tr>
-        {thumbnailColumn && <td className="thumb-column"><Image defaultSrc={placeholder} /></td>}
+        {thumbnailColumn && (
+          <td className="thumb-column">
+            <Image defaultSrc={placeholder} />
+          </td>
+        )}
         {rows}
       </tr>
     )
   }
 
-  render(){
+  render() {
     const { resource, render, alternateAction, columns, thumbnailColumn } = this.props
     if (alternateAction) return alternateAction()
     if (resource && resource.errored) return this.renderErrorRow(columns, thumbnailColumn)
@@ -57,7 +68,6 @@ export class TableRowErrors extends React.Component {
     if (resource && !resource.loaded) return this.renderLoadingRow(columns, thumbnailColumn)
     return render()
   }
-
 }
 
 export default decorate(observer, TableRowErrors)

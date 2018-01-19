@@ -1,13 +1,12 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { observer } from 'mobx-react'
-import { observable, action } from 'mobx'
+import React from "react"
+import PropTypes from "prop-types"
+import { observer } from "mobx-react"
+import { observable, action } from "mobx"
 
 import { styled, t } from "lib/utils/theme"
-import decorate from 'lib/utils/decorate'
+import decorate from "lib/utils/decorate"
 
 export class Accordian extends React.Component {
-
   static propTypes = {
     className: PropTypes.string,
     headerContent: PropTypes.node,
@@ -29,7 +28,8 @@ export class Accordian extends React.Component {
     noAnimation: false,
   }
 
-  @action componentWillReceiveProps = (nextProps) => {
+  @action
+  componentWillReceiveProps = nextProps => {
     if (nextProps.open !== this.props.open && nextProps.open !== this.open) {
       this.open = nextProps.open
     }
@@ -37,7 +37,8 @@ export class Accordian extends React.Component {
 
   @observable open = !!this.props.open
 
-  @action handleToggle = () => {
+  @action
+  handleToggle = () => {
     if (this.props.open === null) {
       this.open = !this.open
     } else if (this.props.toggle) {
@@ -50,7 +51,7 @@ export class Accordian extends React.Component {
       <div
         className="accordian__row"
         key={`accordianRow${i}`}
-        style={this.props.noAnimation ? {} : { minHeight: `${this.props.rowHeight  }px` }}
+        style={this.props.noAnimation ? {} : { minHeight: `${this.props.rowHeight}px` }}
       >
         {row}
       </div>
@@ -71,7 +72,7 @@ export class Accordian extends React.Component {
         }
         onClick={this.handleToggle}
       >
-        { this.props.headerContent }
+        {this.props.headerContent}
       </div>
     )
   }
@@ -81,14 +82,15 @@ export class Accordian extends React.Component {
       return {}
     }
 
-    return this.open ?
-      { minHeight: `${this.props.rows.length * this.props.rowHeight  }px`, height: `auto` } :
-      { minHeight: `0px` }
+    return this.open
+      ? { minHeight: `${this.props.rows.length * this.props.rowHeight}px`, height: `auto` }
+      : { minHeight: `0px` }
   }
 
   getClassName = () => {
     if (this.props.noAnimation) {
-      return this.open ? `accordian__content-noAnimation accordian__content-noAnimation--open`
+      return this.open
+        ? `accordian__content-noAnimation accordian__content-noAnimation--open`
         : `accordian__content-noAnimation`
     }
 
@@ -97,18 +99,14 @@ export class Accordian extends React.Component {
 
   render() {
     return (
-      <div className={this.props.className ? `${this.props.className } accordian` : `accordian`}>
+      <div className={this.props.className ? `${this.props.className} accordian` : `accordian`}>
         {this.props.headerContent ? this.renderHeader() : null}
-        <div
-          style={this.getStyle()}
-          className={this.getClassName()}
-        >
+        <div style={this.getStyle()} className={this.getClassName()}>
           {this.renderRows()}
         </div>
       </div>
     )
   }
-
 }
 
 export default decorate(
