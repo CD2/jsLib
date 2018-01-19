@@ -3,6 +3,7 @@ const validators_types = {
   acceptance: require(`./validators/acceptance`).default,
   format: require(`./validators/format`).default,
   email: require(`./validators/email`).default,
+  postcode: require(`./validators/postcode`).default,
   password: require(`./validators/password`).default,
 }
 
