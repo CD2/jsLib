@@ -1,8 +1,10 @@
 import React from "react"
+import { Link } from 'react-router-dom'
 import PropTypes from "prop-types"
 import decorate from "lib/utils/decorate"
 import { styled, t, p } from "lib/utils/theme"
 import theme from "styles/theme"
+import FaIcon from "./fa_icon"
 
 export class SectionIntro extends React.Component {
   static propTypes = {
@@ -22,7 +24,7 @@ export class SectionIntro extends React.Component {
   }
 
   render() {
-    const { className, children, title, heading, wrapperIntro, style } = this.props
+    const { className, children, title, heading, wrapperIntro, style, linkPath } = this.props
 
     const wrapperIntroStyle = {
       borderBottom: `1px solid ${theme.border}`,
@@ -30,16 +32,18 @@ export class SectionIntro extends React.Component {
       marginBottom: `${theme.gutterHeight.value / 2}px`,
     }
 
+    const _title = linkPath ? <Link to={linkPath}><FaIcon icon="link"/> { title }</Link> : title
+
     return (
       <div className={className} style={wrapperIntro ? wrapperIntroStyle : style}>
         {heading === 2 ? (
-          <h2 className="page-intro__heading">{title}</h2>
+          <h2 className="page-intro__heading">{_title}</h2>
         ) : heading === 3 ? (
-          <h3 className="page-intro__heading">{title}</h3>
+          <h3 className="page-intro__heading">{_title}</h3>
         ) : heading === 4 ? (
-          <h4 className="page-intro__heading">{title}</h4>
+          <h4 className="page-intro__heading">{_title}</h4>
         ) : (
-          <h1 className="page-intro__heading">{title}</h1>
+          <h1 className="page-intro__heading">{_title}</h1>
         )}
         {children && <div className="intro-text">{children}</div>}
       </div>
@@ -51,9 +55,9 @@ export default decorate(
   styled`
     text-align: ${p(`align`, `left`)};
     .modal & { padding-top: 0; }
-    ${({ children, noPad, theme }) => {
+    ${({ children, noPad, theme, spacing }) => {
       if (children && !noPad) {
-        return `padding-bottom: ${theme.gutterHeight.value / 16}em;`
+        return `padding-bottom: ${(spacing || theme.gutterHeight.value) / 16}em;`
       }
     }}
     .intro-text {
