@@ -53,7 +53,7 @@ import ModalStore from "lib/utils/modal_store"
   }
   td {
     padding: ${t(`gutterWidth`, w => w / 4)}px ${t(`gutterWidth`, w => w / 2)}px;
-    height: 37.5px;
+    height: 48px;
     &.primary { font-weight: 600 }
   }
   th:last-child, td:last-child {
