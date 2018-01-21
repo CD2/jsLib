@@ -1,8 +1,6 @@
 import React from "react"
 import PropTypes from "prop-types"
-
 import { Form, Input, Submit } from "lib/components/forms"
-
 import { observer } from "mobx-react"
 import { styled } from "lib/utils/theme"
 
@@ -15,12 +13,12 @@ import { styled } from "lib/utils/theme"
     padding: 10px 20px;
     margin: 4px;
   }
-
 `
 @observer
 export class IndexFilters extends React.Component {
   static propTypes = {
     className: PropTypes.string,
+    filterText: PropTypes.string,
     query: PropTypes.object,
   }
 
@@ -37,7 +35,7 @@ export class IndexFilters extends React.Component {
       <Form className={this.props.className} onSubmit={this.handleSubmit}>
         <Input
           name="search"
-          placeholder="Filter..."
+          placeholder={this.props.filterText || `Filter...`}
           value={this.props.query.getSearchValue(`search`)}
           onChange={this.handleChange}
         />
