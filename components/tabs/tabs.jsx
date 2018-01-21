@@ -30,15 +30,20 @@ import Wrapper from "../wrapper"
         }
 
         .tab-heads {
-          display: flex;    
+          display: flex;
+          border-bottom: 5px solid #eee;    
           > div {
-            padding: ${theme.gutterWidth.value / 2}px;
+            padding: 16px 40px;
             cursor: pointer;
-            opacity: 0.7;
+            opacity: 0.5;
+            transition: 0.3s;
+            border-bottom: 0 solid #eee;
+            margin-bottom: 0;
             &.selected {
               opacity: 1;
-              border-bottom: 3px solid ${theme.primary};
-              margin-bottom: -3px;
+              font-weight: 600;
+              border-bottom: 5px solid ${theme.primary};
+              margin-bottom: -5px;
             }
           }   
         }
@@ -47,25 +52,6 @@ import Wrapper from "../wrapper"
   }}
   }
   }
-  ${({ noBorder }) => {
-    if (!noBorder) return `border-top: 1px solid #ddd;`
-  }}
-  ${({ thick, theme }) => {
-    if (thick)
-      {return `
-      .tab-heads {
-        > div {
-          border-bottom: 5px solid ${theme.border} !important;
-
-          &.selected {
-            font-weight: bold !important;
-            border-bottom: 5px solid ${theme.primary} !important;
-            margin-bottom: 0 !important;
-          }
-        }
-      }
-    `}
-  }}
 `
 @withRouter
 @observer
@@ -76,7 +62,6 @@ export default class Tabs extends React.Component {
     current: PropTypes.string,
     history: PropTypes.object,
     location: PropTypes.object,
-    noBorder: PropTypes.bool,
     onChange: PropTypes.func,
     storeCurrentName: PropTypes.string,
     thick: PropTypes.bool,
@@ -84,7 +69,6 @@ export default class Tabs extends React.Component {
 
   static defaultProps = {
     current: null,
-    noBorder: false,
     storeCurrentName: null,
     thick: false,
   }
