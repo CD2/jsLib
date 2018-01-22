@@ -8,6 +8,7 @@ export default class MouseOverContainer extends React.Component {
   static propTypes = {
     children: PropTypes.node,
     className: PropTypes.string,
+    clear: PropTypes.bool,
     mouseAttachment: PropTypes.node,
     noBoundaries: PropTypes.bool,
     style: PropTypes.object,
@@ -21,14 +22,18 @@ export default class MouseOverContainer extends React.Component {
 
   componentDidMount() {
     window.addEventListener(`mousemove`, this.setPosition)
+    window.addEventListener(`scroll`, this.clearPosition)
+    this.clear = this.props.clear
   }
 
   componentWillUnmount() {
     window.removeEventListener(`mousemove`, this.setPosition)
+    window.removeEventListener(`scroll`, this.clearPosition)
   }
 
   @observable x = null
   @observable y = null
+  @observable clear = null
 
   @computed
   get show() {
@@ -69,6 +74,14 @@ export default class MouseOverContainer extends React.Component {
 
     this.x = x
     this.y = y
+  }
+
+  @action
+  clearPosition = e => {
+    if (this.clear) {
+      this.x = null
+      this.y = null
+    }
   }
 
   renderMouseAttachment = () => (
