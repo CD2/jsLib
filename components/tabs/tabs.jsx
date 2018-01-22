@@ -33,7 +33,7 @@ import Wrapper from "../wrapper"
           display: flex;
           border-bottom: 5px solid #eee;    
           > div {
-            padding: 16px 40px;
+            padding: ${theme.tabPadding};
             cursor: pointer;
             opacity: 0.5;
             transition: 0.3s;
