@@ -34,6 +34,7 @@ class ModalStore {
 
   @action
   clear() {
+    console.log('clear')
     this.modalContents = []
   }
 }

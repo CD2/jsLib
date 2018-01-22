@@ -111,7 +111,7 @@ export default decorate(
     font-size: 0.9em;
     z-index: 5000;
     max-width: 100%;
-
+    
     .search-dropdown {
       position: relative;
       z-index: 20001;
