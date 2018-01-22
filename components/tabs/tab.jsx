@@ -26,12 +26,12 @@ export default class Tab extends React.Component {
     const { heading, icon } = this.props
     if (iconPresent)
       {return (
-        <Grid>
-          <Grid.Item>
+        <div style={{display: 'flex'}}>
+          <div style={{minWidth: '30px', marginRight: '16px'}}>
             <Image width={30} height={20} background contain defaultSrc={icon} />
-          </Grid.Item>
-          <Grid.Item>{heading}</Grid.Item>
-        </Grid>
+          </div>
+          <div style={{flex: 1, fontSize: '13px', fontWeight: '600', lineHeight: '18px'}}>{heading}</div>
+        </div>
       )}
     return (
       <Grid>
