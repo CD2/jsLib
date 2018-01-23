@@ -33,21 +33,31 @@ margin-bottom: 10px;
   .DayPickerInput input,
   textarea,
   .select{
-    box-sizing: border-box;
-    color: ${t(`text`)};
-    font-family: ${t(`font`)};
-    text-transform: none;
-    width: 100%;
-    font-size: 0.9em;
-    padding: 10px 10px 9px;
-    background-color: transparent;
-    border: 1px solid ${t(`border`)};
-    height: 48px;
-    line-height: 28px;
-    border-radius: 3px;
-    outline: none;
+    display: inline-block;
+    max-width: auto;
+    min-width: 75px;
+    vertical-align: baseline;
+    width: auto;
+    height: auto;
+    margin: 0;
+    border: 1px solid #95a7b7;
+    border-style: inset;
+    color: #000000;
     cursor: pointer;
-    background: white;
+    padding: 8px 10px;
+    border: 1px solid #c4cdd5;
+    border-radius: 3px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 24px;
+    text-transform: initial;
+    letter-spacing: initial;
+    box-sizing: border-box;
+    display: block;
+    width: 100%;
+    transition: 0.2s;
+    box-shadow: inset 0 1px 0 0 rgba(63,63,68,0.05);
+    border-color: #c4cdd5;
     -webkit-appearance: none;
     &:focus {
       border: 1px solid ${t(`primary`)};

@@ -6,19 +6,18 @@ import load from "images/load"
 @styled`
     position: relative;
     display: inline-block;
-    padding: 12px 40px 14px;
+    padding: ${t(`buttonPadding`)};
     border: none;
     outline: none;
-    font-size: 1rem;
+    font-size: ${t(`fontSizes.button`)};
     line-height: 1.25;
     text-decoration: none;
     cursor: pointer;
     vertical-align: top;
     color: white;
-    border-radius: 5px;
-    background-color: ${t(`primary`)};
-    transition: 0.3s;
-    margin-bottom: 10px;
+    border-radius: ${t(`borderRadii.button`)};
+    text-align: center;
+    font-weight: ${t(`weights.button`)};
     &:hover {
       background-color: ${t(`primaryLight`)};
     }
@@ -37,6 +36,19 @@ import load from "images/load"
     `
       }
     }}
+          &.gradient-positive {
+        background: linear-gradient(to bottom,  #39b449 0%,#299a0b 100%);
+        border: 1px solid ${t(`positive`)};
+
+      }
+      &.gradient-neutral {
+        background: linear-gradient(to bottom,  #f6fcfd 0%,#eff3f6 100%);
+        color: ${t(`lightText`)};
+        border: 1px solid ${t(`border`)};
+        &:hover {
+          filter: brightness(1.02);
+        }
+      }
 
 `
 export default class Submit extends React.Component {
@@ -51,7 +63,7 @@ export default class Submit extends React.Component {
   }
 
   render() {
-    const { className = ``, value, submitting } = this.props
+    const { className = ``, value, submitting, buttonStyle } = this.props
     let val = value
     if (submitting) {
       val = ``
@@ -59,6 +71,6 @@ export default class Submit extends React.Component {
       val = val || `Submit`
     }
 
-    return <input className={`btn ${className}`} type="submit" value={val} />
+    return <input className={`btn ${className} ${buttonStyle}`} type="submit" value={val} />
   }
 }

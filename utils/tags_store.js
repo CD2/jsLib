@@ -51,6 +51,7 @@ export default class TagsStore {
 
   @computed
   get filteredSuggestions() {
+    console.log('this.suggestions', this.suggestions)
     return this.getFilteredSuggestions(this.suggestions, true)
   }
 

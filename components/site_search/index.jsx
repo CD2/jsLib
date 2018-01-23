@@ -10,6 +10,8 @@ import decorate from "lib/utils/decorate"
 import { Form, Input } from "lib/components/forms"
 import ResultsArea from "./results_area"
 
+import { styled } from "../../utils/theme"
+
 const search = (query, models) => {
   return get(`/search`, { query, models }).then(response => response.data)
 }
@@ -84,7 +86,7 @@ export class SiteSearch extends React.Component {
   render() {
     const { open, results, query, searchValue } = this
     return (
-      <div className="app-bar__search" style={{ position: `relative` }}>
+      <div className={`${this.props.className} app-bar__search`} style={{ position: `relative` }}>
         <Form>
           <Input
             type="search"
@@ -108,4 +110,7 @@ export class SiteSearch extends React.Component {
     )
   }
 }
-export default decorate(withRouter, observer, SiteSearch)
+export default decorate(styled`
+.form-input {
+  z-index: 50000; }
+`,withRouter, observer, SiteSearch)

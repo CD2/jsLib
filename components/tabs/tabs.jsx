@@ -14,7 +14,7 @@ import Wrapper from "../wrapper"
         .tab-heads {
           > div {
             background: white;
-            padding: 20px;
+            padding: ${theme.tabPadding};
             cursor: pointer;
             &.selected {
               color: white;
@@ -33,7 +33,7 @@ import Wrapper from "../wrapper"
           display: flex;
           border-bottom: 5px solid #eee;    
           > div {
-            padding: 16px 40px;
+            padding: ${theme.tabPadding};
             cursor: pointer;
             opacity: 0.5;
             transition: 0.3s;
@@ -133,13 +133,13 @@ export default class Tabs extends React.Component {
   render() {
     if (this.props.vertical) {
       return (
-        <Grid columns={4} className={this.props.className}>
+        <Grid columns={5} className={this.props.className}>
           <Grid.Item>
             <Wrapper floating noSpacing noGutters>
               {this.renderTabHeads()}
             </Wrapper>
           </Grid.Item>
-          <Grid.Item colSpan={3}>{this.renderSelectedTab()}</Grid.Item>
+          <Grid.Item colSpan={4}>{this.renderSelectedTab()}</Grid.Item>
         </Grid>
       )
     }
