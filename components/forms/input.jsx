@@ -124,7 +124,9 @@ margin-bottom: 10px;
   }
   }
 
-
+.field--nested {
+    margin: 12px 0;
+}
 `
 export default class Input extends React.Component {
   static propTypes = {
