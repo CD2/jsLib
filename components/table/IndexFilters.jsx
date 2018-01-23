@@ -10,8 +10,9 @@ import { styled } from "lib/utils/theme"
     position: absolute;
     top: 0;
     right: 0;
-    padding: 10px 20px;
-    margin: 4px;
+    padding: 9px 20px;
+    margin: 2px;
+    height: 38px;
   }
 `
 @observer
