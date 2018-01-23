@@ -25,14 +25,14 @@ export class TextArea extends React.Component {
   }
 
   render() {
-    const { name, value, placeholder, initialValue, onFocus, onKeyPress } = this.props
-
+    const { name, value, placeholder, initialValue, onFocus, onKeyPress, disabled } = this.props
     return (
       <textarea
         name={name}
         defaultValue={initialValue}
         value={value || ``}
         placeholder={placeholder}
+        disabled={disabled}
         onChange={this.handleChange}
         onFocus={onFocus}
         onKeyPress={onKeyPress}
