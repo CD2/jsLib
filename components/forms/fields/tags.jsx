@@ -129,8 +129,9 @@ export class TagsInput extends React.Component {
     if (
       !this.store.current_tag ||
       (this.store.filteredSuggestions.length === 0 && !this.props.onlyAllowSuggestions)
-    )
-      {return}
+    ) {
+      return
+    }
     let style = `tag-input__suggestion tag-input__tag`
 
     let suggestionsComponent = this.store.filteredSuggestions.map((suggestion, index) => {

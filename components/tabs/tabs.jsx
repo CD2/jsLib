@@ -23,7 +23,7 @@ import Wrapper from "../wrapper"
           }
         }
         `
-    } 
+    }
     return `
         .tab-content {
                   padding: 25px 0 0;
@@ -48,7 +48,6 @@ import Wrapper from "../wrapper"
           }   
         }
       `
-    
   }}
   }
   }

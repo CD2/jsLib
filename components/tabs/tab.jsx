@@ -24,15 +24,16 @@ export default class Tab extends React.Component {
 
   renderGrid(iconPresent) {
     const { heading, icon } = this.props
-    if (iconPresent)
-      {return (
+    if (iconPresent) {
+      return (
         <Grid>
           <Grid.Item>
             <Image width={30} height={20} background contain defaultSrc={icon} />
           </Grid.Item>
           <Grid.Item>{heading}</Grid.Item>
         </Grid>
-      )}
+      )
+    }
     return (
       <Grid>
         <Grid.Item>{heading}</Grid.Item>

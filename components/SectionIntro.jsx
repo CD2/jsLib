@@ -1,5 +1,5 @@
 import React from "react"
-import { Link } from 'react-router-dom'
+import { Link } from "react-router-dom"
 import PropTypes from "prop-types"
 import decorate from "lib/utils/decorate"
 import { styled, t, p } from "lib/utils/theme"
@@ -32,7 +32,13 @@ export class SectionIntro extends React.Component {
       marginBottom: `${theme.gutterHeight.value / 2}px`,
     }
 
-    const _title = linkPath ? <Link to={linkPath}><FaIcon icon="link"/> { title }</Link> : title
+    const _title = linkPath ? (
+      <Link to={linkPath}>
+        <FaIcon icon="link" /> {title}
+      </Link>
+    ) : (
+      title
+    )
 
     return (
       <div className={className} style={wrapperIntro ? wrapperIntroStyle : style}>

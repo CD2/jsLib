@@ -132,8 +132,9 @@ export class PaginationControls extends React.Component {
     const min = Math.max(current - visibility, 2)
     if (min > 2) page_numbers.push(elipsis)
     const max = Math.min(Math.max(3 + visibility * 2, min + visibility * 2), count - 1)
-    for (let i = Math.min(min, count - 2 - 2 * visibility); i <= max; i++)
-      {page_numbers.push(number(i))}
+    for (let i = Math.min(min, count - 2 - 2 * visibility); i <= max; i++) {
+      page_numbers.push(number(i))
+    }
     if (max < count - 1) page_numbers.push(elipsis)
     page_numbers.push(number(count))
 
