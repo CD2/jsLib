@@ -16,5 +16,5 @@ import moment from "moment"
 //   return new moment(dateString).fromNow();
 // }
 export function secondsToTime(seconds) {
-  return moment.utc(seconds * 1000).format(`mm\\m ss\\s`)
+  return moment.utc(seconds * 1000).format(`HH\\h mm\\m ss\\s`)
 }
