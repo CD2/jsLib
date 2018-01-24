@@ -55,7 +55,6 @@ export default class Result extends React.Component {
         style={{ color: `#444` }}
         onClick={this.props.onClick}
       >
-        <b>{this.props.type}</b>
         <p>{this.props.result.content}</p>
       </Link>
     )
