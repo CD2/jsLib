@@ -200,7 +200,7 @@ export class Table extends React.Component {
           ) : (
             <table>
               {bulkActions ? [this.renderBulkHeader(), ...headings] : headings}
-              <tbody>{this.paginated_ids.map(this.renderRow)}</tbody>
+              <tbody>{this.paginated_ids.lenght>0 && this.paginated_ids.map(this.renderRow)}</tbody>
             </table>
           )}
         </div>
