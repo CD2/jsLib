@@ -180,8 +180,17 @@ export class Table extends React.Component {
     return React.cloneElement(headings, headings.props, [bulkHeading, ...headings.props.children])
   }
 
+  renderTableShadows() {
+    const dirs = [`top`, `left`, `bottom`, `right`]
+    return dirs.map(dir => (<div 
+      key={dir}
+      style={{ display: window.innerWidth > this.props.theme.medium ? `none` : `block` }} 
+      className={`table__shadow table__shadow--${dir}`}
+    />))
+  }
+
   render() {
-    const { paginationPosition, bulkActions, headings, query, searchBar } = this.props
+    const { paginationPosition, bulkActions, headings, query, searchBar, theme } = this.props
     return (
       <div className={this.props.className}>
         <Grid columns={2} className={this.props.bulkActions && `table-actions`}>
@@ -194,15 +203,20 @@ export class Table extends React.Component {
           </Grid.Item>
         </Grid>
         {paginationPosition !== `bottom` && this.pagination_controls}
-        <div className="table__container">
-          {this.props.noResultsPanel && this.props.ids.length === 0 ? (
-            this.props.noResultsPanel
-          ) : (
-            <table>
-              {bulkActions ? [this.renderBulkHeader(), ...headings] : headings}
-              <tbody>{this.paginated_ids.map(this.renderRow)}</tbody>
-            </table>
-          )}
+        <div 
+          style={{ position: `relative` }} 
+        >
+          {this.renderTableShadows()}
+          <div className="table__container">
+            {this.props.noResultsPanel && this.props.ids.length === 0 ? (
+              this.props.noResultsPanel
+            ) : (
+              <table>
+                {bulkActions ? [this.renderBulkHeader(), ...headings] : headings}
+                <tbody>{this.paginated_ids.map(this.renderRow)}</tbody>
+              </table>
+            )}
+          </div>
         </div>
         {paginationPosition !== `top` && this.pagination_controls}
       </div>
@@ -251,9 +265,20 @@ export default decorate(
   }
   .table__container {
     border-radius: ${t(`borderRadii.table`)};
-    overflow: hidden;
+    overflow: auto;
     box-shadow: ${t(`shadow0`)};
-    border: 1px solid ${t(`border`)}
+    border: 1px solid ${t(`border`)};
+    max-width: 100%;
+
+    &:after {
+      // content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      box-shadow: inset 0 0 10px #000000;
+    }
   }
   .thumb-column { 
     width: 70px;
@@ -320,6 +345,43 @@ export default decorate(
    }
    .right-align {
     text-align: right;
+   }
+
+   .table__shadow {
+      position: absolute;
+      opacity: 0.5;
+
+      &--top {
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 5px;
+        background: linear-gradient(to bottom, rgba(0,0,0,0.45) 0%,rgba(0,0,0,0) 100%);
+      }
+
+      &--bottom {
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 5px;
+        background: linear-gradient(to top, rgba(0,0,0,0.45) 0%,rgba(0,0,0,0) 100%);
+      }
+
+      &--left {
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 5px;
+        background: linear-gradient(to right, rgba(0,0,0,0.45) 0%,rgba(0,0,0,0) 100%);
+      }
+
+      &--right {
+        top: 0;
+        right: 0;
+        height: 100%;
+        width: 5px;
+        background: linear-gradient(to left, rgba(0,0,0,0.45) 0%,rgba(0,0,0,0) 100%);
+      }
    }
 `,
   observer,
