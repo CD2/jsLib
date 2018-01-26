@@ -52,6 +52,59 @@ export class Table extends React.Component {
 
   @observable batchActionPanelOpen = false
 
+  @observable viewWidth
+  @observable windowWidth
+  @observable widthChecking = false
+  @observable lastIndex = this.props.headingsCount
+
+  @computed get tableIsOverflow() {
+    return this.container.clientWidth > this.viewWidth
+  }
+
+  componentDidMount() {
+    this.widths()
+    window.addEventListener(`resize`, () => this.widths())
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener(`resize`, () => this.widths())
+  }
+
+  componentDidUpdate() {
+    console.log('MEEP')
+    this.setWidths()
+    this.hideColumns()
+  }
+
+  @action
+  widths() {
+    this.setWidths()
+    if (!this.widthChecking) {
+      this.widthChecking = true
+      this.hideColumns()
+    }
+  }
+
+  @action
+  setWidths() {
+    this.viewWidth = window.document.body.clientWidth
+    this.windowWidth = window.innerWidth
+    console.log(this.tableIsOverflow)
+  }
+
+  @action
+  hideColumns() {
+    this.setWidths()
+    if (!this.tableIsOverflow || this.lastIndex < 2) {
+      this.widthChecking = false
+      return
+    }
+    this.container.classList.add(`hide-me-${this.lastIndex}`)
+    this.lastIndex = this.lastIndex - 1
+
+    setTimeout(this.hideColumns(), 2000)
+  }
+
   @action
   handleToggleAllBulk = () => {
     this.bulkAllToggled = !this.bulkAllToggled
@@ -183,7 +236,7 @@ export class Table extends React.Component {
   render() {
     const { paginationPosition, bulkActions, headings, query, searchBar } = this.props
     return (
-      <div className={this.props.className}>
+      <div  ref={element => (this.container = element)} className={this.props.className}>
         <Grid columns={2} className={this.props.bulkActions && `table-actions`}>
           <Grid.Item>
             {this.props.bulkActions && this.bulkSelected.length ? this.renderBulkActions() : null}
@@ -321,6 +374,48 @@ export default decorate(
    .right-align {
     text-align: right;
    }
+
+    &.hide-me-1 {
+      tr td:nth-child(1), tr th:nth-child(1) {
+        display: none;
+      }
+    }
+
+   &.hide-me-2 {
+      tr td:nth-child(2), tr th:nth-child(2) {
+        display: none;
+      }
+    }
+
+   &.hide-me-3 {
+      tr td:nth-child(3), tr th:nth-child(3) {
+        display: none;
+      }
+    }
+
+   &.hide-me-4 {
+      tr td:nth-child(4), tr th:nth-child(4) {
+        display: none;
+      }
+    }
+
+   &.hide-me-5 {
+      tr td:nth-child(5), tr th:nth-child(5) {
+        display: none;
+      }
+    }
+
+   &.hide-me-6 {
+      tr td:nth-child(6), tr th:nth-child(6) {
+        display: none;
+      }
+    }
+
+   &.hide-me-7 {
+      tr td:nth-child(7), tr th:nth-child(7) {
+        display: none;
+      }
+    }
 `,
   observer,
   Table,
