@@ -269,6 +269,7 @@ export default decorate(
     box-shadow: ${t(`shadow0`)};
     border: 1px solid ${t(`border`)};
     max-width: 100%;
+    margin-left: 119px;
 
     &:after {
       // content: '';
@@ -369,7 +370,7 @@ export default decorate(
 
       &--left {
         top: 0;
-        left: 0;
+        left: 120px;
         height: 100%;
         width: 5px;
         background: linear-gradient(to right, rgba(0,0,0,0.45) 0%,rgba(0,0,0,0) 100%);
@@ -382,6 +383,21 @@ export default decorate(
         width: 5px;
         background: linear-gradient(to left, rgba(0,0,0,0.45) 0%,rgba(0,0,0,0) 100%);
       }
+   }
+
+   th, td {
+     white-space: nowrap;
+   }
+
+   th:first-child, td:first-child {
+     position: absolute;
+     left: 0;
+     top: auto;
+     background-color: white;
+     width: 120px;
+     border-left: 1px solid ${t(`border`)};
+     overflow: hidden;
+     text-overflow: ellipsis;
    }
 `,
   observer,
