@@ -24,15 +24,18 @@ export default class Tab extends React.Component {
 
   renderGrid(iconPresent) {
     const { heading, icon } = this.props
-    if (iconPresent)
-      {return (
-        <div style={{display: 'flex'}}>
-          <div style={{minWidth: '30px', marginRight: '16px'}}>
+    if (iconPresent) {
+      return (
+        <div style={{ display: `flex` }}>
+          <div style={{ minWidth: `30px`, marginRight: `16px` }}>
             <Image width={30} height={20} background contain defaultSrc={icon} />
           </div>
-          <div style={{flex: 1, fontSize: '13px', fontWeight: '600', lineHeight: '18px'}}>{heading}</div>
+          <div style={{ flex: 1, fontSize: `13px`, fontWeight: `600`, lineHeight: `18px` }}>
+            {heading}
+          </div>
         </div>
-      )}
+      )
+    }
     return (
       <Grid>
         <Grid.Item>{heading}</Grid.Item>
