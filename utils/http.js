@@ -42,8 +42,8 @@ export const getHostWithoutSubdomain = () => {
   let url = window.location.host
   url = url.replace(/(https?:\/\/)?(www.)?/i, ``)
 
-  const last_thing = url.match(/((\.co\.uk|\.com|\.me).*$)/, ``)[1]
-  url = url.replace(/(\.co\.uk|\.com|\.me).*$/, ``)
+  const last_thing = url.match(/((\.co\.uk|\.com|\.me|\.local).*$)/, ``)[1]
+  url = url.replace(/(\.co\.uk|\.com|\.me|\.local).*$/, ``)
 
   url = url.split(`.`)
   url = url[url.length - 1]
