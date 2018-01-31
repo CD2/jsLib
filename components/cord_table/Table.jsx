@@ -180,40 +180,32 @@ export class Table extends React.Component {
     return React.cloneElement(headings, headings.props, [bulkHeading, ...headings.props.children])
   }
 
-  renderTableShadows() {
-    const dirs = [`top`, `left`, `bottom`, `right`]
-    return dirs.map(dir => (<div 
-      key={dir}
-      style={{ display: window.innerWidth > this.props.theme.medium ? `none` : `block` }} 
-      className={`table__shadow table__shadow--${dir}`}
-    />))
-  }
-
   render() {
     const { paginationPosition, bulkActions, headings, query, searchBar, theme } = this.props
+    let tableClassName = ``
+    const headingClasses = headings.props.children.map(heading=>heading.props.className)
+    if (this.props.bulkActions) tableClassName += ` with-checkbox`
+    if (headingClasses.includes(`thumb-column`)) tableClassName += ` with-thumb`
+    if (headingClasses.includes(`prime-column`)) tableClassName += ` with-prime`
     return (
       <div className={this.props.className}>
         <Grid columns={2} className={this.props.bulkActions && `table-actions`}>
           <Grid.Item>
             {this.props.bulkActions && this.bulkSelected.length ? this.renderBulkActions() : null}
           </Grid.Item>
-          <Grid.Item>
-            {searchBar && query && <IndexFilters query={query} />}
-            {/* SHANE IT IS HERE - cheers bud */}
-          </Grid.Item>
+          <Grid.Item>{searchBar && query && <IndexFilters query={query} />}</Grid.Item>
         </Grid>
         {paginationPosition !== `bottom` && this.pagination_controls}
-        <div 
-          style={{ position: `relative` }} 
-        >
-          {this.renderTableShadows()}
+        <div className="fixed-table__container">
           <div className="table__container">
             {this.props.noResultsPanel && this.props.ids.length === 0 ? (
               this.props.noResultsPanel
             ) : (
-              <table>
+              <table
+                className={tableClassName}
+              >
                 {bulkActions ? [this.renderBulkHeader(), ...headings] : headings}
-                <tbody>{this.paginated_ids.map(this.renderRow)}</tbody>
+                {this.paginated_ids.map(this.renderRow)}
               </table>
             )}
           </div>
@@ -247,7 +239,7 @@ export default decorate(
     }
   }
   th{
-    padding: 20px ${t(`gutterWidth`, w => w / 2)}px;
+    padding: 18px ${t(`gutterWidth`, w => w / 2)}px;
     white-space: nowrap;
     text-align: left;
     border-bottom: 1px solid ${t(`border`)};
@@ -257,37 +249,11 @@ export default decorate(
   }
   td {
     padding: ${t(`gutterWidth`, w => w / 4)}px ${t(`gutterWidth`, w => w / 2)}px;
-    height: 48px;
+    height: 54px;
     &.primary { font-weight: 600 }
   }
   .nowrap, .no-wrap {
     white-space: nowrap;
-  }
-  .table__container {
-    border-radius: ${t(`borderRadii.table`)};
-    overflow: auto;
-    box-shadow: ${t(`shadow0`)};
-    border: 1px solid ${t(`border`)};
-    max-width: 100%;
-
-    &:after {
-      // content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      box-shadow: inset 0 0 10px #000000;
-    }
-  }
-  .thumb-column { 
-    width: 70px;
-    height: 70px;
-    padding: 6px; 
-    img { 
-      border: 2px solid #e5e5e5;
-      border-radius: 4px; 
-    }
   }
   .narrow-column {
     width: 1px;
@@ -312,11 +278,6 @@ export default decorate(
   .table-actions {
     padding-bottom: 10px;
   }
-   .checkbox-column {
-    padding: 11px 0 0px 12px;
-    width: 10px;
-    input { margin-right: 0; }
-   }
    .disabled {
      opacity: 0.5;
    }
@@ -347,42 +308,69 @@ export default decorate(
     text-align: right;
    }
 
-   .table__shadow {
-      position: absolute;
-      opacity: 0.5;
-
-      &--top {
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 5px;
-        background: linear-gradient(to bottom, rgba(0,0,0,0.45) 0%,rgba(0,0,0,0) 100%);
+  /* Responsive Table */
+  table {
+    &.with-prime { margin-left: 220px; }
+    &.with-checkbox { margin-left: 48px; }
+    &.with-checkbox.with-prime { margin-left: 268px; }
+    &.with-thumb { margin-left: 52px; }
+    &.with-thumb.with-prime { margin-left: 274px; }
+    &.with-thumb.with-checkbox { margin-left: 102px; }
+    &.with-checkbox.with-thumb.with-prime { margin-left: 322px; }
+  }
+  .fixed-table__container {
+    position: relative;
+  }
+  .table__container {
+    background: white;
+    border-radius: ${t(`borderRadii.table`)};
+    overflow: auto;
+    box-shadow: ${t(`shadow0`)};
+    border: 1px solid ${t(`border`)};
+    max-width: 100%;
+  }
+  .checkbox-column {
+    position: absolute;
+    min-width: 48px;
+    height: 54px;
+    text-align: center;
+    padding: 18px;
+    input { margin-right: 0; }
+    left: 0;
+    background: #fbfbfb;
+    & + .thumb-column {
+      left: 48px;
+      + .prime-column {
+        left: 102px; 
       }
-
-      &--bottom {
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        height: 5px;
-        background: linear-gradient(to top, rgba(0,0,0,0.45) 0%,rgba(0,0,0,0) 100%);
-      }
-
-      &--left {
-        top: 0;
-        left: 0;
-        height: 100%;
-        width: 5px;
-        background: linear-gradient(to right, rgba(0,0,0,0.45) 0%,rgba(0,0,0,0) 100%);
-      }
-
-      &--right {
-        top: 0;
-        right: 0;
-        height: 100%;
-        width: 5px;
-        background: linear-gradient(to left, rgba(0,0,0,0.45) 0%,rgba(0,0,0,0) 100%);
-      }
-   }
+    }
+ }
+ .thumb-column { 
+    width: 54px;
+    height: 54px;
+    padding: 3px;
+    position: absolute;
+    background: #fbfbfb;
+    left: 0;
+    + .prime-column {
+      left: 54px; 
+    }
+    img { 
+      border: 2px solid #e5e5e5;
+      border-radius: 4px; 
+      width: 48px;
+      height: 48px
+    }
+  }
+  .prime-column {
+    position: absolute;
+    width: 220px;
+    left: 102px;
+    border-right: 1px solid ${t(`border`)};
+    background: #fbfbfb;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 `,
   observer,
   Table,
