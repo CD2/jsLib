@@ -13,6 +13,7 @@ export default class DeleteButton extends React.Component {
   static propTypes = {
     content: PropTypes.any,
     cord: PropTypes.object.isRequired,
+    extraAction: PropTypes.func,
     id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
     message: PropTypes.string,
     name: PropTypes.string,
@@ -40,6 +41,7 @@ export default class DeleteButton extends React.Component {
     cord.perform(`destroy`, { ids: [id] }).then(() => {
       ModalStore.removeLast()
       reloadParent && reloadParent()
+      this.props.extraAction && this.props.extraAction()
       if (redirectPath) redirect(redirectPath)
     })
   }

@@ -110,7 +110,12 @@ export class SiteSearch extends React.Component {
     )
   }
 }
-export default decorate(styled`
+export default decorate(
+  styled`
 .form-input {
   z-index: 50000; }
-`,withRouter, observer, SiteSearch)
+`,
+  withRouter,
+  observer,
+  SiteSearch,
+)
