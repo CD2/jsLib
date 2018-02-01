@@ -14,6 +14,7 @@ export class TableRowErrors extends React.Component {
     columns: PropTypes.number.isRequired,
     render: PropTypes.func.isRequired,
     resource: PropTypes.object.isRequired,
+    style: PropTypes.object,
     thumbnailColumn: PropTypes.bool,
   }
 

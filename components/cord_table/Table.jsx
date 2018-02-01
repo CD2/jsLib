@@ -117,6 +117,26 @@ export class Table extends React.Component {
     )
   }
 
+  @observable cellLargestWidth = 0
+  @observable cellLargestHeight = 0
+
+  componentDidMount() {
+    this.getDimensions()
+  }
+
+  componentWillReact() {
+    this.getDimensions()
+  }
+
+  getDimensions() {
+    let cells = document.querySelectorAll(`td:first-of-type`)
+    Promise.resolve(cells.forEach(cell => {
+      if (cell.clientWidth > this.cellLargestWidth) this.cellLargestWidth = cell.clientWidth
+    })).then(() => {
+      console.log(this.cellLargestWidth, 'asdasf')
+    })
+  }
+
   renderBulkActions = () => {
     return (
       <div>
@@ -270,16 +290,6 @@ export default decorate(
     border: 1px solid ${t(`border`)};
     max-width: 100%;
     margin-left: 119px;
-
-    &:after {
-      // content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      box-shadow: inset 0 0 10px #000000;
-    }
   }
   .thumb-column { 
     width: 70px;
@@ -348,57 +358,62 @@ export default decorate(
     text-align: right;
    }
 
-   .table__shadow {
-      position: absolute;
-      opacity: 0.5;
+  // RESPONSIVE TABLE CSS THINGS!!!
+  .table__shadow {
+    position: absolute;
+    opacity: 0.5;
 
-      &--top {
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 5px;
-        background: linear-gradient(to bottom, rgba(0,0,0,0.45) 0%,rgba(0,0,0,0) 100%);
-      }
+    &--top {
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.16) 0%,rgba(0,0,0,0) 100%);
+    }
 
-      &--bottom {
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        height: 5px;
-        background: linear-gradient(to top, rgba(0,0,0,0.45) 0%,rgba(0,0,0,0) 100%);
-      }
+    &--bottom {
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: linear-gradient(to top, rgba(0,0,0,0.16) 0%,rgba(0,0,0,0) 100%);
+    }
 
-      &--left {
-        top: 0;
-        left: 120px;
-        height: 100%;
-        width: 5px;
-        background: linear-gradient(to right, rgba(0,0,0,0.45) 0%,rgba(0,0,0,0) 100%);
-      }
+    &--left {
+      top: 0;
+      left: 120px;
+      height: 100%;
+      width: 5px;
+      background: linear-gradient(to right, rgba(0,0,0,0.16) 0%,rgba(0,0,0,0) 100%);
+    }
 
-      &--right {
-        top: 0;
-        right: 0;
-        height: 100%;
-        width: 5px;
-        background: linear-gradient(to left, rgba(0,0,0,0.45) 0%,rgba(0,0,0,0) 100%);
-      }
-   }
+    &--right {
+      top: 0;
+      right: 0;
+      height: 100%;
+      width: 5px;
+      background: linear-gradient(to left, rgba(0,0,0,0.16) 0%,rgba(0,0,0,0) 100%);
+    }
+  }
 
-   th, td {
-     white-space: nowrap;
-   }
+  th, td {
+    white-space: nowrap;
+  }
 
-   th:first-child, td:first-child {
-     position: absolute;
-     left: 0;
-     top: auto;
-     background-color: white;
-     width: 120px;
-     border-left: 1px solid ${t(`border`)};
-     overflow: hidden;
-     text-overflow: ellipsis;
-   }
+  th:first-child, td:first-child {
+    position: absolute;
+    left: 0;
+    top: auto;
+    background-color: white;
+    border-left: 1px solid ${t(`border`)};
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    &.checkbox-column {
+      width: 30px;
+      padding: 11px 11px 0;
+    }
+  }
 `,
   observer,
   Table,
