@@ -38,7 +38,7 @@ export class Button extends React.Component {
 
   render() {
     let { className, to, external, buttonStyle, onClick, children, target, processing } = this.props
-    console.log(this.props)
+    
     invariant(!(external && !to), `prop \`to\` is required if \`external\` is present`)
 
     let Comp = `div`
