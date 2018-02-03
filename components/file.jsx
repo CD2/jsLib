@@ -48,7 +48,7 @@ export class File extends React.Component {
     }
     return (
       <Button
-        to={url}
+        to={linkTarget ? linkTarget : url}
         className={`file ${this.props.className}`}
         target="_blank"
         buttonStyle="download common"
