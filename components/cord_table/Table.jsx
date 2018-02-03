@@ -183,7 +183,7 @@ export class Table extends React.Component {
   render() {
     const { paginationPosition, bulkActions, headings, query, searchBar, theme } = this.props
     let tableClassName = ``
-    const headingClasses = headings.props.children.map(heading=>heading.props.className)
+    const headingClasses = headings.props.children.map(heading => heading.props.className)
     if (this.props.bulkActions) tableClassName += ` with-checkbox`
     if (headingClasses.includes(`thumb-column`)) tableClassName += ` with-thumb`
     if (headingClasses.includes(`prime-column`)) tableClassName += ` with-prime`
@@ -201,11 +201,9 @@ export class Table extends React.Component {
             {this.props.noResultsPanel && this.props.ids.length === 0 ? (
               this.props.noResultsPanel
             ) : (
-              <table
-                className={tableClassName}
-              >
+              <table className={tableClassName}>
                 {bulkActions ? [this.renderBulkHeader(), ...headings] : headings}
-                {this.paginated_ids.map(this.renderRow)}
+                <tbody>{this.paginated_ids.map(this.renderRow)}</tbody>
               </table>
             )}
           </div>
