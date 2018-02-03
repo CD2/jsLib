@@ -25,7 +25,7 @@ class Grid extends React.Component {
   static propTypes = {
     children: PropTypes.any,
     className: PropTypes.string,
-    columns: PropTypes.number.isRequired,
+    columns: PropTypes.number,
     gutterWidth: PropTypes.number,
     noGutters: PropTypes.bool,
     theme: PropTypes.object,

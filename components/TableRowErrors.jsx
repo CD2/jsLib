@@ -42,7 +42,7 @@ export class TableRowErrors extends React.Component {
     let rows = []
     for (let i = 0; i < columns; i++) {
       rows.push(
-        <td>
+        <td key={i}>
           <span className={i === 0 ? `placeholder large` : `placeholder small`} />
         </td>,
       )
