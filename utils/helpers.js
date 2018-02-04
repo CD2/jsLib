@@ -13,5 +13,6 @@ export const numberToCurrency = (number = 0, currency = `£`) => {
 
 export const monetizeDisplay = monetizeObject => {
   if(!monetizeObject) return numberToCurrency(0.00)
-  return numberToCurrency(monetizeObject.fractional / 100, monetizeObject.currency.symbol)
+  const currency = monetizeObject.currency && monetizeObject.currency.symbol
+  return numberToCurrency(monetizeObject.fractional / 100, currency)
 }
