@@ -1,7 +1,7 @@
 import React from "react"
 import PropTypes from "prop-types"
 
-export default class SelectField extends React.Component {
+export default class Country extends React.Component {
   static propTypes = {
     includeBlank: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
     name: PropTypes.string,

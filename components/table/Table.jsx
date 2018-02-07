@@ -137,11 +137,20 @@ export default class IndexTable extends React.Component {
     }
   }
 
+  performAction = (action, payload) => {
+    return action.cord.perform(action.action, payload).then(response=>{
+      action.onSuccess && action.onSuccess()
+      action.reloadRecord && action.reloadRecord()
+      ModalStore.clear()
+    })
+  }
+
   handleBulkActionSubmit = action => {
     const { onSubmit, formatPayload } = action
 
     if (onSubmit) return onSubmit(this.bulkSelected)
-    formatPayload ? formatPayload(toJS(this.bulkSelected)) : toJS(this.bulkSelected)
+    const payload = formatPayload ? formatPayload(toJS(this.bulkSelected)) : toJS(this.bulkSelected)
+    this.performAction(action, payload)
   }
 
   handleBulkAction = action => {

@@ -12,7 +12,7 @@ import { styled } from "lib/utils/theme"
     margin-right: 6px;
   }
 `
-export class SelectField extends React.Component {
+export class RadioGroup extends React.Component {
   static propTypes = {
     choices: PropTypes.arrayOf(PropTypes.string),
     className: PropTypes.string,
@@ -49,4 +49,4 @@ export class SelectField extends React.Component {
     )
   }
 }
-export default SelectField
+export default RadioGroup

@@ -51,7 +51,6 @@ export default class TagsStore {
 
   @computed
   get filteredSuggestions() {
-    console.log(`this.suggestions`, this.suggestions)
     return this.getFilteredSuggestions(this.suggestions, true)
   }
 
@@ -105,7 +104,6 @@ export default class TagsStore {
     const { format } = props
 
     let fromName = fromNameRaw || name
-    console.log(`format`, fromName)
     if (format === `name`) this[name].replace(props[fromName])
     if (format === `object` || format === `id`) {
       this[name].replace(props[fromName].map(tag => tag.name))
@@ -116,7 +114,6 @@ export default class TagsStore {
 
   @action
   handleInputBlur = (e, force = false) => {
-    console.log(`sadness`)
     return (this.current_tag = null)
     e && e.preventDefault()
     if (!this.mouseOverPopover || force) {

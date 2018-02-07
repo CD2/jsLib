@@ -97,7 +97,6 @@ export default class FormModel {
   }
 
   handleServerError = (request = null) => {
-    console.log(`save`)
     const { onError } = this.options
     if (request && request.response) {
       const data = request.response.data
@@ -112,7 +111,6 @@ export default class FormModel {
       errorFlash && flashStore.add(errorFlash, { level: `error` })
       window.scrollTo(0, 0)
     } else {
-      window.console.log(request)
     }
   }
 
