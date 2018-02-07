@@ -16,6 +16,7 @@ export class PaginationControls extends React.Component {
     page: PropTypes.number.isRequired,
     per_page: PropTypes.number.isRequired,
     storePageName: PropTypes.string,
+    theme: PropTypes.object,
     total_records: PropTypes.number.isRequired,
   }
 
@@ -58,24 +59,28 @@ export class PaginationControls extends React.Component {
 
   renderLeft() {
     const className = `pagination__button`
+    const { theme } = this.props
+    const prevText = theme.prevText ? theme.prevText : `Left`
     if (this.firstPage()) {
-      return <div className={`${className} disabled`}>Left</div>
+      return <div className={`${className} disabled`}>{prevText}</div>
     }
     return (
       <div className={className} onClick={() => this.changePage(this.page - 1)}>
-        Left
+        {prevText}
       </div>
     )
   }
 
   renderRight() {
     const className = `pagination__button`
+    const { theme } = this.props
+    const nextText = theme.nextText ? theme.nextText : `Right`
     if (this.lastPage()) {
-      return <div className={`${className} disabled`}>Right</div>
+      return <div className={`${className} disabled`}>{nextText}</div>
     }
     return (
       <div className={className} onClick={() => this.changePage(this.page + 1)}>
-        Right
+        {nextText}
       </div>
     )
   }
