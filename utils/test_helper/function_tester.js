@@ -25,7 +25,9 @@ export class FunctionTester {
     return this
   }
   expect_return_to_include(args) {
-    it(`expect ${JSON.stringify(args)} to contain ${JSON.stringify(this.result)}`, () => {
+    it(`expect ${JSON.stringify(args)} to contain ${JSON.stringify(
+      this.result,
+    )}`, () => {
       expect(this.result).toEqual(expect.objectContaining(args))
     })
   }

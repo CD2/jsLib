@@ -6,7 +6,12 @@ import objectToFormData from "object-to-formdata"
 const request = (method, url, data) => {
   console.warn(`Non api request sending`)
 
-  return axios({ method, url, data, headers: { "X-CSRF-Token": window._token }})
+  return axios({
+    method,
+    url,
+    data,
+    headers: { "X-CSRF-Token": window._token },
+  })
 }
 
 export const get = (url, params = {}) => {

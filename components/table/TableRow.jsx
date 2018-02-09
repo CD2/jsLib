@@ -44,7 +44,13 @@ export default class PupilTableRow extends React.Component {
     if (column.fields && column.fields.includes(`image`)) {
       return (
         <td className="thumb-column">
-          <Image width={50} height={50} uid={resource.image_uid} crop background />
+          <Image
+            width={50}
+            height={50}
+            uid={resource.image_uid}
+            crop
+            background
+          />
         </td>
       )
     }

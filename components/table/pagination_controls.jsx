@@ -19,7 +19,6 @@ import Button from "lib/components/button"
     opacity: 1;
   }
 `
-@withRouter
 @observer
 export class PaginationControls extends React.Component {
   static propTypes = {
@@ -45,7 +44,10 @@ export class PaginationControls extends React.Component {
       const { storePageName, location } = this.props
       if (storePageName) {
         this.props.history.replace({
-          state: { ...location.state, [`${storePageName}PageNumber`]: page_number },
+          state: {
+            ...location.state,
+            [`${storePageName}PageNumber`]: page_number,
+          },
         })
       }
       this.props.onPageChange(page_number)
@@ -56,7 +58,8 @@ export class PaginationControls extends React.Component {
   get page() {
     const { storePageName, page } = this.props
     const locationPage =
-      this.props.location.state && this.props.location.state[`${storePageName}PageNumber`]
+      this.props.location.state &&
+      this.props.location.state[`${storePageName}PageNumber`]
 
     return locationPage || page
   }
@@ -131,7 +134,10 @@ export class PaginationControls extends React.Component {
     page_numbers.push(number(1))
     const min = Math.max(current - visibility, 2)
     if (min > 2) page_numbers.push(elipsis)
-    const max = Math.min(Math.max(3 + visibility * 2, min + visibility * 2), count - 1)
+    const max = Math.min(
+      Math.max(3 + visibility * 2, min + visibility * 2),
+      count - 1,
+    )
     for (let i = Math.min(min, count - 2 - 2 * visibility); i <= max; i++) {
       page_numbers.push(number(i))
     }

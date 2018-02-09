@@ -8,7 +8,11 @@ import match from "./match"
 
 export default function(connectIds) {
   return Component => {
-    const getIdsRequest = match(connectIds, defaultConnectIdsFactories, `connectIds`)
+    const getIdsRequest = match(
+      connectIds,
+      defaultConnectIdsFactories,
+      `connectIds`,
+    )
     const cord = this
 
     @inject(`cordStore`)
@@ -30,14 +34,17 @@ export default function(connectIds) {
         const { cordStore } = this.props
 
         let loaded = true
-        const ids = Object.entries(idsRequest).reduce((ids, [prop_name, requestData]) => {
-          if (!cordStore.idsLoaded(cord, requestData)) {
-            loaded = false
+        const ids = Object.entries(idsRequest).reduce(
+          (ids, [prop_name, requestData]) => {
+            if (!cordStore.idsLoaded(cord, requestData)) {
+              loaded = false
+              return ids
+            }
+            ids[prop_name] = [...cordStore.getIds(cord, requestData)]
             return ids
-          }
-          ids[prop_name] = [...cordStore.getIds(cord, requestData)]
-          return ids
-        }, {})
+          },
+          {},
+        )
 
         if (!loaded) return <LoadingSpinner className="full-screen" />
 

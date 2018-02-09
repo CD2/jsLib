@@ -2,8 +2,8 @@ import decorate from "lib/utils/decorate"
 
 export default function inputLoader(Component, options) {
   switch (options.type) {
-  case `records`: {
-    return decorate(
+    case `records`: {
+      return decorate(
         options.cord.connectIds(options.scope || `all`),
         options.cord.connectRecord({
           id: props => {
@@ -21,11 +21,12 @@ export default function inputLoader(Component, options) {
         }),
         Component,
       )
-  }
-  case `record`: {
-    return decorate(
+    }
+    case `record`: {
+      return decorate(
         options.cord.connectRecord({
-          condition: props => (options.condition ? options.condition(props) : true),
+          condition: props =>
+            options.condition ? options.condition(props) : true,
           id: props => props.id,
           as: options.as || `record`,
           attributes: options.attributes || [],
@@ -33,12 +34,15 @@ export default function inputLoader(Component, options) {
         }),
         Component,
       )
-  }
-  case `ids`: {
-    return decorate(options.cord.connectIds(options.scope || options.scopes || `all`), Component)
-  }
-  case `fields`: {
-    return decorate(
+    }
+    case `ids`: {
+      return decorate(
+        options.cord.connectIds(options.scope || options.scopes || `all`),
+        Component,
+      )
+    }
+    case `fields`: {
+      return decorate(
         options.cord.connectFields({
           as: options.as || `records`,
           fields: options.fields || [],
@@ -47,8 +51,8 @@ export default function inputLoader(Component, options) {
         }),
         Component,
       )
-  }
-  default:
-    return Component
+    }
+    default:
+      return Component
   }
 }

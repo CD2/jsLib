@@ -48,7 +48,9 @@ export default decorate(
       height: 55px;
       border-radius: 50%;
       background: ${t(`primary`)};
-      background: linear-gradient(to right, ${t(`primary`)} 10%, rgba(255, 255, 255, 0) 42%);
+      background: linear-gradient(to right, ${t(
+        `primary`,
+      )} 10%, rgba(255, 255, 255, 0) 42%);
       position: relative;
       animation: loadingSpinner 1.4s infinite linear;
       transform: translateZ(0);

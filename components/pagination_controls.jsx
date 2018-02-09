@@ -29,7 +29,10 @@ export class PaginationControls extends React.Component {
 
     if (storePageName) {
       this.props.history.replace({
-        state: { ...location.state, [`${storePageName}PageNumber`]: page_number },
+        state: {
+          ...location.state,
+          [`${storePageName}PageNumber`]: page_number,
+        },
       })
     }
     this.props.onPageChange(page_number)
@@ -39,7 +42,8 @@ export class PaginationControls extends React.Component {
   get page() {
     const { storePageName, page } = this.props
     const locationPage =
-      this.props.location.state && this.props.location.state[`${storePageName}PageNumber`]
+      this.props.location.state &&
+      this.props.location.state[`${storePageName}PageNumber`]
 
     return locationPage || page
   }
@@ -96,7 +100,11 @@ export class PaginationControls extends React.Component {
         )
       } else {
         page_numbers.push(
-          <div className="pagination__button" key={i} onClick={() => this.changePage(i)}>
+          <div
+            className="pagination__button"
+            key={i}
+            onClick={() => this.changePage(i)}
+          >
             <span>{i}</span>
           </div>,
         )

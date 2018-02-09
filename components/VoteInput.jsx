@@ -75,8 +75,16 @@ export class VoteInput extends React.Component {
         >
           <FaIcon
             icon="hat-heart"
-            color={this.users_vote === 1 ? `orange` : this.props.light ? `white` : `black`}
-            hoverColor={this.props.disabled ? (this.users_vote === 1 ? `orange` : `#777`) : `#777`}
+            color={
+              this.users_vote === 1
+                ? `orange`
+                : this.props.light ? `white` : `black`
+            }
+            hoverColor={
+              this.props.disabled
+                ? this.users_vote === 1 ? `orange` : `#777`
+                : `#777`
+            }
             size={2}
           />
         </a>

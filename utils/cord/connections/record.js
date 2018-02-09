@@ -15,7 +15,11 @@ export default function({
 } = {}) {
   const cord = this
   const getId = match(id, idFactories, `connectRecordIds`)
-  const getAttributes = match(attributes, attributesFactories, `connectRecordAttributes`)
+  const getAttributes = match(
+    attributes,
+    attributesFactories,
+    `connectRecordAttributes`,
+  )
 
   return Component => {
     @inject(`cordStore`)
@@ -38,20 +42,24 @@ export default function({
       }
 
       reload = () => this.fetch(this.props, { reload: true })
-      getFormattedProps = props => (formatter ? { ...props, ...formatter(props) } : props)
+      getFormattedProps = props =>
+        formatter ? { ...props, ...formatter(props) } : props
 
       fetch = (props = this.props, { reload = false } = {}) => {
         const id = getId(props)
         const attributes = getAttributes(props)
         if (Array.isArray(id)) {
-          id.map(id => this.props.cordStore.fetchRecord(cord, id, attributes, { reload }))
+          id.map(id =>
+            this.props.cordStore.fetchRecord(cord, id, attributes, { reload }),
+          )
         } else {
           this.props.cordStore.fetchRecord(cord, id, attributes, { reload })
         }
       }
 
       render() {
-        if (condition && !condition(this.props)) return <Component {...this.props} />
+        if (condition && !condition(this.props))
+          return <Component {...this.props} />
         const id = getId(this.props)
         const attributes = getAttributes(this.props)
 
@@ -59,7 +67,10 @@ export default function({
           let loaded = true
           let records = []
           id.forEach(id => {
-            if (!loaded || !this.props.cordStore.isRecordLoaded(cord, id, attributes)) {
+            if (
+              !loaded ||
+              !this.props.cordStore.isRecordLoaded(cord, id, attributes)
+            ) {
               return (loaded = false)
             }
             records.push(this.props.cordStore.getRecord(cord, id))

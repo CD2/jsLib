@@ -13,7 +13,9 @@ export class CordProvider extends React.Component {
 
   render() {
     const { children, store } = this.props
-    return <Provider cordStore={store}>{React.Children.only(children)}</Provider>
+    return (
+      <Provider cordStore={store}>{React.Children.only(children)}</Provider>
+    )
   }
 }
 export default CordProvider

@@ -25,7 +25,15 @@ export class TextArea extends React.Component {
   }
 
   render() {
-    const { name, value, placeholder, initialValue, onFocus, onKeyPress, disabled } = this.props
+    const {
+      name,
+      value,
+      placeholder,
+      initialValue,
+      onFocus,
+      onKeyPress,
+      disabled,
+    } = this.props
     return (
       <textarea
         name={name}

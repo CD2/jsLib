@@ -52,7 +52,6 @@ import Wrapper from "../wrapper"
   }
   }
 `
-@withRouter
 @observer
 export default class Tabs extends React.Component {
   static propTypes = {
@@ -84,7 +83,9 @@ export default class Tabs extends React.Component {
   get getSelected() {
     const { current, children, storeCurrentName } = this.props
     const locationCurrent =
-      this.props.location.state && this.props.location.state[`${storeCurrentName}TabKey`]
+      this.props.location &&
+      this.props.location.state &&
+      this.props.location.state[`${storeCurrentName}TabKey`]
 
     if (!this.selected && !current && locationCurrent) return locationCurrent
     const selected = current !== null ? current : this.selected

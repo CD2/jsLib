@@ -47,11 +47,14 @@ export default class CollectionSelect extends React.Component {
 
   renderOption = record => {
     const { value } = this.props
-    const v = typeof value === `function` ? value(record) : record[this.props.value]
+    const v =
+      typeof value === `function` ? value(record) : record[this.props.value]
     return (
       <option
         value={record.id}
-        onClick={() => (this.props.multiple ? this.handleChange(record.id) : null)}
+        onClick={() =>
+          this.props.multiple ? this.handleChange(record.id) : null
+        }
       >
         {v}
       </option>
@@ -63,7 +66,9 @@ export default class CollectionSelect extends React.Component {
       <option
         value={option.value}
         key={option.value}
-        onClick={() => (this.props.multiple ? this.handleChange(option.value) : null)}
+        onClick={() =>
+          this.props.multiple ? this.handleChange(option.value) : null
+        }
       >
         {option.text}
       </option>
@@ -73,14 +78,20 @@ export default class CollectionSelect extends React.Component {
   render() {
     const { props } = this
     if (!this.props.multiple) {
-      props.options.splice(0, 0, <option key={`collectionnSelectEmpty`}>-----</option>)
+      props.options.splice(
+        0,
+        0,
+        <option key={`collectionnSelectEmpty`}>-----</option>,
+      )
     }
 
     return (
       <select
         multiple={this.props.multiple}
         value={this.value}
-        onChange={e => (!this.props.multiple ? this.handleChange(e.target.value) : null)}
+        onChange={e =>
+          !this.props.multiple ? this.handleChange(e.target.value) : null
+        }
       >
         {this.renderOptions()}
       </select>

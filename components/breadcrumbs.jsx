@@ -3,9 +3,9 @@ import { Link } from "react-router-dom"
 import PropTypes from "prop-types"
 import Grid from "lib/components/grid"
 import { styled, t } from "lib/utils/theme"
-import BreadcrumbStore from "lib/stores/Breadcrumbs"
 import { observer } from "mobx-react"
 import decorate from "lib/utils/decorate"
+import BreadcrumbStore from "lib/stores/Breadcrumbs"
 
 import Wrapper from "./wrapper"
 
@@ -32,7 +32,9 @@ export class Breadcrumbs extends React.Component {
   }
 
   render() {
-    if (BreadcrumbStore.breadcrumbs.filter(crumb => crumb).length === 0) return null
+    if (BreadcrumbStore.breadcrumbs.filter(crumb => crumb).length === 0) {
+      return null
+    }
     return (
       <Wrapper
         width={`100%`}
@@ -47,7 +49,9 @@ export class Breadcrumbs extends React.Component {
                 Home
               </Link>
             </span>
-            {BreadcrumbStore.breadcrumbs.filter(crumb => crumb).map(this.renderBreadcrumb)}
+            {BreadcrumbStore.breadcrumbs
+              .filter(crumb => crumb)
+              .map(this.renderBreadcrumb)}
           </Grid.Item>
         </Grid>
       </Wrapper>

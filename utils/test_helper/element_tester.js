@@ -18,19 +18,23 @@ export class ElementTester {
         expect(this.elements.length).toBeGreaterThan(0))
     } else {
       this.elements = this.elements.filterWhere(n => n.prop(name))
-      it(`has an attribute ${name}`, () => expect(this.elements.length).toBeGreaterThan(0))
+      it(`has an attribute ${name}`, () =>
+        expect(this.elements.length).toBeGreaterThan(0))
     }
     return this
   }
 
   with_style(name, value) {
     if (value) {
-      this.elements = this.elements.filterWhere(n => n.prop(`style`)[name] === value)
+      this.elements = this.elements.filterWhere(
+        n => n.prop(`style`)[name] === value,
+      )
       it(`has a style ${name} with value ${value}`, () =>
         expect(this.elements.length).toBeGreaterThan(0))
     } else {
       this.elements = this.elements.filterWhere(n => n.prop(`style`)[name])
-      it(`has a style ${name}`, () => expect(this.elements.length).toBeGreaterThan(0))
+      it(`has a style ${name}`, () =>
+        expect(this.elements.length).toBeGreaterThan(0))
     }
     return this
   }

@@ -37,12 +37,22 @@ export class List extends React.Component {
   }
 
   render() {
-    const { className, children, separator, spacing, itemClass = `` } = this.props
+    const {
+      className,
+      children,
+      separator,
+      spacing,
+      itemClass = ``,
+    } = this.props
     const mappedChildren = React.Children.map(children, (child, i) => {
       if (!child) return
       let childClass = child.props.className || ``
       childClass += ` ${itemClass}`
-      child = React.cloneElement(child, { key: `c_${i}`, ...child.props, className: childClass })
+      child = React.cloneElement(child, {
+        key: `c_${i}`,
+        ...child.props,
+        className: childClass,
+      })
       if (separator && i !== 0) {
         return [<ListSeparator spacing={spacing} key={i} />, child]
       }

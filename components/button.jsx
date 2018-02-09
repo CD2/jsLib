@@ -37,9 +37,21 @@ export class Button extends React.Component {
   }
 
   render() {
-    let { className, to, external, buttonStyle, onClick, children, target, processing } = this.props
-    
-    invariant(!(external && !to), `prop \`to\` is required if \`external\` is present`)
+    let {
+      className,
+      to,
+      external,
+      buttonStyle,
+      onClick,
+      children,
+      target,
+      processing,
+    } = this.props
+
+    invariant(
+      !(external && !to),
+      `prop \`to\` is required if \`external\` is present`,
+    )
 
     let Comp = `div`
     className = `${className} ${buttonStyle} btn`
@@ -58,7 +70,9 @@ export class Button extends React.Component {
 
     const processingProp = processing ? { onClick: () => null } : {}
 
-    return <Comp {...{ ...props, ...processingProp }}>{this.getChildren()}</Comp>
+    return (
+      <Comp {...{ ...props, ...processingProp }}>{this.getChildren()}</Comp>
+    )
   }
 }
 export default decorate(

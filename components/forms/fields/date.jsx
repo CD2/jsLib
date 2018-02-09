@@ -73,7 +73,8 @@ export default class Example extends React.Component {
 
   handleChange = day => {
     const { onChange, name, asDateString } = this.props
-    if (onChange) onChange({ name, value: asDateString ? day.toDateString() : day })
+    if (onChange)
+      onChange({ name, value: asDateString ? day.toDateString() : day })
   }
 
   getValue = () => {
@@ -87,7 +88,10 @@ export default class Example extends React.Component {
     const dayPickerProps = {
       todayButton: `Go to Today`,
       captionElement: (
-        <YearMonthForm disabled={this.props.disabled} onChange={this.handleYearMonthChange} />
+        <YearMonthForm
+          disabled={this.props.disabled}
+          onChange={this.handleYearMonthChange}
+        />
       ),
       fromMonth,
       toMonth,

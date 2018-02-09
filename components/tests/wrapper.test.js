@@ -11,9 +11,13 @@ describe(`<Wrapper />`, () => {
     </Wrapper>,
   )
 
-  const wrapperWithBg = shallow(<Wrapper theme={{ siteWidth: 1 }} backgroundImageUid={`xxx`} />)
+  const wrapperWithBg = shallow(
+    <Wrapper theme={{ siteWidth: 1 }} backgroundImageUid={`xxx`} />,
+  )
 
-  const wrapperWithOverlay = shallow(<Wrapper theme={{ siteWidth: 1 }} overlay={`green`} />)
+  const wrapperWithOverlay = shallow(
+    <Wrapper theme={{ siteWidth: 1 }} overlay={`green`} />,
+  )
 
   it(`snapshot`, () => expect(toJson(wrapper)).toMatchSnapshot())
   it(`snapshot`, () => expect(toJson(wrapperWithBg)).toMatchSnapshot())

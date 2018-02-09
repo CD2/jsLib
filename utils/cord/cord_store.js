@@ -61,11 +61,16 @@ export class CordStore {
     return requests.reduce((grouped, request) => {
       const { path } = request
       grouped[path] = grouped[path] || { ids: [], attributes: [], scope: [] }
-      grouped[path].attributes = [...new Set([...grouped[path].attributes, ...request.attributes])]
+      grouped[path].attributes = [
+        ...new Set([...grouped[path].attributes, ...request.attributes]),
+      ]
 
-      if (request.ids) grouped[path].ids = [...new Set([...grouped[path].ids, ...request.ids])]
+      if (request.ids)
+        grouped[path].ids = [...new Set([...grouped[path].ids, ...request.ids])]
       if (request.scope) {
-        grouped[path].scope = [...new Set([...grouped[path].scope, ...request.scope])]
+        grouped[path].scope = [
+          ...new Set([...grouped[path].scope, ...request.scope]),
+        ]
       }
       return grouped
     }, {})
@@ -116,7 +121,10 @@ export class CordStore {
 
   getTableData(table_name) {
     if (!this.data.hasOwnProperty(table_name)) {
-      this.data[table_name] = { records: observable.shallowMap(), ids: observable.map() }
+      this.data[table_name] = {
+        records: observable.shallowMap(),
+        ids: observable.map(),
+      }
     }
     return this.data[table_name]
   }
@@ -135,9 +143,11 @@ export class CordStore {
   fetchFields(cord, attributes = [], { reload = false, scope = `all` } = {}) {
     const hasScope = this.idsLoaded(cord, { scope })
     const scopeIds = hasScope ? this.getIds(cord, { scope }) : null
-    const firstRecordOfScopeId = scopeIds && scopeIds.length > 0 ? scopeIds.get(0) : null
+    const firstRecordOfScopeId =
+      scopeIds && scopeIds.length > 0 ? scopeIds.get(0) : null
     const hasAttributes =
-      firstRecordOfScopeId && this.isRecordLoaded(cord, firstRecordOfScopeId, attributes)
+      firstRecordOfScopeId &&
+      this.isRecordLoaded(cord, firstRecordOfScopeId, attributes)
 
     if (reload || (!hasScope || !hasAttributes)) {
       const path = this.fieldsPath(cord.path)

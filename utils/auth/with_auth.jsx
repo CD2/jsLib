@@ -8,7 +8,9 @@ export const withAuth = Component =>
       auth: PropTypes.object,
     }
     render() {
-      if (!this.context.auth) throw new Error(`Cannot use withAuth outside of an AuthProvider`)
+      if (!this.context.auth) {
+        throw new Error(`Cannot use withAuth outside of an AuthProvider`)
+      }
       return <Component {...this.props} auth={this.context.auth} />
     }
   }

@@ -38,7 +38,9 @@ export class IntegrationTest {
       const links = this._getWrapper()
         .find(`a`)
         .filterWhere(elem => elem.text() === text)
-      if (links.length > 1) throw new Error(`Multiple links found with text "${text}"`)
+      if (links.length > 1) {
+        throw new Error(`Multiple links found with text "${text}"`)
+      }
       it(`should exist`, () => expect(links.length).toBe(1))
       links.first().simulate(`click`, { button: 0 })
     })

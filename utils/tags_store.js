@@ -32,12 +32,16 @@ export default class TagsStore {
 
   @computed
   get allSuggestions() {
-    return Array.from(new Set(toJS(this.suggestions), toJS(this.popularSuggestions)))
+    return Array.from(
+      new Set(toJS(this.suggestions), toJS(this.popularSuggestions)),
+    )
   }
 
   getFilteredSuggestions = (suggestions, filter = false) => {
     const nonSelected = suggestions.filter(suggestion => {
-      return !this.tags.find(val => val.toUpperCase() === suggestion.toUpperCase())
+      return !this.tags.find(
+        val => val.toUpperCase() === suggestion.toUpperCase(),
+      )
     })
 
     if (filter && this.filterText) {
@@ -110,7 +114,8 @@ export default class TagsStore {
     }
   }
 
-  @action setMouseOver = (isMousedOver = true) => (this.mouseOverPopover = isMousedOver)
+  @action
+  setMouseOver = (isMousedOver = true) => (this.mouseOverPopover = isMousedOver)
 
   @action
   handleInputBlur = (e, force = false) => {
@@ -146,12 +151,20 @@ export default class TagsStore {
   @action
   handleInput = (e = null) => {
     if (this.props.dropdown && e) {
-      if (e.key === `ArrowUp` && this.dropdownHighlight > 0) this.dropdownHighlight -= 1
-      if (e.key === `ArrowDown` && this.dropdownHighlight < this.filteredSuggestions.length) {
+      if (e.key === `ArrowUp` && this.dropdownHighlight > 0) {
+        this.dropdownHighlight -= 1
+      }
+      if (
+        e.key === `ArrowDown` &&
+        this.dropdownHighlight < this.filteredSuggestions.length
+      ) {
         this.dropdownHighlight += 1
         //this.popover.scrollTop = e.target.offsetTop
       }
-      if (e.key === `Enter` && this.filteredSuggestions[this.dropdownHighlight]) {
+      if (
+        e.key === `Enter` &&
+        this.filteredSuggestions[this.dropdownHighlight]
+      ) {
         return this.handleChange(
           [...this.tags, this.filteredSuggestions[this.dropdownHighlight]],
           e,
@@ -162,7 +175,10 @@ export default class TagsStore {
     if (!this.component.textInput) return
     const textValue = this.component.textInput && this.component.textInput.value
 
-    if (textValue !== `` && (!e || e.key === `Enter` || e.key === `Tab` || e.key === `,`)) {
+    if (
+      textValue !== `` &&
+      (!e || e.key === `Enter` || e.key === `Tab` || e.key === `,`)
+    ) {
       // enter
       e && e.preventDefault()
       if (this.current_tag === this.NEW_INPUT) {
@@ -170,7 +186,9 @@ export default class TagsStore {
 
         if (this.props.onlyAllowSuggestions) {
           const allSuggestions = this.allSuggestions
-          newValue = allSuggestions.find(sug => sug.toUpperCase() === textValue.toUpperCase())
+          newValue = allSuggestions.find(
+            sug => sug.toUpperCase() === textValue.toUpperCase(),
+          )
         } else {
           newValue = textValue
         }
@@ -181,7 +199,9 @@ export default class TagsStore {
         let newValue = null
 
         if (this.props.onlyAllowSuggestions) {
-          newValue = this.allSuggestions.find(sug => sug.toUpperCase() === textValue.toUpperCase())
+          newValue = this.allSuggestions.find(
+            sug => sug.toUpperCase() === textValue.toUpperCase(),
+          )
         } else {
           newValue = textValue
         }
@@ -217,7 +237,9 @@ export default class TagsStore {
         return (this.current_tag = tagBeforeCurrent)
       }
     } else {
-      if (this.tags.length > 0) return (this.current_tag = this.tags.get(this.tags.length - 1))
+      if (this.tags.length > 0) {
+        return (this.current_tag = this.tags.get(this.tags.length - 1))
+      }
     }
 
     this.current_tag = null

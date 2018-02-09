@@ -17,7 +17,8 @@ import { styled } from "lib/utils/theme"
   }
 
   .gutter__horizontal {
-    min-height: ${props => props.gutterHeight || props.theme.gutterHeight.value}px;
+    min-height: ${props =>
+      props.gutterHeight || props.theme.gutterHeight.value}px;
     width: 100%;
   }
 `
@@ -41,12 +42,14 @@ class Grid extends React.Component {
     const gutter = <div className="gutter" />
     const gutterHorizontal = <div className="gutter__horizontal" />
 
-    let gutterWidth = this.props.gutterWidth || this.props.theme.gutterWidth.value
+    let gutterWidth =
+      this.props.gutterWidth || this.props.theme.gutterWidth.value
     if (noGutters) gutterWidth = 0
 
     const getWidth = (span = 1) => {
       const colSpans = `${span / columns * 100}%`
-      const gutterOffsets = `${span * ((columns - 1) / columns * gutterWidth)}px`
+      const gutterOffsets = `${span *
+        ((columns - 1) / columns * gutterWidth)}px`
       const gutterOverlaps = `${(span - 1) * gutterWidth}px`
       return `calc( ${colSpans} - ${gutterOffsets} + ${gutterOverlaps} )`
     }
@@ -61,7 +64,10 @@ class Grid extends React.Component {
           : child.props.colSpan
         : 1
 
-      const childWithWidth = React.cloneElement(child, { ...child.props, width: getWidth(colSpan) })
+      const childWithWidth = React.cloneElement(child, {
+        ...child.props,
+        width: getWidth(colSpan),
+      })
       let neededGutter = gutter
       takenColumns += colSpan
       if (takenColumns > columns) {

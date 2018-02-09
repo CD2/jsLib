@@ -26,10 +26,14 @@ export default function connectFields({
 
       componentDidMount = () => this.fetch()
       reload = () => this.fetch({ reload: true })
-      getFormattedProps = props => (formatter ? { ...props, ...formatter(props) } : props)
+      getFormattedProps = props =>
+        formatter ? { ...props, ...formatter(props) } : props
 
       fetch = (options = {}) => {
-        return this.props.cordStore.fetchFields(cord, getFields(this.props), { ...options, scope })
+        return this.props.cordStore.fetchFields(cord, getFields(this.props), {
+          ...options,
+          scope,
+        })
       }
 
       render() {

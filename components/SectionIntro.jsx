@@ -24,7 +24,15 @@ export class SectionIntro extends React.Component {
   }
 
   render() {
-    const { className, children, title, heading, wrapperIntro, style, linkPath } = this.props
+    const {
+      className,
+      children,
+      title,
+      heading,
+      wrapperIntro,
+      style,
+      linkPath,
+    } = this.props
 
     const wrapperIntroStyle = {
       borderBottom: `1px solid ${theme.border}`,
@@ -41,7 +49,10 @@ export class SectionIntro extends React.Component {
     )
 
     return (
-      <div className={className} style={wrapperIntro ? wrapperIntroStyle : style}>
+      <div
+        className={className}
+        style={wrapperIntro ? wrapperIntroStyle : style}
+      >
         {heading === 2 ? (
           <h2 className="page-intro__heading">{_title}</h2>
         ) : heading === 3 ? (
@@ -63,7 +74,8 @@ export default decorate(
     .modal & { padding-top: 0; }
     ${({ children, noPad, theme, spacing }) => {
       if (children && !noPad) {
-        return `padding-bottom: ${(spacing || theme.gutterHeight.value) / 16}em;`
+        return `padding-bottom: ${(spacing || theme.gutterHeight.value) /
+          16}em;`
       }
     }}
     .intro-text {
@@ -91,7 +103,8 @@ export default decorate(
   }}
     }
     .intro-text h3 {
-      margin: 10px 0 ${props => props.gutterHeight || props.theme.gutterHeight.value}px;
+      margin: 10px 0 ${props =>
+        props.gutterHeight || props.theme.gutterHeight.value}px;
       color: ${t(`lightText`)};
   ${({ light }) => {
     if (light) {
@@ -101,7 +114,8 @@ export default decorate(
       font-weight: 500;
     }
     p {
-      margin: 10px 0 ${props => props.gutterHeight || props.theme.gutterHeight.value / 2}px;
+      margin: 10px 0 ${props =>
+        props.gutterHeight || props.theme.gutterHeight.value / 2}px;
       &:last-child {
         margin-bottom: 0;
       }
