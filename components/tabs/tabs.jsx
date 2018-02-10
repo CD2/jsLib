@@ -25,10 +25,6 @@ import Wrapper from "../wrapper"
         `
     }
     return `
-        .tab-content {
-                  padding: 25px 0 0;
-        }
-
         .tab-heads {
           display: flex;
           border-bottom: 5px solid #eee;    
