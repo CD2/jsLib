@@ -95,6 +95,7 @@ export default decorate(
 
       &.common {
         background-color: ${t(`primary`)};
+        border: 2px solid ${t(`primary`)};
         &:hover {
           color: white;
         }
@@ -133,7 +134,7 @@ export default decorate(
         background-color: #fff;
         color: ${t(`primary`)};
         border: 2px solid ${t(`primary`)};
-        padding: 8px 18px 10px;
+        padding: ${t(`buttonPadding`)};
         &:hover {
           color: ${t(`primary`)};
         }

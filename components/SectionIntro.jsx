@@ -72,8 +72,8 @@ export default decorate(
   styled`
     text-align: ${p(`align`, `left`)};
     .modal & { padding-top: 0; }
-    ${({ children, noPad, theme, spacing }) => {
-      if (children && !noPad) {
+    ${({ noPad, theme, spacing }) => {
+      if (!noPad) {
         return `padding-bottom: ${(spacing || theme.gutterHeight.value) /
           16}em;`
       }

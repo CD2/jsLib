@@ -1,53 +1,12 @@
 import React from "react"
 import PropTypes from "prop-types"
-import { styled, t } from "lib/utils/theme"
 import { observer } from "mobx-react"
 import { observable, action, computed } from "mobx"
 import { withRouter } from "react-router-dom"
 import Grid from "../grid"
 import Wrapper from "../wrapper"
 
-@styled`
-  ${({ vertical, theme }) => {
-    if (vertical) {
-      return `
-        .tab-heads {
-          > div {
-            background: white;
-            padding: ${theme.tabPadding};
-            cursor: pointer;
-            &.selected {
-              color: white;
-              background-color: ${theme.primary};
-            }
-          }
-        }
-        `
-    }
-    return `
-        .tab-heads {
-          display: flex;
-          border-bottom: 5px solid #eee;    
-          > div {
-            padding: ${theme.tabPadding};
-            cursor: pointer;
-            opacity: 0.5;
-            transition: 0.3s;
-            border-bottom: 0 solid #eee;
-            margin-bottom: 0;
-            &.selected {
-              opacity: 1;
-              font-weight: 600;
-              border-bottom: 5px solid ${theme.primary};
-              margin-bottom: -5px;
-            }
-          }   
-        }
-      `
-  }}
-  }
-  }
-`
+@withRouter
 @observer
 export default class Tabs extends React.Component {
   static propTypes = {
