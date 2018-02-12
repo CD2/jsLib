@@ -37,15 +37,28 @@ export class Image extends React.Component {
     const { uid, url, width, height, crop, size } = this.props
     if (url) return url
     const params = { uid, size }
-    if (height && !size) params.size = `${Math.round(height * 1.5 * 2)}x${height * 2}`
-    if (width && !size) params.size = `${width * 2}x${Math.round(width / 1.5 * 2)}`
+    if (height && !size) {
+      params.size = `${Math.round(height * 1.5 * 2)}x${height * 2}`
+    }
+    if (width && !size) {
+      params.size = `${width * 2}x${Math.round(width / 1.5 * 2)}`
+    }
     if (width && height && !size) params.size = `${width * 2}x${height * 2}`
     if (crop) params.crop = true
     return buildUrl([`/image`], params)
   }
 
   render() {
-    const { alt, background, children, defaultSrc, uid, embed, width, height } = this.props
+    const {
+      alt,
+      background,
+      children,
+      defaultSrc,
+      uid,
+      embed,
+      width,
+      height,
+    } = this.props
 
     invariant(!(background && alt), `background images don't accept alt tags`)
 
@@ -70,7 +83,10 @@ export class Image extends React.Component {
     if (background) {
       return (
         <div
-          style={Object.assign({ backgroundImage: `url(${url})` }, this.props.style)}
+          style={Object.assign(
+            { backgroundImage: `url(${url})` },
+            this.props.style,
+          )}
           children={children}
           className={`background-image ${this.props.className}`}
           onClick={this.props.onClick}
@@ -78,7 +94,10 @@ export class Image extends React.Component {
       )
     }
 
-    invariant(!children, `images cant accept children unless marked as a background image`)
+    invariant(
+      !children,
+      `images cant accept children unless marked as a background image`,
+    )
 
     return (
       <img

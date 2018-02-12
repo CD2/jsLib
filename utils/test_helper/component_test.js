@@ -52,14 +52,17 @@ export class ComponentTest {
       this._instance.setState = args => {
         const state = this._instance.state
         this._instance.state =
-          typeof args === `function` ? { ...state, ...args(state) } : { ...state, ...args }
+          typeof args === `function`
+            ? { ...state, ...args(state) }
+            : { ...state, ...args }
       }
     }
     return this._instance
   }
 
   snapshot() {
-    it(`renders correctly`, () => expect(toJson(this._getWrapper())).toMatchSnapshot())
+    it(`renders correctly`, () =>
+      expect(toJson(this._getWrapper())).toMatchSnapshot())
   }
 
   has_link({ href, text } = {}) {
@@ -89,7 +92,8 @@ export class ComponentTest {
       console.warn(`Warning: (P)ropTypes being used on:`, this.Component.name)
     } else {
       const propTypes = this.Component.propTypes || {}
-      it(`accepts ${name} as a prop`, () => expect(propTypes).toHaveProperty(name))
+      it(`accepts ${name} as a prop`, () =>
+        expect(propTypes).toHaveProperty(name))
     }
   }
 
@@ -102,7 +106,11 @@ export class ComponentTest {
   }
 
   with_props(props, callback) {
-    return new ComponentTest(this.Component, { ...this.props, ...props }, callback)
+    return new ComponentTest(
+      this.Component,
+      { ...this.props, ...props },
+      callback,
+    )
   }
 
   call_function(function_name, ...args) {

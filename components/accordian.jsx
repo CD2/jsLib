@@ -51,7 +51,11 @@ export class Accordian extends React.Component {
       <div
         className="accordian__row"
         key={`accordianRow${i}`}
-        style={this.props.noAnimation ? {} : { minHeight: `${this.props.rowHeight}px` }}
+        style={
+          this.props.noAnimation
+            ? {}
+            : { minHeight: `${this.props.rowHeight}px` }
+        }
       >
         {row}
       </div>
@@ -83,7 +87,10 @@ export class Accordian extends React.Component {
     }
 
     return this.open
-      ? { minHeight: `${this.props.rows.length * this.props.rowHeight}px`, height: `auto` }
+      ? {
+          minHeight: `${this.props.rows.length * this.props.rowHeight}px`,
+          height: `auto`,
+        }
       : { minHeight: `0px` }
   }
 
@@ -94,12 +101,20 @@ export class Accordian extends React.Component {
         : `accordian__content-noAnimation`
     }
 
-    return this.open ? `accordian__content accordian__content--open` : `accordian__content`
+    return this.open
+      ? `accordian__content accordian__content--open`
+      : `accordian__content`
   }
 
   render() {
     return (
-      <div className={this.props.className ? `${this.props.className} accordian` : `accordian`}>
+      <div
+        className={
+          this.props.className
+            ? `${this.props.className} accordian`
+            : `accordian`
+        }
+      >
         {this.props.headerContent ? this.renderHeader() : null}
         <div style={this.getStyle()} className={this.getClassName()}>
           {this.renderRows()}

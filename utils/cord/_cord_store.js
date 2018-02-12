@@ -79,7 +79,10 @@ export class CordStore {
 
   getTableData(table_name) {
     if (!this.data.has(table_name)) {
-      this.data.set(table_name, { records: observable.map(), ids: observable.map() })
+      this.data.set(table_name, {
+        records: observable.map(),
+        ids: observable.map(),
+      })
     }
     return this.data.get(table_name)
   }

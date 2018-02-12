@@ -42,7 +42,9 @@ export default class FadeIn extends React.Component {
   @computed
   get className() {
     const { left, right } = this.props
-    const str = `visibility visibility--false${right ? `-right` : ``}${left ? `-left` : ``}`
+    const str = `visibility visibility--false${right ? `-right` : ``}${
+      left ? `-left` : ``
+    }`
     return this.visible ? `visibility visibility--true` : str
   }
 

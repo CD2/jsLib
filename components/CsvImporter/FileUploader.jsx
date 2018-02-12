@@ -43,7 +43,9 @@ export class FileUploader extends React.Component {
             onChange={this.handleSetHeadersRow}
           />
         </label>
-        <Button onClick={() => this.props.onChange(this.file, this.headersRow)}>Submit</Button>
+        <Button onClick={() => this.props.onChange(this.file, this.headersRow)}>
+          Submit
+        </Button>
       </div>
     )
   }

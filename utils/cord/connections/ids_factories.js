@@ -23,11 +23,13 @@ const whenConnectIdsIsObject = connectIds => {
   })
 */
 const whenConnectIdsIsFunction = connectIds =>
-  typeof connectIds === `function` ? props => connectIds.call(null, props) : undefined
+  typeof connectIds === `function`
+    ? props => connectIds.call(null, props)
+    : undefined
 
 const whenConnectIdsIsString = connectIds =>
   typeof connectIds === `string`
-    ? props => ({ [`${connectIds}_ids`]: { scope: connectIds }})
+    ? props => ({ [`${connectIds}_ids`]: { scope: connectIds } })
     : undefined
 
 // @connectIds(['scope1', 'scope2', 'scope3'])
@@ -41,7 +43,7 @@ const whenConnectIdsIsArray = connectIds =>
     : undefined
 
 const whenConnectIdsIsUndefined = connectIds =>
-  connectIds === undefined ? () => ({ all_ids: { scope: `all` }}) : undefined
+  connectIds === undefined ? () => ({ all_ids: { scope: `all` } }) : undefined
 
 export default [
   whenConnectIdsIsFunction,

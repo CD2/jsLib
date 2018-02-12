@@ -90,7 +90,8 @@ export class RichTextBox extends React.Component {
   @observable setup = false
 
   handleChange = editor => {
-    const valueIsEmpty = editor.getContent({ format: `text` }).trim().length === 0
+    const valueIsEmpty =
+      editor.getContent({ format: `text` }).trim().length === 0
     const value = valueIsEmpty ? `` : editor.getContent()
     const { onChange, name } = this.props
     this.value = value

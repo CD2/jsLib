@@ -34,7 +34,9 @@ export class Range extends React.Component {
     return (
       <div className={this.props.className}>
         <Wrapper background={this.props.theme.background} spacing={10} floating>
-          <p className="value">{props.value === `null` ? `Choose value` : props.value}</p>
+          <p className="value">
+            {props.value === `null` ? `Choose value` : props.value}
+          </p>
           <div className={`slider`}>
             <b>0</b>
             <input {...props} min={0} max={10} onChange={this.handleChange} />

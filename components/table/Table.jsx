@@ -52,7 +52,10 @@ import ModalStore from "lib/utils/modal_store"
     border-radius: 5px;
   }
   td {
-    padding: ${t(`gutterWidth`, w => w / 4)}px ${t(`gutterWidth`, w => w / 2)}px;
+    padding: ${t(`gutterWidth`, w => w / 4)}px ${t(
+  `gutterWidth`,
+  w => w / 2,
+)}px;
     height: 48px;
     &.primary { font-weight: 600 }
   }
@@ -131,17 +134,30 @@ export default class IndexTable extends React.Component {
   @action
   handleToggleBulkItem = id => {
     if (this.bulkSelected.includes(id)) {
-      this.bulkSelected.replace(this.bulkSelected.filter(selectedId => selectedId !== id))
+      this.bulkSelected.replace(
+        this.bulkSelected.filter(selectedId => selectedId !== id),
+      )
     } else {
       this.bulkSelected.push(id)
     }
+  }
+
+  performAction = (action, payload) => {
+    return action.cord.perform(action.action, payload).then(response => {
+      action.onSuccess && action.onSuccess()
+      action.reloadRecord && action.reloadRecord()
+      ModalStore.clear()
+    })
   }
 
   handleBulkActionSubmit = action => {
     const { onSubmit, formatPayload } = action
 
     if (onSubmit) return onSubmit(this.bulkSelected)
-    formatPayload ? formatPayload(toJS(this.bulkSelected)) : toJS(this.bulkSelected)
+    const payload = formatPayload
+      ? formatPayload(toJS(this.bulkSelected))
+      : toJS(this.bulkSelected)
+    this.performAction(action, payload)
   }
 
   handleBulkAction = action => {
@@ -150,7 +166,9 @@ export default class IndexTable extends React.Component {
       ModalStore.addItem(
         <div>
           <p>{action.modalConfirmationText}</p>
-          <Button onClick={() => this.handleBulkActionSubmit(action)}>Proceed</Button>
+          <Button onClick={() => this.handleBulkActionSubmit(action)}>
+            Proceed
+          </Button>
         </div>,
       )
     } else {
@@ -160,7 +178,9 @@ export default class IndexTable extends React.Component {
 
   @computed
   get total_items() {
-    return this.props && this.props.ids ? this.props.ids.length : this.props.query.ids.length
+    return this.props && this.props.ids
+      ? this.props.ids.length
+      : this.props.query.ids.length
   }
 
   @computed
@@ -194,7 +214,9 @@ export default class IndexTable extends React.Component {
     </Button>
   )
 
-  renderBulkActions = () => <div>{this.props.bulkActions.map(this.renderBulkAction)}</div>
+  renderBulkActions = () => (
+    <div>{this.props.bulkActions.map(this.renderBulkAction)}</div>
+  )
 
   renderRow = id => {
     let bulkColumn = null
@@ -212,7 +234,13 @@ export default class IndexTable extends React.Component {
       )
     }
 
-    return <this.props.row key={id} id={id} {...{ ...this.props.rowProps, bulkColumn }} />
+    return (
+      <this.props.row
+        key={id}
+        id={id}
+        {...{ ...this.props.rowProps, bulkColumn }}
+      />
+    )
   }
 
   renderBulkHeader = () => {
@@ -228,7 +256,10 @@ export default class IndexTable extends React.Component {
       </Th>
     )
 
-    return React.cloneElement(headings, headings.props, [bulkHeading, ...headings.props.children])
+    return React.cloneElement(headings, headings.props, [
+      bulkHeading,
+      ...headings.props.children,
+    ])
   }
 
   render() {

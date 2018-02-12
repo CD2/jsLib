@@ -49,10 +49,13 @@ export class Th extends React.Component {
   render() {
     return (
       <th
-        className={`${this.props.className} ${this.props.sortable && `sortable`}`}
+        className={`${this.props.className} ${this.props.sortable &&
+          `sortable`}`}
         onClick={this.handleClick}
       >
-        {this.props.filterable && <FaIcon icon="filter" onClick={this.handleFilterClick} />}
+        {this.props.filterable && (
+          <FaIcon icon="filter" onClick={this.handleFilterClick} />
+        )}
         {this.props.children}
         {this.sortIcon}
         {this.showFilters && (

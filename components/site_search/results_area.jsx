@@ -35,14 +35,14 @@ export class ResultsArea extends React.Component {
 
   handleKeyDown = e => {
     switch (e.key) {
-    case `ArrowDown`:
-      this.handleArrowDown()
-      break
-    case `ArrowUp`:
-      this.handleArrowUp()
-      break
-    default:
-      return null
+      case `ArrowDown`:
+        this.handleArrowDown()
+        break
+      case `ArrowUp`:
+        this.handleArrowUp()
+        break
+      default:
+        return null
     }
   }
 
@@ -84,7 +84,9 @@ export class ResultsArea extends React.Component {
   renderEmptyResults() {
     return (
       <div className="search-dropdown__container">
-        <div className="search-dropdown search-dropdown--no-results">Sorry, no results found</div>
+        <div className="search-dropdown search-dropdown--no-results">
+          Sorry, no results found
+        </div>
       </div>
     )
   }

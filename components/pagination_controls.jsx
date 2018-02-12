@@ -16,6 +16,7 @@ export class PaginationControls extends React.Component {
     page: PropTypes.number.isRequired,
     per_page: PropTypes.number.isRequired,
     storePageName: PropTypes.string,
+    theme: PropTypes.object,
     total_records: PropTypes.number.isRequired,
   }
 
@@ -28,7 +29,10 @@ export class PaginationControls extends React.Component {
 
     if (storePageName) {
       this.props.history.replace({
-        state: { ...location.state, [`${storePageName}PageNumber`]: page_number },
+        state: {
+          ...location.state,
+          [`${storePageName}PageNumber`]: page_number,
+        },
       })
     }
     this.props.onPageChange(page_number)
@@ -38,7 +42,8 @@ export class PaginationControls extends React.Component {
   get page() {
     const { storePageName, page } = this.props
     const locationPage =
-      this.props.location.state && this.props.location.state[`${storePageName}PageNumber`]
+      this.props.location.state &&
+      this.props.location.state[`${storePageName}PageNumber`]
 
     return locationPage || page
   }
@@ -58,24 +63,28 @@ export class PaginationControls extends React.Component {
 
   renderLeft() {
     const className = `pagination__button`
+    const { theme } = this.props
+    const prevText = theme.prevText ? theme.prevText : `Left`
     if (this.firstPage()) {
-      return <div className={`${className} disabled`}>Left</div>
+      return <div className={`${className} disabled`}>{prevText}</div>
     }
     return (
       <div className={className} onClick={() => this.changePage(this.page - 1)}>
-        Left
+        {prevText}
       </div>
     )
   }
 
   renderRight() {
     const className = `pagination__button`
+    const { theme } = this.props
+    const nextText = theme.nextText ? theme.nextText : `Right`
     if (this.lastPage()) {
-      return <div className={`${className} disabled`}>Right</div>
+      return <div className={`${className} disabled`}>{nextText}</div>
     }
     return (
       <div className={className} onClick={() => this.changePage(this.page + 1)}>
-        Right
+        {nextText}
       </div>
     )
   }
@@ -91,7 +100,11 @@ export class PaginationControls extends React.Component {
         )
       } else {
         page_numbers.push(
-          <div className="pagination__button" key={i} onClick={() => this.changePage(i)}>
+          <div
+            className="pagination__button"
+            key={i}
+            onClick={() => this.changePage(i)}
+          >
             <span>{i}</span>
           </div>,
         )

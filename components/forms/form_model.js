@@ -19,7 +19,8 @@ export default class FormModel {
     const values = fields.reduce((newValues, field) => {
       let newValue = null
 
-      if (options.values) newValue = options.values[field.defaultName || field.name]
+      if (options.values)
+        newValue = options.values[field.defaultName || field.name]
       if (field.formatValue && newValue) newValue = field.formatValue(newValue)
       if (newValue) newValues[field.name] = newValue
 
@@ -91,7 +92,9 @@ export default class FormModel {
       if (this.options.doesntCatch) {
         return this.options.onSubmit(toJS(this.changes))
       }
-      return this.options.onSubmit(toJS(this.changes)).catch(this.handleServerError)
+      return this.options
+        .onSubmit(toJS(this.changes))
+        .catch(this.handleServerError)
     }
     if (this.options.perform) return this.perform()
   }
@@ -116,7 +119,15 @@ export default class FormModel {
 
   perform(payloadValues = null) {
     if (!this.hasChanges() && !payloadValues) return
-    const { redirectTo, cord, flash, onSuccess, perform, formatPayload, scroll } = this.options
+    const {
+      redirectTo,
+      cord,
+      flash,
+      onSuccess,
+      perform,
+      formatPayload,
+      scroll,
+    } = this.options
     let params = null
     const values = payloadValues || this.changes
 

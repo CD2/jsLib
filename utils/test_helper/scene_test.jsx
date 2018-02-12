@@ -40,7 +40,7 @@ export class SceneTest extends ComponentTest {
   }
 }
 
-export function scene_routing(Scene, { base_url, routes } = {}) {
+export function Scene_routing(Scene, { base_url, routes } = {}) {
   describe(`${Scene.name} routes`, () => {
     beforeEach(() => {
       this.history = createMemoryHistory()

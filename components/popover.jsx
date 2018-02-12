@@ -46,7 +46,9 @@ export class Popover extends React.Component {
   render() {
     if (!this.props.open) return null
     return (
-      <div className={`${this.props.className} ${this.props.containerClassName}`}>
+      <div
+        className={`${this.props.className} ${this.props.containerClassName}`}
+      >
         <div
           className={this.getClassName()}
           onMouseEnter={this.props.onMouseEnter}

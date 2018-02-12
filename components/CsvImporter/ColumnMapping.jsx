@@ -25,11 +25,15 @@ export class ColumnMapping extends React.Component {
       keys: [`value`],
       shouldSort: true,
     })
-    const searchedValues = this.props.databaseColumns.reduce((values, column) => {
-      const searchResults = fuse.search(column.title)
-      values[column.key] = searchResults.length > 0 ? searchResults[0].value : csvColumns[0]
-      return values
-    }, {})
+    const searchedValues = this.props.databaseColumns.reduce(
+      (values, column) => {
+        const searchResults = fuse.search(column.title)
+        values[column.key] =
+          searchResults.length > 0 ? searchResults[0].value : csvColumns[0]
+        return values
+      },
+      {},
+    )
 
     this.values = searchedValues
   }
@@ -87,8 +91,8 @@ export class ColumnMapping extends React.Component {
       <div>
         <h2>Column Mapping</h2>
         <p>
-          Please check each of the columns from your csv are correctly assigned to a database
-          column.
+          Please check each of the columns from your csv are correctly assigned
+          to a database column.
         </p>
         <div>{this.props.databaseColumns.map(this.renderMappingInput)}</div>
         <Button

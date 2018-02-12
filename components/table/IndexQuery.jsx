@@ -68,7 +68,10 @@ export class IndexQuery {
 
   @action
   handleFilterChange = (filter_name, option) => {
-    this.getFilterState(filter_name).set(option, !this.getFilterState(filter_name).get(option))
+    this.getFilterState(filter_name).set(
+      option,
+      !this.getFilterState(filter_name).get(option),
+    )
     this.fetch()
   }
 

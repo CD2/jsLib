@@ -18,7 +18,9 @@ import load from "images/load"
     border-radius: ${t(`borderRadii.button`)};
     text-align: center;
     font-weight: ${t(`weights.button`)};
-    background: linear-gradient(to bottom,  ${t(`primary`)} 0%,${t(`primaryLight`)} 100%);
+    background: linear-gradient(to bottom,  ${t(`primary`)} 0%,${t(
+  `primaryLight`,
+)} 100%);
     border: 1px solid ${t(`positive`)};
     &:hover {
       background-color: ${t(`primaryLight`)};
@@ -73,6 +75,12 @@ export default class Submit extends React.Component {
       val = val || `Submit`
     }
 
-    return <input className={`btn ${className} ${buttonStyle}`} type="submit" value={val} />
+    return (
+      <input
+        className={`btn ${className} ${buttonStyle}`}
+        type="submit"
+        value={val}
+      />
+    )
   }
 }

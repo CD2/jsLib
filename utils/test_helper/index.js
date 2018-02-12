@@ -1,5 +1,5 @@
 import ComponentTest from "./component_test"
-import SceneTest from "./scene_test"
+import SceneTest from "./Scene_test"
 
 jest.mock(`tinymce`)
 jest.mock(`axios`)
@@ -12,5 +12,5 @@ window.Intercom = () => {}
 
 export default {
   describe_component: (...args) => new ComponentTest(...args),
-  describe_scene: (...args) => new SceneTest(...args),
+  describe_Scene: (...args) => new SceneTest(...args),
 }

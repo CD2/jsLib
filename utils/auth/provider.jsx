@@ -25,7 +25,9 @@ export default class AuthProvider extends React.Component {
 
     const retreived = this.retrieveAuth()
     this.state = {
-      auth: this.buildContext(retreived === undefined ? props.defaultAuth : retreived),
+      auth: this.buildContext(
+        retreived === undefined ? props.defaultAuth : retreived,
+      ),
     }
   }
 

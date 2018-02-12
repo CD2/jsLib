@@ -9,17 +9,22 @@ export class InputTester {
   }
 
   _findInput(selector) {
-    const input = this.wrapper.find(`input`).filterWhere(n => n.prop(selector[0]) === selector[1])
+    const input = this.wrapper
+      .find(`input`)
+      .filterWhere(n => n.prop(selector[0]) === selector[1])
     return input
   }
 
   fill_in(value) {
-    this.input.simulate(`change`, { target: { name: this.input.props().name, value: value }})
+    this.input.simulate(`change`, {
+      target: { name: this.input.props().name, value: value },
+    })
     return this
   }
 
   expect_value(value) {
-    it(`has value: ${value}`, () => expect(this.input.props().value).toBe(value))
+    it(`has value: ${value}`, () =>
+      expect(this.input.props().value).toBe(value))
     return this
   }
 

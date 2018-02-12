@@ -58,8 +58,11 @@ export default class MouseOverContainer extends React.Component {
     if (!this.props.noBoundaries) {
       const scrollTop = this.getOffset(this.container, `scrollTop`)
       const scrollLeft = this.getOffset(this.container, `scrollLeft`)
-      const top = this.getOffset(this.container, `offsetTop`, `offsetParent`) - scrollTop
-      const left = this.getOffset(this.container, `offsetLeft`, `offsetParent`) - scrollLeft
+      const top =
+        this.getOffset(this.container, `offsetTop`, `offsetParent`) - scrollTop
+      const left =
+        this.getOffset(this.container, `offsetLeft`, `offsetParent`) -
+        scrollLeft
       const height = this.container.clientHeight
       const width = this.container.clientWidth
       const withinY = y > top && y < top + height

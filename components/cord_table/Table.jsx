@@ -61,7 +61,9 @@ export class Table extends React.Component {
   @action
   handleToggleBulkItem = id => {
     if (this.bulkSelected.includes(id)) {
-      this.bulkSelected.replace(this.bulkSelected.filter(selectedId => selectedId !== id))
+      this.bulkSelected.replace(
+        this.bulkSelected.filter(selectedId => selectedId !== id),
+      )
     } else {
       this.bulkSelected.push(id)
     }
@@ -80,7 +82,9 @@ export class Table extends React.Component {
       ModalStore.addItem(
         <div>
           <p>{action.modalConfirmationText}</p>
-          <Button onClick={() => this.handleBulkActionSubmit(action)}>Proceed</Button>
+          <Button onClick={() => this.handleBulkActionSubmit(action)}>
+            Proceed
+          </Button>
         </div>,
       )
     } else {
@@ -90,7 +94,9 @@ export class Table extends React.Component {
 
   @computed
   get total_items() {
-    return this.props && this.props.ids ? this.props.ids.length : this.props.query.ids.length
+    return this.props && this.props.ids
+      ? this.props.ids.length
+      : this.props.query.ids.length
   }
 
   @computed
@@ -120,7 +126,10 @@ export class Table extends React.Component {
   renderBulkActions = () => {
     return (
       <div>
-        <Button buttonStyle="gradient-neutral" onClick={this.handleBatchPanelOpen}>
+        <Button
+          buttonStyle="gradient-neutral"
+          onClick={this.handleBatchPanelOpen}
+        >
           Bulk actions
         </Button>
         <Popover
@@ -161,7 +170,14 @@ export class Table extends React.Component {
       )
     }
 
-    return <this.props.row key={id} id={id} {...this.props.rowProps} bulkColumn={bulkColumn} />
+    return (
+      <this.props.row
+        key={id}
+        id={id}
+        {...this.props.rowProps}
+        bulkColumn={bulkColumn}
+      />
+    )
   }
 
   renderBulkHeader = () => {
@@ -177,13 +193,25 @@ export class Table extends React.Component {
       </Th>
     )
 
-    return React.cloneElement(headings, headings.props, [bulkHeading, ...headings.props.children])
+    return React.cloneElement(headings, headings.props, [
+      bulkHeading,
+      ...headings.props.children,
+    ])
   }
 
   render() {
-    const { paginationPosition, bulkActions, headings, query, searchBar, theme } = this.props
+    const {
+      paginationPosition,
+      bulkActions,
+      headings,
+      query,
+      searchBar,
+      theme,
+    } = this.props
     let tableClassName = ``
-    const headingClasses = headings.props.children.map(heading => heading.props.className)
+    const headingClasses = headings.props.children.map(
+      heading => heading.props.className,
+    )
     if (this.props.bulkActions) tableClassName += ` with-checkbox`
     if (headingClasses.includes(`thumb-column`)) tableClassName += ` with-thumb`
     if (headingClasses.includes(`prime-column`)) tableClassName += ` with-prime`
@@ -191,9 +219,13 @@ export class Table extends React.Component {
       <div className={this.props.className}>
         <Grid columns={2} className={this.props.bulkActions && `table-actions`}>
           <Grid.Item>
-            {this.props.bulkActions && this.bulkSelected.length ? this.renderBulkActions() : null}
+            {this.props.bulkActions && this.bulkSelected.length
+              ? this.renderBulkActions()
+              : null}
           </Grid.Item>
-          <Grid.Item>{searchBar && query && <IndexFilters query={query} />}</Grid.Item>
+          <Grid.Item>
+            {searchBar && query && <IndexFilters query={query} />}
+          </Grid.Item>
         </Grid>
         {paginationPosition !== `bottom` && this.pagination_controls}
         <div className="fixed-table__container">
@@ -202,7 +234,9 @@ export class Table extends React.Component {
               this.props.noResultsPanel
             ) : (
               <table className={tableClassName}>
-                {bulkActions ? [this.renderBulkHeader(), ...headings] : headings}
+                {bulkActions
+                  ? [this.renderBulkHeader(), ...headings]
+                  : headings}
                 <tbody>{this.paginated_ids.map(this.renderRow)}</tbody>
               </table>
             )}
@@ -246,7 +280,10 @@ export default decorate(
     border-radius: 5px;
   }
   td {
-    padding: ${t(`gutterWidth`, w => w / 4)}px ${t(`gutterWidth`, w => w / 2)}px;
+    padding: ${t(`gutterWidth`, w => w / 4)}px ${t(
+    `gutterWidth`,
+    w => w / 2,
+  )}px;
     height: 54px;
     &.primary { font-weight: 600 }
   }

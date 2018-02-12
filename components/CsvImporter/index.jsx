@@ -70,19 +70,29 @@ export class CSVImporter extends React.Component {
   }
 
   getMappedObjects = mappings => {
-    const headersRow = this.csv.find((row, index) => index === this.headersRowIndex)
-    const mappingPositions = Object.entries(mappings).reduce((positions, [key, csvKey]) => {
-      positions[key] = headersRow.findIndex(csvColumn => csvColumn === csvKey)
+    const headersRow = this.csv.find(
+      (row, index) => index === this.headersRowIndex,
+    )
+    const mappingPositions = Object.entries(mappings).reduce(
+      (positions, [key, csvKey]) => {
+        positions[key] = headersRow.findIndex(csvColumn => csvColumn === csvKey)
 
-      return positions
-    }, {})
-    const csvRows = this.csv.filter((row, index) => index !== this.headersRowIndex)
+        return positions
+      },
+      {},
+    )
+    const csvRows = this.csv.filter(
+      (row, index) => index !== this.headersRowIndex,
+    )
 
     return csvRows.map(row => {
-      return Object.entries(mappingPositions).reduce((newObject, [key, position]) => {
-        newObject[key] = row[position]
-        return newObject
-      }, {})
+      return Object.entries(mappingPositions).reduce(
+        (newObject, [key, position]) => {
+          newObject[key] = row[position]
+          return newObject
+        },
+        {},
+      )
     })
   }
 
@@ -134,8 +144,8 @@ export class CSVImporter extends React.Component {
     const { position, csv, headersRowIndex, parsingErrors } = this
 
     switch (position) {
-    case `column_mapping`:
-      return (
+      case `column_mapping`:
+        return (
           <ColumnMapping
             databaseColumns={this.props.columns}
             headersRowIndex={headersRowIndex}
@@ -143,16 +153,16 @@ export class CSVImporter extends React.Component {
             submitting={this.submitting}
             onSubmit={this.handleSubmit}
           />
-      )
-    case `parsingError`:
-      return <FailureSlide errors={parsingErrors} />
-    case `failure`:
-    case `success`:
-      return <FinishSlide failure={this.position === `failure`} />
-    case `loading`:
-      return this.renderLoading()
-    default:
-      return <FileUploader onChange={this.handleFileUpload} />
+        )
+      case `parsingError`:
+        return <FailureSlide errors={parsingErrors} />
+      case `failure`:
+      case `success`:
+        return <FinishSlide failure={this.position === `failure`} />
+      case `loading`:
+        return this.renderLoading()
+      default:
+        return <FileUploader onChange={this.handleFileUpload} />
     }
   }
 

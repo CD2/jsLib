@@ -39,7 +39,7 @@ export class TableFilter extends React.Component {
   }
 
   renderCheckboxFilter() {
-    const { filter: { options }} = this.props
+    const { filter: { options } } = this.props
     return (
       <div className={this.props.className}>
         <div>
@@ -63,7 +63,7 @@ export class TableFilter extends React.Component {
   }
 
   renderRadiosFilter() {
-    const { filter: { options }} = this.props
+    const { filter: { options } } = this.props
     return (
       <div className={this.props.className}>
         <div>
