@@ -69,7 +69,7 @@ export default class Tabs extends React.Component {
         renderHead: true,
         onTabHeadClick: this.handleTabHeadClick,
         className: `tab-head`,
-        selected: this.getSelected,
+        selected: Array.isArray(this.props.children) ? this.getSelected : child.key,
       })
     })
     return <div className="tab-heads">{headings}</div>
