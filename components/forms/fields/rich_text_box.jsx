@@ -8,6 +8,9 @@ import "tinymce/plugins/link"
 import "tinymce/plugins/table"
 import "tinymce/plugins/anchor"
 import "tinymce/plugins/code"
+import "tinymce/plugins/textcolor"
+import "tinymce/plugins/colorpicker"
+
 import { styled, t } from "lib/utils/theme"
 
 import { observer } from "mobx-react"
@@ -51,7 +54,7 @@ export class RichTextBox extends React.Component {
       elementpath: false,
       browser_spellcheck: true,
       readonly: this.props.disabled ? 1 : 0,
-      plugins: [`lists link table anchor code`],
+      plugins: [`lists link table anchor code textcolor`],
       toolbar,
       height,
       init_instance_callback: editor => {
