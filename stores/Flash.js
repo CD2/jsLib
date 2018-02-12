@@ -5,9 +5,10 @@ export default observable({
   previousFlashes: [],
   add(
     message,
-    { level = `notice`, timeout = 8000, disableTimeout = false } = {},
+    { level = `notice`, timeout = 800000, disableTimeout = false } = {},
   ) {
     const id = Date.now()
+    console.log('ADDED FLASH')
 
     if (this.flashes.length >= 3) this.flashes.shift()
 
