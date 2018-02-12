@@ -19,6 +19,7 @@ import Button from "lib/components/button"
     opacity: 1;
   }
 `
+@withRouter
 @observer
 export class PaginationControls extends React.Component {
   static propTypes = {
