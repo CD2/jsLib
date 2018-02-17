@@ -11,14 +11,12 @@ const FIELD_TYPES = {
   password_with_help: require(`./fields/password_with_help`).default,
   select: require(`./fields/select`).default,
   checkbox: require(`./fields/checkbox`).default,
-  date: require(`./fields/date`).default,
   tags: require(`./fields/tags`).default,
   radiogroup: require(`./fields/radiogroup`).default,
   image: require(`./fields/image`).default,
   hidden: require(`./fields/hidden`).default,
   country: require(`./fields/country`).default,
   range: require(`./fields/range`).default,
-  color: require(`./fields/color`).default,
   file: require(`./fields/file`).default,
 }
 
