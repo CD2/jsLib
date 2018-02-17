@@ -1,6 +1,6 @@
 import React from "react"
 import PropTypes from "prop-types"
-import dropdown from "images/dropdown"
+import dropdown from "images/dropdown.svg"
 import { styled, t } from "lib/utils/theme"
 import loader from "./loader"
 
