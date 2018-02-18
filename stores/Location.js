@@ -6,7 +6,7 @@ export default class LocationStore {
   @observable pathname = ``
   @observable hash = ``
   @observable search = ``
-  @observable _params = {}
+  @observable params = observable.map()
 
   @action
   update = () => {
@@ -14,12 +14,18 @@ export default class LocationStore {
     if (this.hash !== hash) this.hash = hash
     if (this.pathname !== pathname) this.pathname = pathname
     if (this.search !== search) this.search = search
-  }
 
-  constructor() {
-    autorun(() => {
-      this.updateParams()
-    })
+    const rawParams = getUrlSearch(this.search)
+    const newParams = Object.entries(rawParams).reduce(
+      (params, [key, value]) => {
+        if (value !== ``) {
+          params[key] = value
+        }
+        return params
+      },
+      {},
+    )
+    this.params.replace(newParams)
   }
 
   bindHistory(history) {
@@ -56,6 +62,10 @@ export default class LocationStore {
         }
       },
     )
+
+    this.params.observe(params => {
+      this.search = qs.stringify(this.params.toJS())
+    })
   }
 
   //pathExpression = '/courses/:id/*'
@@ -63,24 +73,6 @@ export default class LocationStore {
     const str = this.pathExpressionToRegex(pathExpression)
     const regex = new RegExp(`^${str}.*$`)
     return regex.test(this.pathname)
-  }
-
-  updateParams() {
-    const raw_params = getUrlSearch(this.search)
-    const params = Object.entries(raw_params).reduce((params, [key, value]) => {
-      if (value !== ``) {
-        params[key] = value
-      }
-      return params
-    }, {})
-    this._params = params
-  }
-
-  get params() {
-    return this._params
-  }
-  set params(value) {
-    this.search = qs.stringify(value)
   }
 
   pathExpressionToRegex(expression) {
