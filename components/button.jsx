@@ -181,9 +181,6 @@ export default decorate(
       &.delete {
         background-color: ${t(`error`)};
         color: ${t(`white`)};
-        &:hover {
-          background-color: #cecece;
-        }
       }
 
       &.pagination {
