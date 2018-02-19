@@ -11,7 +11,7 @@ import Input from "lib/components/forms/input"
 import Button from "lib/components/button"
 import ModalStore from "lib/utils/modal_store"
 import Popover from "../popover"
-import Grid from "../grid/index"
+import Grid from "../grid"
 
 export class Table extends React.Component {
   static propTypes = {
