@@ -5,7 +5,20 @@ import PropTypes from "prop-types"
 import decorate from "lib/utils/decorate"
 import { styled } from "lib/utils/theme"
 
-import { ShareButtons, generateShareIcon } from "react-share"
+import { 
+  FacebookShareButton, 
+  TwitterShareButton, 
+  GooglePlusShareButton, 
+  LinkedinShareButton, 
+  EmailShareButton, 
+  TumblrShareButton, 
+  FacebookIcon, 
+  TwitterIcon, 
+  GooglePlusIcon, 
+  LinkedinIcon, 
+  EmailIcon, 
+  TumblrIcon, 
+} from "react-share"
 
 export class SocialButtons extends React.Component {
   static propTypes = {
@@ -20,20 +33,12 @@ export class SocialButtons extends React.Component {
   }
 
   render() {
-    const {
-      FacebookShareButton,
-      TwitterShareButton,
-      GooglePlusShareButton,
-      LinkedinShareButton,
-      EmailShareButton,
-      TumblrShareButton,
-    } = ShareButtons
-    const FacebookIcon = generateShareIcon(`facebook`)
-    const TwitterIcon = generateShareIcon(`twitter`)
-    const GooglePlusIcon = generateShareIcon(`google`)
-    const LinkedinIcon = generateShareIcon(`linkedin`)
-    const EmailIcon = generateShareIcon(`email`)
-    const TumblrIcon = generateShareIcon(`tumblr`)
+    // const FacebookIcon = generateShareIcon(`facebook`)
+    // const TwitterIcon = generateShareIcon(`twitter`)
+    // const GooglePlusIcon = generateShareIcon(`google`)
+    // const LinkedinIcon = generateShareIcon(`linkedin`)
+    // const EmailIcon = generateShareIcon(`email`)
+    // const TumblrIcon = generateShareIcon(`tumblr`)
 
     const url = window.location.href
 
