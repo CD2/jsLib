@@ -16,7 +16,6 @@ export class TableRowErrors extends React.Component {
     columns: 1,
   }
 
-
   render() {
     const { columns, thumbnailColumn } = this.props
     let rows = []

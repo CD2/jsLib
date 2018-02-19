@@ -4,7 +4,7 @@ import { observer } from "mobx-react"
 import { observable, action } from "mobx"
 
 import { styled, t } from "lib/utils/theme"
-import { List, ListItem } from "lib/components/list/index"
+import List from "lib/components/list"
 import { popover } from "lib/utils/common_styles"
 import decorate from "lib/utils/decorate"
 import Result from "./Result"
@@ -68,7 +68,7 @@ export class ResultsArea extends React.Component {
   renderResult = (result, i) => {
     const { selectedIndex } = this
     return (
-      <ListItem key={this.getResultKey(result)}>
+      <List.Item key={this.getResultKey(result)}>
         <Result
           type={result.searchable_type}
           result={result}
@@ -77,7 +77,7 @@ export class ResultsArea extends React.Component {
           onScrollTo={this.handleScrollTo}
           onClick={this.props.onClick}
         />
-      </ListItem>
+      </List.Item>
     )
   }
 

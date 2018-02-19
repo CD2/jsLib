@@ -8,7 +8,7 @@ export default observable({
     { level = `notice`, timeout = 8000, disableTimeout = false } = {},
   ) {
     const id = Date.now()
-    console.log('ADDED FLASH')
+    console.log("ADDED FLASH")
 
     if (this.flashes.length >= 3) this.flashes.shift()
 
