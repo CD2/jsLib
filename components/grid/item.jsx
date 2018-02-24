@@ -19,9 +19,9 @@ export class GridItem extends React.Component {
   }
 
   render() {
-    const { className, children, onClick } = this.props
+    const { className, children, onClick, style } = this.props
     return (
-      <div className={className} onClick={onClick}>
+      <div className={className} onClick={onClick} style={style}>
         {children}
       </div>
     )

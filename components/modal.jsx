@@ -76,8 +76,8 @@ export default decorate(
       overflow: auto;
       position: absolute;
       left: 50%;
-      top: 50%;
-      transform: translateX(-50%) translateY(-50%);
+      top: 10%;
+      transform: translateX(-50%);
 
       &--s {
         max-height: 450px;
