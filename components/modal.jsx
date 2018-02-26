@@ -43,8 +43,9 @@ export default decorate(
     top: 0;
     left: 0;
     right: 0;
-    bottom: 0;
+    height: 100%;
     z-index: 250000;
+    padding-bottom: 100px;
     .close-modal {
       position: absolute;
       top: 10px;
@@ -74,7 +75,7 @@ export default decorate(
         }}
       max-height: 90%;
       overflow: auto;
-      position: absolute;
+      position: relative;
       left: 50%;
       top: 10%;
       transform: translateX(-50%);

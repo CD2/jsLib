@@ -11,17 +11,9 @@ import "tinymce/plugins/code"
 import "tinymce/plugins/textcolor"
 import "tinymce/plugins/colorpicker"
 
-import { styled, t } from "lib/utils/theme"
-
 import { observer } from "mobx-react"
 import { observable } from "mobx"
 
-@styled`
-  border-radius: ${t(`borderRadii.panel`)};
-  overflow: hidden;
-  border: 1px solid ${t(`border`)};
-  background: white;
-`
 @observer
 export class RichTextBox extends React.Component {
   static propTypes = {
@@ -93,14 +85,14 @@ export class RichTextBox extends React.Component {
     const valueIsEmpty =
       editor.getContent({ format: `text` }).trim().length === 0
     const value = valueIsEmpty ? `` : editor.getContent()
-    const { onChange, name } = this.props
+    const { onChange } = this.props
     this.value = value
-    if (onChange) onChange({ name, value })
+    if (onChange) onChange(value)
   }
 
   render() {
     return (
-      <div className={this.props.className}>
+      <div className='rich-text'>
         <textarea id={this.props.name} ref={elem => (this.target = elem)} />
       </div>
     )

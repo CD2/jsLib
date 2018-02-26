@@ -254,7 +254,9 @@ export default decorate(
       }
 
     }
-    margin-right: 6px;
+    + .btn {
+      margin-left: 6px;
+    }
 
     ${({ wide }) => {
       if (wide) {
