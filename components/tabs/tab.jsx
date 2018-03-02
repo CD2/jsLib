@@ -28,13 +28,7 @@ export default class Tab extends React.Component {
       return (
         <div style={{ display: `flex` }}>
           <div style={{ minWidth: `30px`, marginRight: `16px` }}>
-            <Image
-              width={30}
-              height={20}
-              background
-              contain
-              defaultSrc={icon}
-            />
+            <Image width={30} height={20} background contain defaultSrc={icon} />
           </div>
           <div
             style={{

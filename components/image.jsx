@@ -49,16 +49,7 @@ export class Image extends React.Component {
   }
 
   render() {
-    const {
-      alt,
-      background,
-      children,
-      defaultSrc,
-      uid,
-      embed,
-      width,
-      height,
-    } = this.props
+    const { alt, background, children, defaultSrc, uid, embed, width, height } = this.props
 
     invariant(!(background && alt), `background images don't accept alt tags`)
 
@@ -83,10 +74,7 @@ export class Image extends React.Component {
     if (background) {
       return (
         <div
-          style={Object.assign(
-            { backgroundImage: `url(${url})` },
-            this.props.style,
-          )}
+          style={Object.assign({ backgroundImage: `url(${url})` }, this.props.style)}
           children={children}
           className={`background-image ${this.props.className}`}
           onClick={this.props.onClick}
@@ -94,10 +82,7 @@ export class Image extends React.Component {
       )
     }
 
-    invariant(
-      !children,
-      `images cant accept children unless marked as a background image`,
-    )
+    invariant(!children, `images cant accept children unless marked as a background image`)
 
     return (
       <img

@@ -44,10 +44,7 @@ export function _geolocationToPostcode({ lat, lng }) {
     })
   })
 }
-const geolocationToPostcode = memoize(
-  _geolocationToPostcode,
-  ({ lat, lng }) => `${lat}${lng}`,
-)
+const geolocationToPostcode = memoize(_geolocationToPostcode, ({ lat, lng }) => `${lat}${lng}`)
 export { geolocationToPostcode }
 
 const api_key = `AIzaSyAc2UY3q7g6gu8A3_ySkY02YrNeYpSfs3o`

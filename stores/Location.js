@@ -16,15 +16,12 @@ export default class LocationStore {
     if (this.search !== search) this.search = search
 
     const rawParams = getUrlSearch(this.search)
-    const newParams = Object.entries(rawParams).reduce(
-      (params, [key, value]) => {
-        if (value !== ``) {
-          params[key] = value
-        }
-        return params
-      },
-      {},
-    )
+    const newParams = Object.entries(rawParams).reduce((params, [key, value]) => {
+      if (value !== ``) {
+        params[key] = value
+      }
+      return params
+    }, {})
     this.params.replace(newParams)
   }
 

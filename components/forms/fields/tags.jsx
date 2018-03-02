@@ -81,8 +81,9 @@ export class TagsInput extends React.Component {
       this.textInput.selectionStart = this.store.current_tag.length
       this.textInput.selectionEnd = this.store.current_tag.length
     }
-    if (props.value.length < this.props.value.length)
+    if (props.value.length < this.props.value.length) {
       this.store.current_tag = this.store.NEW_INPUT
+    }
   }
 
   store = new TagsStore(this, this.props)
@@ -106,9 +107,7 @@ export class TagsInput extends React.Component {
       <FaIcon
         icon="cross"
         className="tag-input__tag-remove"
-        onClick={e =>
-          !this.props.disabled && this.store.handleRemoveTag(e, tag)
-        }
+        onClick={e => !this.props.disabled && this.store.handleRemoveTag(e, tag)}
       />
     </span>
   )
@@ -131,37 +130,33 @@ export class TagsInput extends React.Component {
   renderSuggestions() {
     if (
       !this.store.current_tag ||
-      (this.store.filteredSuggestions.length === 0 &&
-        !this.props.onlyAllowSuggestions)
+      (this.store.filteredSuggestions.length === 0 && !this.props.onlyAllowSuggestions)
     ) {
       return
     }
     let style = `tag-input__suggestion tag-input__tag`
 
-    let suggestionsComponent = this.store.filteredSuggestions.map(
-      (suggestion, index) => {
-        if (this.props.dropdown) {
-          style = `tag-input__dropdown-suggestion ${
-            this.store.dropdownHighlight === index
-              ? `tag-input__dropdown-suggestion--highlight`
-              : ``
-          }`
-        }
+    let suggestionsComponent = this.store.filteredSuggestions.map((suggestion, index) => {
+      if (this.props.dropdown) {
+        style = `tag-input__dropdown-suggestion ${
+          this.store.dropdownHighlight === index ? `tag-input__dropdown-suggestion--highlight` : ``
+        }`
+      }
 
-        return (
-          <span
-            key={suggestion}
-            className={style}
-            onClick={this.store.handleAddTag.bind(this, suggestion)}
-          >
-            {suggestion}
-          </span>
-        )
-      },
-    )
+      return (
+        <span
+          key={suggestion}
+          className={style}
+          onClick={this.store.handleAddTag.bind(this, suggestion)}
+        >
+          {suggestion}
+        </span>
+      )
+    })
 
-    if (suggestionsComponent.length === 0)
+    if (suggestionsComponent.length === 0) {
       suggestionsComponent = this.renderNoSuggestionsMessage()
+    }
 
     if (this.props.dropdown) {
       return (
@@ -207,10 +202,7 @@ export class TagsInput extends React.Component {
   renderClearAll = () => {
     if (this.store.tags.length > 0 && !this.props.hideClear) {
       return (
-        <div
-          className="tag-input__clear-all"
-          onClick={e => this.store.handleChange([], e)}
-        >
+        <div className="tag-input__clear-all" onClick={e => this.store.handleChange([], e)}>
           Clear
         </div>
       )
@@ -221,15 +213,9 @@ export class TagsInput extends React.Component {
     return (
       <div className={this.props.className}>
         {this.store.current_tag && (
-          <Overlay
-            clickThrough
-            onClick={e => this.store.handleInputBlur(e, true)}
-          />
+          <Overlay clickThrough onClick={e => this.store.handleInputBlur(e, true)} />
         )}
-        <div
-          className="wrapper"
-          onClick={!this.props.disabled && this.store.handleInputFocus}
-        >
+        <div className="wrapper" onClick={!this.props.disabled && this.store.handleInputFocus}>
           {this.renderPopularSuggestions()}
           <div
             className="tag-input"

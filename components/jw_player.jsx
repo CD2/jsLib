@@ -60,15 +60,7 @@ export class JWVideoPlayer extends React.Component {
   }
 
   render() {
-    const {
-      autoPlay,
-      muted,
-      onPlay,
-      onProgress,
-      onComplete,
-      className,
-      customProps,
-    } = this.props
+    const { autoPlay, muted, onPlay, onProgress, onComplete, className, customProps } = this.props
 
     return (
       <ReactJWPlayer

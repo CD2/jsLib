@@ -223,8 +223,7 @@ export default class Country extends React.Component {
     const { includeBlank } = this.props
     const choiceHtml = []
     if (includeBlank) {
-      const text =
-        typeof includeBlank === `string` ? includeBlank : `-- Please select --`
+      const text = typeof includeBlank === `string` ? includeBlank : `-- Please select --`
       choiceHtml.push(
         <option key="$BLANK$" value="">
           {text}
@@ -244,12 +243,7 @@ export default class Country extends React.Component {
   render() {
     const { name, value } = this.props
     return (
-      <select
-        name={name}
-        className="select"
-        value={value}
-        onChange={this.handleChange}
-      >
+      <select name={name} className="select" value={value} onChange={this.handleChange}>
         {this.renderChoices()}
       </select>
     )

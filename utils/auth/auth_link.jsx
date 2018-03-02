@@ -12,8 +12,6 @@ export default class AuthLink extends React.Component {
 
   render() {
     const { auth, permission } = this.props
-    return isAuthed(auth, permission) ? (
-      <Link {...this.props} permission={undefined} />
-    ) : null
+    return isAuthed(auth, permission) ? <Link {...this.props} permission={undefined} /> : null
   }
 }

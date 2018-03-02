@@ -29,12 +29,8 @@ export default class TranscriptService {
       this._clearTranscriptGlobals()
     }
 
-    global_transcript = window.document.getElementById(
-      transcriptComponentIds.transcript,
-    )
-    global_search = window.document.getElementById(
-      transcriptComponentIds.search,
-    )
+    global_transcript = window.document.getElementById(transcriptComponentIds.transcript)
+    global_search = window.document.getElementById(transcriptComponentIds.search)
     global_match = window.document.getElementById(transcriptComponentIds.match)
 
     this._transcriptSetup(video, chapterListUrl, transcriptUrl)
@@ -156,15 +152,12 @@ export default class TranscriptService {
           if (j !== global_caption) {
             const c = window.document.getElementById(`caption${j}`)
             if (global_caption > -1) {
-              window.document.getElementById(
-                `caption${global_caption}`,
-              ).className = ``
+              window.document.getElementById(`caption${global_caption}`).className = ``
             }
             c.className = `current`
             global_transcript.scrollTop = c.offsetTop
             if (global_query === ``) {
-              global_transcript.scrollTop =
-                c.offsetTop - global_transcript.offsetTop - 40
+              global_transcript.scrollTop = c.offsetTop - global_transcript.offsetTop - 40
             }
             global_caption = j
           }

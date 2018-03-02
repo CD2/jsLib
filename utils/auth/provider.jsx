@@ -25,9 +25,7 @@ export default class AuthProvider extends React.Component {
 
     const retreived = this.retrieveAuth()
     this.state = {
-      auth: this.buildContext(
-        retreived === undefined ? props.defaultAuth : retreived,
-      ),
+      auth: this.buildContext(retreived === undefined ? props.defaultAuth : retreived),
     }
   }
 
@@ -43,14 +41,24 @@ export default class AuthProvider extends React.Component {
     const { localStorageKey } = this.props
     if (!localStorageKey) return
     data = JSON.stringify(data)
-    window.localStorage.setItem(localStorageKey, data)
+    window.sessionStorage.setItem(localStorageKey, data)
   }
 
   retrieveAuth() {
     const { localStorageKey } = this.props
     if (!localStorageKey) return
-    const data = window.localStorage.getItem(localStorageKey)
-    if (data) return JSON.parse(data)
+    try {
+      const data = window.sessionStorage.getItem(localStorageKey)
+      if (data) return JSON.parse(data)
+    } catch (e) {
+      console.error(`Cant obtain headers`, e)
+      return {
+        sign_in_confirmed: false,
+        user_id: null,
+        roles: [`anonymous`],
+        data: {},
+      }
+    }
   }
 
   buildContext(data = {}) {

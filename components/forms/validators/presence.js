@@ -14,23 +14,19 @@ export default class PresenceValidator extends BaseValidator {
   isPresent(rawValue) {
     const value = toJS(rawValue)
     //TODO: make this work with objects and arrays
-    if (typeof value === `string`)
+    if (typeof value === `string`) {
       return (this.options.allow_blank ? value : value.trim()) !== ``
+    }
     if (Array.isArray(value)) {
-      return (
-        (this.options.allow_blank ? value : value.filter(x => x)).length !== 0
-      )
+      return (this.options.allow_blank ? value : value.filter(x => x)).length !== 0
     }
     if (typeof value === `boolean`) return true
-    if (
-      value &&
-      typeof value === `object` &&
-      value.toString() === `[object File]`
-    ) {
+    if (value && typeof value === `object` && value.toString() === `[object File]`) {
       return value.name
     }
-    if (value && typeof value === `object`)
+    if (value && typeof value === `object`) {
       return Object.keys(value).length !== 0
+    }
     return !!value
   }
 

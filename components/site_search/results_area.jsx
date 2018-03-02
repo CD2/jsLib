@@ -84,9 +84,7 @@ export class ResultsArea extends React.Component {
   renderEmptyResults() {
     return (
       <div className="search-dropdown__container">
-        <div className="search-dropdown search-dropdown--no-results">
-          Sorry, no results found
-        </div>
+        <div className="search-dropdown search-dropdown--no-results">Sorry, no results found</div>
       </div>
     )
   }

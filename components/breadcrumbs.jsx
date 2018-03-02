@@ -49,9 +49,7 @@ export class Breadcrumbs extends React.Component {
                 Home
               </Link>
             </span>
-            {BreadcrumbStore.breadcrumbs
-              .filter(crumb => crumb)
-              .map(this.renderBreadcrumb)}
+            {BreadcrumbStore.breadcrumbs.filter(crumb => crumb).map(this.renderBreadcrumb)}
           </Grid.Item>
         </Grid>
       </Wrapper>

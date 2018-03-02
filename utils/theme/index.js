@@ -4,10 +4,8 @@ export { default as withTheme } from "./with_theme"
 export { default as styled } from "./styled"
 
 export const media = {
-  min: size => (...args) =>
-    css`@media (min-width: ${size / 16}em) {${css(...args)}}`,
-  max: size => (...args) =>
-    css`@media (max-width: ${size / 16}em) {${css(...args)}}`,
+  min: size => (...args) => css`@media (min-width: ${size / 16}em) {${css(...args)}}`,
+  max: size => (...args) => css`@media (max-width: ${size / 16}em) {${css(...args)}}`,
 }
 
 export const theme = (name, callback) => props => {
@@ -28,20 +26,7 @@ export const prop = (name, defaultValue, callback) => props => {
 }
 
 export const unit = (value, unit = `px`) => {
-  const units = [
-    `%`,
-    `cm`,
-    `em`,
-    `ex`,
-    `in`,
-    `mm`,
-    `pc`,
-    `pt`,
-    `px`,
-    `vh`,
-    `vw`,
-    `vmin`,
-  ]
+  const units = [`%`, `cm`, `em`, `ex`, `in`, `mm`, `pc`, `pt`, `px`, `vh`, `vw`, `vmin`]
   value += ``
   if (units.find(u => value.endsWith(u)) === undefined) value += unit
   return value

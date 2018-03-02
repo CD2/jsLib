@@ -35,9 +35,7 @@ export class Checkbox extends React.Component {
   }
 
   @observable
-  checked = !!(this.props.model
-    ? this.props.model.get(this.props.name)
-    : this.props.value)
+  checked = !!(this.props.model ? this.props.model.get(this.props.name) : this.props.value)
 
   @action
   handleChange = e => {
@@ -58,12 +56,7 @@ export class Checkbox extends React.Component {
     delete props.value
     return (
       <label className={className}>
-        <input
-          {...props}
-          className="input"
-          checked={this.checked}
-          onChange={this.handleChange}
-        />
+        <input {...props} className="input" checked={this.checked} onChange={this.handleChange} />
         <span>{labelText}</span>
       </label>
     )

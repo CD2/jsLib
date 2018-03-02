@@ -98,9 +98,7 @@ export class PasswordWithHelpField extends React.Component {
     this.helper_errors = helper_errors
     this.errors = errors
     this.confirmation_errors = confirmation_errors
-    return (
-      !helper_errors && errors.length === 0 && confirmation_errors.length === 0
-    )
+    return !helper_errors && errors.length === 0 && confirmation_errors.length === 0
   }
 
   getErrors() {
@@ -175,11 +173,9 @@ export class PasswordWithHelpField extends React.Component {
   }
 
   renderHelpers() {
-    const helperComponents = Object.entries(this.helpers).map(
-      ([text, tester]) => {
-        return this.renderHelp(text, tester)
-      },
-    )
+    const helperComponents = Object.entries(this.helpers).map(([text, tester]) => {
+      return this.renderHelp(text, tester)
+    })
 
     let className = ``
     if (this.getValue() && this.getValue() === this.getConfirmationValue()) {
