@@ -1,7 +1,6 @@
 import React from "react"
 import PropTypes from "prop-types"
 import { Link } from "react-router-dom"
-
 import { redirect } from "lib/utils/router"
 
 export default class Result extends React.Component {

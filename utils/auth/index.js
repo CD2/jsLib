@@ -8,7 +8,6 @@ export { default as AuthRoute } from "./auth_route"
 export { default as AuthSwitch } from "./auth_switch"
 export { default as AuthLink } from "./auth_link"
 export { default as AuthNavLink } from "./auth_nav_link"
-
 import HasPermission from "./has_permission"
 export { HasPermission }
 

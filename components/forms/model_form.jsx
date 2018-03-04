@@ -2,9 +2,7 @@ import React from "react"
 import PropTypes from "prop-types"
 import { observer } from "mobx-react"
 import { observable, action } from "mobx"
-
 import { titleize } from "help-my-strings"
-
 import Model from "./form_model"
 import Form from "./form"
 import Submit from "./submit"

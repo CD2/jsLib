@@ -6,7 +6,6 @@ import { Editor } from "react-draft-wysiwyg"
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css"
 import decorate from "../../../utils/decorate"
 import draftToHtml from "draftjs-to-html"
-import Textarea from "./textarea"
 
 export class RichTextBox extends React.Component {
   constructor(props) {

@@ -2,14 +2,11 @@ import React from "react"
 import PropTypes from "prop-types"
 import { action, reaction } from "mobx"
 import { observer } from "mobx-react"
-
 import { tag } from "lib/utils/common_styles"
 import decorate from "lib/utils/decorate"
 import { styled, t } from "lib/utils/theme"
-
 import Overlay from "lib/components/overlay"
 import FaIcon from "lib/components/fa_icon"
-
 import Popover from "lib/components/popover"
 import TagsStore from "lib/utils/tags_store"
 

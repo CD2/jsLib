@@ -1,7 +1,6 @@
 /* eslint-disable react/no-set-state */
 import React from "react"
 import PropTypes from "prop-types"
-
 import { get } from "lib/utils/api_http"
 
 export default class AuthProvider extends React.Component {

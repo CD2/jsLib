@@ -3,7 +3,6 @@ import PropTypes from "prop-types"
 import { observer } from "mobx-react"
 import { observable, computed, action } from "mobx"
 import VisibilitySensor from "react-visibility-sensor"
-
 import { styled, t } from "lib/utils/theme"
 
 @styled`

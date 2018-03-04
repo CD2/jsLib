@@ -2,7 +2,6 @@ import React from "react"
 import PropTypes from "prop-types"
 import { observer } from "mobx-react"
 import { observable, action } from "mobx"
-
 import { styled, t } from "lib/utils/theme"
 import List from "lib/components/list"
 import { popover } from "lib/utils/common_styles"

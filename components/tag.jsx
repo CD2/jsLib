@@ -1,11 +1,8 @@
 import React from "react"
 import PropTypes from "prop-types"
-
 import { computed, action } from "mobx"
 import { observer } from "mobx-react"
-
 import tagStore from "lib/stores/Tags"
-
 import { styled, t } from "lib/utils/theme"
 import decorate from "lib/utils/decorate"
 export class Tag extends React.Component {

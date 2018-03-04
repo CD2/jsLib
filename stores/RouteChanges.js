@@ -1,5 +1,4 @@
 import { observable, action, computed } from "mobx"
-
 import { history } from "lib/utils/router"
 
 class RouteChangesStore {

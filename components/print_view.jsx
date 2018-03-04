@@ -1,7 +1,6 @@
 import React from "react"
 import PropTypes from "prop-types"
 import { observer } from "mobx-react"
-
 import decorate from "lib/utils/decorate"
 import PrintStore from "lib/utils/print"
 import { styled } from "lib/utils/theme"

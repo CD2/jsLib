@@ -2,10 +2,8 @@ import React from "react"
 import shortid from "shortid"
 import ReactJWPlayer from "react-jw-player"
 import PropTypes from "prop-types"
-
 import decorate from "lib/utils/decorate"
 import JWPlayerTranscript from "lib/utils/jw_player_transcript"
-
 import config from "libDependencies/jwPlayerConfig"
 
 export class JWVideoPlayer extends React.Component {

@@ -3,13 +3,11 @@ import PropTypes from "prop-types"
 import { withRouter } from "react-router-dom"
 import { observer } from "mobx-react"
 import { observable, action } from "mobx"
-
 import { get } from "lib/utils/api_http"
 import Overlay from "lib/components/overlay"
 import decorate from "lib/utils/decorate"
 import { Form, Input } from "lib/components/forms"
 import ResultsArea from "./results_area"
-
 import { styled } from "../../utils/theme"
 
 const search = (query, models) => {

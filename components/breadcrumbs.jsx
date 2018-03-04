@@ -6,7 +6,6 @@ import { styled, t } from "lib/utils/theme"
 import { observer } from "mobx-react"
 import decorate from "lib/utils/decorate"
 import BreadcrumbStore from "lib/stores/Breadcrumbs"
-
 import Wrapper from "./wrapper"
 
 export class Breadcrumbs extends React.Component {

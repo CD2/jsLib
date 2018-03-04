@@ -1,10 +1,8 @@
 /* eslint-disable no-cond-assign */
 import React from "react"
 import PropTypes from "prop-types"
-
 import decorate from "lib/utils/decorate"
 import { styled } from "lib/utils/theme"
-
 import {
   FacebookShareButton,
   TwitterShareButton,
