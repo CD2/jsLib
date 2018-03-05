@@ -8,13 +8,11 @@ import {
   TwitterShareButton,
   GooglePlusShareButton,
   LinkedinShareButton,
-  TumblrShareButton,
   EmailShareButton,
   FacebookIcon,
   TwitterIcon,
   GooglePlusIcon,
   LinkedinIcon,
-  TumblrIcon,
   EmailIcon,
 } from "react-share"
 
@@ -49,9 +47,6 @@ export class SocialButtons extends React.Component {
         <LinkedinShareButton url={url}>
           <LinkedinIcon size={size} round={round} />
         </LinkedinShareButton>
-        <TumblrShareButton url={url}>
-          <TumblrIcon size={size} round={round} />
-        </TumblrShareButton>
         <EmailShareButton body={url} url={url}>
           <EmailIcon size={size} round={round} />
         </EmailShareButton>
