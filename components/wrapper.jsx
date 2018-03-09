@@ -14,6 +14,7 @@ export class Wrapper extends React.Component {
     borderRadius: PropTypes.bool,
     children: PropTypes.any,
     className: PropTypes.string,
+    extraContentStyle: PropTypes.object,
     floating: PropTypes.bool,
     fullHeight: PropTypes.bool,
     gutter: PropTypes.number,
@@ -32,18 +33,20 @@ export class Wrapper extends React.Component {
   }
 
   renderContent() {
-    const { children, noGutters, spacing, noSpacing, noRelative } = this.props
+    const { children, noGutters, spacing, noSpacing, noRelative, extraContentStyle } = this.props
     const width = this.props.width || theme.siteWidth
     const gutters = noGutters ? 0 : this.props.gutter || theme.gutterWidth
     const spacingHeight = noSpacing ? 0 : spacing ? spacing : theme.gutterHeight
 
-    const contentStyle = {
+    const defaultContentStyle = {
       width: `100%`,
       position: noRelative ? `static` : `relative`,
       margin: `0 auto`,
       padding: `${spacingHeight}px ${gutters}px`,
       maxWidth: typeof width === `string` ? width : `${width}px`,
     }
+
+    const contentStyle = Object.assign(defaultContentStyle, extraContentStyle)
 
     return <div style={contentStyle}>{children}</div>
   }
