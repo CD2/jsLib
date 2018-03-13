@@ -28,6 +28,7 @@ class Grid extends React.Component {
     columns: PropTypes.number,
     gutterWidth: PropTypes.number,
     noGutters: PropTypes.bool,
+    style: PropTypes.object,
     theme: PropTypes.object,
   }
 
@@ -37,7 +38,7 @@ class Grid extends React.Component {
   }
 
   render() {
-    const { columns, children, className, noGutters } = this.props
+    const { columns, children, className, noGutters, style } = this.props
     const gutter = <div className="gutter" />
     const gutterHorizontal = <div className="gutter__horizontal" />
 
@@ -77,7 +78,7 @@ class Grid extends React.Component {
       return [neededGutter, childWithWidth]
     })
 
-    return <div className={className}>{items}</div>
+    return <div className={className} style={style}>{items}</div>
   }
 }
 
