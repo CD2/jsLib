@@ -27,6 +27,11 @@ export class RichTextBox extends React.Component {
     }
   }
 
+  titleLize(text){
+    const title = text.replace(/_/g,` `)
+    return title.charAt(0).toUpperCase() + title.slice(1)
+  }
+
   handleEditorStateChange = editorState => {
     this.setState({
       editorState,
@@ -39,7 +44,7 @@ export class RichTextBox extends React.Component {
     const { editorState } = this.state
     return (
       <div className={this.props.className}>
-        <label>{this.props.field}</label>
+        <label>{this.titleLize(this.props.field)}</label>
         <div className="rich-text">
           <Editor
             editorState={editorState}
@@ -55,6 +60,10 @@ export class RichTextBox extends React.Component {
 }
 export default decorate(
   styled`
+
+.rich-text {
+  max-width: inherit;
+}
 .rdw-option-wrapper {
   padding: 5px;
   min-width: 25px;
