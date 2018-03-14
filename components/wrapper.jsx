@@ -103,7 +103,7 @@ export class Wrapper extends React.Component {
     return (
       <div
         className={this.props.className || ``}
-        style={{
+        style={{...{
           backgroundColor: background || `white`,
           position: noRelative ? `static` : `relative`,
           boxShadow: !this.props.noShadow && floating ? theme.shadow0 : `none`,
@@ -112,7 +112,7 @@ export class Wrapper extends React.Component {
           overflow: this.props.overflow ? `initial` : `hidden`,
           height: this.props.fullHeight ? `100%` : `auto`,
           border: this.props.border,
-        }}
+        }, ...this.props.style}}
         onClick={this.props.onClick}
       >
         {this.renderOverlay()}
