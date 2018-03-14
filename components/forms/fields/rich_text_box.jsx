@@ -62,7 +62,8 @@ export default decorate(
   styled`
 
 .rich-text {
-  max-width: inherit;
+  max-width: 635px;
+  border-radius: 5px;
 }
 .rdw-option-wrapper {
   padding: 5px;
