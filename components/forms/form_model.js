@@ -104,9 +104,9 @@ export default class FormModel {
       const data = request.response.data
       const errors = data.error_for ? data.error_for.message : {}
       const errorFlash = data.exception
-        ? data.exception
-            .replace(`#<ActiveRecord::RecordInvalid: Validation failed: `, ``)
-            .replace(`>`, ``)
+        ? data.exception.
+          replace(`#<ActiveRecord::RecordInvalid: Validation failed: `, ``).
+          replace(`>`, ``)
         : ``
       this.errors.replace(errors)
       onError && onError(errors)
@@ -130,15 +130,15 @@ export default class FormModel {
 
     const payload = formatPayload ? formatPayload(toJS(values)) : params
 
-    cord
-      .perform(perform, payload)
-      .then(response => {
+    cord.
+      perform(perform, payload).
+      then(response => {
         onSuccess && onSuccess(values, response)
         if (scroll) window.scrollTo(0, 0)
         if (flash) flashStore.add(flash)
         if (redirectTo) redirect(redirectTo(toJS(values), response))
-      })
-      .catch(this.handleServerError)
+      }).
+      catch(this.handleServerError)
   }
 
   reset(newValues) {

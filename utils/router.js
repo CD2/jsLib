@@ -8,7 +8,7 @@ history.listen((location, action) => {
   if (cont) cont.scrollTop = 0
 })
 
-export const redirect = (url, { reload = false, state = {} } = {}) => {
+export const redirect = (url, { reload = false, state = {}} = {}) => {
   reload ? (window.location.href = url) : history.push(url, state)
 }
 

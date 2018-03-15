@@ -51,12 +51,12 @@ export const request = (
   if (send_tokens) headers = { ...headers, ...getApiHeaders() }
   if (process_data && data) data = objectToFormData(data)
 
-  return axios({ method, url, ...options, data, headers })
-    .then(response => {
+  return axios({ method, url, ...options, data, headers }).
+    then(response => {
       setApiHeaders(response.headers)
       return response
-    })
-    .catch(error => {
+    }).
+    catch(error => {
       console.error(error.status, error)
       if (error.status === 401) redirect(`/`, { reload: true })
       else throw error

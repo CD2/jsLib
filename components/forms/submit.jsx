@@ -24,8 +24,8 @@ import load from "images/load.gif"
       background-color: ${t(`primaryLight`)};
     }
     ${({ submitting }) => {
-      if (submitting) {
-        return `
+  if (submitting) {
+    return `
         background: url(${load});
         opacity: 0.7;
         background-size: 100%;
@@ -36,8 +36,8 @@ import load from "images/load.gif"
           background-color: #2c2d2d;
         }
     `
-      }
-    }}
+  }
+}}
           &.gradient-positive {
         background: linear-gradient(to bottom,  #39b449 0%,#299a0b 100%);
         border: 1px solid ${t(`positive`)};

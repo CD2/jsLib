@@ -58,21 +58,21 @@ export default decorate(
     border-radius: ${t(`borderRadii.modal`)};
       z-index: 250000;
       ${({ padding, theme, noPad }) => {
-        if (padding) return `padding: ${padding}px;`
-        if (!noPad) return `padding: ${theme.gutterWidth.value}px;`
-      }}
+    if (padding) return `padding: ${padding}px;`
+    if (!noPad) return `padding: ${theme.gutterWidth.value}px;`
+  }}
 
       width: 90%;
       max-width: 800px;
       ${({ background }) => {
-        if (background) return `background-color: ${background};`
-        return `background-color: white;`
-      }}
+    if (background) return `background-color: ${background};`
+    return `background-color: white;`
+  }}
         ${({ narrow }) => {
-          if (narrow) {
-            return `max-width: 500px;`
-          }
-        }}
+    if (narrow) {
+      return `max-width: 500px;`
+    }
+  }}
       max-height: 90%;
       overflow: auto;
       position: relative;

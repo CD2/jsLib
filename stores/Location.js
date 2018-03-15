@@ -73,10 +73,10 @@ export default class LocationStore {
   }
 
   pathExpressionToRegex(expression) {
-    return expression
-      .replace(/:(\w+)/g, (match, p1) => {
+    return expression.
+      replace(/:(\w+)/g, (match, p1) => {
         return `([^/]+)`
-      })
-      .replace(/\//g, `\\/`)
+      }).
+      replace(/\//g, `\\/`)
   }
 }

@@ -11,9 +11,9 @@ const afterSignOut = () => {
 }
 
 export const signOut = () => {
-  return del(`/auth/sign_out`)
-    .then(() => afterSignOut())
-    .catch(() => afterSignOut())
+  return del(`/auth/sign_out`).
+    then(() => afterSignOut()).
+    catch(() => afterSignOut())
 }
 
 export const signUp = values => {

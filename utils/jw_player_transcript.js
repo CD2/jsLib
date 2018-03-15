@@ -96,10 +96,10 @@ export default class TranscriptService {
     if (a[3]) {
       t += ` ${a[3]}`
     }
-    t = t
-      .replace(/&/g, `&amp;`)
-      .replace(/</g, `&lt;`)
-      .replace(/>/g, `&gt;`)
+    t = t.
+      replace(/&/g, `&amp;`).
+      replace(/</g, `&lt;`).
+      replace(/>/g, `&gt;`)
     return {
       begin: this.seconds(a[1].substr(0, i)),
       btext: a[1].substr(3, i - 7),

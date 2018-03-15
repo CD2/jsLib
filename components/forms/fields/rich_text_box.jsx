@@ -10,7 +10,7 @@ import draftToHtml from "draftjs-to-html"
 export class RichTextBox extends React.Component {
   constructor(props) {
     super(props)
-    if(props.value && props.value.replace(/<(?:.|\n)*?>/gm, '').length > 0){
+    if (props.value && props.value.replace(/<(?:.|\n)*?>/gm, ``).length > 0) {
       const blocksFromHTML = convertFromHTML(props.value)
       const state = ContentState.createFromBlockArray(
         blocksFromHTML.contentBlocks,
@@ -23,12 +23,11 @@ export class RichTextBox extends React.Component {
       this.state = {
         editorState: EditorState.createEmpty(),
       }
-
     }
   }
 
-  titleLize(text){
-    const title = text.replace(/_/g,` `)
+  titleLize(text) {
+    const title = text.replace(/_/g, ` `)
     return title.charAt(0).toUpperCase() + title.slice(1)
   }
 

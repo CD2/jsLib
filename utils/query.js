@@ -27,15 +27,15 @@ export default class Query {
     //either currently fetching or already fetched and meant to reload data
     if (this.fetching || (this.fetched && !reload)) return
     this.fetching = true
-    get(this.path, data)
-      .then(
+    get(this.path, data).
+      then(
         action(`${this.name}Fulfilled`, response => {
           this.fetching = false
           this.fetched = true
           this.data = this.fulfilled(response, this)
         }),
-      )
-      .catch(
+      ).
+      catch(
         action(`${this.name}Rejected`, error => {
           this.fetching = false
           this.error = true

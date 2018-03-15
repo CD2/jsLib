@@ -245,16 +245,16 @@ export default decorate(
     }
 
     ${({ wide }) => {
-      if (wide) {
-        return `
+    if (wide) {
+      return `
           width: 100%;
       `
-      }
-    }}
+    }
+  }}
 
     ${({ processing }) => {
-      if (processing) {
-        return `
+    if (processing) {
+      return `
         cursor: none;
         background: url(${load});
         opacity: 0.7;
@@ -269,8 +269,8 @@ export default decorate(
           background-color: #2c2d2d;
         }
       `
-      }
-    }}
+    }
+  }}
   `,
   Button,
 )

@@ -62,10 +62,10 @@ export default decorate(
     text-align: ${p(`align`, `left`)};
     .modal & { padding-top: 0; }
     ${({ noPad, theme, spacing }) => {
-      if (!noPad) {
-        return `padding-bottom: ${(spacing || theme.gutterHeight.value) / 16}em;`
-      }
-    }}
+    if (!noPad) {
+      return `padding-bottom: ${(spacing || theme.gutterHeight.value) / 16}em;`
+    }
+  }}
     .intro-text {
   ${({ light, theme }) => {
     const color = light ? theme.background : theme.lightText

@@ -78,7 +78,11 @@ class Grid extends React.Component {
       return [neededGutter, childWithWidth]
     })
 
-    return <div className={className} style={style}>{items}</div>
+    return (
+      <div className={className} style={style}>
+        {items}
+      </div>
+    )
   }
 }
 
