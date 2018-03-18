@@ -44,7 +44,7 @@ export class RichTextBox extends React.Component {
     return (
       <div className={this.props.className}>
         <label>{this.titleLize(this.props.field)}</label>
-        <div className="rich-text">
+        <div className={`rich-text ${this.props.field}`}>
           <Editor
             editorState={editorState}
             toolbarClassName="toolbarClassName"
