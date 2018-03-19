@@ -54,32 +54,35 @@ export default decorate(
       cursor: pointer;
     }
     .modal {
-    position: relative;
-    border-radius: ${t(`borderRadii.modal`)};
-      z-index: 250000;
-      ${({ padding, theme, noPad }) => {
-    if (padding) return `padding: ${padding}px;`
-    if (!noPad) return `padding: ${theme.gutterWidth.value}px;`
-  }}
-
+      position: relative;
+      border-radius: ${t(`borderRadii.modal`)};
+      z-index: 250000;      
       width: 90%;
       max-width: 800px;
-      ${({ background }) => {
-    if (background) return `background-color: ${background};`
-    return `background-color: white;`
-  }}
-        ${({ narrow }) => {
-    if (narrow) {
-      return `max-width: 500px;`
-    }
-  }}
       max-height: 90%;
       overflow: auto;
       position: relative;
       left: 50%;
       top: 10%;
       transform: translateX(-50%);
-
+      ${({ large }) => {
+        if (large) return `
+          max-width: 9999px;
+          max-height: 9999px;
+          height: 80vh;
+        `
+      }}
+      ${({ padding, theme, noPad, background }) => {
+        if (padding) return `padding: ${padding}px;`
+        if (!noPad) return `padding: ${theme.gutterWidth.value}px;`
+      }}
+      ${({ background }) => {
+        if (background) return `background-color: ${background};`
+        return `background-color: white;`
+      }}
+      ${({ narrow }) => {
+        if (narrow) return `max-width: 500px;`
+      }}
       &--s {
         max-height: 450px;
       }
