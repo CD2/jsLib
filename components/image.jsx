@@ -57,7 +57,6 @@ export class Image extends React.Component {
     if (!uid && !this.props.url) {
       url = defaultSrc
     }
-
     if (embed) {
       return (
         <embed
@@ -103,25 +102,25 @@ export default decorate(
     position: relative;
     display: block;
     ${({ contain }) => {
-      if (contain) {
-        return `background-size: contain;
+    if (contain) {
+      return `background-size: contain;
       `
-      }
-    }}
+    }
+  }}
       max-width: 100%;
     max-height: 100%;
 
     ${({ circular }) => {
-      if (circular) {
-        return `border-radius: 50%;
+    if (circular) {
+      return `border-radius: 50%;
       `
-      }
-    }}
+    }
+  }}
     ${({ height }) => {
-      if (height) {
-        return `height: ${height}px;`
-      }
-    }}
+    if (height) {
+      return `height: ${height}px;`
+    }
+  }}
   ${({ width }) => {
     if (width) {
       return `width: ${width}px;`

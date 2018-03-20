@@ -52,10 +52,10 @@ export default decorate(
     width: 100%;
     z-index: 24999;
     ${({ belowAppBar }) => {
-      if (belowAppBar) {
-        return `z-index: 4999;`
-      }
-    }}
+    if (belowAppBar) {
+      return `z-index: 4999;`
+    }
+  }}
     &.visible {
       background: #000;
       cursor: pointer;

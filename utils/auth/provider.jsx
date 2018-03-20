@@ -40,14 +40,14 @@ export default class AuthProvider extends React.Component {
     const { localStorageKey } = this.props
     if (!localStorageKey) return
     data = JSON.stringify(data)
-    window.sessionStorage.setItem(localStorageKey, data)
+    window.localStorage.setItem(localStorageKey, data)
   }
 
   retrieveAuth() {
     const { localStorageKey } = this.props
     if (!localStorageKey) return
     try {
-      const data = window.sessionStorage.getItem(localStorageKey)
+      const data = window.localStorage.getItem(localStorageKey)
       if (data) return JSON.parse(data)
     } catch (e) {
       console.error(`Cant obtain headers`, e)

@@ -2,7 +2,7 @@ import React from "react"
 import createHistory from "history/createBrowserHistory"
 export const history = createHistory()
 
-export const redirect = (url, { reload = false, state = {} } = {}) => {
+export const redirect = (url, { reload = false, state = {}} = {}) => {
   reload ? (window.location.href = url) : history.push(url, state)
 }
 

@@ -31,6 +31,7 @@ export default class Tab extends React.Component {
             <Image width={30} height={20} background contain defaultSrc={icon} />
           </div>
           <div
+            className="heading"
             style={{
               flex: 1,
               fontSize: `13px`,
@@ -45,7 +46,7 @@ export default class Tab extends React.Component {
     }
     return (
       <Grid>
-        <Grid.Item>{heading}</Grid.Item>
+        <Grid.Item className="heading">{heading}</Grid.Item>
       </Grid>
     )
   }

@@ -62,10 +62,10 @@ export default decorate(
     text-align: ${p(`align`, `left`)};
     .modal & { padding-top: 0; }
     ${({ noPad, theme, spacing }) => {
-      if (!noPad) {
-        return `padding-bottom: ${(spacing || theme.gutterHeight.value) / 16}em;`
-      }
-    }}
+    if (!noPad) {
+      return `padding-bottom: ${(spacing || theme.gutterHeight.value) / 16}em;`
+    }
+  }}
     .intro-text {
   ${({ light, theme }) => {
     const color = light ? theme.background : theme.lightText
@@ -89,6 +89,16 @@ export default decorate(
       return `color: white;`
     }
   }}
+    }
+    .intro-text h2 {
+      margin: 14px 0 ${props => props.gutterHeight || props.theme.gutterHeight.value}px;
+      color: ${t(`lightText`)};
+  ${({ light }) => {
+    if (light) {
+      return `color: white;`
+    }
+  }}
+      font-weight: 500;
     }
     .intro-text h3 {
       margin: 10px 0 ${props => props.gutterHeight || props.theme.gutterHeight.value}px;

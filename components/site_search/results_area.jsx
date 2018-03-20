@@ -34,14 +34,14 @@ export class ResultsArea extends React.Component {
 
   handleKeyDown = e => {
     switch (e.key) {
-      case `ArrowDown`:
-        this.handleArrowDown()
-        break
-      case `ArrowUp`:
-        this.handleArrowUp()
-        break
-      default:
-        return null
+    case `ArrowDown`:
+      this.handleArrowDown()
+      break
+    case `ArrowUp`:
+      this.handleArrowUp()
+      break
+    default:
+      return null
     }
   }
 

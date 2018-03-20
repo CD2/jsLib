@@ -10,7 +10,7 @@ import { titleize } from "../../../../utils/strings"
 export class RichTextBox extends React.Component {
   constructor(props) {
     super(props)
-    if(props.value && props.value.replace(/<(?:.|\n)*?>/gm, '').length > 0){
+    if (props.value && props.value.replace(/<(?:.|\n)*?>/gm, ``).length > 0) {
       const blocksFromHTML = convertFromHTML(props.value)
       const state = ContentState.createFromBlockArray(
         blocksFromHTML.contentBlocks,
@@ -23,8 +23,12 @@ export class RichTextBox extends React.Component {
       this.state = {
         editorState: EditorState.createEmpty(),
       }
-
     }
+  }
+
+  titleLize(text) {
+    const title = text.replace(/_/g, ` `)
+    return title.charAt(0).toUpperCase() + title.slice(1)
   }
 
   handleEditorStateChange = editorState => {
@@ -41,13 +45,15 @@ export class RichTextBox extends React.Component {
       <div className={this.props.className}>
         <label>{titleize(this.props.title || this.props.field)}</label>
         <div className="rich-text">
-          <Editor
-            editorState={editorState}
-            toolbarClassName="toolbarClassName"
-            wrapperClassName="wrapperClassName"
-            editorClassName="editorClassName"
-            onEditorStateChange={this.handleEditorStateChange}
-          />
+          <div className={`rich-text ${this.props.field}`}>
+            <Editor
+              editorState={editorState}
+              toolbarClassName="toolbarClassName"
+              wrapperClassName="wrapperClassName"
+              editorClassName="editorClassName"
+              onEditorStateChange={this.handleEditorStateChange}
+            />
+          </div>
         </div>
       </div>
     )
@@ -55,6 +61,11 @@ export class RichTextBox extends React.Component {
 }
 export default decorate(
   styled`
+
+.rich-text {
+  max-width: 635px;
+  border-radius: 5px;
+}
 .rdw-option-wrapper {
   padding: 5px;
   min-width: 25px;

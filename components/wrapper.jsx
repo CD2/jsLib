@@ -104,14 +104,18 @@ export class Wrapper extends React.Component {
       <div
         className={this.props.className || ``}
         style={{
-          backgroundColor: background || `white`,
-          position: noRelative ? `static` : `relative`,
-          boxShadow: !this.props.noShadow && floating ? theme.shadow0 : `none`,
-          borderRadius: floating || this.props.borderRadius ? `6px` : `0`,
-          marginBottom: floating && !noMargin ? this.props.margin || theme.gutterHeight.value : `0`,
-          overflow: this.props.overflow ? `initial` : `hidden`,
-          height: this.props.fullHeight ? `100%` : `auto`,
-          border: this.props.border,
+          ...{
+            backgroundColor: background || `white`,
+            position: noRelative ? `static` : `relative`,
+            boxShadow: !this.props.noShadow && floating ? theme.shadow0 : `none`,
+            borderRadius: floating || this.props.borderRadius ? `6px` : `0`,
+            marginBottom:
+              floating && !noMargin ? this.props.margin || theme.gutterHeight.value : `0`,
+            overflow: this.props.overflow ? `initial` : `hidden`,
+            height: this.props.fullHeight ? `100%` : `auto`,
+            border: this.props.border,
+          },
+          ...this.props.style,
         }}
         onClick={this.props.onClick}
       >

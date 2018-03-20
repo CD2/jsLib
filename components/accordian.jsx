@@ -83,9 +83,9 @@ export class Accordian extends React.Component {
 
     return this.open
       ? {
-          minHeight: `${this.props.rows.length * this.props.rowHeight}px`,
-          height: `auto`,
-        }
+        minHeight: `${this.props.rows.length * this.props.rowHeight}px`,
+        height: `auto`,
+      }
       : { minHeight: `0px` }
   }
 
