@@ -2,6 +2,7 @@ import axios from "axios"
 import { redirect } from "lib/utils/router"
 import objectToFormData from "object-to-formdata"
 import API_ROUTE from "constants/api_host"
+import STORAGE from "constants/storage"
 import qs from "qs"
 
 const api_auth_keys = [`access-token`, `client`, `expiry`, `token-type`, `uid`]
@@ -10,7 +11,7 @@ const key_prefix = `auth_`
 export const getApiHeaders = () => {
   const headers = {}
   try {
-    api_auth_keys.forEach(key => (headers[key] = localStorage.getItem(`${key_prefix}${key}`)))
+    api_auth_keys.forEach(key => (headers[key] = STORAGE.getItem(`${key_prefix}${key}`)))
   } catch (e) {
     console.error(`Cant obtain headers`, e)
   }
@@ -20,14 +21,14 @@ export const getApiHeaders = () => {
 
 export const setApiHeaders = headers => {
   if (headers.hasOwnProperty(`access-token`)) {
-    api_auth_keys.forEach(key => localStorage.setItem(`${key_prefix}${key}`, headers[key]))
+    api_auth_keys.forEach(key => STORAGE.setItem(`${key_prefix}${key}`, headers[key]))
   }
 }
 
 export const clearApiHeaders = () => {
   try {
     api_auth_keys.forEach(
-      api_auth_keys.forEach(key => localStorage.removeItem(`${key_prefix}${key}`)),
+      api_auth_keys.forEach(key => STORAGE.removeItem(`${key_prefix}${key}`)),
     )
   } catch (e) {
     console.error(`Cant obtain headers`, e)
