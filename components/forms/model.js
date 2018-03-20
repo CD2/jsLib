@@ -75,7 +75,7 @@ export default class Model {
     if (newValues) this.values.replace(newValues)
   }
 
-  onSave(values) {
+  onSave() {
     throw new Error(`Must provide an onSave method to the model`)
   }
 }

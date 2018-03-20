@@ -1,4 +1,4 @@
-import { observable, reaction, action, autorun } from "mobx"
+import { observable, reaction, action} from "mobx"
 import { getUrlSearch } from "lib/utils/http"
 import qs from "qs"
 
@@ -60,12 +60,11 @@ export default class LocationStore {
       },
     )
 
-    this.params.observe(params => {
+    this.params.observe(() => {
       this.search = qs.stringify(this.params.toJS())
     })
   }
 
-  //pathExpression = '/courses/:id/*'
   startsWith(pathExpression) {
     const str = this.pathExpressionToRegex(pathExpression)
     const regex = new RegExp(`^${str}.*$`)
@@ -74,7 +73,7 @@ export default class LocationStore {
 
   pathExpressionToRegex(expression) {
     return expression
-      .replace(/:(\w+)/g, (match, p1) => {
+      .replace(/:(\w+)/g, () => {
         return `([^/]+)`
       })
       .replace(/\//g, `\\/`)

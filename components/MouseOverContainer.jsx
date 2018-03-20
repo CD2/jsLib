@@ -77,7 +77,7 @@ export default class MouseOverContainer extends React.Component {
   }
 
   @action
-  clearPosition = e => {
+  clearPosition = () => {
     if (this.clear) {
       this.x = null
       this.y = null

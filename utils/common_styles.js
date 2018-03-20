@@ -38,13 +38,6 @@ export const active_card = props => css`
   }
 `
 
-export const small_icon = props => css`
-  max-width: 18px;
-  opacity: 0.5;
-  position: relative;
-  top: 4px;
-`
-
 export const tag = props => css`
   border-radius: 3px;
   color: #999;

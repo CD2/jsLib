@@ -4,7 +4,7 @@ import { observer } from "mobx-react"
 import { action } from "mobx"
 import Modal from "lib/components/modal"
 import ModalStore from "lib/utils/modal_store"
-import Button from "lib/components/button"
+
 @observer
 export default class OrderForm extends React.Component {
   static propTypes = {
