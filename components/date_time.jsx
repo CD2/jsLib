@@ -6,6 +6,7 @@ export class DateTime extends React.Component {
   static propTypes = {
     date: PropTypes.any,
     format: PropTypes.string,
+    getDateToday: PropTypes.boolean
   }
 
   static defaultProps = {
@@ -18,8 +19,19 @@ export class DateTime extends React.Component {
     with_time: `H:mm - DD MMM YYYY`,
   }
 
+  dateToday(){
+    const today = new Date()
+    let dd = today.getDate()
+    let mm = today.getMonth()+1
+    const yyyy = today.getFullYear()
+    dd = dd<10 ? `0${dd}` : dd
+    mm = mm<10 ? `0${mm}` : mm
+    return `${yyyy}-${mm}-${dd}`
+  }
+
   render() {
-    let { format } = this.props
+    let { format, getDateToday } = this.props
+    if(getDateToday) this.dateToday()
     format = this.predefinedFormats[format] || format
     const datestring = moment(this.props.date).format(format)
     return <span>{datestring}</span>
