@@ -6,7 +6,6 @@ export class DateTime extends React.Component {
   static propTypes = {
     date: PropTypes.any,
     format: PropTypes.string,
-    getDateToday: PropTypes.boolean
   }
 
   static defaultProps = {
@@ -30,8 +29,7 @@ export class DateTime extends React.Component {
   }
 
   render() {
-    let { format, getDateToday } = this.props
-    if(getDateToday) this.dateToday()
+    let { format } = this.props
     format = this.predefinedFormats[format] || format
     const datestring = moment(this.props.date).format(format)
     return <span>{datestring}</span>

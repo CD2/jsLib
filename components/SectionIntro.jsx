@@ -13,6 +13,7 @@ export class SectionIntro extends React.Component {
     className: PropTypes.string,
     heading: PropTypes.any,
     light: PropTypes.bool,
+    linkPath: PropTypes.string,
     noPad: PropTypes.bool,
     style: PropTypes.object,
     title: PropTypes.any,

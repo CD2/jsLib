@@ -66,11 +66,11 @@ export default decorate(
       top: 10%;
       transform: translateX(-50%);
       ${({ large }) => {
-        if (large) return `
-          max-width: 9999px;
-          max-height: 9999px;
-          height: 80vh;
-        `
+        if (large){ return `
+              max-width: 9999px;
+              max-height: 9999px;
+              height: 80vh;`
+        }
       }}
       ${({ padding, theme, noPad, background }) => {
         if (padding) return `padding: ${padding}px;`
