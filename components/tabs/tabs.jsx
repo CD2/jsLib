@@ -13,6 +13,7 @@ export default class Tabs extends React.Component {
     children: PropTypes.any,
     className: PropTypes.string,
     current: PropTypes.string,
+    extendTabHeadClick: PropTypes.func,
     history: PropTypes.object,
     location: PropTypes.object,
     onChange: PropTypes.func,
@@ -50,7 +51,8 @@ export default class Tabs extends React.Component {
 
   @action
   handleTabHeadClick = key => {
-    const { onChange, storeCurrentName, location } = this.props
+    const { onChange, storeCurrentName, location, extendTabHeadClick } = this.props
+    extendTabHeadClick && extendTabHeadClick()
     this.selected = key
     if (storeCurrentName) {
       this.props.history.replace({
