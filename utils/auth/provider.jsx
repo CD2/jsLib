@@ -2,6 +2,7 @@
 import React from "react"
 import PropTypes from "prop-types"
 import { get } from "lib/utils/api_http"
+import STORAGE from "constants/storage"
 
 export default class AuthProvider extends React.Component {
   static propTypes = {
@@ -40,14 +41,14 @@ export default class AuthProvider extends React.Component {
     const { localStorageKey } = this.props
     if (!localStorageKey) return
     data = JSON.stringify(data)
-    window.localStorage.setItem(localStorageKey, data)
+    STORAGE.setItem(localStorageKey, data)
   }
 
   retrieveAuth() {
     const { localStorageKey } = this.props
     if (!localStorageKey) return
     try {
-      const data = window.localStorage.getItem(localStorageKey)
+      const data = STORAGE.getItem(localStorageKey)
       if (data) return JSON.parse(data)
     } catch (e) {
       console.error(`Cant obtain headers`, e)

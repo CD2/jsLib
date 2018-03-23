@@ -18,6 +18,16 @@ export class DateTime extends React.Component {
     with_time: `H:mm - DD MMM YYYY`,
   }
 
+  dateToday(){
+    const today = new Date()
+    let dd = today.getDate()
+    let mm = today.getMonth()+1
+    const yyyy = today.getFullYear()
+    dd = dd<10 ? `0${dd}` : dd
+    mm = mm<10 ? `0${mm}` : mm
+    return `${yyyy}-${mm}-${dd}`
+  }
+
   render() {
     let { format } = this.props
     format = this.predefinedFormats[format] || format

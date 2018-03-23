@@ -4,7 +4,7 @@ import { observer } from "mobx-react"
 import { action } from "mobx"
 import Modal from "lib/components/modal"
 import ModalStore from "lib/utils/modal_store"
-import Button from "lib/components/button"
+
 @observer
 export default class OrderForm extends React.Component {
   static propTypes = {
@@ -23,7 +23,7 @@ export default class OrderForm extends React.Component {
   render() {
     if (ModalStore.hasContents) {
       return (
-        <Modal onClose={this.handleCloseModal} showClose={this.props.showClose}>
+        <Modal showClose={this.props.showClose} onClose={this.handleCloseModal}>
           {ModalStore.getLast()}
         </Modal>
       )
