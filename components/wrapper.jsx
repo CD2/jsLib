@@ -84,13 +84,16 @@ export class Wrapper extends React.Component {
           uid={backgroundImageUid}
           defaultSrc={backgroundImage}
           style={{
-            position: `relative`,
-            boxShadow: floating ? theme.shadow0 : `none`,
-            borderRadius: floating ? `6px` : `0`,
-            marginBottom:
-              floating && !noMargin ? this.props.margin || theme.gutterHeight.value : `0`,
-            overflow: this.props.overflow ? `initial` : `hidden`,
-            height: this.props.fullHeight ? `100%` : `auto`,
+            ...{
+              position: `relative`,
+              boxShadow: floating ? theme.shadow0 : `none`,
+              borderRadius: floating ? `6px` : `0`,
+              marginBottom:
+                floating && !noMargin ? this.props.margin || theme.gutterHeight.value : `0`,
+              overflow: this.props.overflow ? `initial` : `hidden`,
+              height: this.props.fullHeight ? `100%` : `auto`,
+            },
+            ...this.props.style,
           }}
           size={this.props.backgroundImageSize ? this.props.backgroundImageSize : null}
           background
