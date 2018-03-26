@@ -5,6 +5,7 @@ export class ListItem extends React.Component {
   static propTypes = {
     children: PropTypes.any,
     className: PropTypes.string,
+    onClick: PropTypes.func,
   }
 
   render() {
