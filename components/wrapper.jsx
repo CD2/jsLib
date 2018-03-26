@@ -11,6 +11,7 @@ export class Wrapper extends React.Component {
     backgroundImage: PropTypes.string,
     backgroundImageSize: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     backgroundImageUid: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    border: PropTypes.string,
     borderRadius: PropTypes.bool,
     children: PropTypes.any,
     className: PropTypes.string,
@@ -21,12 +22,15 @@ export class Wrapper extends React.Component {
     innerBackground: PropTypes.string,
     margin: PropTypes.number,
     noGutters: PropTypes.bool,
+    noMargin: PropTypes.bool,
     noRelative: PropTypes.bool,
+    noShadow: PropTypes.bool,
     noSpacing: PropTypes.bool,
     onClick: PropTypes.func,
     overflow: PropTypes.bool,
     overlay: PropTypes.string,
     spacing: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+    style: PropTypes.object,
     theme: PropTypes.object,
     wide: PropTypes.bool,
     width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
@@ -84,13 +88,16 @@ export class Wrapper extends React.Component {
           uid={backgroundImageUid}
           defaultSrc={backgroundImage}
           style={{
-            position: `relative`,
-            boxShadow: floating ? theme.shadow0 : `none`,
-            borderRadius: floating ? `6px` : `0`,
-            marginBottom:
-              floating && !noMargin ? this.props.margin || theme.gutterHeight.value : `0`,
-            overflow: this.props.overflow ? `initial` : `hidden`,
-            height: this.props.fullHeight ? `100%` : `auto`,
+            ...{
+              position: `relative`,
+              boxShadow: floating ? theme.shadow0 : `none`,
+              borderRadius: floating ? `6px` : `0`,
+              marginBottom:
+                floating && !noMargin ? this.props.margin || theme.gutterHeight.value : `0`,
+              overflow: this.props.overflow ? `initial` : `hidden`,
+              height: this.props.fullHeight ? `100%` : `auto`,
+            },
+            ...this.props.style,
           }}
           size={this.props.backgroundImageSize ? this.props.backgroundImageSize : null}
           background

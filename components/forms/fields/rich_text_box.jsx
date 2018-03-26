@@ -6,8 +6,16 @@ import { Editor } from "react-draft-wysiwyg"
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css"
 import decorate from "../../../utils/decorate"
 import draftToHtml from "draftjs-to-html"
+import { titleize } from "../../../../utils/strings"
 
 export class RichTextBox extends React.Component {
+  static propTypes = {
+    className: PropTypes.string,
+    field: PropTypes.string,
+    onChange: PropTypes.func,
+    title: PropTypes.string,
+    value: PropTypes.string,
+  }
   constructor(props) {
     super(props)
     if (props.value && props.value.replace(/<(?:.|\n)*?>/gm, ``).length > 0) {

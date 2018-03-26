@@ -5,7 +5,6 @@ import { styled } from "lib/utils/theme"
 import decorate from "lib/utils/decorate"
 import Button from "./button"
 import FaIcon from "./fa_icon"
-import { Link } from "react-router-dom"
 
 export class File extends React.Component {
   static propTypes = {
@@ -52,8 +51,8 @@ export class File extends React.Component {
         className={`file ${this.props.className}`}
         target="_blank"
         buttonStyle="download common"
-        onClick={this.props.onClick}
         wide={this.props.wide}
+        onClick={this.props.onClick}
       >
         <FaIcon icon="download" size={1.3} />
         {children}
