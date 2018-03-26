@@ -15,7 +15,6 @@ export class RichTextBox extends React.Component {
     onChange: PropTypes.func,
     title: PropTypes.string,
     value: PropTypes.string,
-    
   }
   constructor(props) {
     super(props)

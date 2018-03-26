@@ -53,7 +53,6 @@ export class File extends React.Component {
         buttonStyle="download common"
         wide={this.props.wide}
         onClick={this.props.onClick}
-
       >
         <FaIcon icon="download" size={1.3} />
         {children}

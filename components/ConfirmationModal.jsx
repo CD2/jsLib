@@ -12,7 +12,7 @@ export class ConfirmationModal extends React.Component {
     onCancel: PropTypes.func,
     onClose: PropTypes.func,
     onConfirm: PropTypes.func,
-    showClose: PropTypes.bool, 
+    showClose: PropTypes.bool,
     title: PropTypes.string,
   }
 
@@ -32,7 +32,7 @@ export class ConfirmationModal extends React.Component {
   render() {
     const { title, body } = this.props
     return (
-      <Modal narrow onClose={this.handleCancel} >
+      <Modal narrow onClose={this.handleCancel}>
         <SectionIntro title={title} heading={2} noPad>
           <h3>{body}</h3>
 

@@ -66,23 +66,24 @@ export default decorate(
       top: 10%;
       transform: translateX(-50%);
       ${({ large }) => {
-        if (large){ return `
+    if (large) {
+      return `
               max-width: 9999px;
               max-height: 9999px;
               height: 80vh;`
-        }
-      }}
+    }
+  }}
       ${({ padding, theme, noPad, background }) => {
-        if (padding) return `padding: ${padding}px;`
-        if (!noPad) return `padding: ${theme.gutterWidth.value}px;`
-      }}
+    if (padding) return `padding: ${padding}px;`
+    if (!noPad) return `padding: ${theme.gutterWidth.value}px;`
+  }}
       ${({ background }) => {
-        if (background) return `background-color: ${background};`
-        return `background-color: white;`
-      }}
+    if (background) return `background-color: ${background};`
+    return `background-color: white;`
+  }}
       ${({ narrow }) => {
-        if (narrow) return `max-width: 500px;`
-      }}
+    if (narrow) return `max-width: 500px;`
+  }}
       &--s {
         max-height: 450px;
       }

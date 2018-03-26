@@ -8,8 +8,12 @@ export class ListItem extends React.Component {
   }
 
   render() {
-    const { children, className = `` } = this.props
-    return <div className={`list_item ${className}`}>{children}</div>
+    const { children, onClick, className = `` } = this.props
+    return (
+      <div className={`list_item ${className}`} onClick={onClick}>
+        {children}
+      </div>
+    )
   }
 }
 export default ListItem
