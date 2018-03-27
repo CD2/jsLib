@@ -7,7 +7,7 @@ import SectionIntro from "../SectionIntro"
 export default class Tab extends React.Component {
   static propTypes = {
     children: PropTypes.node,
-    heading: PropTypes.string,
+    heading: PropTypes.string.isRequired,
     icon: PropTypes.string,
     onTabHeadClick: PropTypes.func,
     renderHead: PropTypes.bool,
@@ -30,7 +30,7 @@ export default class Tab extends React.Component {
       return (
         <div style={{ display: `flex` }}>
           <div style={{ minWidth: `30px`, marginRight: `16px` }}>
-            <Image width={30} height={20} defaultSrc={icon} background contain />
+            <Image width={30} height={20} defaultSrc={icon} contain background />
           </div>
           <div
             className="heading"
