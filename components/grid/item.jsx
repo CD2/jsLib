@@ -13,7 +13,7 @@ import PropTypes from "prop-types"
 `
 export class GridItem extends React.Component {
   static propTypes = {
-    children: PropTypes.any,
+    children: PropTypes.node,
     className: PropTypes.string,
     onClick: PropTypes.func,
     style: PropTypes.object,
@@ -22,11 +22,7 @@ export class GridItem extends React.Component {
   render() {
     const { className, children, onClick, style } = this.props
     return (
-<<<<<<< HEAD
-      <div className={className}  style={style} onClick={onClick}>
-=======
       <div className={className} style={style} onClick={onClick}>
->>>>>>> big refac
         {children}
       </div>
     )
