@@ -23,7 +23,7 @@ export default class OrderForm extends React.Component {
   render() {
     if (ModalStore.hasContents) {
       return (
-        <Modal onClose={this.handleCloseModal} showClose={this.props.showClose}>
+        <Modal showClose={this.props.showClose} onClose={this.handleCloseModal}>
           {ModalStore.getLast()}
         </Modal>
       )

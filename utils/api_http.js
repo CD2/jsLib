@@ -27,9 +27,7 @@ export const setApiHeaders = headers => {
 
 export const clearApiHeaders = () => {
   try {
-    api_auth_keys.forEach(
-      api_auth_keys.forEach(key => STORAGE.removeItem(`${key_prefix}${key}`)),
-    )
+    api_auth_keys.forEach(api_auth_keys.forEach(key => STORAGE.removeItem(`${key_prefix}${key}`)))
   } catch (e) {
     console.error(`Cant obtain headers`, e)
   }

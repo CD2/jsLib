@@ -115,12 +115,12 @@ export default class TagsStore {
   @action
   handleInputBlur = (e, force = false) => {
     return (this.current_tag = null)
-    e && e.preventDefault()
-    if (!this.mouseOverPopover || force) {
-      this.current_tag && this.handleInput()
-      this.current_tag = null
-      this.filterText = ``
-    }
+    // e && e.preventDefault()
+    // if (!this.mouseOverPopover || force) {
+    //   this.current_tag && this.handleInput()
+    //   this.current_tag = null
+    //   this.filterText = ``
+    // }
   }
 
   @action

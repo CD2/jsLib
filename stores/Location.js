@@ -1,4 +1,4 @@
-import { observable, reaction, action} from "mobx"
+import { observable, reaction, action } from "mobx"
 import { getUrlSearch } from "lib/utils/http"
 import qs from "qs"
 

@@ -1,4 +1,5 @@
 import React from "react"
+import PropTypes from "prop-types"
 import { styled } from "../../../utils/theme"
 import { EditorState, convertToRaw, ContentState, convertFromHTML } from "draft-js"
 import { Editor } from "react-draft-wysiwyg"
@@ -8,6 +9,13 @@ import draftToHtml from "draftjs-to-html"
 import { titleize } from "../../../../utils/strings"
 
 export class RichTextBox extends React.Component {
+  static propTypes = {
+    className: PropTypes.string,
+    field: PropTypes.string,
+    onChange: PropTypes.func,
+    title: PropTypes.string,
+    value: PropTypes.string,
+  }
   constructor(props) {
     super(props)
     if (props.value && props.value.replace(/<(?:.|\n)*?>/gm, ``).length > 0) {
@@ -43,17 +51,15 @@ export class RichTextBox extends React.Component {
     const { editorState } = this.state
     return (
       <div className={this.props.className}>
-        <label>{titleize(this.props.title || this.props.field)}</label>
-        <div className="rich-text">
-          <div className={`rich-text ${this.props.field}`}>
-            <Editor
-              editorState={editorState}
-              toolbarClassName="toolbarClassName"
-              wrapperClassName="wrapperClassName"
-              editorClassName="editorClassName"
-              onEditorStateChange={this.handleEditorStateChange}
-            />
-          </div>
+        <label>{this.titleLize(this.props.field)}</label>
+        <div className={`rich-text ${this.props.field}`}>
+          <Editor
+            editorState={editorState}
+            toolbarClassName="toolbarClassName"
+            wrapperClassName="wrapperClassName"
+            editorClassName="editorClassName"
+            onEditorStateChange={this.handleEditorStateChange}
+          />
         </div>
       </div>
     )
@@ -873,7 +879,6 @@ export default decorate(
 }
 .rdw-editor-main {
   height: 100%;
-  min-height: 100px;
   overflow: auto;
   box-sizing: border-box;
 }

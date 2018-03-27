@@ -2,11 +2,19 @@ import React from "react"
 import PropTypes from "prop-types"
 import { observer } from "mobx-react"
 import { observable, action, computed } from "mobx"
-import { withRouter } from "react-router-dom"
 import Grid from "../grid"
 import Wrapper from "../wrapper"
+import windowStore from "stores/window"
 
-@withRouter
+function tabChangeParams(value) {
+  windowStore.location.params.set(`tab`, value)
+}
+function removeParams(params=[]){
+  params.map(param => {
+    windowStore.location.params.delete(param)
+  })
+}
+
 @observer
 export default class Tabs extends React.Component {
   static propTypes = {
@@ -17,33 +25,31 @@ export default class Tabs extends React.Component {
     history: PropTypes.object,
     location: PropTypes.object,
     onChange: PropTypes.func,
-    storeCurrentName: PropTypes.string,
     thick: PropTypes.bool,
   }
 
   static defaultProps = {
     current: null,
-    storeCurrentName: null,
     thick: false,
   }
 
   componentDidMount() {
     const { onChange } = this.props
-
+    if(windowStore && windowStore.location && windowStore.location.params){
+      this.selected = windowStore.location.params.get(`tab`)
+    }
     onChange && onChange(this.getSelected)
+  }
+
+  componentWillUnmount(){
+    removeParams([`page`, `tab`, `query`])
   }
 
   @observable selected = null
 
   @computed
   get getSelected() {
-    const { current, children, storeCurrentName } = this.props
-    const locationCurrent =
-      this.props.location &&
-      this.props.location.state &&
-      this.props.location.state[`${storeCurrentName}TabKey`]
-
-    if (!this.selected && !current && locationCurrent) return locationCurrent
+    const { current, children } = this.props
     const selected = current !== null ? current : this.selected
     if (!children[0]) return
     return selected !== null ? selected : children[0].key
@@ -51,14 +57,11 @@ export default class Tabs extends React.Component {
 
   @action
   handleTabHeadClick = key => {
-    const { onChange, storeCurrentName, location, extendTabHeadClick } = this.props
+    const { onChange, extendTabHeadClick } = this.props
     extendTabHeadClick && extendTabHeadClick()
     this.selected = key
-    if (storeCurrentName) {
-      this.props.history.replace({
-        state: { ...location.state, [`${storeCurrentName}TabKey`]: key },
-      })
-    }
+    tabChangeParams(key)
+    removeParams([`page`, `query`])
     if (onChange) onChange(key)
   }
 
