@@ -72,7 +72,7 @@ export default decorate(
     const color = light ? theme.background : theme.lightText
     return `
       color: ${color};
-`
+    `
   }}
   ${({ light }) => {
     if (light) {
@@ -128,6 +128,6 @@ export default decorate(
     .btn {
       margin-top: 16px;
     }
-`,
+  `,
   SectionIntro,
 )
