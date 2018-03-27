@@ -63,7 +63,7 @@ export default class Tabs extends React.Component {
 
   renderSelectedTab() {
     React.Children.forEach(this.props.children, child => {
-      if (child.key === this.getSelected) this.tab = child
+      if (child && child.key === this.getSelected) this.tab = child
     })
     return <div className="tab-content">{this.tab}</div>
   }
