@@ -55,6 +55,7 @@ import load from "images/load.gif"
 `
 export default class Submit extends React.Component {
   static propTypes = {
+    buttonStyle: PropTypes.string,
     className: PropTypes.string,
     submitting: PropTypes.bool,
     value: PropTypes.string,

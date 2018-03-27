@@ -16,6 +16,7 @@ const search = (query, models) => {
 
 export class SiteSearch extends React.Component {
   static propTypes = {
+    className: PropTypes.string,
     location: PropTypes.shape({
       pathname: PropTypes.string,
     }),
@@ -96,13 +97,13 @@ export class SiteSearch extends React.Component {
           {open && <Overlay belowAppBar clickThrough onClick={this.handleBlur} />}
           {open &&
             this.anyResults() && (
-              <ResultsArea
-                results={results}
-                query={query}
-                models={this.props.models}
-                onClick={this.handleClick}
-              />
-            )}
+            <ResultsArea
+              results={results}
+              query={query}
+              models={this.props.models}
+              onClick={this.handleClick}
+            />
+          )}
         </Form>
       </div>
     )

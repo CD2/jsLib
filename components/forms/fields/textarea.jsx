@@ -3,6 +3,7 @@ import PropTypes from "prop-types"
 
 export class TextArea extends React.Component {
   static propTypes = {
+    disabled: PropTypes.bool,
     initialValue: PropTypes.string,
     name: PropTypes.string,
     onChange: PropTypes.func,

@@ -6,7 +6,6 @@ import { Editor } from "react-draft-wysiwyg"
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css"
 import decorate from "../../../utils/decorate"
 import draftToHtml from "draftjs-to-html"
-import { titleize } from "../../../../utils/strings"
 
 export class RichTextBox extends React.Component {
   static propTypes = {
@@ -40,7 +39,7 @@ export class RichTextBox extends React.Component {
   }
 
   handleEditorStateChange = editorState => {
-    this.setState({
+    this.setState({ //eslint-disable-line
       editorState,
     })
     const { onChange } = this.props
