@@ -7,8 +7,11 @@ import SectionIntro from "../SectionIntro"
 export default class Tab extends React.Component {
   static propTypes = {
     children: PropTypes.node,
+    className: PropTypes.string,
     heading: PropTypes.string.isRequired,
     icon: PropTypes.string,
+    innerBody: PropTypes.string,
+    innerHead: PropTypes.string,
     onTabHeadClick: PropTypes.func,
     renderHead: PropTypes.bool,
     selected: PropTypes.any,
