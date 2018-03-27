@@ -16,12 +16,13 @@ export class GridItem extends React.Component {
     children: PropTypes.any,
     className: PropTypes.string,
     onClick: PropTypes.func,
+    style: PropTypes.object,
   }
 
   render() {
     const { className, children, onClick, style } = this.props
     return (
-      <div className={className} onClick={onClick} style={style}>
+      <div className={className} style={style} onClick={onClick}>
         {children}
       </div>
     )

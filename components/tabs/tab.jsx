@@ -2,6 +2,7 @@ import React from "react"
 import PropTypes from "prop-types"
 import Image from "../image"
 import Grid from "../grid"
+import SectionIntro from "../SectionIntro"
 
 export default class Tab extends React.Component {
   static propTypes = {
@@ -62,8 +63,18 @@ export default class Tab extends React.Component {
   }
 
   render() {
-    const { renderHead, children } = this.props
+    const { renderHead, children, innerHead, innerBody, className } = this.props
     if (renderHead) return this.renderHead()
+    if (innerHead) {
+      return (
+        <div className={className}>
+          <SectionIntro title={innerHead} heading={3} className="tab-intro">
+            <p>{innerBody}</p>
+          </SectionIntro>
+          <div>{children}</div>
+        </div>
+      )
+    }
     return <div>{children}</div>
   }
 }
