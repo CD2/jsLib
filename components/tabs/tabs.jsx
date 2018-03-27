@@ -12,6 +12,8 @@ export default class Tabs extends React.Component {
     children: PropTypes.any,
     className: PropTypes.string,
     onChange: PropTypes.func,
+    storeCurrentName: PropTypes.string,
+    thick: PropTypes.bool,
     vertical: PropTypes.bool,
   }
 
@@ -45,16 +47,18 @@ export default class Tabs extends React.Component {
 
   renderTabHeads() {
     const headings = React.Children.map(this.props.children, child => {
+      
       if (!child) return
       return React.cloneElement(child, {
         ...child.props,
-        tabKey: child.key,
+        key: child.key+Math.random(),
         renderHead: true,
         onTabHeadClick: this.handleTabHeadClick,
         className: `tab-head`,
         selected: Array.isArray(this.props.children) ? this.getSelected : child.key,
       })
-    })
+     
+    }) 
     return <div className="tab-heads">{headings}</div>
   }
 

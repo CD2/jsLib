@@ -269,9 +269,9 @@ export default decorate(
         &:hover{
           background-color: #2c2d2d;
         }
-      `
+`
     }
   }}
-  `,
+`,
   Button,
 )
