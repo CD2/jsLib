@@ -12,7 +12,10 @@ export class SectionIntro extends React.Component {
     children: PropTypes.node,
     className: PropTypes.string,
     heading: PropTypes.any,
-    light: PropTypes.bool,
+    light: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.bool,
+    ]),
     linkPath: PropTypes.string,
     noPad: PropTypes.bool,
     style: PropTypes.object,
