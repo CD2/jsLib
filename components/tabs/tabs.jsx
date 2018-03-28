@@ -40,9 +40,7 @@ export default class Tabs extends React.Component {
   }
 
   removeParams(params = []) {
-    params.map(param => {
-      windowStore.location.params.delete(param)
-    })
+    windowStore.location.clearParams(params)
   }
 
   renderTabHeads() {

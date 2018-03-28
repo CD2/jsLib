@@ -8,6 +8,12 @@ export default class LocationStore {
   @observable search = ``
   @observable params = observable.map()
 
+  clearParams = (params=[]) => {
+    params.map(param=>{
+      this.params.delete(param)
+    })
+  }
+
   @action
   update = () => {
     const { hash, pathname, search } = this.history.location
