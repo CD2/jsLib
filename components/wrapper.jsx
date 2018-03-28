@@ -16,7 +16,10 @@ export class Wrapper extends React.Component {
     children: PropTypes.any,
     className: PropTypes.string,
     extraContentStyle: PropTypes.object,
-    floating: PropTypes.string,
+    floating: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.bool,
+    ]),
     fullHeight: PropTypes.bool,
     gutter: PropTypes.number,
     innerBackground: PropTypes.string,
