@@ -127,6 +127,6 @@ export default decorate(
     }
   }}
 
-`,
+  `,
   Image,
 )
