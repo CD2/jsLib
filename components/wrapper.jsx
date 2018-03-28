@@ -25,7 +25,7 @@ export class Wrapper extends React.Component {
     innerBackground: PropTypes.string,
     margin: PropTypes.number,
     noGutters: PropTypes.bool,
-    noMargin: PropTypes.string,
+    noMargin: PropTypes.bool,
     noRelative: PropTypes.bool,
     noShadow: PropTypes.bool,
     noSpacing: PropTypes.bool,
