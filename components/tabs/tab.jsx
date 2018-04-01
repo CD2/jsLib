@@ -8,7 +8,7 @@ export default class Tab extends React.Component {
   static propTypes = {
     children: PropTypes.node,
     className: PropTypes.string,
-    heading: PropTypes.string.isRequired,
+    heading: PropTypes.string,
     icon: PropTypes.string,
     innerBody: PropTypes.string,
     innerHead: PropTypes.string,
