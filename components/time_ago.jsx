@@ -15,16 +15,6 @@ export class TimeAgo extends React.Component {
     time: PropTypes.string.isRequired,
   }
 
-  componentDidMount() {
-    this.timeout()
-  }
-
-  componentWillUnmount() {
-    clearTimeout(this.timer)
-  }
-
-  @observable displayTime = ``
-  @computed
   get time() {
     return new Date(this.props.time).getTime()
   }
