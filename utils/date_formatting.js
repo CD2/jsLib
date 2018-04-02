@@ -28,6 +28,12 @@ export function timeAgoInWords(dateString) {
   return justNow(dateString) ? 'Just now' : new moment.utc(dateString).fromNow()
 }
 
+export function olderThanSeconds(dateString, seconds) {
+  const timeDiffInSeconds = moment.utc(dateString).diff(this)
+  return Math.abs(timeDiffInSeconds) > seconds * 1000
+}
+
+
 export function justNow(dateString) {
   const timeDiffInSeconds = moment.utc(dateString).diff(this)
   return Math.abs(timeDiffInSeconds) < 25000
@@ -35,4 +41,8 @@ export function justNow(dateString) {
 
 export function secondsToTime(seconds) {
   return moment.utc(seconds * 1000).format(`mm\\m ss\\s`)
+}
+
+export function now() {
+  return moment.utc().toString()
 }
