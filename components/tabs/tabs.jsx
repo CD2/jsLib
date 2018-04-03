@@ -21,10 +21,6 @@ export default class Tabs extends React.Component {
     children: [],
   }
 
-  componentWillUnmount() {
-    this.removeParams([`page`, `tab`, `query`])
-  }
-
   @computed
   get getSelected() {
     if (this.props.children.length > 0) {
