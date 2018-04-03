@@ -135,7 +135,7 @@ export default class Input extends React.Component {
     type: PropTypes.string,
   }
 
-  componentDidMount() {
+  componentWillMount() {
     const field = FIELD_TYPES[this.props.type] || FIELD_TYPES.text
 
     this.field = field
