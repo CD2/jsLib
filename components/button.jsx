@@ -137,7 +137,11 @@ export default decorate(
         border: 2px solid ${t(`white`)};
         background: white;
       }
-
+      &.white {
+        color: ${t(`white`)};
+        border: 2px solid ${t(`white`)};
+        background-color: transparent;
+      }
       &:hover {
         filter: brightness(1.15);
       }
