@@ -112,8 +112,7 @@ export default class FormModel {
       onError && onError(errors)
       errorFlash && flashStore.add(errorFlash, { level: `error` })
       window.scrollTo(0, 0)
-    } else {
-    }
+    } else return null
   }
 
   perform(payloadValues = null) {
