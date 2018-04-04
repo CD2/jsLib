@@ -12,6 +12,7 @@ export class Button extends React.Component {
     children: PropTypes.node,
     className: PropTypes.string,
     external: PropTypes.bool,
+    handleOnclick: PropTypes.func,
     onClick: PropTypes.func,
     processing: PropTypes.bool,
     style: PropTypes.object,
@@ -37,13 +38,14 @@ export class Button extends React.Component {
   }
 
   render() {
-    let { className, to, external, buttonStyle, onClick, children, target, processing, style } = this.props
+    let { className, to, external, buttonStyle, children, target, processing, style } = this.props
 
     invariant(!(external && !to), `prop \`to\` is required if \`external\` is present`)
 
     let Comp = `div`
     className = `${className} ${buttonStyle} btn`
 
+    const onClick = this.props.onClick || this.props.handleOnclick
     let props = { className, to, onClick, children, target, style }
 
     if (to) {
