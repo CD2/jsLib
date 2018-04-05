@@ -20,10 +20,10 @@ export class Modal extends React.Component {
   }
 
   render() {
-    const { className, children, showClose } = this.props
+    const { className, children, showClose, style } = this.props
     return (
       <div className={`${className}`}>
-        <div className={`modal ${windowStore.isSmall ? `modal--s` : ``}`}>
+        <div className={`modal ${windowStore.isSmall ? `modal--s` : ``}`} style={style}>
           {showClose && (
             <div className="close-modal" onClick={this.handleClose}>
               <FaIcon icon={`cross`} size={1.2} />
@@ -56,7 +56,7 @@ export default decorate(
     .modal {
       position: relative;
       border-radius: ${t(`borderRadii.modal`)};
-      z-index: 250000;      
+      z-index: 250000;
       width: 90%;
       max-width: 800px;
       max-height: 90%;
@@ -75,7 +75,7 @@ export default decorate(
   }}
       ${({ padding, theme, noPad, background }) => {
     if (padding) return `padding: ${padding}px;`
-    if (!noPad) return `padding: ${theme.gutterWidth.value}px;`
+    if (!noPad) return `padding: ${theme.gutterWidth}px;`
   }}
       ${({ background }) => {
     if (background) return `background-color: ${background};`

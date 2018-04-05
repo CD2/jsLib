@@ -5,7 +5,7 @@ import { EditorState, convertToRaw, ContentState, convertFromHTML } from "draft-
 import { Editor } from "react-draft-wysiwyg"
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css"
 import decorate from "../../../utils/decorate"
-import draftToHtml from "draftjs-to-html"
+import {stateToHTML} from 'draft-js-export-html';
 
 export class RichTextBox extends React.Component {
   static propTypes = {
@@ -43,7 +43,7 @@ export class RichTextBox extends React.Component {
       editorState,
     })
     const { onChange } = this.props
-    if (onChange) onChange(draftToHtml(convertToRaw(editorState.getCurrentContent())))
+    if (onChange) onChange(stateToHTML(editorState.getCurrentContent()))
   }
 
   render() {

@@ -20,10 +20,3 @@ export const signUp = values => {
   return post(`/auth`, values)
 }
 
-export const recoverPassword = values => {
-  return post(`/auth/password`, values)
-}
-
-export const resetPassword = values => {
-  return put(`/auth/password`, values, { send_tokens: false })
-}

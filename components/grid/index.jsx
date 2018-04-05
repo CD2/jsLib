@@ -9,7 +9,7 @@ import { styled } from "lib/utils/theme"
 
   > .gutter {
     display: inline-block;
-    min-width: ${props => props.gutterWidth || props.theme.gutterWidth.value}px;
+    min-width: ${props => props.gutterWidth || props.theme.gutterWidth}px;
     vertical-align: top;
     & + .gutter {
       display: none;
@@ -17,7 +17,7 @@ import { styled } from "lib/utils/theme"
   }
 
   .gutter__horizontal {
-    min-height: ${props => props.gutterHeight || props.theme.gutterHeight.value}px;
+    min-height: ${props => props.gutterHeight || props.theme.gutterHeight}px;
     width: 100%;
   }
 `
@@ -42,7 +42,7 @@ class Grid extends React.Component {
     const gutter = <div className="gutter" />
     const gutterHorizontal = <div className="gutter__horizontal" />
 
-    let gutterWidth = this.props.gutterWidth || this.props.theme.gutterWidth.value
+    let gutterWidth = this.props.gutterWidth || this.props.theme.gutterWidth
     if (noGutters) gutterWidth = 0
 
     const getWidth = (span = 1) => {

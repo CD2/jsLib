@@ -1,6 +1,5 @@
 import axios from "axios"
 import { redirect } from "lib/utils/router"
-import objectToFormData from "object-to-formdata"
 import API_ROUTE from "constants/api_host"
 import STORAGE from "constants/storage"
 import qs from "qs"
@@ -48,7 +47,6 @@ export const request = (
 ) => {
   const url = buildUrl(path)
   if (send_tokens) headers = { ...headers, ...getApiHeaders() }
-  if (process_data && data) data = objectToFormData(data)
 
   return axios({ method, url, ...options, data, headers }).
     then(response => {
@@ -62,9 +60,7 @@ export const request = (
     })
 }
 export const get = (path, params = {}) => request(`get`, path, { params })
-
 export const post = (path, data = {}, options) => request(`post`, path, { data, ...options })
-export const put = (path, data = {}, options) => request(`put`, path, { data, ...options })
 export const del = (path, data = {}, options) => request(`delete`, path, { data, ...options })
 
 export const apiRoute = API_ROUTE

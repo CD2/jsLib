@@ -1,5 +1,4 @@
 import { get } from "lib/utils/api_http"
-import { link } from "autolinker"
 
 let global_chapters = []
 let global_captions = []
@@ -136,7 +135,7 @@ export default class TranscriptService {
           h += `</p><h4>${global_chapters[s].text}</h4><p>`
           s++
         }
-        h += `<span id='caption${i}'>${link(c.text)}</span>`
+        h += `<span id='caption${i}'>${c.text}</span>`
         global_captions.push(c)
       }
       global_transcript.innerHTML = `${h}</p>`
