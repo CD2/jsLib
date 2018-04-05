@@ -34,7 +34,7 @@ export const clearApiHeaders = () => {
 
 export const buildUrl = (parts, params = {}) => {
   let url
-  if (parts.indexOf(`http://`) === 0) url = parts
+  if (parts.indexOf(`http://`) === 0 || parts.indexOf(`https://`) === 0) url = parts
   else {
     parts = Array.isArray(parts) ? parts.map(part => part.trim(`/`)) : [parts.trim(`/`)]
     parts.unshift(API_ROUTE.trim(`/`))

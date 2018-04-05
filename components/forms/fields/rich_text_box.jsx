@@ -43,8 +43,10 @@ export class RichTextBox extends React.Component {
       editorState,
     })
     const { onChange } = this.props
-    if (onChange) onChange(stateToHTML(editorState.getCurrentContent()))
+    const content = stateToHTML(editorState.getCurrentContent()).split(/<br>\s+<br>/gm).join('</p><p>')
+    if (onChange) onChange(content)
   }
+
 
   render() {
     const { editorState } = this.state
@@ -53,6 +55,7 @@ export class RichTextBox extends React.Component {
         <label>{this.titleLize(this.props.field)}</label>
         <div className={`rich-text ${this.props.field}`}>
           <Editor
+            className={`hello_${this.props.field}`}
             editorState={editorState}
             toolbarClassName="toolbarClassName"
             wrapperClassName="wrapperClassName"
