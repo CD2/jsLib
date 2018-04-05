@@ -33,9 +33,13 @@ export const clearApiHeaders = () => {
 }
 
 export const buildUrl = (parts, params = {}) => {
-  parts = Array.isArray(parts) ? parts.map(part => part.trim(`/`)) : [parts.trim(`/`)]
-  parts.unshift(API_ROUTE.trim(`/`))
-  let url = parts.join(``)
+  let url
+  if (parts.indexOf(`http://`) === 0) url = parts
+  else {
+    parts = Array.isArray(parts) ? parts.map(part => part.trim(`/`)) : [parts.trim(`/`)]
+    parts.unshift(API_ROUTE.trim(`/`))
+    url = parts.join(``)
+  }
   if (Object.keys(params).length > 0) url += `?${qs.stringify(params)}`
   return url
 }
