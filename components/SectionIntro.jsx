@@ -32,8 +32,8 @@ export class SectionIntro extends React.Component {
 
     const wrapperIntroStyle = {
       borderBottom: `1px solid ${theme.border}`,
-      paddingBottom: `${theme.gutterHeight.value / 2}px`,
-      marginBottom: `${theme.gutterHeight.value / 2}px`,
+      paddingBottom: `${theme.gutterHeight / 2}px`,
+      marginBottom: `${theme.gutterHeight / 2}px`,
     }
 
     const _title = linkPath ? (
@@ -67,7 +67,7 @@ export default decorate(
     .modal & { padding-top: 0; }
     ${({ noPad, theme, spacing }) => {
     if (!noPad) {
-      return `padding-bottom: ${(spacing || theme.gutterHeight.value) / 16}em;`
+      return `padding-bottom: ${(spacing || theme.gutterHeight) / 16}em;`
     }
   }}
     .intro-text {
@@ -95,7 +95,7 @@ export default decorate(
   }}
     }
     .intro-text h2 {
-      margin: 14px 0 ${props => props.gutterHeight || props.theme.gutterHeight.value}px;
+      margin: 14px 0 ${props => props.gutterHeight || props.theme.gutterHeight}px;
       color: ${t(`lightText`)};
   ${({ light }) => {
     if (light) {
@@ -105,7 +105,7 @@ export default decorate(
       font-weight: 500;
     }
     .intro-text h3 {
-      margin: 10px 0 ${props => props.gutterHeight || props.theme.gutterHeight.value}px;
+      margin: 10px 0 ${props => props.gutterHeight || props.theme.gutterHeight}px;
       color: ${t(`lightText`)};
   ${({ light }) => {
     if (light) {
@@ -115,7 +115,7 @@ export default decorate(
       font-weight: 500;
     }
     p {
-      margin: 10px 0 ${props => props.gutterHeight || props.theme.gutterHeight.value / 2}px;
+      margin: 10px 0 ${props => props.gutterHeight || props.theme.gutterHeight / 2}px;
       &:last-child {
         margin-bottom: 0;
       }
