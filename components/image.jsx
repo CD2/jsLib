@@ -4,7 +4,11 @@ import { buildUrl } from "lib/utils/api_http"
 import invariant from "invariant"
 import { styled } from "lib/utils/theme"
 import decorate from "lib/utils/decorate"
+import { App } from 'utils/store'
+import { observable } from 'mobx'
+import { observer } from 'mobx-react'
 
+@observer
 export class Image extends React.Component {
   static propTypes = {
     alt: PropTypes.string,
@@ -33,7 +37,11 @@ export class Image extends React.Component {
     url: null,
   }
 
-  get url() {
+  componentDidMount(){
+    this.fetchUrl()
+  }
+
+  async fetchUrl() {
     const { uid, url, width, height, crop, size } = this.props
     if (url) return url
     const params = { uid, size }
@@ -45,15 +53,21 @@ export class Image extends React.Component {
     }
     if (width && height && !size) params.size = `${width * 2}x${height * 2}`
     if (crop) params.crop = true
-    return buildUrl([`/image`], params)
+    // return buildUrl([`/image`], params)
+    App.image(params).then(response=>
+      this.url = response.data.url
+    )
   }
+
+  @observable url
 
   render() {
     const { alt, background, children, defaultSrc, uid, embed, width, height } = this.props
 
     invariant(!(background && alt), `background images don't accept alt tags`)
-
+    if(!this.url) return ''
     let url = this.url
+
     if (!uid && !this.props.url) {
       url = defaultSrc
     }

@@ -3,6 +3,7 @@ import React from "react"
 import PropTypes from "prop-types"
 import { get } from "lib/utils/api_http"
 import STORAGE from "constants/storage"
+import { Session } from 'utils/store'
 
 export default class AuthProvider extends React.Component {
   static propTypes = {
@@ -69,7 +70,7 @@ export default class AuthProvider extends React.Component {
   }
 
   verify() {
-    return get(this.props.url).then(response => {
+    return Session.verifyCredentials().then(response => {
       this.storeAuth(response.data)
       this.setState({ auth: this.buildContext(response.data) })
     })

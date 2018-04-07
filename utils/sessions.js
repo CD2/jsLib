@@ -1,8 +1,9 @@
 import { post, del, put, clearApiHeaders } from "lib/utils/api_http"
 import { redirect } from "lib/utils/router"
+import { Session } from  'utils/store'
 
 export const signIn = params => {
-  return post(`/auth/sign_in`, params).then(response => response.data)
+  return Session.signIn(params).then(response => response.data)
 }
 
 const afterSignOut = () => {
@@ -11,7 +12,7 @@ const afterSignOut = () => {
 }
 
 export const signOut = () => {
-  return del(`/auth/sign_out`).
+  return Session.signOut().
     then(() => afterSignOut()).
     catch(() => afterSignOut())
 }
