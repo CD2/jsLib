@@ -2,7 +2,7 @@
 import React from "react"
 import PropTypes from "prop-types"
 import decorate from "lib/utils/decorate"
-import { styled } from "lib/utils/theme"
+import { styled, t } from "lib/utils/theme"
 import {
   FacebookShareButton,
   TwitterShareButton,
@@ -18,6 +18,7 @@ import {
 
 export class SocialButtons extends React.Component {
   static propTypes = {
+    borderRadius: PropTypes.string,
     className: PropTypes.string,
     round: PropTypes.bool,
     size: PropTypes.number,
@@ -61,6 +62,13 @@ export default decorate(
     .SocialMediaShareButton + .SocialMediaShareButton {
       margin-left: 4px;
     }
+
+    svg {
+      ${({ borderRadius }) => {
+        return `border-radius: ${borderRadius || `0px`};`
+      }
+    }
+
   `,
   SocialButtons,
 )
