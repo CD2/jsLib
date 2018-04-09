@@ -1,20 +1,13 @@
 import { post, del, put, clearApiHeaders } from "lib/utils/api_http"
 import { redirect } from "lib/utils/router"
-import { Session } from  'utils/store'
+import session from  'stores/session'
 
 export const signIn = params => {
-  return Session.signIn(params).then(response => response.data)
-}
-
-const afterSignOut = () => {
-  clearApiHeaders()
-  redirect(`/`, { reload: true })
+  return session.signIn(params).then(response => response.data)
 }
 
 export const signOut = () => {
-  return Session.signOut().
-    then(() => afterSignOut()).
-    catch(() => afterSignOut())
+  return session.signOut()
 }
 
 export const signUp = values => {
