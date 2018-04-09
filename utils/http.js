@@ -1,5 +1,6 @@
 import axios from "axios"
 import qs from "qs"
+import { memoize } from "cd2oolz"
 
 const request = (method, url, data) => {
   console.warn(`Non api request sending`)
@@ -17,7 +18,6 @@ export const get = (url, params = {}) => {
   return axios.get(url, { params })
 }
 export const post = (url, data = {}, { process = true } = {}) => {
-  if (process) data = objectToFormData(data)
   return request(`post`, url, data)
 }
 export const del = (url, data = {}) => request(`delete`, url, data)
@@ -47,14 +47,4 @@ export const getHostWithoutSubdomain = () => {
   url = url.split(`.`)
   url = url[url.length - 1]
   return `${url}${last_thing}`
-}
-
-let cache = {}
-function memoize(func) {
-  return (arg)=>{
-    if(!(arg in cache)){
-      cache[arg] = func(arg)
-    }
-    return cache[arg]
-  };
 }

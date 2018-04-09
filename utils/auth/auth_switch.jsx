@@ -1,10 +1,11 @@
 import React from "react"
 import PropTypes from "prop-types"
-import { Switch } from "react-router-dom"
+import { Switch, withRouter } from "react-router-dom"
 import { observer } from "mobx-react"
 import currentUser from "stores/currentUser"
 import { withAuth } from "./with_auth"
 
+@withRouter
 @withAuth
 @observer
 export default class AuthSwitch extends React.Component {
@@ -15,6 +16,7 @@ export default class AuthSwitch extends React.Component {
 
   componentDidUpdate() {
     currentUser.fetchAllData(true)
+    console.log(currentUser.user_type)
   }
 
   render() {

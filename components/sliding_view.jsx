@@ -1,5 +1,5 @@
 import React from "react"
-import debounce from "lodash/debounce"
+import {debounce} from 'cd2oolz'
 import PropTypes from "prop-types"
 import { observer } from "mobx-react"
 import { observable, action, computed } from "mobx"
@@ -19,7 +19,7 @@ export class SlidingView extends React.Component {
 
   componentDidMount() {
     this.updateViewWidth()
-    window.addEventListener(`resize`, debounce(this.updateViewWidth))
+    window.addEventListener(`resize`, debounce(1000)(this.updateViewWidth))
   }
 
   @action

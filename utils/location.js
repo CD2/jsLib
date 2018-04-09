@@ -1,5 +1,5 @@
 import { get } from "lib/utils/http"
-import memoize from "lodash/memoize"
+import { memoize } from "cd2oolz"
 
 export function hasGeolocation() {
   return !!navigator.geolocation
