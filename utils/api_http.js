@@ -20,7 +20,8 @@ export const getApiHeaders = () => {
 
 export const setApiHeaders = headers => {
   if (headers.hasOwnProperty(`access-token`)) {
-    if(headers && getApiHeaders() && headers.expiry > getApiHeaders().expiry){
+    const { expiry: currentExpiry } = getApiHeaders()
+    if(!currentExpiry || headers.expiry > currentExpiry){
       api_auth_keys.forEach(key => STORAGE.setItem(`${key_prefix}${key}`, headers[key]))
     }
   }
