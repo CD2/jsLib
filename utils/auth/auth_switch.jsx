@@ -16,7 +16,6 @@ export default class AuthSwitch extends React.Component {
 
   componentDidUpdate() {
     currentUser.fetchAllData(true)
-    console.log(currentUser.user_type)
   }
 
   render() {
