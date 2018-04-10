@@ -37,7 +37,7 @@ export class List extends React.Component {
   }
 
   render() {
-    const { className, children, separator, spacing, itemClass = `` } = this.props
+    const { className, children, separator, spacing, style, itemClass = `` } = this.props
     const mappedChildren = React.Children.map(children, (child, i) => {
       if (!child) return
       let childClass = child.props.className || ``
@@ -53,7 +53,7 @@ export class List extends React.Component {
       return child
     })
 
-    return <div className={className}>{mappedChildren}</div>
+    return <div className={className} style={style}>{mappedChildren}</div>
   }
 }
 export default List
