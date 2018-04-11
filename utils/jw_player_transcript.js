@@ -77,7 +77,7 @@ export default class TranscriptService {
     if (!global_chapterUrl) return
     get(global_chapterUrl).then(({ data: chapters }) => {
       if (chapters) {
-        const t = chapters.split(`\n\n`)
+        const t = chapters.split(/\n\r?\n/)
         t.shift()
         for (let i = 0; i < t.length; i++) {
           const c = this.parse(t[i])
@@ -125,7 +125,7 @@ export default class TranscriptService {
     get(global_captionUrl).then(({ data: captions }) => {
       window.captions = captions
       if (!captions) return
-      const t = captions.split(`\n\n`)
+      const t = captions.split(/\n\r?\n/)
       t.shift()
       let h = `<p>`
       let s = 0
