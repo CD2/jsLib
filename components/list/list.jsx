@@ -28,6 +28,7 @@ export class List extends React.Component {
     itemClass: PropTypes.string,
     separator: PropTypes.bool,
     spacing: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    style: PropTypes.object,
   }
 
   static defaultProps = {
