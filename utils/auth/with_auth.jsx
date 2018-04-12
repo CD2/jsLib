@@ -2,6 +2,7 @@ import React from "react"
 import PropTypes from "prop-types"
 import {observer, inject} from 'mobx-react'
 import currentUser from 'stores/currentUser'
+import currentStore from 'stores/currentStore'
 import LoadingSpinner from "../../../lib/components/loading_spinner"
 
 @inject('session')
@@ -13,6 +14,7 @@ export const withAuth = Component =>
     async componentDidMount() {
       await this.props.session.verifyCredentials()
       currentUser.fetchAllData()
+      currentStore.fetchAllData()
     }
 
     get sessionParams() {

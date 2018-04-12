@@ -4,7 +4,7 @@ import { buildUrl } from "lib/utils/api_http"
 import invariant from "invariant"
 import { styled } from "lib/utils/theme"
 import decorate from "lib/utils/decorate"
-import { App } from 'utils/store'
+import App from 'models/App'
 import { observable } from 'mobx'
 import { observer } from 'mobx-react'
 
