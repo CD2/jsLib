@@ -10,9 +10,10 @@ import Result from "./Result"
 
 export class ResultsArea extends React.Component {
   static propTypes = {
+    anyResults: PropTypes.bool,
     className: PropTypes.string,
     models: PropTypes.object.isRequired,
-    noResultsText: PropTypes.any,
+    noResultsText: PropTypes.string,
     onClick: PropTypes.func,
     query: PropTypes.string,
     results: PropTypes.array,
@@ -81,23 +82,24 @@ export class ResultsArea extends React.Component {
     )
   }
 
-  renderEmptyResults() {
-    return (
-      <div className="search-dropdown__container">
-        <div className="search-dropdown search-dropdown--no-results">Sorry, no results found</div>
-      </div>
+  renderListItems() {
+    const { anyResults, results, noResultsText } = this.props
+    if (anyResults) return results.map(this.renderResult)
+    return(
+      <List.Item>
+        { noResultsText ? noResultsText : <a className="search-dropdown__result">Sorry, no results found</a>}
+      </List.Item>
     )
   }
 
   setRef = elem => (this.elem = elem)
 
   render() {
-    const { results, className } = this.props
-    if (results.length === 0) return this.renderEmptyResults()
+    const { className } = this.props
     return (
       <div className={className} ref={this.setRef}>
         <List spacing="none" className="search-dropdown" separator>
-          {results.map(this.renderResult)}
+          {this.renderListItems()}
         </List>
       </div>
     )
@@ -122,7 +124,7 @@ export default decorate(
         text-overflow: ellipsis;
         overflow: hidden;
         display: block;
-        color: ${t(`text`)};
+        color: ${t(`text`)} !important;
 
         p { 
           margin: 0 
