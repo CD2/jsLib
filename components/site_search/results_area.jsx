@@ -13,9 +13,9 @@ export class ResultsArea extends React.Component {
     anyResults: PropTypes.bool,
     className: PropTypes.string,
     models: PropTypes.object.isRequired,
-    noResultsText: PropTypes.string,
     onClick: PropTypes.func,
     query: PropTypes.string,
+    renderNoResults: PropTypes.function,
     results: PropTypes.array,
   }
 
@@ -83,11 +83,11 @@ export class ResultsArea extends React.Component {
   }
 
   renderListItems() {
-    const { anyResults, results, noResultsText } = this.props
+    const { anyResults, results, renderNoResults, query } = this.props
     if (anyResults) return results.map(this.renderResult)
     return(
       <List.Item>
-        { noResultsText ? noResultsText : <a className="search-dropdown__result">Sorry, no results found</a>}
+        { renderNoResults ? renderNoResults(query) : <a className="search-dropdown__result">Sorry, no results found</a>}
       </List.Item>
     )
   }

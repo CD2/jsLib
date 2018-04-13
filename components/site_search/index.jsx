@@ -21,8 +21,8 @@ export class SiteSearch extends React.Component {
       pathname: PropTypes.string,
     }),
     models: PropTypes.object.isRequired,
-    noResultsText: PropTypes.any,
     placeholder: PropTypes.string,
+    renderNoResults: PropTypes.function,
   }
 
   static defaultProps = {
@@ -104,7 +104,7 @@ export class SiteSearch extends React.Component {
               query={query}
               models={this.props.models}
               anyResults={this.anyResults}
-              noResultsText={this.props.noResultsText}
+              renderNoResults={this.props.renderNoResults}
               onClick={this.handleClick}
             />
           )}
