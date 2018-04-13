@@ -12,6 +12,7 @@ export class ResultsArea extends React.Component {
   static propTypes = {
     className: PropTypes.string,
     models: PropTypes.object.isRequired,
+    noResultsText: PropTypes.any,
     onClick: PropTypes.func,
     query: PropTypes.string,
     results: PropTypes.array,

@@ -83,7 +83,7 @@ export class SiteSearch extends React.Component {
   }
 
   render() {
-    const { open, results, query, searchValue } = this
+    const { open, results, query, searchValue, noResultsText } = this
     return (
       <div className={`${this.props.className} app-bar__search`} style={{ position: `relative` }}>
         <Form>
@@ -101,6 +101,8 @@ export class SiteSearch extends React.Component {
               results={results}
               query={query}
               models={this.props.models}
+              anyResults={this.anyResults}
+              noResultsText={noResultsText}
               onClick={this.handleClick}
             />
           )}
