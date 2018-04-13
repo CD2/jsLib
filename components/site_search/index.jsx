@@ -2,7 +2,7 @@ import React from "react"
 import PropTypes from "prop-types"
 import { withRouter } from "react-router-dom"
 import { observer } from "mobx-react"
-import { observable, action } from "mobx"
+import { observable, action, computed } from "mobx"
 import { get } from "lib/utils/api_http"
 import Overlay from "lib/components/overlay"
 import decorate from "lib/utils/decorate"
@@ -60,7 +60,9 @@ export class SiteSearch extends React.Component {
     this.open = false
   }
 
-  anyResults = () => this.results && this.results.length > 0
+  @computed get anyResults() {
+    return this.results && this.results.length > 0
+  }
 
   @action
   handleSearchChange = e => {
@@ -95,15 +97,15 @@ export class SiteSearch extends React.Component {
             onFocus={this.handleFocus}
           />
           {open && <Overlay belowAppBar clickThrough onClick={this.handleBlur} />}
-          {open &&
-            this.anyResults() && (
-              <ResultsArea
-                results={results}
-                query={query}
-                models={this.props.models}
-                onClick={this.handleClick}
-              />
-            )}
+          {open && query.length > 0 && (
+            <ResultsArea
+              results={results}
+              query={query}
+              models={this.props.models}
+              anyResults={this.anyResults}
+              onClick={this.handleClick}
+            />
+          )}
         </Form>
       </div>
     )
