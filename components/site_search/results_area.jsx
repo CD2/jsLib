@@ -13,7 +13,7 @@ export class ResultsArea extends React.Component {
     anyResults: PropTypes.bool,
     className: PropTypes.string,
     models: PropTypes.object.isRequired,
-    noResultsText: PropTypes.string,
+    noResultsText: PropTypes.any,
     onClick: PropTypes.func,
     query: PropTypes.string,
     results: PropTypes.array,
