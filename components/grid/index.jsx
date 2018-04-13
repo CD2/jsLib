@@ -2,7 +2,7 @@ import React from "react"
 import PropTypes from "prop-types"
 import Item from "./item"
 import { styled } from "lib/utils/theme"
-
+import { snakeCase } from 'help-my-strings'
 @styled`
   display: flex;
   flex-wrap: wrap;

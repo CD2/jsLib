@@ -41,4 +41,4 @@ export class ListSimple extends React.Component {
     )
   }
 }
-export default List
+export default ListSimple
