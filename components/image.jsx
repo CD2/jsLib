@@ -54,9 +54,13 @@ export class Image extends React.Component {
     if (width && height && !size) params.size = `${width * 2}x${height * 2}`
     if (crop) params.crop = true
     // return buildUrl([`/image`], params)
-    App.image(params).then(response=>
-      this.url = response.data.url
-    )
+    if(uid) {
+      App.image(params, { uid: uid, size: size, crop: crop }).then(response =>
+        this.url = response.data.url
+      )
+    } else {
+      this.url = ''
+    }
   }
 
   @observable url
@@ -65,7 +69,7 @@ export class Image extends React.Component {
     const { alt, background, children, defaultSrc, uid, embed, width, height } = this.props
 
     invariant(!(background && alt), `background images don't accept alt tags`)
-    if(!this.url) return ''
+    // if(!this.url) return 'no url'
     let url = this.url
 
     if (!uid && !this.props.url) {
