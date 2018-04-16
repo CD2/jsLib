@@ -21,8 +21,8 @@ export const withAuth = Component =>
       return {
         subdomain: this.props.session.subdomain,
         user_id: this.props.session.userId,
-        school_id: this.props.session.school_id,
-        school_name: this.props.session.school_name
+        store_id: this.props.session.store_id,
+        store_name: this.props.session.store_name
       }
     }
 
