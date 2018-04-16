@@ -50,7 +50,7 @@ export class RichTextBox extends React.Component {
     const { editorState } = this.state
     return (
       <div className={this.props.className}>
-        <label>{this.titleLize(this.props.field)}</label>
+        <label>{this.titleLize(this.props.title ? this.props.title : this.props.field)}</label>
         <div className={`rich-text ${this.props.field}`}>
           <Editor
             editorState={editorState}
