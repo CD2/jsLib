@@ -37,6 +37,7 @@ export class PasswordWithHelpField extends React.Component {
     label: PropTypes.oneOfType([PropTypes.node, PropTypes.bool]),
     name: PropTypes.string.isRequired,
     onChange: PropTypes.func,
+    otherPlaceholder: PropTypes.string,
     placeholder: PropTypes.string,
     type: PropTypes.string,
   }
@@ -210,7 +211,7 @@ export class PasswordWithHelpField extends React.Component {
             className="field"
             type="password"
             value={this.getConfirmationValue()}
-            placeholder="Password Confirmation"
+            placeholder={this.props.otherPlaceholder ? this.props.otherPlaceholder : `Password Confirmation`}
             onChange={this.handleConfirmationChange}
           />
         </div>
