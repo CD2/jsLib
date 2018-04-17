@@ -7,6 +7,7 @@ import decorate from "lib/utils/decorate"
 import App from 'models/App'
 import { observable } from 'mobx'
 import { observer } from 'mobx-react'
+import API_HOST from 'constants/api_host'
 
 @observer
 export class Image extends React.Component {
@@ -54,9 +55,9 @@ export class Image extends React.Component {
     if (width && height && !size) params.size = `${width * 2}x${height * 2}`
     if (crop) params.crop = true
     // return buildUrl([`/image`], params)
-    App.image(params).then(response=>
-      this.url = response.data.url
-    )
+    App.image(params).then(response=> {
+      this.url = API_HOST + response.data.url
+    })
   }
 
   @observable url
