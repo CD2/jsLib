@@ -2,7 +2,7 @@ import React from "react"
 import PropTypes from "prop-types"
 import Item from "./item"
 import { styled } from "lib/utils/theme"
-import { snakeCase } from 'help-my-strings'
+import { snakeCase } from "help-my-strings"
 @styled`
   display: flex;
   flex-wrap: wrap;
@@ -58,7 +58,9 @@ class Grid extends React.Component {
 
       const colSpan = child.props.colSpan
         ? child.props.colSpan === `fill`
-          ? columns - takenColumns <= 0 ? columns : columns - takenColumns
+          ? columns - takenColumns <= 0
+            ? columns
+            : columns - takenColumns
           : child.props.colSpan
         : 1
 

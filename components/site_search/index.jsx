@@ -61,7 +61,8 @@ export class SiteSearch extends React.Component {
     this.open = false
   }
 
-  @computed get anyResults() {
+  @computed
+  get anyResults() {
     return this.results && this.results.length > 0
   }
 
@@ -98,7 +99,8 @@ export class SiteSearch extends React.Component {
             onFocus={this.handleFocus}
           />
           {open && <Overlay belowAppBar clickThrough onClick={this.handleBlur} />}
-          {open && query.length > 0 && (
+          {open &&
+            query.length > 0 && (
             <ResultsArea
               results={results}
               query={query}

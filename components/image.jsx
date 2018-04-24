@@ -4,9 +4,9 @@ import { buildUrl } from "lib/utils/api_http"
 import invariant from "invariant"
 import { styled } from "lib/utils/theme"
 import decorate from "lib/utils/decorate"
-import App from 'models/App'
-import { observable } from 'mobx'
-import { observer } from 'mobx-react'
+import App from "models/App"
+import { observable } from "mobx"
+import { observer } from "mobx-react"
 
 @observer
 export class Image extends React.Component {
@@ -37,7 +37,7 @@ export class Image extends React.Component {
     url: null,
   }
 
-  componentDidMount(){
+  componentDidMount() {
     this.fetchUrl()
   }
 
@@ -54,12 +54,12 @@ export class Image extends React.Component {
     if (width && height && !size) params.size = `${width * 2}x${height * 2}`
     if (crop) params.crop = true
     // return buildUrl([`/image`], params)
-    if(uid) {
-      App.image(params, { uid: uid, size: size, crop: crop }).then(response =>
-        this.url = response.data.url
+    if (uid) {
+      App.image(params, { uid: uid, size: size, crop: crop }).then(
+        response => (this.url = response.data.url),
       )
     } else {
-      this.url = ''
+      this.url = ``
     }
   }
 

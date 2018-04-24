@@ -80,6 +80,7 @@ export default decorate(
       border-radius: ${t(`borderRadii.button`)};
       text-align: center;
       font-weight: ${t(`weights.button`)};
+      margin: 6px 6px 0 0;
 
       &.common {
         background-color: ${t(`primary`)};
@@ -247,9 +248,6 @@ export default decorate(
       }
 
     }
-    + .btn {
-      margin-left: 6px;
-    }
 
     ${({ wide }) => {
     if (wide) {
@@ -275,9 +273,9 @@ export default decorate(
         &:hover{
           background-color: #2c2d2d;
         }
-      `
+`
     }
   }}
-  `,
+`,
   Button,
 )

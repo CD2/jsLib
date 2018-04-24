@@ -7,7 +7,8 @@ export const redirect = (url, { reload = false, state = {}} = {}) => {
 }
 
 export const renderComponent = (Component, default_props = {}) => {
-  return loc => { //eslint-disable-line
+  return loc => {
+    //eslint-disable-line
     const { params } = loc.match
     Object.entries(params).forEach(([key, value]) => {
       const int_param = parseInt(value, 10)

@@ -5,7 +5,7 @@ import { EditorState, convertToRaw, ContentState, convertFromHTML } from "draft-
 import { Editor } from "react-draft-wysiwyg"
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css"
 import decorate from "../../../utils/decorate"
-import {stateToHTML} from 'draft-js-export-html';
+import { stateToHTML } from "draft-js-export-html"
 
 export class RichTextBox extends React.Component {
   static propTypes = {
@@ -39,14 +39,16 @@ export class RichTextBox extends React.Component {
   }
 
   handleEditorStateChange = editorState => {
-    this.setState({ //eslint-disable-line
+    this.setState({
+      //eslint-disable-line
       editorState,
     })
     const { onChange } = this.props
-    const content = stateToHTML(editorState.getCurrentContent()).split(/<br>\s+<br>/gm).join('</p><p>')
+    const content = stateToHTML(editorState.getCurrentContent()).
+      split(/<br>\s+<br>/gm).
+      join(`</p><p>`)
     if (onChange) onChange(content)
   }
-
 
   render() {
     const { editorState } = this.state

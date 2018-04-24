@@ -12,10 +12,7 @@ export class SectionIntro extends React.Component {
     children: PropTypes.node,
     className: PropTypes.string,
     heading: PropTypes.any,
-    light: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.bool,
-    ]),
+    light: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
     linkPath: PropTypes.string,
     noPad: PropTypes.bool,
     style: PropTypes.object,
@@ -75,7 +72,7 @@ export default decorate(
     const color = light ? theme.background : theme.lightText
     return `
       color: ${color};
-    `
+`
   }}
   ${({ light }) => {
     if (light) {
@@ -131,6 +128,6 @@ export default decorate(
     .btn {
       margin-top: 16px;
     }
-  `,
+`,
   SectionIntro,
 )

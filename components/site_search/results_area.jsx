@@ -85,9 +85,13 @@ export class ResultsArea extends React.Component {
   renderListItems() {
     const { anyResults, results, renderNoResults, query } = this.props
     if (anyResults) return results.map(this.renderResult)
-    return(
+    return (
       <List.Item>
-        { renderNoResults ? renderNoResults(query) : <a className="search-dropdown__result">Sorry, no results found</a>}
+        {renderNoResults ? (
+          renderNoResults(query)
+        ) : (
+          <a className="search-dropdown__result">Sorry, no results found</a>
+        )}
       </List.Item>
     )
   }

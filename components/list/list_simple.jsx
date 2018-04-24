@@ -34,11 +34,7 @@ export class ListSimple extends React.Component {
 
   render() {
     const { children, className = `` } = this.props
-    return (
-      <div className={className}>
-        {children}
-      </div>
-    )
+    return <div className={className}>{children}</div>
   }
 }
 export default ListSimple

@@ -65,10 +65,9 @@ export default decorate(
 
     svg {
       ${({ borderRadius }) => {
-        return `border-radius: ${borderRadius || `0px`};`
-      }
-    }
+    return `border-radius: ${borderRadius || `0px`};`
+  }}
 
-  `,
+`,
   SocialButtons,
 )
