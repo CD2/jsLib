@@ -97,18 +97,19 @@ export class RichTextBox extends React.Component {
 
     return(
       <div style={{ display: true ? `block` : `none` }}>
-        <FormFor
-          record={this.imageRecord}
-          afterSubmit={() => this.afterImageSubmit}
-        >
-          <Input field="image" type="image" />
-          <Submit />
-        </FormFor>
+
       
       </div>
     )
   }
 
+//   <FormFor
+//   record={this.imageRecord}
+//   afterSubmit={() => this.afterImageSubmit}
+// >
+//   <Input field="image" type="image" />
+//   <Submit />
+// </FormFor>
 
   render() {
     const { editorState } = this.state
