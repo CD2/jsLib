@@ -77,9 +77,13 @@ export class RichTextBox extends React.Component {
   }
 
   async processUpload(file) {
-    // this.imageRecord = Image.new()
-    // this.imageRecord.image = file
-    // await this.imageRecord.save()
+    this.imageRecord = Image.new()
+
+    this.imageRecord.image = file
+    setTimeout(()=>{
+      this.imageRecord.save()
+    }, 1000)
+
 
     // Image.createRecord({ image: file }).then(response => {
     //   debugger
@@ -91,24 +95,24 @@ export class RichTextBox extends React.Component {
     this.imageRecord.image = file
 
   }
-
-  renderImageForm() {
-    
-
-    return(
-      <div style={{ display: true ? `block` : `none` }}>
-        <FormFor
-          record={this.imageRecord}
-          afterSubmit={() => this.afterImageSubmit}
-        >
-          <Input field="image" type="image" />
-          <Submit />
-        </FormFor>
-      
-      </div>
-    )
-  }
-
+  //
+  // renderImageForm() {
+  //
+  //
+  //   return(
+  //     <div style={{ display: true ? `block` : `none` }}>
+  //       <FormFor
+  //         record={this.imageRecord}
+  //         afterSubmit={() => this.afterImageSubmit}
+  //       >
+  //         <Input field="image" type="image" />
+  //         <Submit />
+  //       </FormFor>
+  //
+  //     </div>
+  //   )
+  // }
+  //
 
   render() {
     const { editorState } = this.state
@@ -133,10 +137,10 @@ export class RichTextBox extends React.Component {
             onEditorStateChange={this.handleEditorStateChange}
           />
         </div>
-        {ReactDOM.createPortal(
-          this.renderImageForm(),
-          document.getElementById(`portal-area`)
-        )}
+        {/*{ReactDOM.createPortal(*/}
+          {/*this.renderImageForm(),*/}
+          {/*document.getElementById(`portal-area`)*/}
+        {/*)}*/}
       </div>
     )
   }
