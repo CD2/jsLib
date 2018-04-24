@@ -4,7 +4,7 @@ import API_ROUTE from "constants/api_host"
 import STORAGE from "constants/storage"
 import qs from "qs"
 
-const api_auth_keys = [`access-token`, `client`, `expiry`, `token-type`, `uid`]
+const api_auth_keys = [`access-token`, `client`, `expiry`, `provider`, `uid`]
 const key_prefix = `auth_`
 
 export const getApiHeaders = () => {
