@@ -7,7 +7,7 @@ import { Editor } from "react-draft-wysiwyg"
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css"
 import decorate from "../../../utils/decorate"
 import { stateToHTML } from 'draft-js-export-html';
-import Image from "models/Image"
+// import Image from "models/Image"
 import { observer } from "mobx-react"
 import { observable } from "mobx"
 import { FormFor, Submit, Input } from "@cd2/cord-react-dom"
@@ -55,10 +55,6 @@ export class RichTextBox extends React.Component {
 
   // ######
 
-  componentDidMount() {
-    this.imageRecord = Image.withAttributes(Image.formFields).new()
-  }
-
   @observable imageRecord
 
   afterImageSubmit = () => {
@@ -77,12 +73,12 @@ export class RichTextBox extends React.Component {
   }
 
   async processUpload(file) {
-    this.imageRecord = Image.new()
+    // this.imageRecord = Image.new()
 
-    this.imageRecord.image = file
-    setTimeout(()=>{
-      this.imageRecord.save()
-    }, 1000)
+    // this.imageRecord.image = file
+    // setTimeout(()=>{
+    //   this.imageRecord.save()
+    // }, 1000)
 
 
     // Image.createRecord({ image: file }).then(response => {
@@ -92,10 +88,8 @@ export class RichTextBox extends React.Component {
     // this.imageRecord = await Image.withAttributes(Image.formFields).new()
     // this.imageRecord.image = file
 
-    this.imageRecord.image = file
-
   }
-  //
+  
   // renderImageForm() {
   //
   //
