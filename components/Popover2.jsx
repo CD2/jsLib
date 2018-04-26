@@ -33,7 +33,7 @@ export default class Popover2 extends React.Component {
   
   showStyle = {
     overflow: `initial`,
-    maxHeight: `initial`,
+    maxHeight: 1111,
     opacity: 1,
     transform: `scale(1)`,
   }
