@@ -7,10 +7,10 @@ import { Editor } from "react-draft-wysiwyg"
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css"
 import decorate from "../../../utils/decorate"
 import { stateToHTML } from 'draft-js-export-html';
-import Image from "models/Image"
 import { observer } from "mobx-react"
 import { observable } from "mobx"
 import { FormFor, Submit, Input } from "@cd2/cord-react-dom"
+// import Image from "models/Image"
 
 
 export class RichTextBox extends React.Component {
@@ -55,46 +55,46 @@ export class RichTextBox extends React.Component {
 
   // ######
 
-  componentDidMount() {
-    this.imageRecord = Image.withAttributes(Image.formFields).new()
-  }
+  // componentDidMount() {
+  //   this.imageRecord = Image.withAttributes(Image.formFields).new()
+  // }
 
-  @observable imageRecord
+  // @observable imageRecord
 
-  afterImageSubmit = () => {
-    debugger
-  }
+  // afterImageSubmit = () => {
+  //   debugger
+  // }
 
   uploadImageCallBack = (file) => {
 
     return new Promise(
       (resolve, reject) => {
 
-        this.processUpload(file)
+        // this.processUpload(file)
 
       }
     )
   }
 
-  async processUpload(file) {
-    this.imageRecord = Image.new()
+  // async processUpload(file) {
+  //   this.imageRecord = Image.new()
 
-    this.imageRecord.image = file
-    setTimeout(()=>{
-      this.imageRecord.save()
-    }, 1000)
+  //   this.imageRecord.image = file
+  //   setTimeout(()=>{
+  //     this.imageRecord.save()
+  //   }, 1000)
 
 
-    // Image.createRecord({ image: file }).then(response => {
-    //   debugger
-    // })
+  //   // Image.createRecord({ image: file }).then(response => {
+  //   //   debugger
+  //   // })
 
-    // this.imageRecord = await Image.withAttributes(Image.formFields).new()
-    // this.imageRecord.image = file
+  //   // this.imageRecord = await Image.withAttributes(Image.formFields).new()
+  //   // this.imageRecord.image = file
 
-    this.imageRecord.image = file
+  //   this.imageRecord.image = file
 
-  }
+  // }
   //
   // renderImageForm() {
   //
