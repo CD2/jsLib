@@ -29,6 +29,7 @@ export default class Popover2 extends React.Component {
     transform: `scale(0.95)`,
     overflow: `hidden`,
     maxHeight: 0,
+    zIndex: 3,
   }
   
   showStyle = {
