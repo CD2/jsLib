@@ -235,6 +235,18 @@ export default decorate(
           filter: brightness(1.02);
         }
       }
+      &.active {
+        background: ${t(`primary`)};
+        color: ${t(`white`)};
+      }
+      &.inactive {
+        background: #cecece;
+        color: ${t(`lightText`)};
+        &:hover {
+          background: #d2d2d2;
+          filter: brightness(1);
+        }
+      }
       &.menu {
         border-radius: 0;
         color: ${t(`text`)};
