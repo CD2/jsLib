@@ -12,12 +12,16 @@ export default class Popover2 extends React.Component {
     className: PropTypes.string,
     height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     show: PropTypes.bool,
+    triangleHeight: PropTypes.number,
+    triangleWidth: PropTypes.number,
     width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   }
 
   static defaultProps = {
     width: 200,
     height: 175,
+    triangleHeight: 10,
+    triangleWidth: 8,
   }
 
   hiddenStyle = {
@@ -44,7 +48,7 @@ export default class Popover2 extends React.Component {
     width: 0,
     height: 0,
     borderStyle: `solid`,
-    borderWidth: `0 8px 10px 8px`,
+    borderWidth: `0 ${this.props.triangleWidth}px ${this.props.triangleHeight}px ${this.props.triangleWidth}px`,
     borderColor: `transparent transparent white transparent`,
   }
 
