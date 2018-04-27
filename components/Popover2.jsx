@@ -8,6 +8,7 @@ import theme from "styles/theme"
 export default class Popover2 extends React.Component {
 
   static propTypes = {
+    backgroundColor: PropTypes.string,
     children: PropTypes.node,
     className: PropTypes.string,
     height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
@@ -22,6 +23,7 @@ export default class Popover2 extends React.Component {
     height: 175,
     triangleHeight: 10,
     triangleWidth: 8,
+    backgroundColor: `white`,
   }
 
   hiddenStyle = {
@@ -49,11 +51,11 @@ export default class Popover2 extends React.Component {
     height: 0,
     borderStyle: `solid`,
     borderWidth: `0 ${this.props.triangleWidth}px ${this.props.triangleHeight}px ${this.props.triangleWidth}px`,
-    borderColor: `transparent transparent white transparent`,
+    borderColor: `transparent transparent ${this.props.backgroundColor} transparent`,
   }
 
   containerStyle = {
-    backgroundColor: `white`,
+    backgroundColor: `${this.props.backgroundColor}`,
     maxHeight: this.props.height,
     overflowY: `auto`,
     boxShadow: theme.shadow5,
