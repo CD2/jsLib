@@ -80,7 +80,7 @@ export default decorate(
       border-radius: ${t(`borderRadii.button`)};
       text-align: center;
       font-weight: ${t(`weights.button`)};
-      margin: 6px 6px 0 0;
+      margin: 0 6px 6px 0;
 
       &.common {
         background-color: ${t(`primary`)};
