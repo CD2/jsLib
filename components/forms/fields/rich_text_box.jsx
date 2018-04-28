@@ -1,17 +1,16 @@
 import React from "react"
-import ReactDOM from 'react-dom'
+import ReactDOM from "react-dom"
 import PropTypes from "prop-types"
 import { styled } from "../../../utils/theme"
 import { EditorState, convertToRaw, ContentState, convertFromHTML } from "draft-js"
 import { Editor } from "react-draft-wysiwyg"
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css"
 import decorate from "../../../utils/decorate"
-import { stateToHTML } from 'draft-js-export-html';
+import { stateToHTML } from "draft-js-export-html"
 import { observer } from "mobx-react"
 import { observable } from "mobx"
 import { FormFor, Submit, Input } from "@cd2/cord-react-dom"
 // import Image from "models/Image"
-
 
 export class RichTextBox extends React.Component {
   static propTypes = {
@@ -45,11 +44,16 @@ export class RichTextBox extends React.Component {
   }
 
   handleEditorStateChange = editorState => {
-    this.setState({ //eslint-disable-line
+    this.setState({
+      //eslint-disable-line
       editorState,
     })
     const { onChange } = this.props
-    const content = stateToHTML(editorState.getCurrentContent()).split(/<br>\s+<br>/gm).join('</p><p>')
+    const currentContent = stateToHTML(editorState.getCurrentContent())
+    const content = currentContent
+      .split(/<br>\s+<br>/gm)
+      .join("</p><p>")
+      .replace(/\n/g, "")
     if (onChange) onChange(content)
   }
 
@@ -65,15 +69,10 @@ export class RichTextBox extends React.Component {
   //   debugger
   // }
 
-  uploadImageCallBack = (file) => {
-
-    return new Promise(
-      (resolve, reject) => {
-
-        // this.processUpload(file)
-
-      }
-    )
+  uploadImageCallBack = file => {
+    return new Promise((resolve, reject) => {
+      // this.processUpload(file)
+    })
   }
 
   // async processUpload(file) {
@@ -83,7 +82,6 @@ export class RichTextBox extends React.Component {
   //   setTimeout(()=>{
   //     this.imageRecord.save()
   //   }, 1000)
-
 
   //   // Image.createRecord({ image: file }).then(response => {
   //   //   debugger
@@ -132,14 +130,17 @@ export class RichTextBox extends React.Component {
               textAlign: { inDropdown: true },
               link: { inDropdown: true },
               history: { inDropdown: true },
-              image: { uploadCallback: this.uploadImageCallBack, alt: { present: true, mandatory: true } },
+              image: {
+                uploadCallback: this.uploadImageCallBack,
+                alt: { present: true, mandatory: true },
+              },
             }}
             onEditorStateChange={this.handleEditorStateChange}
           />
         </div>
         {/*{ReactDOM.createPortal(*/}
-          {/*this.renderImageForm(),*/}
-          {/*document.getElementById(`portal-area`)*/}
+        {/*this.renderImageForm(),*/}
+        {/*document.getElementById(`portal-area`)*/}
         {/*)}*/}
       </div>
     )
