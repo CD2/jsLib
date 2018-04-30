@@ -7,12 +7,10 @@ import { Editor } from "react-draft-wysiwyg"
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css"
 import decorate from "../../../utils/decorate"
 import { stateToHTML } from 'draft-js-export-html';
-// import Image from "models/Image"
 import { observer } from "mobx-react"
 import { observable } from "mobx"
 import { FormFor, Submit, Input } from "@cd2/cord-react-dom"
-
-
+import Image from 'models/Image'
 export class RichTextBox extends React.Component {
   static propTypes = {
     className: PropTypes.string,
@@ -57,56 +55,19 @@ export class RichTextBox extends React.Component {
 
   @observable imageRecord
 
-  afterImageSubmit = () => {
-    debugger
-  }
-
   uploadImageCallBack = (file) => {
 
     return new Promise(
-      (resolve, reject) => {
-
-        this.processUpload(file)
-
+      async (resolve, reject) => {
+        this.imageRecord = Image.withAttributes([`url`]).new({ image: file })
+        setTimeout(async () => {
+          await this.imageRecord.save()
+          await this.imageRecord.reload()
+          this.imageRecord.url ? resolve({ data: { link: this.imageRecord.url, alt: `image` }}) : reject(`some error`)
+        }, 421)
       }
     )
   }
-
-  async processUpload(file) {
-    // this.imageRecord = Image.new()
-
-    // this.imageRecord.image = file
-    // setTimeout(()=>{
-    //   this.imageRecord.save()
-    // }, 1000)
-
-
-    // Image.createRecord({ image: file }).then(response => {
-    //   debugger
-    // })
-
-    // this.imageRecord = await Image.withAttributes(Image.formFields).new()
-    // this.imageRecord.image = file
-
-  }
-  
-  // renderImageForm() {
-  //
-  //
-  //   return(
-  //     <div style={{ display: true ? `block` : `none` }}>
-  //       <FormFor
-  //         record={this.imageRecord}
-  //         afterSubmit={() => this.afterImageSubmit}
-  //       >
-  //         <Input field="image" type="image" />
-  //         <Submit />
-  //       </FormFor>
-  //
-  //     </div>
-  //   )
-  // }
-  //
 
   render() {
     const { editorState } = this.state
@@ -126,15 +87,11 @@ export class RichTextBox extends React.Component {
               textAlign: { inDropdown: true },
               link: { inDropdown: true },
               history: { inDropdown: true },
-              image: { uploadCallback: this.uploadImageCallBack, alt: { present: true, mandatory: true } },
+              image: { uploadCallback: this.uploadImageCallBack },
             }}
             onEditorStateChange={this.handleEditorStateChange}
           />
         </div>
-        {/*{ReactDOM.createPortal(*/}
-          {/*this.renderImageForm(),*/}
-          {/*document.getElementById(`portal-area`)*/}
-        {/*)}*/}
       </div>
     )
   }

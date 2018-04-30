@@ -80,7 +80,7 @@ export default decorate(
       border-radius: ${t(`borderRadii.button`)};
       text-align: center;
       font-weight: ${t(`weights.button`)};
-      margin: 6px 6px 0 0;
+      margin: 0 6px 6px 0;
 
       &.common {
         background-color: ${t(`primary`)};
@@ -233,6 +233,18 @@ export default decorate(
         border: 1px solid ${t(`border`)};
         &:hover {
           filter: brightness(1.02);
+        }
+      }
+      &.active {
+        background: ${t(`primary`)};
+        color: ${t(`white`)};
+      }
+      &.inactive {
+        background: #cecece;
+        color: ${t(`lightText`)};
+        &:hover {
+          background: #d2d2d2;
+          filter: brightness(1);
         }
       }
       &.menu {
