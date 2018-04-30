@@ -125,11 +125,11 @@ export class RichTextBox extends React.Component {
             wrapperClassName="wrapperClassName"
             editorClassName="editorClassName"
             toolbar={{
-              inline: { inDropdown: true },
-              list: { inDropdown: true },
+              inline: { inDropdown: false },
+              list: { inDropdown: false },
               textAlign: { inDropdown: true },
-              link: { inDropdown: true },
-              history: { inDropdown: true },
+              link: { inDropdown: false },
+              history: { inDropdown: false },
               image: {
                 uploadCallback: this.uploadImageCallBack,
                 alt: { present: true, mandatory: true },
