@@ -65,7 +65,7 @@ export class Wrapper extends React.Component {
       left: `0`,
       top: `0`,
       backgroundAttachment: `fixed`,
-      opacity: `0.93`,
+      opacity: this.props.overlayOpacity || `0.93`,
       backgroundColor: overlay || `black`,
     }
 
@@ -100,6 +100,7 @@ export class Wrapper extends React.Component {
           }}
           size={this.props.backgroundImageSize ? this.props.backgroundImageSize : null}
           background
+          onClick={this.props.onClick}
         >
           {this.renderOverlay()}
           {this.renderContent()}
