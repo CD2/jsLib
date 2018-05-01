@@ -7,6 +7,10 @@ import theme from "styles/theme"
 @observer
 export default class Popover2 extends React.Component {
 
+  // TODO refactor this a bit to take a position prop to determine horizontal placement
+  // could also take prop for side of div to render on
+  // also the styling is a bit out of hand
+
   static propTypes = {
     backgroundColor: PropTypes.string,
     centered: PropTypes.bool,
