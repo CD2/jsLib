@@ -61,6 +61,24 @@ export default class Popover2 extends React.Component {
     boxShadow: theme.shadow5,
   }
 
+  itemStyle = `
+    .popover__item {
+      background-color: white;
+      display: flex;
+      align-items: center;
+      width: 100%;
+      padding: 8px 16px;
+      cursor: pointer;
+      transition: ${theme.globalTransitionSpeed};
+    }
+    .popover__item:hover {
+      background-color: ${theme.greyBackground};
+    }
+    .popover__item span {
+      margin-left: 16px;
+    }
+  `
+
   @computed
   get style() {
     return this.props.show ? { ...this.hiddenStyle, ...this.showStyle } : this.hiddenStyle
@@ -68,7 +86,8 @@ export default class Popover2 extends React.Component {
 
   render() {
     return(
-      <div className={this.props.className} style={this.style}>
+      <div className={`popover ${this.props.className}`} style={this.style}>
+        <style>{this.itemStyle}</style>
         <div style={{ textAlign: `right`, paddingRight: 8, fontSize: 0 }}>
           <div style={this.triangleStyle} />
         </div>
