@@ -9,6 +9,7 @@ export default class Popover2 extends React.Component {
 
   static propTypes = {
     backgroundColor: PropTypes.string,
+    centered: PropTypes.bool,
     children: PropTypes.node,
     className: PropTypes.string,
     height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
@@ -28,7 +29,7 @@ export default class Popover2 extends React.Component {
 
   hiddenStyle = {
     position: `absolute`,
-    right: 0,
+    right: this.props.centered ? `calc(50% - ${this.props.width / 2}px)` : 0,
     transition: theme.globalTransitionSpeed,
     opacity: 0,
     width: this.props.width,
@@ -85,10 +86,11 @@ export default class Popover2 extends React.Component {
   }
 
   render() {
+    const { className, centered } = this.props
     return(
-      <div className={`popover ${this.props.className}`} style={this.style}>
+      <div className={`popover ${className}`} style={this.style}>
         <style>{this.itemStyle}</style>
-        <div style={{ textAlign: `right`, paddingRight: 8, fontSize: 0 }}>
+        <div style={{ textAlign: centered ? `center` : `right`, paddingRight: centered ? 0 : 8, fontSize: 0 }}>
           <div style={this.triangleStyle} />
         </div>
         <div style={this.containerStyle} >
