@@ -94,7 +94,7 @@ export default class Popover2 extends React.Component {
     return(
       <div className={`popover ${className}`} style={this.style}>
         <style>{this.itemStyle}</style>
-        <div style={{ textAlign: centered ? `center` : `right`, paddingRight: centered ? 0 : 8, fontSize: 0 }}>
+        <div style={{ textAlign: centered ? `center` : `right`, paddingRight: centered ? 0 : 8, fontSize: 0, lineHeight: 0 }}>
           <div style={this.triangleStyle} />
         </div>
         <div style={this.containerStyle} >
