@@ -6,12 +6,13 @@ export class ListItem extends React.Component {
     children: PropTypes.any,
     className: PropTypes.string,
     onClick: PropTypes.func,
+    style: PropTypes.object,
   }
 
   render() {
-    const { children, onClick, className = `` } = this.props
+    const { children, onClick, style, className = `` } = this.props
     return (
-      <div className={`list_item ${className}`} onClick={onClick}>
+      <div style={style} className={`list_item ${className}`} onClick={onClick}>
         {children}
       </div>
     )
