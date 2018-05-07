@@ -55,7 +55,7 @@ export default decorate(
               top: 75px;
     left: 250px;`
     }
-    }};
+  }};
     width: 100%;
     z-index: 24999;
     ${({ belowAppBar }) => {

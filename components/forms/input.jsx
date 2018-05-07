@@ -57,7 +57,7 @@ margin-bottom: 10px;
     border-color: #c4cdd5;
     -webkit-appearance: none;
     &:focus {
-      border: 1px solid ${t(`primary`)};
+      border: 1px solid ${t(`primary.value`)};
       outline: none;
     }
 

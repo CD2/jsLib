@@ -24,7 +24,7 @@ import Wrapper from "lib/components/wrapper"
       color: ${t(`lightText`)}
     }
     .complete {
-      color: ${t(`primary`)}
+      color: ${t(`primary.value`)}
     }
   }
 `

@@ -1,16 +1,16 @@
 import React from "react"
-import ReactDOM from 'react-dom'
+import ReactDOM from "react-dom"
 import PropTypes from "prop-types"
 import { styled } from "../../../utils/theme"
 import { EditorState, convertToRaw, ContentState, convertFromHTML } from "draft-js"
 import { Editor } from "react-draft-wysiwyg"
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css"
 import decorate from "../../../utils/decorate"
-import { stateToHTML } from 'draft-js-export-html';
+import { stateToHTML } from "draft-js-export-html"
 import { observer } from "mobx-react"
 import { observable } from "mobx"
 import { FormFor, Submit, Input } from "@cd2/cord-react-dom"
-import Image from 'models/Image'
+import Image from "models/Image"
 export class RichTextBox extends React.Component {
   static propTypes = {
     className: PropTypes.string,
@@ -43,11 +43,14 @@ export class RichTextBox extends React.Component {
   }
 
   handleEditorStateChange = editorState => {
-    this.setState({ //eslint-disable-line
+    this.setState({
+      //eslint-disable-line
       editorState,
     })
     const { onChange } = this.props
-    const content = stateToHTML(editorState.getCurrentContent()).split(/<br>\s+<br>/gm).join('</p><p>')
+    const content = stateToHTML(editorState.getCurrentContent()).
+      split(/<br>\s+<br>/gm).
+      join(`</p><p>`)
     if (onChange) onChange(content)
   }
 
@@ -55,18 +58,17 @@ export class RichTextBox extends React.Component {
 
   @observable imageRecord
 
-  uploadImageCallBack = (file) => {
-
-    return new Promise(
-      async (resolve, reject) => {
-        this.imageRecord = Image.withAttributes([`url`]).new({ image: file })
-        setTimeout(async () => {
-          await this.imageRecord.save()
-          await this.imageRecord.reload()
-          this.imageRecord.url ? resolve({ data: { link: this.imageRecord.url, alt: `image` }}) : reject(`some error`)
-        }, 421)
-      }
-    )
+  uploadImageCallBack = file => {
+    return new Promise(async (resolve, reject) => {
+      this.imageRecord = Image.withAttributes([`url`]).new({ image: file })
+      setTimeout(async () => {
+        await this.imageRecord.save()
+        await this.imageRecord.reload()
+        this.imageRecord.url
+          ? resolve({ data: { link: this.imageRecord.url, alt: `image` }})
+          : reject(`some error`)
+      }, 421)
+    })
   }
 
   render() {

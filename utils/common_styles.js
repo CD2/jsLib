@@ -58,7 +58,7 @@ export const tag = props => css`
   }
 
   &.selected {
-    background: ${t(`primary`)(props)};
+    background: ${t(`primary.value`)(props)};
     color: white;
   }
 `

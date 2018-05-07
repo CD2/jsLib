@@ -2,7 +2,7 @@ import React from "react"
 import PropTypes from "prop-types"
 import Modal from "./modal"
 import SectionIntro from "./SectionIntro"
-import Button from "./button"
+import { Button } from "components/parts/StyledComponents"
 
 export class ConfirmationModal extends React.Component {
   static propTypes = {

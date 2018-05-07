@@ -6,7 +6,6 @@ import theme from "styles/theme"
 
 @observer
 export default class Popover2 extends React.Component {
-
   // TODO refactor this a bit to take a position prop to determine horizontal placement
   // could also take prop for side of div to render on
   // also the styling is a bit out of hand
@@ -42,7 +41,7 @@ export default class Popover2 extends React.Component {
     maxHeight: 0,
     zIndex: 3,
   }
-  
+
   showStyle = {
     overflow: `initial`,
     maxHeight: 1111,
@@ -55,7 +54,9 @@ export default class Popover2 extends React.Component {
     width: 0,
     height: 0,
     borderStyle: `solid`,
-    borderWidth: `0 ${this.props.triangleWidth}px ${this.props.triangleHeight}px ${this.props.triangleWidth}px`,
+    borderWidth: `0 ${this.props.triangleWidth}px ${this.props.triangleHeight}px ${
+      this.props.triangleWidth
+    }px`,
     borderColor: `transparent transparent ${this.props.backgroundColor} transparent`,
   }
 
@@ -91,17 +92,21 @@ export default class Popover2 extends React.Component {
 
   render() {
     const { className, centered } = this.props
-    return(
+    return (
       <div className={`popover ${className}`} style={this.style}>
         <style>{this.itemStyle}</style>
-        <div style={{ textAlign: centered ? `center` : `right`, paddingRight: centered ? 0 : 8, fontSize: 0, lineHeight: 0 }}>
+        <div
+          style={{
+            textAlign: centered ? `center` : `right`,
+            paddingRight: centered ? 0 : 8,
+            fontSize: 0,
+            lineHeight: 0,
+          }}
+        >
           <div style={this.triangleStyle} />
         </div>
-        <div style={this.containerStyle} >
-          {this.props.children}
-        </div>
+        <div style={this.containerStyle}>{this.props.children}</div>
       </div>
     )
   }
-
 }

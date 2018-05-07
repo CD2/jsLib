@@ -65,7 +65,7 @@ export default decorate(
     }
 
     &.selected {
-      background: ${t(`primary`)};
+      background: ${t(`primary.value`)};
       color: white;
     }
   `,

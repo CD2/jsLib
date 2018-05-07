@@ -86,7 +86,7 @@ export default decorate(
     }
 
     .sliding-view__nav-button {
-      background-color: ${t(`primary`)};
+      background-color: ${t(`primary.value`)};
       color: white;
       display: flex;
       flex: 1;

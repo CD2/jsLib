@@ -50,7 +50,7 @@ export default decorate(
               top: 75px;
     left: 250px;`
     }
-    }};
+  }};
     height: 100%;
     z-index: 250000;
     padding-bottom: 100px;

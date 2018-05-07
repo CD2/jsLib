@@ -3,7 +3,7 @@ import PropTypes from "prop-types"
 import { observer, inject } from "mobx-react"
 import currentUser from "stores/currentUser"
 import currentStore from "stores/currentStore"
-import LoadingSpinner from "../../../lib/components/loading_spinner"
+import { LoadingSpinner } from "components/parts/StyledComponents"
 
 export const withAuth = Component =>
   @inject(`session`)

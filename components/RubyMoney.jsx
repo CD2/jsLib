@@ -1,38 +1,38 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { observer } from 'mobx-react'
-import { observable, computed, action } from 'mobx'
+import React from "react"
+import PropTypes from "prop-types"
+import { observer } from "mobx-react"
+import { observable, computed, action } from "mobx"
 
 export default class RubyMoney {
   @action
-  static doMathGud = (value) => {
+  static doMathGud = value => {
     const f = parseInt(value.fractional)
     const su = parseInt(value.currency.subunit_to_unit)
-    
-    const units = Math.floor(f/su)
-    const subunits = f%su
+
+    const units = Math.floor(f / su)
+    const subunits = f % su
     return {
       units: units,
-      subunits: subunits
+      subunits: subunits,
     }
   }
 
-  static returnValue(value){
-    if(!value) return 'noval'
+  static returnValue(value) {
+    if (!value) return `noval`
     const result = this.doMathGud(value)
-    if(!result.units) return 0
+    if (!result.units) return 0
     return parseFloat(`${result.units}.${result.subunits}`)
   }
-  
-  static renderAddValue(value, math){
+
+  static renderAddValue(value, math) {
     const result = this.returnValue(value) + math
-    if(!result) return '---'
+    if (!result) return `---`
     return `${value.currency.symbol}${result}`
   }
 
-  static renderValue(value){
+  static renderValue(value) {
     const result = this.returnValue(value)
-    if(!result) return '---'
+    if (!result) return `---`
     return `${value.currency.symbol}${result}`
   }
 }
