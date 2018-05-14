@@ -54,9 +54,9 @@ export class SectionIntro extends React.Component {
     return (
       <div className={className} style={wrapperIntro ? wrapperIntroStyle : style}>
         { rawHtml ?
-          <Elem  className="page-intro__heading" dangerouslySetInnerHTML={{__html: _title}} /> :
+          <Elem  className="page-intro__heading" dangerouslySetInnerHTML={{ __html: _title }} /> :
           <Elem  className="page-intro__heading">{_title}</Elem>
-         }
+        }
         {children && <div className="intro-text">{children}</div>}
       </div>
     )

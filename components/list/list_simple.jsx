@@ -7,7 +7,7 @@ import { styled } from "lib/utils/theme"
   > *:not(:last-child) {
     ${({ spacing, separator, theme }) => {
   if (!separator) {
-    return `margin-bottom: ${theme.spacing[spacing] || spacing}px`
+    return `margin-bottom: ${theme.spacing[spacing] || spacing}px; display: block`
   }
 }}
 
@@ -15,7 +15,7 @@ import { styled } from "lib/utils/theme"
   > * {
     ${({ endSpace, spacing, theme }) => {
   if (endSpace) {
-    return `margin-bottom: ${theme.spacing[spacing] || spacing}px`
+    return `margin-bottom: ${theme.spacing[spacing] || spacing}px; display: block`
   }
 }}
   }
@@ -33,8 +33,8 @@ export class ListSimple extends React.Component {
   }
 
   render() {
-    const { children, className = `` } = this.props
-    return <div className={className}>{children}</div>
+    const { children, style, className = `` } = this.props
+    return <div className={className} style={style}>{children}</div>
   }
 }
 export default ListSimple

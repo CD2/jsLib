@@ -64,7 +64,8 @@ export default class Popover2 extends React.Component {
     backgroundColor: `${this.props.backgroundColor}`,
     maxHeight: this.props.height,
     overflowY: `auto`,
-    boxShadow: theme.shadow5,
+    boxShadow: theme.shadow3,
+    borderRadius: theme.borderRadii.panel
   }
 
   itemStyle = `
@@ -91,9 +92,9 @@ export default class Popover2 extends React.Component {
   }
 
   render() {
-    const { className, centered } = this.props
+    const { centered, onClick } = this.props
     return (
-      <div className={`popover ${className}`} style={this.style}>
+      <div className="popover" style={this.style} onClick={onClick}>
         <style>{this.itemStyle}</style>
         <div
           style={{
