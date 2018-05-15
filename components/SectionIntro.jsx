@@ -25,7 +25,16 @@ export class SectionIntro extends React.Component {
   }
 
   render() {
-    const { className, children, title, heading, wrapperIntro, style, linkPath, rawHtml } = this.props
+    const {
+      className,
+      children,
+      title,
+      heading,
+      wrapperIntro,
+      style,
+      linkPath,
+      rawHtml,
+    } = this.props
 
     const wrapperIntroStyle = {
       borderBottom: `1px solid ${theme.border}`,
@@ -41,22 +50,15 @@ export class SectionIntro extends React.Component {
       title
     )
 
-    const Elem = heading === 2 ? (
-      `h2`
-    ) : heading === 3 ? (
-      `h3`
-    ) : heading === 4 ? (
-      `h4`
-    ) : (
-      `h1`
-    )
+    const Elem = heading === 2 ? `h2` : heading === 3 ? `h3` : heading === 4 ? `h4` : `h1`
 
     return (
       <div className={className} style={wrapperIntro ? wrapperIntroStyle : style}>
-        { rawHtml ?
-          <Elem  className="page-intro__heading" dangerouslySetInnerHTML={{ __html: _title }} /> :
-          <Elem  className="page-intro__heading">{_title}</Elem>
-        }
+        {rawHtml ? (
+          <Elem className="page-intro__heading" dangerouslySetInnerHTML={{ __html: _title }} />
+        ) : (
+          <Elem className="page-intro__heading">{_title}</Elem>
+        )}
         {children && <div className="intro-text">{children}</div>}
       </div>
     )

@@ -65,7 +65,7 @@ export default class Popover2 extends React.Component {
     maxHeight: this.props.height,
     overflowY: `auto`,
     boxShadow: theme.shadow3,
-    borderRadius: theme.borderRadii.panel
+    borderRadius: theme.borderRadii.panel,
   }
 
   itemStyle = `

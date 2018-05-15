@@ -2,7 +2,7 @@ import React from "react"
 import PropTypes from "prop-types"
 import invariant from "invariant"
 import { Link } from "react-router-dom"
-import { observer } from 'mobx-react'
+import { observer } from "mobx-react"
 
 @observer
 export default class Button extends React.Component {
