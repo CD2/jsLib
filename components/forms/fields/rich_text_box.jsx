@@ -23,12 +23,15 @@ export class RichTextBox extends React.Component {
     super(props)
     if (props.value && props.value.replace(/<(?:.|\n)*?>/gm, ``) && props.value.trim().length > 7) {
       const blocksFromHTML = convertFromHTML(props.value)
-      const state = ContentState.createFromBlockArray(
-        blocksFromHTML.contentBlocks,
-        blocksFromHTML.entityMap,
-      )
+      let state
+      if(blocksFromHTML){
+        state = ContentState.createFromBlockArray(
+          blocksFromHTML.contentBlocks,
+          blocksFromHTML.entityMap,
+        )
+      }
       this.state = {
-        editorState: EditorState.createWithContent(state),
+        editorState: state ? EditorState.createWithContent(state) : EditorState.createEmpty(),
       }
     } else {
       this.state = {
