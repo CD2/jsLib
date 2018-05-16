@@ -24,7 +24,7 @@ export class RichTextBox extends React.Component {
     if (props.value && props.value.replace(/<(?:.|\n)*?>/gm, ``) && props.value.trim().length > 7) {
       const blocksFromHTML = convertFromHTML(props.value)
       let state
-      if(blocksFromHTML){
+      if(blocksFromHTML && blocksFromHTML.contentBlocks){
         state = ContentState.createFromBlockArray(
           blocksFromHTML.contentBlocks,
           blocksFromHTML.entityMap,
