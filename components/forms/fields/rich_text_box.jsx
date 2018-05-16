@@ -97,6 +97,7 @@ export class RichTextBox extends React.Component {
             onEditorStateChange={this.handleEditorStateChange}
           />
         </div>
+        <input type="hidden" />
       </div>
     )
   }
