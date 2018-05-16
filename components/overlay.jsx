@@ -49,6 +49,13 @@ export default decorate(
     opacity: 0;
     position: fixed;
     top: 0;
+    ${({ showNavigation }) => {
+    if (showNavigation) {
+      return `
+              top: 75px;
+    left: 250px;`
+    }
+  }};
     width: 100%;
     z-index: 24999;
     ${({ belowAppBar }) => {

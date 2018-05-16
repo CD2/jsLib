@@ -54,7 +54,11 @@ export class List extends React.Component {
       return child
     })
 
-    return <div className={className} style={style}>{mappedChildren}</div>
+    return (
+      <div className={className} style={style}>
+        {mappedChildren}
+      </div>
+    )
   }
 }
 export default List

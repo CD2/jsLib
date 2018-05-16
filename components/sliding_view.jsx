@@ -1,5 +1,5 @@
 import React from "react"
-import {debounce} from 'cd2oolz'
+import { debounce } from "cd2oolz"
 import PropTypes from "prop-types"
 import { observer } from "mobx-react"
 import { observable, action, computed } from "mobx"
@@ -86,7 +86,7 @@ export default decorate(
     }
 
     .sliding-view__nav-button {
-      background-color: ${t(`primary`)};
+      background-color: ${t(`primary.value`)};
       color: white;
       display: flex;
       flex: 1;

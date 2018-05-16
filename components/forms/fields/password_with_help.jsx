@@ -24,7 +24,7 @@ import Wrapper from "lib/components/wrapper"
       color: ${t(`lightText`)}
     }
     .complete {
-      color: ${t(`primary`)}
+      color: ${t(`primary.value`)}
     }
   }
 `
@@ -211,7 +211,9 @@ export class PasswordWithHelpField extends React.Component {
             className="field"
             type="password"
             value={this.getConfirmationValue()}
-            placeholder={this.props.otherPlaceholder ? this.props.otherPlaceholder : `Password Confirmation`}
+            placeholder={
+              this.props.otherPlaceholder ? this.props.otherPlaceholder : `Password Confirmation`
+            }
             onChange={this.handleConfirmationChange}
           />
         </div>

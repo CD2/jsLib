@@ -31,7 +31,7 @@ export class Modal extends React.Component {
           )}
           {children}
         </div>
-        <Overlay visible onClick={this.handleClose} />
+        <Overlay visible onClick={this.handleClose} showNavigation={this.props.showNavigation} />
       </div>
     )
   }
@@ -40,9 +40,17 @@ export class Modal extends React.Component {
 export default decorate(
   styled`
     position: fixed;
+    
     top: 0;
     left: 0;
     right: 0;
+    ${({ showNavigation }) => {
+    if (showNavigation) {
+      return `
+              top: 75px;
+    left: 250px;`
+    }
+  }};
     height: 100%;
     z-index: 250000;
     padding-bottom: 100px;
@@ -89,6 +97,6 @@ export default decorate(
       }
 
     }
-  `,
+`,
   Modal,
 )

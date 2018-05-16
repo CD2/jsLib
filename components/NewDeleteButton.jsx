@@ -3,7 +3,7 @@ import PropTypes from "prop-types"
 import { observer } from "mobx-react"
 import { action } from "mobx"
 import { redirect } from "lib/utils/router"
-import Button from "lib/components/button"
+import { Button } from "components/parts/StyledComponents"
 import ModalStore from "lib/utils/modal_store"
 
 @observer

@@ -2,11 +2,11 @@ import React from "react"
 import PropTypes from "prop-types"
 import { styled } from "lib/utils/theme"
 import decorate from "lib/utils/decorate"
-import Button from "./button"
+import { Button } from "components/parts/StyledComponents"
 import FaIcon from "./fa_icon"
-import { observable } from "mobx";
-import { observer } from "mobx-react";
-import { App } from "utils/store";
+import { observable } from "mobx"
+import { observer } from "mobx-react"
+import { App } from "utils/store"
 
 @observer
 export class File extends React.Component {
@@ -28,23 +28,21 @@ export class File extends React.Component {
     wide: false,
   }
 
-  componentDidMount(){
+  componentDidMount() {
     this.fetchUrl()
   }
 
   async fetchUrl() {
     const { uid } = this.props
     const params = { uid }
-    App.file(params).then(response=>
-      this.url = response.data.url
-    )
+    App.file(params).then(response => (this.url = response.data.url))
   }
 
   @observable url
 
   render() {
     const { defaultSrc, uid, children, linkOnly, linkTarget } = this.props
-    if(!this.url) return ''
+    if (!this.url) return ``
 
     let url = this.url
     if (!uid) {

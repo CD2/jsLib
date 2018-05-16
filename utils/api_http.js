@@ -4,7 +4,7 @@ import API_ROUTE from "constants/api_host"
 import STORAGE from "constants/storage"
 import qs from "qs"
 
-const api_auth_keys = [`access-token`, `client`, `expiry`, `token-type`, `uid`]
+const api_auth_keys = [`access-token`, `client`, `expiry`, `provider`, `uid`]
 const key_prefix = `auth_`
 
 export const getApiHeaders = () => {
@@ -21,7 +21,7 @@ export const getApiHeaders = () => {
 export const setApiHeaders = headers => {
   if (headers.hasOwnProperty(`access-token`)) {
     const { expiry: currentExpiry } = getApiHeaders()
-    if(!currentExpiry || headers.expiry > currentExpiry){
+    if (!currentExpiry || headers.expiry > currentExpiry) {
       api_auth_keys.forEach(key => STORAGE.setItem(`${key_prefix}${key}`, headers[key]))
     }
   }
@@ -54,7 +54,6 @@ export const request = (
 ) => {
   const url = buildUrl(path)
   if (send_tokens) headers = { ...headers, ...getApiHeaders() }
-
   return axios({ method, url, ...options, data, headers }).
     then(response => {
       setApiHeaders(response.headers)

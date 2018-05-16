@@ -27,4 +27,3 @@ export default class Accordian extends React.Component {
     )
   }
 }
-

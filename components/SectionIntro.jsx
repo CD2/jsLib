@@ -12,10 +12,7 @@ export class SectionIntro extends React.Component {
     children: PropTypes.node,
     className: PropTypes.string,
     heading: PropTypes.any,
-    light: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.bool,
-    ]),
+    light: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
     linkPath: PropTypes.string,
     noPad: PropTypes.bool,
     style: PropTypes.object,
@@ -28,7 +25,16 @@ export class SectionIntro extends React.Component {
   }
 
   render() {
-    const { className, children, title, heading, wrapperIntro, style, linkPath } = this.props
+    const {
+      className,
+      children,
+      title,
+      heading,
+      wrapperIntro,
+      style,
+      linkPath,
+      rawHtml,
+    } = this.props
 
     const wrapperIntroStyle = {
       borderBottom: `1px solid ${theme.border}`,
@@ -44,16 +50,14 @@ export class SectionIntro extends React.Component {
       title
     )
 
+    const Elem = heading === 2 ? `h2` : heading === 3 ? `h3` : heading === 4 ? `h4` : `h1`
+
     return (
       <div className={className} style={wrapperIntro ? wrapperIntroStyle : style}>
-        {heading === 2 ? (
-          <h2 className="page-intro__heading">{_title}</h2>
-        ) : heading === 3 ? (
-          <h3 className="page-intro__heading">{_title}</h3>
-        ) : heading === 4 ? (
-          <h4 className="page-intro__heading">{_title}</h4>
+        {rawHtml ? (
+          <Elem className="page-intro__heading" dangerouslySetInnerHTML={{ __html: _title }} />
         ) : (
-          <h1 className="page-intro__heading">{_title}</h1>
+          <Elem className="page-intro__heading">{_title}</Elem>
         )}
         {children && <div className="intro-text">{children}</div>}
       </div>
@@ -75,7 +79,7 @@ export default decorate(
     const color = light ? theme.background : theme.lightText
     return `
       color: ${color};
-    `
+`
   }}
   ${({ light }) => {
     if (light) {
@@ -131,6 +135,6 @@ export default decorate(
     .btn {
       margin-top: 16px;
     }
-  `,
+`,
   SectionIntro,
 )

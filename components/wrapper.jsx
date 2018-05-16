@@ -16,19 +16,13 @@ export class Wrapper extends React.Component {
     children: PropTypes.any,
     className: PropTypes.string,
     extraContentStyle: PropTypes.object,
-    floating: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.bool,
-    ]),
+    floating: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
     fullHeight: PropTypes.bool,
     gutter: PropTypes.number,
     innerBackground: PropTypes.string,
     margin: PropTypes.number,
     noGutters: PropTypes.bool,
-    noMargin: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.bool,
-    ]),
+    noMargin: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
     noRelative: PropTypes.bool,
     noShadow: PropTypes.bool,
     noSpacing: PropTypes.bool,
@@ -71,7 +65,7 @@ export class Wrapper extends React.Component {
       left: `0`,
       top: `0`,
       backgroundAttachment: `fixed`,
-      opacity: `0.93`,
+      opacity: this.props.overlayOpacity || `0.93`,
       backgroundColor: overlay || `black`,
     }
 
@@ -98,8 +92,7 @@ export class Wrapper extends React.Component {
               position: `relative`,
               boxShadow: floating ? theme.shadow0 : `none`,
               borderRadius: floating ? `6px` : `0`,
-              marginBottom:
-                floating && !noMargin ? this.props.margin || theme.gutterHeight : `0`,
+              marginBottom: floating && !noMargin ? this.props.margin || theme.gutterHeight : `0`,
               overflow: this.props.overflow ? `initial` : `hidden`,
               height: this.props.fullHeight ? `100%` : `auto`,
             },
@@ -107,6 +100,7 @@ export class Wrapper extends React.Component {
           }}
           size={this.props.backgroundImageSize ? this.props.backgroundImageSize : null}
           background
+          onClick={this.props.onClick}
         >
           {this.renderOverlay()}
           {this.renderContent()}
@@ -122,8 +116,7 @@ export class Wrapper extends React.Component {
             position: noRelative ? `static` : `relative`,
             boxShadow: !this.props.noShadow && floating ? theme.shadow0 : `none`,
             borderRadius: floating || this.props.borderRadius ? `6px` : `0`,
-            marginBottom:
-              floating && !noMargin ? this.props.margin || theme.gutterHeight : `0`,
+            marginBottom: floating && !noMargin ? this.props.margin || theme.gutterHeight : `0`,
             overflow: this.props.overflow ? `initial` : `hidden`,
             height: this.props.fullHeight ? `100%` : `auto`,
             border: this.props.border,

@@ -32,7 +32,7 @@ export class DateTime extends React.Component {
     let { format } = this.props
     format = this.predefinedFormats[format] || format
     const datestring = moment(this.props.date).format(format)
-    return <span>{datestring === 'Invalid date' ? `-` : datestring}</span>
+    return <span>{datestring === `Invalid date` ? `-` : datestring}</span>
   }
 }
 
