@@ -19,7 +19,6 @@ export default class ErrorBoundary extends React.Component {
   componentDidUpdate(prevProps, prevState, snapshot) {
     if (this.location !== window.location.href) {
       this.error = undefined
-      this.info = undefined
       this.location = window.location.href
     }
   }
@@ -30,7 +29,6 @@ export default class ErrorBoundary extends React.Component {
   }
 
   @observable error
-  @observable info
   @observable location
 
   render() {
