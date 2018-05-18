@@ -37,7 +37,7 @@ export default class ErrorBoundary extends React.Component {
     if (this.error) {
       return (
         <pre style={{ padding: `8px 16px` }}>
-          Something went wrong. {this.error.toString()}
+          Something went wrong, check console for more info. {this.error.toString()}
         </pre>
       )
     }
