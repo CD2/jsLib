@@ -46,3 +46,13 @@ export default class ErrorBoundary extends React.Component {
     return this.props.children
   }
 }
+
+export const errorBoundary = WrappedComponent => class extends React.Component {
+  render() {
+    return(
+      <ErrorBoundary>
+        <WrappedComponent {...this.props} />
+      </ErrorBoundary>
+    )
+  }
+}
