@@ -3,6 +3,7 @@ import PropTypes from "prop-types"
 import Item from "./item"
 import { styled } from "lib/utils/theme"
 import { snakeCase } from "help-my-strings"
+import invariant from "invariant"
 @styled`
   display: flex;
   flex-wrap: wrap;
@@ -92,7 +93,26 @@ function SimpleGrid({ columns, children }) {
   return <Grid columns={columns}>{children.map(child => <Grid.Item>{child}</Grid.Item>)}</Grid>
 }
 
+function RatioGrid({ columns, children, splitAt, right }) {
+  invariant(children.length === 2, `Grid must contain 2 children`)
+  if (right) {
+    return (
+      <Grid columns={splitAt ? 1 : columns}>
+        <Grid.Item>{children[0]}</Grid.Item>
+        <Grid.Item colSpan={splitAt ? 1 : columns - 1}>{children[1]}</Grid.Item>
+      </Grid>
+    )
+  }
+  return (
+    <Grid columns={splitAt ? 1 : columns}>
+      <Grid.Item colSpan={splitAt ? 1 : columns - 1}>{children[0]}</Grid.Item>
+      <Grid.Item>{children[1]}</Grid.Item>
+    </Grid>
+  )
+}
+
 Grid.Item = Item
+Grid.Ratio = RatioGrid
 Grid.Simple = SimpleGrid
 
 export default Grid
