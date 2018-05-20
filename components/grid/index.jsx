@@ -88,6 +88,11 @@ class Grid extends React.Component {
   }
 }
 
+function SimpleGrid({ columns, children }) {
+  return <Grid columns={columns}>{children.map(child => <Grid.Item>{child}</Grid.Item>)}</Grid>
+}
+
 Grid.Item = Item
+Grid.Simple = SimpleGrid
 
 export default Grid
