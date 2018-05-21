@@ -8,7 +8,7 @@ import { observer } from "mobx-react"
 @observer
 export default class ErrorBoundary extends React.Component {
   static propTypes = {
-    children: PropTypes.onode,
+    children: PropTypes.node,
   }
 
   constructor(props) {
