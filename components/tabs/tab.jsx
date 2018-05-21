@@ -8,6 +8,7 @@ export default class Tab extends React.Component {
   static propTypes = {
     children: PropTypes.node,
     className: PropTypes.string,
+    didMountCallBack: PropTypes.func,
     heading: PropTypes.string,
     icon: PropTypes.string,
     innerBody: PropTypes.string,
@@ -20,6 +21,10 @@ export default class Tab extends React.Component {
 
   static defaultProps = {
     renderHead: false,
+  }
+
+  componentDidMount() {
+    this.props.didMountCallBack && this.props.didMountCallBack(this.props.selected)
   }
 
   handleTabHeadClick = () => {
