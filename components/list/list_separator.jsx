@@ -12,10 +12,11 @@ import PropTypes from "prop-types"
 export class ListSeparator extends React.Component {
   static propTypes = {
     className: PropTypes.string,
+    style: PropTypes.object,
   }
 
   render() {
-    return <div className={this.props.className} />
+    return <div className={this.props.className} style={this.props.style} />
   }
 }
 export default ListSeparator
