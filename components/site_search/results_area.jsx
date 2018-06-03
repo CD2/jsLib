@@ -3,7 +3,7 @@ import PropTypes from "prop-types"
 import { observer } from "mobx-react"
 import { observable, action } from "mobx"
 import { styled, t } from "lib/utils/theme"
-import List from "lib/components/list"
+§
 import { popover } from "lib/utils/common_styles"
 import decorate from "lib/utils/decorate"
 import Result from "./Result"

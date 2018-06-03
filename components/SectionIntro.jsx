@@ -124,9 +124,6 @@ export default decorate(
         margin-bottom: 0;
       }
     }
-    input {
-      margin-top: ${t(`spacing.medium`, t => t / 16)}em;
-    }
     + {
       p, h1, h2, h3, h4 {
         margin-top: 10px;

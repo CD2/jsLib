@@ -7,7 +7,8 @@ import { BasicInput } from "@cd2/cord-react-dom"
 import { errorDisplay, sessionSubmission, SubmitButton } from "components/Sessions/utils"
 import { Link } from "react-router-dom"
 import session from "stores/session"
-import { redirect } from "lib/utils/router"
+import { r } from 'constants/routes'
+
 @observer
 export default class SignIn extends React.Component {
   static propTypes = {
@@ -55,7 +56,7 @@ export default class SignIn extends React.Component {
           <SubmitButton submitting={this.submitting} text="Sign in" />
         </List.Simple>
         <List.Separator spacing={16} />
-        <Link to="/password/new">Forgotten your password?</Link>
+        <Link to={r.password_recovery}>Forgotten your password?</Link>
       </form>
     )
   }
