@@ -24,7 +24,11 @@ export default class Tabs extends React.Component {
   @computed
   get getSelected() {
     if (this.props.children.length > 0) {
-      return windowStore.location.params.get(`tab`) || this.props.children.filter(x => x)[0].key
+      const tabParam = windowStore.location.params.get(`tab`)
+      if (tabParam && this.props.children.filter(x => x).map(x=>x.key).includes(tabParam)) {
+        return tabParam
+      }
+      return this.props.children.filter(x => x)[0].key
     }
   }
 
