@@ -29,6 +29,7 @@ export class Wrapper extends React.Component {
     onClick: PropTypes.func,
     overflow: PropTypes.bool,
     overlay: PropTypes.string,
+    padding: PropTypes.number,
     spacing: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     style: PropTypes.object,
     theme: PropTypes.object,
@@ -120,6 +121,7 @@ export class Wrapper extends React.Component {
             overflow: this.props.overflow ? `initial` : `hidden`,
             height: this.props.fullHeight ? `100%` : `auto`,
             border: this.props.border,
+            padding: this.props.padding || 0,
           },
           ...this.props.style,
         }}
