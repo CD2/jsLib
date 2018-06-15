@@ -31,6 +31,7 @@ export default class RubyMoney {
   }
 
   static renderValue(value) {
+    if(!value) return null
     const result = this.returnValue(value)
     if (!result) return `---`
     return `${value ? value.currency.symbol : '£'}${result.toFixed(2)}`
