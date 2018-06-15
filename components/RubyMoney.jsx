@@ -18,22 +18,22 @@ export default class RubyMoney {
   }
 
   static returnValue(value) {
-    if (!value) return `noval`
+    if (!value) return 0
     const result = this.doMathGud(value)
     if (!result.units) return 0
     return parseFloat(`${result.units}.${result.subunits}`)
   }
 
-  static renderAddValue(value, math) {
-    const result = this.returnValue(value) + math
+  static renderAddValue(value, math, mathSym) {
+    const result = this.returnValue(value)
     if (!result) return `---`
-    return `${value.currency.symbol}${result}`
+    return mathSym ? `${value ? value.currency.symbol : '£'}${eval(`${result} ${mathSym} ${math}`).toFixed(2)}` : `${value.currency.symbol}${result.toFixed(2)}`
   }
 
   static renderValue(value) {
     const result = this.returnValue(value)
     if (!result) return `---`
-    return `${value.currency.symbol}${result}`
+    return `${value ? value.currency.symbol : '£'}${result.toFixed(2)}`
   }
 }
 
