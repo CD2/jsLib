@@ -8,7 +8,7 @@ export class FaIcon extends React.Component {
 
   static propTypes = {
     className: PropTypes.string,
-    color: PropTypes.string,
+    color: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
     hoverColor: PropTypes.string,
     icon: PropTypes.string.isRequired,
     onClick: PropTypes.func,
