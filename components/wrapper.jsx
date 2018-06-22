@@ -7,7 +7,7 @@ import Image from "./image"
 
 export class Wrapper extends React.Component {
   static propTypes = {
-    background: PropTypes.string,
+    background: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
     backgroundImage: PropTypes.string,
     backgroundImageSize: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     backgroundImageUid: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),

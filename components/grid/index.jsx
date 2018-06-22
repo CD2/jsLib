@@ -90,7 +90,11 @@ class Grid extends React.Component {
 }
 
 function SimpleGrid({ columns, children, align }) {
-  return <Grid columns={columns}>{children.map(child => <Grid.Item align={align}>{child}</Grid.Item>)}</Grid>
+  return (
+    <Grid columns={columns}>
+      {children.map((child,index) => <Grid.Item key={index} align={align}>{child}</Grid.Item>)}
+    </Grid>
+  )
 }
 
 function RatioGrid({ columns, children, splitAt, right }) {
