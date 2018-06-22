@@ -94,7 +94,7 @@ export default class Popover2 extends React.Component {
   render() {
     const { centered, onClick } = this.props
     return (
-      <div className="popover" style={this.style} onClick={onClick}>
+      <div className="popover" style={{...this.style, ...this.props.style}} onClick={onClick}>
         <style>{this.itemStyle}</style>
         <div
           style={{
