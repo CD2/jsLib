@@ -4,6 +4,7 @@ import ReactJWPlayer from "react-jw-player"
 import PropTypes from "prop-types"
 import decorate from "lib/utils/decorate"
 import JWPlayerTranscript from "lib/utils/jw_player_transcript"
+import JWPlayerTranscriptNew from "lib/utils/jw_player_transcript_new"
 import config from "libDependencies/jwPlayerConfig"
 
 export class JWVideoPlayer extends React.Component {
@@ -19,6 +20,7 @@ export class JWVideoPlayer extends React.Component {
     showTranscript: PropTypes.bool,
     title: PropTypes.string,
     transcriptUrl: PropTypes.string,
+    transcript_id: PropTypes.number,
     url: PropTypes.string,
     video: PropTypes.string,
   }
@@ -35,17 +37,17 @@ export class JWVideoPlayer extends React.Component {
 
   constructor(props) {
     super(props)
-
     this.id = `jw_video__${shortid.generate()}`
   }
 
   handleReady = () => {
-    const { showTranscript, chapterListUrl, transcriptUrl, video } = this.props
+    const { showTranscript, chapterListUrl, transcriptUrl, video, transcript_id } = this.props
 
     if (showTranscript) {
-      const transcript = new JWPlayerTranscript()
+      const Component = this.props.transcript_id ? JWPlayerTranscriptNew : JWPlayerTranscript
+      const transcript = new Component()
 
-      transcript.loadTranscript(video, chapterListUrl, transcriptUrl)
+      transcript.loadTranscript(video, chapterListUrl, transcriptUrl, transcript_id)
     }
   }
 
@@ -58,7 +60,7 @@ export class JWVideoPlayer extends React.Component {
   }
 
   render() {
-    const { autoPlay, muted, onPlay, onProgress, onComplete, className, customProps } = this.props
+    const { autoPlay, muted, onPlay, onPause, onProgress, onComplete, className, customProps } = this.props
 
     return (
       <ReactJWPlayer
@@ -70,6 +72,7 @@ export class JWVideoPlayer extends React.Component {
         isAutoPlay={autoPlay}
         isMuted={muted}
         onPlay={onPlay}
+        onPause={onPause}
         onTime={onProgress}
         onOneHundredPercent={onComplete}
         onReady={this.handleReady}
