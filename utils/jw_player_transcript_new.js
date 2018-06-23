@@ -57,8 +57,8 @@ export default class TranscriptService {
       const part = {
         begin: script[i]['timeStart'],
         end: script[i]['timeEnd'],
-        btext: script[i]['text'].substr(3, i - 7),
-        text: script[i]['text'],
+        btext: script[i]['text'] ? script[i]['text'].substr(3, i - 7) : ``,
+        text: script[i]['text'] || ``,
       }
       h += `<span id='caption${i}'>${part.text}</span>`
       global_captions.push(part)
