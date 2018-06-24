@@ -92,7 +92,7 @@ class Grid extends React.Component {
 function SimpleGrid({ columns, children, align }) {
   return (
     <Grid columns={columns}>
-      {children.map((child,index) => <Grid.Item key={index} align={align}>{child}</Grid.Item>)}
+      {children.filter(x=>x).map((child,index) => <Grid.Item key={index} align={align}>{child}</Grid.Item>)}
     </Grid>
   )
 }
